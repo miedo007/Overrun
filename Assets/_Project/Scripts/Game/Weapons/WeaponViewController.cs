@@ -28,7 +28,7 @@ namespace Project.Game.Weapons
 
         public void SetFlipped(bool flipX)
         {
-            SpriteRenderer.flipX = flipX;
+            transform.localRotation = flipX ? Quaternion.Euler(0,180,0) : Quaternion.identity;
         }
     }
 }

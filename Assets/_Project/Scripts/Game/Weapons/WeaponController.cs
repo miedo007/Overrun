@@ -8,8 +8,10 @@ namespace Project.Game.Weapons
     {
         public event Action Activated;
         
-        public WeaponData Data { get; private set; }
+        [field: SerializeField] public Transform Barrel { get; set; }
         
+        public WeaponData Data { get; private set; }
+
         private float _lastActivationTime;
         
         public void Initialize(WeaponData weaponData)
@@ -22,15 +24,15 @@ namespace Project.Game.Weapons
             return time >= _lastActivationTime + Data.ActivationRate;
         }
 
-        public void Activate(float time)
+        public void Activate(float time, WeaponController weapon)
         {
             _lastActivationTime = time;
-            StartCoroutine(ActivationRoutine());
+            StartCoroutine(ActivationRoutine(weapon));
         }
 
-        private IEnumerator ActivationRoutine()
+        private IEnumerator ActivationRoutine(WeaponController weapon)
         {
-            yield return Data.BehaviourBase.ActivationRoutine();
+            yield return Data.BehaviourBase.ActivationRoutine(weapon);
         }
     }
 }

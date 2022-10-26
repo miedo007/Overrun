@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: data_projectile_pistol
   m_EditorClassIdentifier: 
   <ProjectilePrefab>k__BackingField: {fileID: 7478756677700919632, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+  <Speed>k__BackingField: 25
+  <Lifespan>k__BackingField: 1

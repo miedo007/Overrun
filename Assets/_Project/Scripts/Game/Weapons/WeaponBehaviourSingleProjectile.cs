@@ -10,9 +10,11 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public ProjectileData ProjectileData { get; private set; }
         
-        public override IEnumerator ActivationRoutine()
+        public override IEnumerator ActivationRoutine(WeaponController weaponController)
         {
-            var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab);
+            var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weaponController.Barrel.position, weaponController.Barrel.rotation);
+            projectile.Initialize(ProjectileData);
+            
             yield break;
         }
     }

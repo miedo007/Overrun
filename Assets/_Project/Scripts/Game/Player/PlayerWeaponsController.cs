@@ -50,7 +50,7 @@ namespace Project.Game.Player
                 var weapon = weaponSlot.Weapon;
                 if (weapon.ShouldActivate(time))
                 {
-                    weapon.Activate(time);
+                    weapon.Activate(time, weapon);
                 }
             }
         }

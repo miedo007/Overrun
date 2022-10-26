@@ -52,11 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WeaponData>k__BackingField:
   - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   <WeaponSlots>k__BackingField:
   - {fileID: 5994559864341266707}
   - {fileID: 2055334948838545858}
