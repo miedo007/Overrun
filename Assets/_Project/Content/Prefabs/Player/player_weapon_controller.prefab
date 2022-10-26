@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1596045192788323945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.125, y: 1.125, z: 1.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1596045194318793020}
@@ -53,6 +53,10 @@ MonoBehaviour:
   <WeaponData>k__BackingField:
   - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
+  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
+  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
+  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
+  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   <WeaponSlots>k__BackingField:
   - {fileID: 5994559864341266707}
   - {fileID: 2055334948838545858}
@@ -69,7 +73,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrder>k__BackingField
-      value: -3
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrderOnFlip>k__BackingField
@@ -231,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrderOnFlip>k__BackingField
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5744042605408486164, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: m_Name
@@ -312,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrderOnFlip>k__BackingField
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5744042605408486164, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: m_Name
@@ -389,11 +393,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrder>k__BackingField
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 765698363074169658, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: <SortingOrderOnFlip>k__BackingField
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5744042605408486164, guid: 8c2433924c84a03489ab5edfc0bea120, type: 3}
       propertyPath: m_Name
