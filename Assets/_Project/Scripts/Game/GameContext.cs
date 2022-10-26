@@ -1,6 +1,6 @@
 using Project.Application;
 
-namespace Project.Scripts.Game
+namespace Project.Game
 {
     public class GameContext : SceneContext
     {

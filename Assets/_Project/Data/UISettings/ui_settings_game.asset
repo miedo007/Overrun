@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ui_settings_game
   m_EditorClassIdentifier: 
   <CanvasRoot>k__BackingField: {fileID: 2170965435419163059, guid: 01672268fcce7274aacfc0c5e913451c, type: 3}
-  screens: []
+  screens:
+  - <UIScreen>k__BackingField: {fileID: 1508621801620786103, guid: a134b060fe7c0f04395582c61e52169c, type: 3}
+    <CreateOnOpen>k__BackingField: 0
+    <DestroyOnClose>k__BackingField: 0

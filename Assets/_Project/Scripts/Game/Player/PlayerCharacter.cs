@@ -10,10 +10,14 @@ namespace Project.Game.Player
         [field: SerializeField] public float Drag { get; private set; }
         
         public Vector2 Velocity { get; private set; }
+        public float MovementSpeed { get; private set; }
+        public int HorizontalDirection { get; private set; } = 1;
 
         public void SetMovementDirection(Vector2 direction)
         {
-            if (Mathf.Approximately(direction.sqrMagnitude, 0))
+            var inputMagnitude = direction.magnitude;
+            
+            if (Mathf.Approximately(inputMagnitude, 0))
             {
                 // Decelerate
                 Velocity *= 1 - (Drag * Time.deltaTime);
@@ -23,7 +27,14 @@ namespace Project.Game.Player
                 Velocity += direction * Acceleration * Time.deltaTime;
             }
 
-            Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed);
+            var horizontalDirection = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
+            if (horizontalDirection != 0)
+            {
+                HorizontalDirection = horizontalDirection;
+            }
+            
+            Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed * inputMagnitude);
+            MovementSpeed = Velocity.magnitude;
             Rigidbody.position += Velocity * Time.deltaTime;
         }
     }
