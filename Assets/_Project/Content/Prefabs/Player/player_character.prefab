@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 3258216174217633417}
-  <MaxSpeed>k__BackingField: 4.5
+  <MaxSpeed>k__BackingField: 5
   <Acceleration>k__BackingField: 75
   <Drag>k__BackingField: 15
 --- !u!50 &3258216174217633417

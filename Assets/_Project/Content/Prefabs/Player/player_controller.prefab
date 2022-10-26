@@ -118,6 +118,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_character
       objectReference: {fileID: 0}
+    - target: {fileID: 3258216175681178933, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216175681178933, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1792453
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216175681178933, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_Color.g
+      value: 0.14347641
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216175681178933, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_Color.r
+      value: 0.06341225
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216176053934876, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216176053934876, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258216176053934876, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d694776b3a01c64f986eab87adba1ad, type: 3}
 --- !u!114 &8265728661537205135 stripped

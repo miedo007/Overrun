@@ -6,5 +6,7 @@ namespace Project.Game.Weapons
     public class WeaponData : ScriptableObject
     {
         [field: SerializeField] public WeaponViewController ViewPrefab { get; private set; }
+        [field: SerializeField] public float ActivationRate { get; private set; } = 1f;
+        [field: SerializeField] public WeaponBehaviourBase BehaviourBase { get; set; }
     }
 }

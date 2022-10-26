@@ -41,5 +41,18 @@ namespace Project.Game.Player
                  slot.SetFlipped(flipX);
             }
         }
+
+        private void Update()
+        {
+            var time = Time.time;
+            foreach (var weaponSlot in _activeSlots)
+            {
+                var weapon = weaponSlot.Weapon;
+                if (weapon.ShouldActivate(time))
+                {
+                    weapon.Activate(time);
+                }
+            }
+        }
     }
 }
