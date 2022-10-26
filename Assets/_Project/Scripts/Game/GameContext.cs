@@ -1,0 +1,12 @@
+using Project.Application;
+
+namespace Project.Scripts.Game
+{
+    public class GameContext : SceneContext
+    {
+        protected override void OnInjectStart()
+        {
+            base.OnInjectStart();
+        }
+    }
+}
