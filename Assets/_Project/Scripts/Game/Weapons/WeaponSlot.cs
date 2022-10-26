@@ -23,7 +23,6 @@ namespace Project.Game.Weapons
 
         public void SetFlipped(bool flipX)
         {
-            WeaponView.SetSortingOrder(flipX ? SortingOrderOnFlip : SortingOrder);
             WeaponView.SetFlipped(flipX);
         }
     }

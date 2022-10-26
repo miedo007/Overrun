@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fa57c7926b04d6c859ed4af11fe0ece, type: 3}
-  m_Name: data_projectile_pistol
+  m_Script: {fileID: 11500000, guid: 29570d22a26942ac8b207cc140c0260e, type: 3}
+  m_Name: data_enemy_test
   m_EditorClassIdentifier: 
-  <ProjectilePrefab>k__BackingField: {fileID: 7478756677700919632, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
-  <Speed>k__BackingField: 25
-  <Lifespan>k__BackingField: 3
+  <Prefab>k__BackingField: {fileID: 8322420268677525029, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}

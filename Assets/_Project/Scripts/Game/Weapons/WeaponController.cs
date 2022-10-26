@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Project.Game.Targets;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -11,7 +12,7 @@ namespace Project.Game.Weapons
         [field: SerializeField] public Transform Barrel { get; set; }
         
         public WeaponData Data { get; private set; }
-
+        
         private float _lastActivationTime;
         
         public void Initialize(WeaponData weaponData)
@@ -33,6 +34,18 @@ namespace Project.Game.Weapons
         private IEnumerator ActivationRoutine(WeaponController weapon)
         {
             yield return Data.BehaviourBase.ActivationRoutine(weapon);
+        }
+
+        public void UpdateTarget(Target target)
+        {
+            if (target == null)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                transform.right = target.transform.position - transform.position;
+            }
         }
     }
 }

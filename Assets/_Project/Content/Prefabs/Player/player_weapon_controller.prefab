@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596045192788323944}
   - component: {fileID: 1596045192788323947}
+  - component: {fileID: 425882226003985251}
   m_Layer: 0
   m_Name: player_weapon_controller
   m_TagString: Untagged
@@ -59,6 +60,20 @@ MonoBehaviour:
   - {fileID: 2055334949709192078}
   - {fileID: 2055334949873673023}
   - {fileID: 2055334948590381732}
+--- !u!114 &425882226003985251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596045192788323945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 1596045192788323947}
 --- !u!1001 &1596045192726775854
 PrefabInstance:
   m_ObjectHideFlags: 0

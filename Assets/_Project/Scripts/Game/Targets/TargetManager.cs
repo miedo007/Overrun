@@ -51,6 +51,7 @@ namespace Project.Game.Targets
                 if (distSqr < closestDistSqr)
                 {
                     closestTarget = target;
+                    closestDistSqr = distSqr;
                 }
             }
 
