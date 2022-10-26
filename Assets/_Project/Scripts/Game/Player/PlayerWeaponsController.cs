@@ -52,9 +52,10 @@ namespace Project.Game.Player
             {
                 var weapon = weaponSlot.Weapon;
                 var target = _targetManager.GetClosestTarget(weapon.Barrel.position);
+                
                 weapon.UpdateTarget(target);
                 
-                if (weapon.ShouldActivate(time))
+                if (target != null && weapon.ShouldActivate(time))
                 {
                     weapon.Activate(time, weapon);
                 }

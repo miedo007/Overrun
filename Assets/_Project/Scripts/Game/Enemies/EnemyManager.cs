@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Lean.Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,10 +18,10 @@ namespace Project.Game.Enemies
         {
             while (enabled)
             {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(.25f);
 
                 var enemyData = EnemyDatas[Random.Range(0, EnemyDatas.Length)];
-                var enemy = LeanPool.Spawn(enemyData.Prefab, Random.insideUnitCircle * 10f, Quaternion.identity,
+                var enemy = LeanPool.Spawn(enemyData.Prefab, Random.insideUnitCircle * 6, Quaternion.identity,
                     transform);
 
                 enemy.Initialize(enemyData);

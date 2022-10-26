@@ -9,6 +9,7 @@ namespace Project.Application
         
         protected override void OnInjectStart()
         {
+            UnityEngine.Application.targetFrameRate = 60;
             Bind(sceneLoader);
         }
 
