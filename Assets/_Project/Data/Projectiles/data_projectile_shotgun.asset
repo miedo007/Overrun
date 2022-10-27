@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fa57c7926b04d6c859ed4af11fe0ece, type: 3}
-  m_Name: data_projectile_pistol
+  m_Name: data_projectile_shotgun
   m_EditorClassIdentifier: 
-  <ProjectilePrefab>k__BackingField: {fileID: 4387666197315951769, guid: 61074f922df34b24f95ea79a064f17f6, type: 3}
+  <ProjectilePrefab>k__BackingField: {fileID: 4387666197315951769, guid: d04b536ae3d0baf4985f33b9f0fb5ea9, type: 3}
   <Speed>k__BackingField: 20
-  <Lifespan>k__BackingField: 3
+  <RandomSpeed>k__BackingField: 0
+  <SpeedRange>k__BackingField: {x: 10, y: 12}
+  <Lifespan>k__BackingField: 0.3
+  <RandomLifespan>k__BackingField: 1
+  <LifespanRange>k__BackingField: {x: 0.2, y: 0.3}

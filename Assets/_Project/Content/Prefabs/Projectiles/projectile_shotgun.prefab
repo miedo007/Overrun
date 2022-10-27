@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3691358494671117113, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_Radius
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 5028524498433308840, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_Name
-      value: projectile_base
+      value: projectile_shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5028524498433308843, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_RootOrder
@@ -54,6 +58,22 @@ PrefabInstance:
     - target: {fileID: 5028524498433308843, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.50104666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.50104666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.50104666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0174
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}

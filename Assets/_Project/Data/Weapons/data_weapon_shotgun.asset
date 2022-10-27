@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
   m_Name: data_weapon_shotgun
   m_EditorClassIdentifier: 
-  <ViewPrefab>k__BackingField: {fileID: 6597700622337457177, guid: 0323fe17aad5cdc4282d9baeca214d88, type: 3}
+  <ViewPrefab>k__BackingField: {fileID: 5477758156196813389, guid: beab32e7f00efac4a8c3ab0d1ddaade3, type: 3}
   <ActivationRate>k__BackingField: 1.25
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: b2fb7a6b1449a2f4dbf76ac426a20a04, type: 2}

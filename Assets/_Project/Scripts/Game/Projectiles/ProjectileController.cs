@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Game.Projectiles
 {
@@ -9,6 +10,8 @@ namespace Project.Game.Projectiles
 
         private float _initializationTime;
         private Transform _transform;
+        private float _speed;
+        private float _lifespan;
         
         public ProjectileData Data { get; private set; }
         public bool IsActive { get; private set; }
@@ -24,6 +27,8 @@ namespace Project.Game.Projectiles
             _initializationTime = Time.time;
             IsActive = true;
             Data = data;
+            _speed = Data.RandomSpeed ? Random.Range(data.SpeedRange.x, data.SpeedRange.y) : data.Speed;
+            _lifespan = Data.RandomLifespan ? Random.Range(data.LifespanRange.x, data.LifespanRange.y) : data.Lifespan;
             Added?.Invoke(this);
         }
         
@@ -34,7 +39,7 @@ namespace Project.Game.Projectiles
                 IsActive = false;
             }
             
-            _transform.position += _transform.right * Data.Speed * Time.deltaTime;
+            _transform.position += _transform.right * _speed * Time.deltaTime;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
