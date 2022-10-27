@@ -1,6 +1,8 @@
 ﻿using Lean.Pool;
+using Mtl.Injection;
 using Project.Game.Projectiles;
 using Project.Game.Targets;
+using Project.PopupText;
 using UnityEngine;
 
 namespace Project.Game.Enemies
@@ -8,6 +10,9 @@ namespace Project.Game.Enemies
     public class EnemyController : MonoBehaviour, IProjectileReactor
     {
         [SerializeField] private Target target;
+
+        [Inject] private readonly PopupTextManager popupTextManager;
+        
         
         public EnemyData Data { get; private set; }
 
@@ -29,6 +34,8 @@ namespace Project.Game.Enemies
                 {
                     Kill();
                 }
+                
+                popupTextManager.DisplayTextAtPosition($"{damage}", Color.white, target.transform.position);
                 return true;
             }
 

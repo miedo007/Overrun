@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 6365086261947818779}
   - component: {fileID: 8322420268677525029}
   - component: {fileID: -8706968978736568844}
-  - component: {fileID: -4356375691159681606}
   - component: {fileID: 6601995195346668188}
+  - component: {fileID: -4356375691159681606}
+  - component: {fileID: 1658300301536218819}
   m_Layer: 8
   m_Name: enemy_base
   m_TagString: Untagged
@@ -147,17 +148,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!210 &-4356375691159681606
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2464363063314510666}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!61 &6601995195346668188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184,6 +174,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.88, y: 0.58}
   m_EdgeRadius: 0
+--- !u!210 &-4356375691159681606
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464363063314510666}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &1658300301536218819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464363063314510666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 8322420268677525029}
 --- !u!1 &2978958270558183469
 GameObject:
   m_ObjectHideFlags: 0
