@@ -14,6 +14,7 @@ namespace Project.Game.Weapons
         
         private float _lastActivationTime;
         private Transform _transform;
+        private float _attackDelay;
         
         public WeaponData Data { get; private set; }
         public WeaponSlot Slot { get; private set; }
@@ -29,17 +30,18 @@ namespace Project.Game.Weapons
             _transform.SetParent(weaponSlot.Transform, true);
             _transform.localPosition = Vector3.zero;
             Data = weaponData;
+            _attackDelay = 1f / Data.AttackRate;
             Initialized?.Invoke();
         }
         
         public bool ShouldActivate(float time)
         {
-            return time >= _lastActivationTime + Data.ActivationRate;
+            return time >= _lastActivationTime + _attackDelay;
         }
 
         public bool ShouldTarget(float time)
         {
-            return time >= _lastActivationTime + (Data.ActivationRate * 0.5f);
+            return time >= _lastActivationTime + (_attackDelay * 0.5f);
         }
 
         public void Activate(float time, WeaponController weapon)

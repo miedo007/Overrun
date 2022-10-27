@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Project.Stats;
+using UnityEngine;
 
 namespace Project.Game.Weapons
 {
@@ -7,6 +8,7 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public WeaponController Prefab { get; private set; }
         [field: SerializeField] public WeaponBehaviourBase BehaviourBase { get; set; }
-        [field: SerializeField] public float ActivationRate { get; private set; } = 1f;
+        [field: SerializeField, Tooltip("Attacks Per Second")] public float AttackRate { get; private set; } = 1f;
+        [field: SerializeField] public StatData AttackRateStat { get; private set; }
     }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
+  m_Name: data_character_stats_default
+  m_EditorClassIdentifier: 
+  <Stats>k__BackingField:
+  - <Data>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
+    <LevelScaling>k__BackingField:
+      <BaseValue>k__BackingField: 3
+      <Coefficient>k__BackingField: 1.09
+    <RoundingType>k__BackingField: 1
+  - <Data>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
+    <LevelScaling>k__BackingField:
+      <BaseValue>k__BackingField: 1
+      <Coefficient>k__BackingField: 1.09
+    <RoundingType>k__BackingField: 1
+  - <Data>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
+    <LevelScaling>k__BackingField:
+      <BaseValue>k__BackingField: 1
+      <Coefficient>k__BackingField: 1.09
+    <RoundingType>k__BackingField: 1
+  - <Data>k__BackingField: {fileID: 11400000, guid: 070fe47ddc6d56941800d0210966c59a, type: 2}
+    <LevelScaling>k__BackingField:
+      <BaseValue>k__BackingField: 1
+      <Coefficient>k__BackingField: 1
+    <RoundingType>k__BackingField: 0
