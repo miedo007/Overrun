@@ -179,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721743371}
   - component: {fileID: 721743372}
+  - component: {fileID: 721743373}
   m_Layer: 0
   m_Name: game_context
   m_TagString: Untagged
@@ -216,6 +217,20 @@ MonoBehaviour:
   uiSettings: {fileID: 11400000, guid: 740d4ceed252ae44280c04886f168c01, type: 2}
   <Joystick>k__BackingField: {fileID: 4987174990861450179}
   <TargetManager>k__BackingField: {fileID: 1115673116}
+--- !u!114 &721743373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721743370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 721743372}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

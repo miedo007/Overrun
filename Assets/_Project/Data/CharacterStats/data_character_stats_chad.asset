@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
   m_Name: data_character_stats_chad
   m_EditorClassIdentifier: 
-  <Stats>k__BackingField: []
+  <Stats>k__BackingField:
+  - <Data>k__BackingField: {fileID: 11400000, guid: 070fe47ddc6d56941800d0210966c59a, type: 2}
+    <BaseValue>k__BackingField: 10
+    <LevelScaling>k__BackingField:
+      <Coefficient>k__BackingField: 1
+    <RoundingType>k__BackingField: 0

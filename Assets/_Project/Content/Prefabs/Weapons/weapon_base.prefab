@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 776470380188817457}
   - component: {fileID: 6597700622337457177}
   - component: {fileID: 592394403656401054}
+  - component: {fileID: 3202784606902515332}
   m_Layer: 0
   m_Name: weapon_base
   m_TagString: Untagged
@@ -143,6 +144,20 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &3202784606902515332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037361939318503752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 776470380188817457}
 --- !u!1 &9037361939565035566
 GameObject:
   m_ObjectHideFlags: 0

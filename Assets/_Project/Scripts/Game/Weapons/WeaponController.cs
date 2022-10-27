@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Mtl.Injection;
 using Project.Game.Targets;
+using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -15,7 +17,9 @@ namespace Project.Game.Weapons
         private float _lastActivationTime;
         private Transform _transform;
         private float _attackDelay;
-        
+
+        [Inject] private readonly HeroInfo _heroInfo;
+
         public WeaponData Data { get; private set; }
         public WeaponSlot Slot { get; private set; }
 
@@ -30,7 +34,9 @@ namespace Project.Game.Weapons
             _transform.SetParent(weaponSlot.Transform, true);
             _transform.localPosition = Vector3.zero;
             Data = weaponData;
-            _attackDelay = 1f / Data.AttackRate;
+
+            var heroAttackRateStatInfo = _heroInfo.GetStat(weaponData.AttackRateStat);
+            _attackDelay = 1f / (Data.AttackRate * heroAttackRateStatInfo.GetFloatValue());
             Initialized?.Invoke();
         }
         

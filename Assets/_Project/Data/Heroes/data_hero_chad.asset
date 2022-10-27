@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: data_hero_chad
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Chad
-  <Stats>k__BackingField: {fileID: 11400000, guid: 8974c4d6b65b40448b1c190153ec45f7, type: 2}
+  <StatOverrides>k__BackingField: {fileID: 11400000, guid: 8974c4d6b65b40448b1c190153ec45f7, type: 2}
   <Prefab>k__BackingField: {fileID: 8191813735188580489, guid: 51b0490bd69b79349bbb4b64368a8cd8, type: 3}

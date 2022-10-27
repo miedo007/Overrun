@@ -11,14 +11,12 @@ namespace Project.Game.Player
         [field: SerializeField] public PlayerWeaponsController WeaponsController { get; private set; }
         
         [Inject] private readonly UltimateJoystick _joystick;
-        [Inject] private readonly HeroRegistry _heroRegistry;
+        [Inject] private readonly HeroInfo _heroInfo;
 
-        private HeroData _heroData;
         
         public void OnReady()
         {
-            _heroData = _heroRegistry.GetHeroAtIndex(0);
-            var heroView = Instantiate(_heroData.Prefab, transform);
+            var heroView = Instantiate(_heroInfo.Data.Prefab, transform);
             heroView.Initialize(Character);
         }
 

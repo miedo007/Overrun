@@ -7,13 +7,36 @@ namespace Project.Stats
     public class StatInfo
     {
         [field: SerializeField] public StatData Data { get; private set; }
+        [field: SerializeField] public float BaseValue { get; private set; }
         [field: SerializeField] public LevelScaling LevelScaling { get; private set; }
         [field: SerializeField] public RoundingType RoundingType { get; private set; }
 
-        public int GetIntValueForLevel(int level)
+        private StatInfo() { }
+
+        public StatInfo GetLeveledStatInfo(int level)
+        {
+            var statInfo = new StatInfo();
+            statInfo.Data = Data;
+            statInfo.BaseValue = GetBaseFloatValueForLevel(level);
+            statInfo.RoundingType = RoundingType;
+            return statInfo;
+        }
+
+        private float GetBaseFloatValueForLevel(int level)
+        {
+            // apply modifiers
+            return LevelScaling.GetValueForLevel(BaseValue, level);
+        }
+       
+        public float GetFloatValue()
+        {
+            return BaseValue;
+        }
+
+        public int GetIntLevel()
         {
             var intValue = 0;
-            var floatValue = GetFloatValue(level);
+            var floatValue = GetFloatValue();
             switch (RoundingType)
             {
                 case RoundingType.Round:
@@ -31,23 +54,16 @@ namespace Project.Stats
 
             return intValue;
         }
-
-        public float GetFloatValue(int level)
-        {
-            // apply modifiers
-            return LevelScaling.GetBaseValueForLevel(level);
-        }
     }
 
     [System.Serializable]
     public class LevelScaling
     {
-        [field: SerializeField] public float BaseValue { get; private set; }
         [field: SerializeField] public float Coefficient { get; private set; } = 1.09f;
 
-        public float GetBaseValueForLevel(int level)
+        public float GetValueForLevel(float baseValue, int level)
         {
-            return BaseValue * Mathf.Pow(Coefficient, level);
+            return baseValue * Mathf.Pow(Coefficient, level);
         }
     }
 
