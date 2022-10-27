@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using Project.Game.Targets;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Game.Weapons
 {
     public class WeaponController : MonoBehaviour
     {
+        public event Action Initialized;
         public event Action Activated;
         
         [field: SerializeField] public Transform Barrel { get; set; }
@@ -16,15 +16,20 @@ namespace Project.Game.Weapons
         private Transform _transform;
         
         public WeaponData Data { get; private set; }
+        public WeaponSlot Slot { get; private set; }
 
         private void Awake()
         {
             _transform = transform;
         }
 
-        public void Initialize(WeaponData weaponData)
+        public void Initialize(WeaponData weaponData, WeaponSlot weaponSlot)
         {
+            Slot = weaponSlot;
+            _transform.SetParent(weaponSlot.Transform, true);
+            _transform.localPosition = Vector3.zero;
             Data = weaponData;
+            Initialized?.Invoke();
         }
         
         public bool ShouldActivate(float time)
@@ -32,9 +37,15 @@ namespace Project.Game.Weapons
             return time >= _lastActivationTime + Data.ActivationRate;
         }
 
+        public bool ShouldTarget(float time)
+        {
+            return time >= _lastActivationTime + (Data.ActivationRate * 0.5f);
+        }
+
         public void Activate(float time, WeaponController weapon)
         {
             _lastActivationTime = time;
+            Activated?.Invoke();
             StartCoroutine(ActivationRoutine(weapon));
         }
 
@@ -43,8 +54,13 @@ namespace Project.Game.Weapons
             yield return Data.BehaviourBase.ActivationRoutine(weapon);
         }
 
-        public void UpdateTarget(Target target)
+        public void UpdateTarget(Target target, float time)
         {
+            if (!ShouldTarget(time))
+            {
+                return;
+            }
+            
             if (target == null)
             {
                 _transform.rotation = Quaternion.identity;

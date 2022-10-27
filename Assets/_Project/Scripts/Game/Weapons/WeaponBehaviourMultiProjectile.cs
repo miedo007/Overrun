@@ -10,6 +10,7 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public ProjectileData ProjectileData { get; private set; }
         [field: SerializeField] public int ProjectileCount { get; private set; }
+        [field: SerializeField] public Vector2 ProjectileSpread { get; private set; } = new(-30, 30);
         
         public override IEnumerator ActivationRoutine(WeaponController weaponController)
         {
@@ -17,9 +18,11 @@ namespace Project.Game.Weapons
             var targetPosition = barrel.position + barrel.right;
             for (int i = 0; i < ProjectileCount; i++)
             {
-                var randomPosition = targetPosition + (Vector3)Random.insideUnitCircle * 0.5f;
-                var vectorToTarget = randomPosition - barrel.position;
-                var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
+                var vectorToTarget = (targetPosition - barrel.position).normalized;
+                var spreadAngle = Random.Range(ProjectileSpread.x, ProjectileSpread.y);
+                var spreadRotation = Quaternion.AngleAxis(spreadAngle, Vector3.forward);
+                var randomOffsetVector = spreadRotation * vectorToTarget;
+                var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * randomOffsetVector;
                 var rotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
                 var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weaponController.Barrel.position, rotation);
                 projectile.Initialize(ProjectileData);

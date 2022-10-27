@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
   m_Name: data_weapon_pistol
   m_EditorClassIdentifier: 
-  <ViewPrefab>k__BackingField: {fileID: 5477758156196813389, guid: d1644ba18563e4a4ca6bfad30914bb5e, type: 3}
-  <ActivationRate>k__BackingField: 0.5
+  <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: d1644ba18563e4a4ca6bfad30914bb5e, type: 3}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 56c98611031f93049be9a4f64edc4c74, type: 2}
+  <ActivationRate>k__BackingField: 0.5

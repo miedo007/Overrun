@@ -14,7 +14,7 @@ namespace Project.Game.Player
 
         [Inject] private readonly TargetManager _targetManager;
 
-        private readonly List<WeaponSlot> _activeSlots = new List<WeaponSlot>();
+        private readonly List<WeaponSlot> _activeSlots = new();
 
         private void Start()
         {
@@ -37,14 +37,6 @@ namespace Project.Game.Player
             }
         }
 
-        public void SetFlipped(bool flipX)
-        {
-            foreach (var slot in _activeSlots)
-            {
-                 slot.SetFlipped(flipX);
-            }
-        }
-
         private void Update()
         {
             var time = Time.time;
@@ -53,7 +45,7 @@ namespace Project.Game.Player
                 var weapon = weaponSlot.Weapon;
                 var target = _targetManager.GetClosestTarget(weapon.Barrel.position);
                 
-                weapon.UpdateTarget(target);
+                weapon.UpdateTarget(target, time);
                 
                 if (target != null && weapon.ShouldActivate(time))
                 {
