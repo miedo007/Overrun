@@ -800,5 +800,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8265728663106645542, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265728663106645542, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
