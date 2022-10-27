@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using Project.Heroes;
+using Project.Stats;
+using UnityEngine;
+
+namespace Project.Heroes
+{
+    [CreateAssetMenu(fileName = "hero_database_", menuName = "Data/Heroes/HeroDatabase", order = 0)]
+    public class HeroDatabase : ScriptableObject
+    {
+        [field: SerializeField] public CharacterStats DefaultStats { get; private set; }
+        [field: SerializeField] public List<HeroData> Heroes { get; private set; }
+    }
+}

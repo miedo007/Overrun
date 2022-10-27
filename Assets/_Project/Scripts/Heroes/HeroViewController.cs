@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using Project.Game.Player;
 using UnityEngine;
 
-namespace Project.Game.Player
+namespace Project.Heroes
 {
     public class HeroViewController : MonoBehaviour
     {
-        private static readonly int MoveSpeed = Animator.StringToHash("move_speed");
         [field: SerializeField] public Animator Animator { get; private set; }
 
         private bool _isFlipped;
+
+        private static readonly int MoveSpeed = Animator.StringToHash("move_speed");
 
         public PlayerCharacter Character { get; private set; }
         public Transform HeroRoot { get; private set; }
