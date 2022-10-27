@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590f212d82074d44acc8f8a8ea34670f, type: 3}
-  m_Name: weapon_behaviour_single_projectile_pistol
+  m_Script: {fileID: 11500000, guid: 1f823643c78c4830ae6a38278f74e7dd, type: 3}
+  m_Name: weapon_behaviour_pistol
   m_EditorClassIdentifier: 
   <ProjectileData>k__BackingField: {fileID: 11400000, guid: 60a6892f9fcbf0944868c08fd4056574, type: 2}
+  <ProjectileCount>k__BackingField: 1
+  <ProjectileSpread>k__BackingField: {x: -2, y: 2}

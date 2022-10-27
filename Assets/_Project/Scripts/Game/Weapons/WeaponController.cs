@@ -3,12 +3,15 @@ using System.Collections;
 using Mtl.Injection;
 using Project.Game.Targets;
 using Project.Heroes;
+using Project.Stats;
 using UnityEngine;
 
 namespace Project.Game.Weapons
 {
     public class WeaponController : MonoBehaviour
     {
+        private static readonly Vector3 FlippedScale = new Vector3(1, -1, 1);
+        
         public event Action Initialized;
         public event Action Activated;
         
@@ -23,6 +26,10 @@ namespace Project.Game.Weapons
         public WeaponData Data { get; private set; }
         public WeaponSlot Slot { get; private set; }
 
+        public StatInfo AttackRateStat { get; private set; }
+
+        public StatInfo DamageStat { get; private set; }
+
         private void Awake()
         {
             _transform = transform;
@@ -35,11 +42,32 @@ namespace Project.Game.Weapons
             _transform.localPosition = Vector3.zero;
             Data = weaponData;
 
-            var heroAttackRateStatInfo = _heroInfo.GetStat(weaponData.AttackRateStat);
-            _attackDelay = 1f / (Data.AttackRate * heroAttackRateStatInfo.GetFloatValue());
+            AttackRateStat = _heroInfo.GetStat(weaponData.Type.AttackRateStat);
+            AttackRateStat.Changed += OnHeroAttackRateChanged;
+            OnHeroAttackRateChanged(AttackRateStat);
+            
+            DamageStat = _heroInfo.GetStat(weaponData.Type.DamageStat);
+            DamageStat.Changed += OnDamageStatChanged;
+            OnDamageStatChanged(DamageStat);
+            
             Initialized?.Invoke();
         }
-        
+
+        private void OnDestroy()
+        {
+            AttackRateStat.Changed -= OnHeroAttackRateChanged;
+            DamageStat.Changed -= OnDamageStatChanged;
+        }
+
+        private void OnDamageStatChanged(StatInfo obj)
+        {
+        }
+
+        private void OnHeroAttackRateChanged(StatInfo statInfo)
+        {
+            _attackDelay = 1f / (Data.AttackRate * AttackRateStat.GetFloatValue());
+        }
+
         public bool ShouldActivate(float time)
         {
             return time >= _lastActivationTime + _attackDelay;
@@ -84,8 +112,8 @@ namespace Project.Game.Weapons
                 var targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 1080 * Time.deltaTime);
                 _transform.localScale = target.transform.position.x < _transform.position.x 
-                    ? new Vector3(1, -1, 1)
-                    : new Vector3(1,1,1);
+                    ? FlippedScale
+                    : Vector3.one;
             }
         }
     }

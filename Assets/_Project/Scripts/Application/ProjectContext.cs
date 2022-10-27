@@ -12,7 +12,6 @@ namespace Project.Application
         {
             UnityEngine.Application.targetFrameRate = 60;
             Bind(sceneLoader);
-            Bind(new HeroRegistry());
         }
 
         protected override void OnPostSetup()

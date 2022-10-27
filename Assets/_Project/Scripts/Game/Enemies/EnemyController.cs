@@ -10,23 +10,35 @@ namespace Project.Game.Enemies
         [SerializeField] private Target target;
         
         public EnemyData Data { get; private set; }
+
+        public float CurrentHealth { get; private set; }
         
         public void Initialize(EnemyData enemyData)
         {
+            CurrentHealth = enemyData.BaseHealth;
             Data = enemyData;
             target.Enabled = true;
         }
 
-        public bool ReactToProjectile(ProjectileController projectile)
+        public bool ReactToProjectile(ProjectileController projectile, float damage)
         {
             if (target.Enabled)
             {
-                LeanPool.Despawn(this);
-                target.Enabled = false;
+                CurrentHealth -= damage;
+                if (CurrentHealth <= 0)
+                {
+                    Kill();
+                }
                 return true;
             }
 
             return false;
+        }
+
+        public void Kill()
+        {
+            LeanPool.Despawn(this);
+            target.Enabled = false;
         }
     }
 }

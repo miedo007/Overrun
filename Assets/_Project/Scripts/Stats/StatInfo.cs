@@ -6,6 +6,8 @@ namespace Project.Stats
     [System.Serializable]
     public class StatInfo
     {
+        public event Action<StatInfo> Changed;
+        
         [field: SerializeField] public StatData Data { get; private set; }
         [field: SerializeField] public float BaseValue { get; private set; }
         [field: SerializeField] public LevelScaling LevelScaling { get; private set; }

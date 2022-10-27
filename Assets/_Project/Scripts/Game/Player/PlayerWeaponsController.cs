@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Project.Game.Player
 {
-    public class PlayerWeaponsController : MonoBehaviour
+    public class PlayerWeaponsController : MonoBehaviour, IInjectionReady
     {
         [field: SerializeField] public WeaponData[] WeaponData { get; private set; }
         [field: SerializeField] public WeaponSlot[] WeaponSlots { get; private set; }
@@ -16,7 +16,7 @@ namespace Project.Game.Player
 
         private readonly List<WeaponSlot> _activeSlots = new();
 
-        private void Start()
+        public void OnReady()
         {
             FillWeaponSlots();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Stats;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,9 +13,11 @@ namespace Project.Game.Projectiles
         private Transform _transform;
         private float _speed;
         private float _lifespan;
-        
+
         public ProjectileData Data { get; private set; }
         public bool IsActive { get; private set; }
+
+        public float Damage { get; private set; }
 
         private void Awake()
         {
@@ -22,13 +25,17 @@ namespace Project.Game.Projectiles
             _transform = transform;
         }
 
-        public void Initialize(ProjectileData data)
+        public void Initialize(ProjectileData data, float damage)
         {
             _initializationTime = Time.time;
+            Damage = damage;
+            
             IsActive = true;
             Data = data;
+            
             _speed = Data.RandomSpeed ? Random.Range(data.SpeedRange.x, data.SpeedRange.y) : data.Speed;
             _lifespan = Data.RandomLifespan ? Random.Range(data.LifespanRange.x, data.LifespanRange.y) : data.Lifespan;
+            
             Added?.Invoke(this);
         }
         
@@ -49,10 +56,11 @@ namespace Project.Game.Projectiles
                 return;
             }
             
+            
             var projectileReactor = other.GetComponent<IProjectileReactor>();
             if (projectileReactor != null)
             {
-                if (projectileReactor.ReactToProjectile(this))
+                if (projectileReactor.ReactToProjectile(this, Damage))
                 {
                     IsActive = false;
                 }

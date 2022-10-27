@@ -6,6 +6,7 @@ namespace Project.Game.Enemies
     public class EnemyData : ScriptableObject
     {
         [field: SerializeField] public EnemyController Prefab { get; private set; }
+        [field: SerializeField] public float BaseHealth { get; private set; } = 3;
         
     }
 }

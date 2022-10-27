@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 982904300607123419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2967592958024202452}
   - component: {fileID: 7550262286081149764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: target
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -89,8 +89,8 @@ GameObject:
   - component: {fileID: -8706968978736568844}
   - component: {fileID: -4356375691159681606}
   - component: {fileID: 6601995195346668188}
-  m_Layer: 0
-  m_Name: enemy_test
+  m_Layer: 8
+  m_Name: enemy_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2249189836340118775}
   - component: {fileID: 6461528716246511985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

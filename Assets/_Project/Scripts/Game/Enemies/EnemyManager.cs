@@ -18,7 +18,7 @@ namespace Project.Game.Enemies
         {
             while (enabled)
             {
-                yield return new WaitForSeconds(.25f);
+                yield return new WaitForSeconds(.5f);
 
                 var enemyData = EnemyDatas[Random.Range(0, EnemyDatas.Length)];
                 var enemy = LeanPool.Spawn(enemyData.Prefab, Random.insideUnitCircle * 6, Quaternion.identity,

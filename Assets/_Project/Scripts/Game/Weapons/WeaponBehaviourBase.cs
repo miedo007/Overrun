@@ -5,7 +5,7 @@ namespace Project.Game.Weapons
 {
     public class WeaponBehaviourBase : ScriptableObject
     {
-        public virtual IEnumerator ActivationRoutine(WeaponController weaponController)
+        public virtual IEnumerator ActivationRoutine(WeaponController weapon)
         {
             yield break;
         }

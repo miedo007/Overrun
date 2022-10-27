@@ -10,8 +10,6 @@ namespace Project.Game
     {
         [field: SerializeField] public UltimateJoystick Joystick { get; private set; }
         [field: SerializeField] public TargetManager TargetManager { get; private set; }
-
-        [Inject] private readonly HeroRegistry _heroRegistry;
                 
         protected override void OnInjectStart()
         {
@@ -19,7 +17,8 @@ namespace Project.Game
             Bind(Joystick);
             Bind(TargetManager);
 
-            var heroInfo = _heroRegistry.GetActiveHeroInfo();
+            var heroRegistry = new HeroRegistry();
+            var heroInfo = heroRegistry.GetActiveHeroInfo();
             Bind(heroInfo);
         }
     }

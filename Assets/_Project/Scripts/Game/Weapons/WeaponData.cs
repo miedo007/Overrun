@@ -7,8 +7,9 @@ namespace Project.Game.Weapons
     public class WeaponData : ScriptableObject
     {
         [field: SerializeField] public WeaponController Prefab { get; private set; }
+        [field: SerializeField] public WeaponTypeData Type { get; private set; }
         [field: SerializeField] public WeaponBehaviourBase BehaviourBase { get; set; }
         [field: SerializeField, Tooltip("Attacks Per Second")] public float AttackRate { get; private set; } = 1f;
-        [field: SerializeField] public StatData AttackRateStat { get; private set; }
+        [field: SerializeField, Tooltip("Multiplied by WeaponType Damage Stat")] public float DamageFactor { get; private set; } = 1f;
     }
 }
