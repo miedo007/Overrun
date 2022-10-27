@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
-  m_Name: data_weapon_pistol
+  m_Name: data_weapon_shotgun
   m_EditorClassIdentifier: 
-  <ViewPrefab>k__BackingField: {fileID: 6597700622337457177, guid: 8961a34667098734d97061133676bc91, type: 3}
-  <ActivationRate>k__BackingField: 0.5
-  <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 56c98611031f93049be9a4f64edc4c74, type: 2}
+  <ViewPrefab>k__BackingField: {fileID: 6597700622337457177, guid: 0323fe17aad5cdc4282d9baeca214d88, type: 3}
+  <ActivationRate>k__BackingField: 1.25
+  <BehaviourBase>k__BackingField: {fileID: 11400000, guid: b2fb7a6b1449a2f4dbf76ac426a20a04, type: 2}

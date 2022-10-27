@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Project.Game.Targets;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -11,10 +12,16 @@ namespace Project.Game.Weapons
         
         [field: SerializeField] public Transform Barrel { get; set; }
         
-        public WeaponData Data { get; private set; }
-        
         private float _lastActivationTime;
+        private Transform _transform;
         
+        public WeaponData Data { get; private set; }
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
+
         public void Initialize(WeaponData weaponData)
         {
             Data = weaponData;
@@ -40,11 +47,21 @@ namespace Project.Game.Weapons
         {
             if (target == null)
             {
-                transform.rotation = Quaternion.identity;
+                _transform.rotation = Quaternion.identity;
+                _transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
-                transform.right = target.transform.position - transform.position;
+                // vector from this object towards the target location
+                var vectorToTarget = (target.transform.position - _transform.position).normalized;
+                // rotate that vector by 90 degrees around the Z axis
+                var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
+                
+                var targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 1080 * Time.deltaTime);
+                _transform.localScale = target.transform.position.x < _transform.position.x 
+                    ? new Vector3(1, -1, 1)
+                    : new Vector3(1,1,1);
             }
         }
     }

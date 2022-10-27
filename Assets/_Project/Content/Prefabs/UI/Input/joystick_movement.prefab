@@ -198,7 +198,7 @@ MonoBehaviour:
   extendRadius: 0
   axis: 0
   boundary: 0
-  deadZone: 0.125
+  deadZone: 0.25
   tapCountOption: 1
   tapCountDuration: 0.33
   targetTapCount: 2

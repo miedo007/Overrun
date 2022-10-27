@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6989026788217627102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.346, y: 0.03100001, z: 0}
+  m_LocalPosition: {x: 0.339, y: -0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 776470380188817457}
   - component: {fileID: 6597700622337457177}
   m_Layer: 0
-  m_Name: weapon_pistol
+  m_Name: weapon_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9037361939565035566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.048, y: -0.105, z: 0}
+  m_LocalPosition: {x: 0.082, y: -0.033, z: 0}
   m_LocalScale: {x: 0.5291111, y: 0.5291111, z: 0.5291111}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165,7 +165,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b8d98dd67d97d5c45a588c59729da467, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab8deb5bf5e977d40a6ed12a49b49d08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
