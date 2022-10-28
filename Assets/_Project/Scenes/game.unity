@@ -350,8 +350,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1557129297
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11053755, g: 0.30940056, b: 0.33962262, a: 1}
@@ -560,8 +560,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -133250049
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11053755, g: 0.30940056, b: 0.33962262, a: 1}
@@ -680,8 +680,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1557129297
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11053755, g: 0.30940056, b: 0.33962262, a: 1}
@@ -823,8 +823,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1557129297
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11053755, g: 0.30940056, b: 0.33962262, a: 1}
@@ -1157,15 +1157,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: orthographic size
-      value: 11
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2199969
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3178899
+      value: 3.1003845e-15
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1177,7 +1177,7 @@ PrefabInstance:
       objectReference: {fileID: 1440190959}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 11
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478763, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.x

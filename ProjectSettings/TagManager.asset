@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4161717247
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -46,4 +49,7 @@ TagManager:
     locked: 0
   - name: PopupText
     uniqueID: 2363125557
+    locked: 0
+  - name: Foreground
+    uniqueID: 1557129297
     locked: 0

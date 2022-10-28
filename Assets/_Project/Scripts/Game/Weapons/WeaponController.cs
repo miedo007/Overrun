@@ -19,7 +19,8 @@ namespace Project.Game.Weapons
         [field: SerializeField] public Collider2D Collider { get; set; }
         [field: SerializeField] public Animation Animation { get; set; }
         [field: SerializeField] public bool FlipScale { get; set; } = true;
-        
+
+        private Quaternion _targetRotation;
         private float _lastActivationTime;
         private Transform _transform;
         private float _attackDelay;
@@ -85,6 +86,7 @@ namespace Project.Game.Weapons
         public void Activate(float time, WeaponController weapon)
         {
             _lastActivationTime = time;
+            _transform.rotation = _targetRotation;
             StartCoroutine(ActivationRoutine(weapon));
         }
 
@@ -115,8 +117,8 @@ namespace Project.Game.Weapons
                 // rotate that vector by 90 degrees around the Z axis
                 var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
                 
-                var targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 1080 * Time.deltaTime);
+                _targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
+                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, 1080 * Time.deltaTime);
 
                 if (FlipScale)
                 {
