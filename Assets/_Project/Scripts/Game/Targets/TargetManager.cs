@@ -29,8 +29,10 @@ namespace Project.Game.Targets
             }
         }
 
-        public Target GetClosestTarget(Vector3 position)
+        public Target GetClosestTarget(Vector3 position, float range = 5)
         {
+            var rangeSqr = range * range;
+            
             if (_activeTargets.Count <= 0)
             {
                 return null;
@@ -41,14 +43,14 @@ namespace Project.Game.Targets
                 return _activeTargets[0];
             }
 
-            var closestTarget = _activeTargets[0];
-            var closestDistSqr = (closestTarget.transform.position - position).sqrMagnitude;
+            Target closestTarget = null;
+            var closestDistSqr = rangeSqr;
             
             for (var i = 1; i < _activeTargets.Count; i++)
             {
                 var target = _activeTargets[i];
                 var distSqr = (target.transform.position - position).sqrMagnitude;
-                if (distSqr < closestDistSqr)
+                if (distSqr <= closestDistSqr)
                 {
                     closestTarget = target;
                     closestDistSqr = distSqr;

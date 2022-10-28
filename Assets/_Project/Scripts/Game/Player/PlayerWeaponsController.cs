@@ -43,7 +43,7 @@ namespace Project.Game.Player
             foreach (var weaponSlot in _activeSlots)
             {
                 var weapon = weaponSlot.Weapon;
-                var target = _targetManager.GetClosestTarget(weapon.Barrel.position);
+                var target = _targetManager.GetClosestTarget(weapon.Barrel.position, weapon.Data.Range);
                 
                 weapon.UpdateTarget(target, time);
                 

@@ -30,9 +30,9 @@ namespace Project.Game.Weapons
         public WeaponData Data { get; private set; }
         public WeaponSlot Slot { get; private set; }
         public bool IsActivated { get; private set; } = false;
+        public Target CurrentTarget { get; private set; }
 
         public StatInfo AttackRateStat { get; private set; }
-
         public StatInfo DamageStat { get; private set; }
 
         private void Awake()
@@ -85,6 +85,11 @@ namespace Project.Game.Weapons
 
         public void Activate(float time, WeaponController weapon)
         {
+            if (CurrentTarget == null || !CurrentTarget.Enabled)
+            {
+                return;
+            }
+            
             _lastActivationTime = time;
             _transform.rotation = _targetRotation;
             StartCoroutine(ActivationRoutine(weapon));
@@ -104,11 +109,13 @@ namespace Project.Game.Weapons
             {
                 return;
             }
+
+            CurrentTarget = target;
             
             if (target == null)
             {
-                _transform.rotation = Quaternion.identity;
                 _transform.localScale = new Vector3(1, 1, 1);
+                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, Quaternion.identity, 1080 * Time.deltaTime);
             }
             else
             {

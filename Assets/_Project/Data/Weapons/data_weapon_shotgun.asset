@@ -17,3 +17,4 @@ MonoBehaviour:
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: b2fb7a6b1449a2f4dbf76ac426a20a04, type: 2}
   <AttackRate>k__BackingField: 0.75
   <DamageFactor>k__BackingField: 1.25
+  <Range>k__BackingField: 4
