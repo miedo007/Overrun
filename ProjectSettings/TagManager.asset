@@ -16,7 +16,7 @@ TagManager:
   - Enemy
   - ProjectilePlayer
   - ProjectileEnemy
-  - 
+  - MeleeWeaponPlayer
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2601397425
     locked: 0
   - name: PopupText
     uniqueID: 2363125557

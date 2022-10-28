@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29570d22a26942ac8b207cc140c0260e, type: 3}
-  m_Name: data_enemy_pig
+  m_Script: {fileID: 11500000, guid: faf300db6e7e4de083e76955ec719a99, type: 3}
+  m_Name: weapon_behaviour_baseball_bat
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1d9047f8eb66370408f6646b72398741, type: 3}
-  <BaseHealth>k__BackingField: 8
-  <MoveSpeed>k__BackingField: 1.5
+  <AnimationClip>k__BackingField: {fileID: 7400000, guid: e11cb30930c0c624fa380bd7a53c31eb, type: 2}

@@ -13,19 +13,19 @@ namespace Project.Game
         [field: SerializeField] public TargetManager TargetManager { get; private set; }
         [field: SerializeField] public PopupTextManager PopupTextManager { get; private set; }
         [field: SerializeField] public PlayerController PlayerController { get; private set; }
-                
+
         protected override void OnInjectStart()
         {
             base.OnInjectStart();
+            
+            var heroRegistry = new HeroRegistry();
+            var heroInfo = heroRegistry.GetActiveHeroInfo();
+            Bind(heroInfo);
             
             Bind(Joystick);
             Bind(TargetManager);
             Bind(PopupTextManager);
             Bind(PlayerController);
-
-            var heroRegistry = new HeroRegistry();
-            var heroInfo = heroRegistry.GetActiveHeroInfo();
-            Bind(heroInfo);
         }
     }
 }

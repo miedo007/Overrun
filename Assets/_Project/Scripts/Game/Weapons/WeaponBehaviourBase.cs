@@ -9,5 +9,13 @@ namespace Project.Game.Weapons
         {
             yield break;
         }
+
+        protected IEnumerator WaitForAnimationClip(Animation animation)
+        {
+            while (animation.IsPlaying(animation.clip.name))
+            {
+                yield return null;
+            }
+        }
     }
 }

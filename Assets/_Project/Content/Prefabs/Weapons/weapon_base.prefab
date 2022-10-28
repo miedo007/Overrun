@@ -113,6 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Barrel>k__BackingField: {fileID: 4373690516925087285}
+  <Collider>k__BackingField: {fileID: 0}
+  <Animation>k__BackingField: {fileID: 592394403656401054}
+  <FlipScale>k__BackingField: 1
 --- !u!114 &6597700622337457177
 MonoBehaviour:
   m_ObjectHideFlags: 0

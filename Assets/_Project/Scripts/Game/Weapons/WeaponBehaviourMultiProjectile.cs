@@ -29,7 +29,7 @@ namespace Project.Game.Weapons
                 projectile.Initialize(ProjectileData, weapon.DamageStat.GetFloatValue() * weapon.Data.DamageFactor);
             }
             
-            yield break;
+            yield return WaitForAnimationClip(weapon.Animation);
         }
     }
 }

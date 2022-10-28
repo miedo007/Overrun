@@ -16,6 +16,9 @@ namespace Project.Game.Weapons
         public event Action Activated;
         
         [field: SerializeField] public Transform Barrel { get; set; }
+        [field: SerializeField] public Collider2D Collider { get; set; }
+        [field: SerializeField] public Animation Animation { get; set; }
+        [field: SerializeField] public bool FlipScale { get; set; } = true;
         
         private float _lastActivationTime;
         private Transform _transform;
@@ -25,6 +28,7 @@ namespace Project.Game.Weapons
 
         public WeaponData Data { get; private set; }
         public WeaponSlot Slot { get; private set; }
+        public bool IsActivated { get; private set; } = false;
 
         public StatInfo AttackRateStat { get; private set; }
 
@@ -33,6 +37,10 @@ namespace Project.Game.Weapons
         private void Awake()
         {
             _transform = transform;
+            /*if (Collider != null)
+            {
+                Collider.enabled = false;
+            }*/
         }
 
         public void Initialize(WeaponData weaponData, WeaponSlot weaponSlot)
@@ -73,26 +81,24 @@ namespace Project.Game.Weapons
             return time >= _lastActivationTime + _attackDelay;
         }
 
-        public bool ShouldTarget(float time)
-        {
-            return time >= _lastActivationTime + (_attackDelay * 0.5f);
-        }
 
         public void Activate(float time, WeaponController weapon)
         {
             _lastActivationTime = time;
-            Activated?.Invoke();
             StartCoroutine(ActivationRoutine(weapon));
         }
 
         private IEnumerator ActivationRoutine(WeaponController weapon)
         {
+            IsActivated = true;
+            Activated?.Invoke();
             yield return Data.BehaviourBase.ActivationRoutine(weapon);
+            IsActivated = false;
         }
 
         public void UpdateTarget(Target target, float time)
         {
-            if (!ShouldTarget(time))
+            if (IsActivated)
             {
                 return;
             }
@@ -111,9 +117,22 @@ namespace Project.Game.Weapons
                 
                 var targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 1080 * Time.deltaTime);
-                _transform.localScale = target.transform.position.x < _transform.position.x 
-                    ? FlippedScale
-                    : Vector3.one;
+
+                if (FlipScale)
+                {
+                    _transform.localScale = target.transform.position.x < _transform.position.x 
+                        ? FlippedScale
+                        : Vector3.one;
+                }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            var damageReceiver = col.GetComponent<IDamageReceiver>();
+            if (damageReceiver != null)
+            {
+                damageReceiver.ReceiveDamage(DamageStat.GetFloatValue() * Data.DamageFactor);
             }
         }
     }

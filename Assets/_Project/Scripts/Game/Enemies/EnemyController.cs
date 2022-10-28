@@ -2,12 +2,13 @@
 using Mtl.Injection;
 using Project.Game.Projectiles;
 using Project.Game.Targets;
+using Project.Game.Weapons;
 using Project.PopupText;
 using UnityEngine;
 
 namespace Project.Game.Enemies
 {
-    public class EnemyController : MonoBehaviour, IProjectileReactor
+    public class EnemyController : MonoBehaviour, IProjectileReactor, IDamageReceiver
     {
         public event Action DamageTaken;
         public event Action<EnemyController> Killed;
@@ -62,27 +63,43 @@ namespace Project.Game.Enemies
         {
             if (selfTarget.Enabled)
             {
-                CurrentHealth -= damage;
-                if (CurrentHealth <= 0)
-                {
-                    Kill();
-                }
-                else
-                {
-                    DamageTaken?.Invoke();
-                }
-                
-                _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", Color.white, selfTarget.transform.position);
+                ApplyDamage(damage);
                 return true;
             }
 
             return false;
         }
 
+        private void ApplyDamage(float damage)
+        {
+            CurrentHealth -= damage;
+            if (CurrentHealth <= 0)
+            {
+                Kill();
+            }
+            else
+            {
+                DamageTaken?.Invoke();
+            }
+                
+            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", Color.white, selfTarget.transform.position);
+        }
+
         public void Kill()
         {
             selfTarget.Enabled = false;
             Killed?.Invoke(this);
+        }
+
+        public bool ReceiveDamage(float damage)
+        {
+            if (selfTarget.Enabled)
+            {
+                ApplyDamage(damage);
+                return true;
+            }
+
+            return false;
         }
     }
 }
