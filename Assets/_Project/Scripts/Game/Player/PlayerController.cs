@@ -12,8 +12,16 @@ namespace Project.Game.Player
         
         [Inject] private readonly UltimateJoystick _joystick;
         [Inject] private readonly HeroInfo _heroInfo;
-
         
+        private Transform _transform;
+
+        public Vector3 Position => _transform.position;
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
+
         public void OnReady()
         {
             var heroView = Instantiate(_heroInfo.Data.Prefab, transform);

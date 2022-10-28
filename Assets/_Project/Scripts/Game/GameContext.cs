@@ -1,5 +1,6 @@
 using Project.PopupText;
 using Project.Application;
+using Project.Game.Player;
 using Project.Game.Targets;
 using Project.Heroes;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Project.Game
         [field: SerializeField] public UltimateJoystick Joystick { get; private set; }
         [field: SerializeField] public TargetManager TargetManager { get; private set; }
         [field: SerializeField] public PopupTextManager PopupTextManager { get; private set; }
+        [field: SerializeField] public PlayerController PlayerController { get; private set; }
                 
         protected override void OnInjectStart()
         {
@@ -19,6 +21,7 @@ namespace Project.Game
             Bind(Joystick);
             Bind(TargetManager);
             Bind(PopupTextManager);
+            Bind(PlayerController);
 
             var heroRegistry = new HeroRegistry();
             var heroInfo = heroRegistry.GetActiveHeroInfo();

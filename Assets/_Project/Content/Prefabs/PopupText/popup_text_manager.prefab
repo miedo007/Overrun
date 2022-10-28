@@ -63,4 +63,4 @@ MonoBehaviour:
   - {x: 0.125, y: 0.25, z: 0}
   - {x: -0.125, y: 0.25, z: 0}
   - {x: 0, y: 0.25, z: 0}
-  displayDuration: 0.375
+  displayDuration: 0.2

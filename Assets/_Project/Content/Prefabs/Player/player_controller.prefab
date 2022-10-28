@@ -172,6 +172,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
     - target: {fileID: 1596045194318793021, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: m_Layer
       value: 6

@@ -35,7 +35,35 @@ namespace Project.Game.Player
             
             Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed * inputMagnitude);
             MovementSpeed = Velocity.magnitude;
-            Rigidbody.position += Velocity * Time.deltaTime;
+
+            var newPosition = Rigidbody.position;
+            newPosition += Velocity * Time.deltaTime;
+
+            var newVelocity = Velocity;
+            if (newPosition.x < -7.5f)
+            {
+                newPosition.x = -7.5f;
+                newVelocity.x = 0;
+            }
+            else if (newPosition.x > 7.5f)
+            {
+                newPosition.x = 7.5f;
+                newVelocity.x = 0;
+            }
+            
+            if (newPosition.y < -8f)
+            {
+                newPosition.y = -8f;
+                newVelocity.y = 0;
+            }
+            else if (newPosition.y > 7.5f)
+            {
+                newPosition.y = 7.5f;
+                newVelocity.y = 0;
+            }
+
+            Velocity = newVelocity;
+            Rigidbody.position = newPosition;
         }
     }
 }

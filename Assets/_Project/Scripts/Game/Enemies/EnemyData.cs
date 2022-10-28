@@ -7,6 +7,6 @@ namespace Project.Game.Enemies
     {
         [field: SerializeField] public EnemyController Prefab { get; private set; }
         [field: SerializeField] public float BaseHealth { get; private set; } = 3;
-        
+        [field: SerializeField] public float MoveSpeed { get; private set; } = 3;
     }
 }
