@@ -44,19 +44,26 @@ namespace Project.Game.Enemies
             _transform = transform;
         }
 
-        public void Initialize(EnemyData enemyData)
+        public void Initialize(EnemyData enemyData, Vector3 playerPosition)
         {
+            selfTarget.Enabled = false;
+            var direction = (playerPosition - _transform.position).normalized;
+            FacePlayer(direction);
             CurrentHealth = enemyData.BaseHealth;
             Data = enemyData;
-            selfTarget.Enabled = true;
         }
 
         public void Step(float dt, float time, Vector3 playerPosition)
         {
             var currentPosition = _transform.position;
             var direction = (playerPosition - currentPosition).normalized;
-            FacingDirection = direction.x < 0 ? -1 : 1;
+            FacePlayer(direction);
             _transform.position = currentPosition + direction * Data.MoveSpeed * dt;
+        }
+
+        private void FacePlayer(Vector3 directionToPlayer)
+        {
+            FacingDirection = directionToPlayer.x < 0 ? -1 : 1;
         }
 
         public bool ReactToProjectile(ProjectileController projectile, float damage)
@@ -100,6 +107,11 @@ namespace Project.Game.Enemies
             }
 
             return false;
+        }
+
+        public void Activate()
+        {
+            selfTarget.Enabled = true;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Mtl.Injection;
+using Project.Game.Rooms;
+using UnityEngine;
 
 namespace Project.Game.Player
 {
@@ -8,7 +10,9 @@ namespace Project.Game.Player
         [field: SerializeField] public float MaxSpeed { get; private set; }
         [field: SerializeField] public float Acceleration { get; private set; }
         [field: SerializeField] public float Drag { get; private set; }
-        
+
+        [Inject] private readonly RoomManager _roomManager;
+
         public Vector2 Velocity { get; private set; }
         public float MovementSpeed { get; private set; }
         public int HorizontalDirection { get; private set; } = 1;
@@ -40,25 +44,20 @@ namespace Project.Game.Player
             newPosition += Velocity * Time.deltaTime;
 
             var newVelocity = Velocity;
-            if (newPosition.x < -7.5f)
-            {
-                newPosition.x = -7.5f;
-                newVelocity.x = 0;
-            }
-            else if (newPosition.x > 7.5f)
-            {
-                newPosition.x = 7.5f;
-                newVelocity.x = 0;
-            }
             
-            if (newPosition.y < -8f)
+            newPosition = _roomManager.ClampToRoomRect(
+                newPosition, 
+                out var didClampX, 
+                out var didClampY
+                );
+            
+            if (didClampX)
             {
-                newPosition.y = -8f;
-                newVelocity.y = 0;
+                newVelocity.x = 0;
             }
-            else if (newPosition.y > 7.5f)
+
+            if (didClampY)
             {
-                newPosition.y = 7.5f;
                 newVelocity.y = 0;
             }
 

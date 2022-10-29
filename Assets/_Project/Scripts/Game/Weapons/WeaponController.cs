@@ -144,5 +144,13 @@ namespace Project.Game.Weapons
                 damageReceiver.ReceiveDamage(DamageStat.GetFloatValue() * Data.DamageFactor);
             }
         }
+
+        private void OnDrawGizmos()
+        {
+            if (Data != null)
+            {
+                Gizmos.DrawWireSphere(transform.position, Data.Range);
+            }
+        }
     }
 }

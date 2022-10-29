@@ -10,19 +10,23 @@ PrefabInstance:
     - target: {fileID: 592394403656401054, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_Animation
       value: 
-      objectReference: {fileID: 7400000, guid: e11cb30930c0c624fa380bd7a53c31eb, type: 2}
+      objectReference: {fileID: 7400000, guid: c46cf2bd8d9ff2d46a9dca9ee7dda77c, type: 2}
     - target: {fileID: 592394403656401054, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_AnimatePhysics
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 592394403656401054, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_Animations.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 592394403656401054, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_Animations.Array.data[1]
       value: 
       objectReference: {fileID: 7400000, guid: e11cb30930c0c624fa380bd7a53c31eb, type: 2}
+    - target: {fileID: 592394403656401054, guid: 8961a34667098734d97061133676bc91, type: 3}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: c46cf2bd8d9ff2d46a9dca9ee7dda77c, type: 2}
     - target: {fileID: 776470380188817457, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: <Collider>k__BackingField
       value: 

@@ -8,5 +8,11 @@ namespace Project.Game.Enemies
         [field: SerializeField] public EnemyController Prefab { get; private set; }
         [field: SerializeField] public float BaseHealth { get; private set; } = 3;
         [field: SerializeField] public float MoveSpeed { get; private set; } = 3;
+        [field: SerializeField] public Vector2Int GroupSizeRange { get; private set; } = new Vector2Int(1, 1);
+
+        public int GetRandomGroupSize()
+        {
+            return Random.Range(GroupSizeRange.x, GroupSizeRange.y + 1);
+        }
     }
 }

@@ -33,3 +33,8 @@ MonoBehaviour:
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
     <RoundingType>k__BackingField: 0
+  - <Data>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
+    <BaseValue>k__BackingField: 1
+    <LevelScaling>k__BackingField:
+      <Coefficient>k__BackingField: 1
+    <RoundingType>k__BackingField: 0

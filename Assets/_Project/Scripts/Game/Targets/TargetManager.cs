@@ -37,16 +37,11 @@ namespace Project.Game.Targets
             {
                 return null;
             }
-            
-            if (_activeTargets.Count == 1)
-            {
-                return _activeTargets[0];
-            }
 
             Target closestTarget = null;
             var closestDistSqr = rangeSqr;
             
-            for (var i = 1; i < _activeTargets.Count; i++)
+            for (var i = 0; i < _activeTargets.Count; i++)
             {
                 var target = _activeTargets[i];
                 var distSqr = (target.transform.position - position).sqrMagnitude;

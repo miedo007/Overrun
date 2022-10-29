@@ -15,3 +15,4 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1d9047f8eb66370408f6646b72398741, type: 3}
   <BaseHealth>k__BackingField: 8
   <MoveSpeed>k__BackingField: 1.5
+  <GroupSizeRange>k__BackingField: {x: 2, y: 4}
