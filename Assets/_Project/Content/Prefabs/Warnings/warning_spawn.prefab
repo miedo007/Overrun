@@ -130,5 +130,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ShowDuration>k__BackingField: 0.125
-  <WarningDuration>k__BackingField: 0.25
+  <WarningDuration>k__BackingField: 0.375
   <HideDuration>k__BackingField: 0.125

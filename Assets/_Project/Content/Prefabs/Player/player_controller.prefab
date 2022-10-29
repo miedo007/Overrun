@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 8265728662808973050}
   - component: {fileID: 5278812402053378852}
   - component: {fileID: 5182591935649089197}
+  - component: {fileID: 8790892790790220526}
+  - component: {fileID: 3289144243730525299}
+  - component: {fileID: 1440190966}
+  - component: {fileID: 1440190967}
   m_Layer: 6
   m_Name: player_controller
   m_TagString: Untagged
@@ -51,6 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   injectedBehaviors:
   - {fileID: 8265728662808973050}
+  - {fileID: 5278812402053378852}
+  - {fileID: 8790892790790220526}
+  - {fileID: 1440190967}
 --- !u!50 &1440190957
 Rigidbody2D:
   serializedVersion: 4
@@ -113,6 +120,62 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &8790892790790220526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265728662808973049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935fb1ffb4a3491d82060f173dd64842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HealthStat>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
+--- !u!114 &3289144243730525299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265728662808973049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8ac0cab66a4b7395ad4ff5f9a150a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infos:
+  - <Behaviour>k__BackingField: {fileID: 8790892790790220526}
+    <Id>k__BackingField: 
+--- !u!58 &1440190966
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265728662808973049}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.33}
+  serializedVersion: 2
+  m_Radius: 0.3
+--- !u!114 &1440190967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265728662808973049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4a9fd662ab4b058fb1b57de9cc6350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7247293221181734989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,12 +237,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
+      objectReference: {fileID: 11400000, guid: 9b67f703a8f774b42a1dc5b4a3cead17, type: 2}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
     - target: {fileID: 1596045194318793021, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: m_Layer
       value: 6

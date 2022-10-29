@@ -21,8 +21,6 @@ namespace Project.Game.Rooms
         
         public Vector3 ClampToRoomRect(Vector3 position, out bool didClampX, out bool didClampY)
         {
-            Debug.Log($"Rect xMin::{Rect.xMin} xMax::{Rect.xMax} yMin::{Rect.yMin} yMax::{Rect.yMax}");
-            
             didClampX = false;
             didClampY = false;
             

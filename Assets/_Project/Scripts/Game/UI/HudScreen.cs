@@ -5,6 +5,6 @@ namespace Project.Game.UI
 {
     public class HudScreen : UIScreen
     {
-        [field: SerializeField] public HealthMeter HealthMeter { get; private set; }
+        [field: SerializeField] public PlayerHealthMeter PlayerHealthMeter { get; private set; }
     }
 }

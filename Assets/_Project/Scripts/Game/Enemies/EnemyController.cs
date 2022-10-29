@@ -20,6 +20,7 @@ namespace Project.Game.Enemies
 
         private Transform _transform;
         private int _facingDirection = 1;
+        private float _lastAttackTime;
         
         public EnemyData Data { get; private set; }
         public float CurrentHealth { get; private set; }
@@ -113,5 +114,33 @@ namespace Project.Game.Enemies
         {
             selfTarget.Enabled = true;
         }
+
+        public void OnTriggerEnter2D(Collider2D other)
+        {
+            TryAttack(other);
+        }
+
+        private void TryAttack(Collider2D other)
+        {
+            if (Time.time >= _lastAttackTime + Data.MeleeAttackRate)
+            {
+                
+                var damageReceiver = other.GetComponent<IDamageReceiver>();
+                if (damageReceiver == null)
+                {
+                    return;
+                }
+
+                damageReceiver.ReceiveDamage(Data.MeleeDamage);
+                _lastAttackTime = Time.time;
+            }
+        }
+
+        public void OnTriggerStay2D(Collider2D other)
+        {
+            TryAttack(other);
+        }
+        
+        
     }
 }
