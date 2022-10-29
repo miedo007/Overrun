@@ -117,11 +117,19 @@ namespace Project.Game.Enemies
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            TryAttack(other);
+            if (selfTarget.Enabled)
+            {
+                TryAttack(other);
+            }
         }
 
         private void TryAttack(Collider2D other)
         {
+            if (!selfTarget.Enabled)
+            {
+                return;
+            }
+            
             if (Time.time >= _lastAttackTime + Data.MeleeAttackRate)
             {
                 

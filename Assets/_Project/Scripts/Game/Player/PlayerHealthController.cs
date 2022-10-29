@@ -9,7 +9,7 @@ namespace Project.Game.Player
     public class PlayerHealthController : MonoBehaviour
     {
         public event Action Initialized;
-        public event Action<float> Changed;
+        public event Action<float, float> Changed;
         public event Action Depleted;
 
         [field: SerializeField] public StatData HealthStat { get; private set; }
@@ -19,25 +19,23 @@ namespace Project.Game.Player
         
         [Inject] private readonly HeroInfo _heroInfo;
 
-        public float MaxHealth
-        {
-            get { return _healthStatInfo.GetFloatValue(); }
-        }
+        public float MaxHealth => _healthStatInfo.GetFloatValue();
 
         public float CurrentHealth
         {
             get { return _currentHealth; }
             set
             {
-                var delta = _currentHealth - value;
+                var previousValue = _currentHealth;
                 _currentHealth = value;
                 if (_currentHealth <= 0)
                 {
                     _currentHealth = 0;
                     Depleted?.Invoke();
                 }
-                
-                Changed?.Invoke(delta);
+
+                var maxHp = _healthStatInfo.GetFloatValue();
+                Changed?.Invoke(previousValue / maxHp, _currentHealth / maxHp);
             }
         }
 

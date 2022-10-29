@@ -33,10 +33,10 @@ namespace Project.PopupText
             _rotation = Quaternion.LookRotation(forward, Vector3.up);
         }
         
-        public void DisplayTextAtPosition(string text, Color color, Vector3 position)
+        public void DisplayTextAtPosition(string text, Color color, Vector3 position, PopupTextItem textPrefab = null)
         {
             var targetPosition = position + offsets[Random.Range(0, offsets.Length)];
-            var textItem = LeanPool.Spawn(textItemPrefab, position, _rotation, _transform);
+            var textItem = LeanPool.Spawn(textPrefab == null ? textItemPrefab : textPrefab, position, _rotation, _transform);
             textItem.Initialize(text, color, targetPosition, displayDuration);
             _activeTextItems.Add(textItem);
         }

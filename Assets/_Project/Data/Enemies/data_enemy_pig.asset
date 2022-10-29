@@ -16,3 +16,5 @@ MonoBehaviour:
   <BaseHealth>k__BackingField: 8
   <MoveSpeed>k__BackingField: 1.5
   <GroupSizeRange>k__BackingField: {x: 2, y: 4}
+  <MeleeAttackRate>k__BackingField: 0.375
+  <MeleeDamage>k__BackingField: 1
