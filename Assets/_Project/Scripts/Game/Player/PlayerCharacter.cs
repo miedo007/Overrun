@@ -28,7 +28,14 @@ namespace Project.Game.Player
             }
             else
             {
-                Velocity += direction * Acceleration * Time.deltaTime;
+                if (Vector3.Dot(Velocity.normalized, direction.normalized) < 0)
+                {
+                    Velocity = Vector2.zero;
+                }
+                else
+                {
+                    Velocity += direction * Acceleration * Time.deltaTime;
+                }
             }
 
             var horizontalDirection = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;

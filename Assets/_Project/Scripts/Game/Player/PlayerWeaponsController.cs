@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Game.Targets;
 using Project.Game.Weapons;
@@ -10,42 +9,38 @@ namespace Project.Game.Player
     public class PlayerWeaponsController : MonoBehaviour, IInjectionReady
     {
         [field: SerializeField] public WeaponData[] WeaponData { get; private set; }
-        [field: SerializeField] public WeaponSlot[] WeaponSlots { get; private set; }
+        [field: SerializeField] public SlotConfigData[] WeaponSlotConfigs { get; private set; }
 
         [Inject] private readonly TargetManager _targetManager;
-
-        private readonly List<WeaponSlot> _activeSlots = new();
+        [Inject] private readonly PlayerController _playerController;
+        
+        private readonly List<WeaponController> _weapons = new();
 
         public void OnReady()
         {
-            FillWeaponSlots();
+            PlaceWeapons();
         }
 
-        private void FillWeaponSlots()
+        private void PlaceWeapons()
         {
-            for (int i = 0; i < WeaponSlots.Length; i++)
+            var slotConfig = WeaponSlotConfigs[WeaponData.Length - 1];
+            for (var i = 0; i < WeaponData.Length; i++)
             {
-                if (i >= WeaponData.Length)
-                {
-                    break;
-                }
-
-                var slot = WeaponSlots[i];
                 var data = WeaponData[i];
-                slot.SetWeapon(data);
-                _activeSlots.Add(slot);
+                var weapon = Instantiate(data.Prefab, transform);
+                weapon.LocalPosition = slotConfig.GetPosition(i);
+                weapon.Initialize(data);
+                _weapons.Add(weapon);
             }
         }
 
         private void Update()
         {
             var time = Time.time;
-            foreach (var weaponSlot in _activeSlots)
+            foreach (var weapon in _weapons)
             {
-                var weapon = weaponSlot.Weapon;
                 var target = _targetManager.GetClosestTarget(weapon.Barrel.position, weapon.Data.Range);
-                
-                weapon.UpdateTarget(target, time);
+                weapon.UpdateTarget(target, time, _playerController.Character.HorizontalDirection);
                 
                 if (target != null && weapon.ShouldActivate(time))
                 {
@@ -53,5 +48,23 @@ namespace Project.Game.Player
                 }
             }
         }
+
+        #if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (WeaponSlotConfigs.Length <= 0)
+            {
+                return;
+            }
+
+            var configIndex = WeaponData.Length - 1;
+            for (var i = 0; i < WeaponSlotConfigs[configIndex].Count; i++)
+            {
+                var worldPos = transform.TransformPoint(WeaponSlotConfigs[configIndex].GetPosition(i));
+                Gizmos.DrawWireSphere(worldPos, 0.1f);
+                UnityEditor.Handles.Label(worldPos + (Vector3.up * 0.25f), $"{i}");
+            }
+        }
+        #endif
     }
 }

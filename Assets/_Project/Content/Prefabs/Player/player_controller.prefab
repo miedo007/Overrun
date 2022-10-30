@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 1440190957}
   <MaxSpeed>k__BackingField: 5
-  <Acceleration>k__BackingField: 75
+  <Acceleration>k__BackingField: 100
   <Drag>k__BackingField: 15
 --- !u!210 &5182591935649089197
 SortingGroup:
@@ -233,22 +233,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_weapon_controller
       objectReference: {fileID: 0}
-    - target: {fileID: 1596045192788323945, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
+      objectReference: {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.data[2]
       value: 
@@ -256,31 +248,11 @@ PrefabInstance:
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <WeaponData>k__BackingField.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-    - target: {fileID: 1596045194318793021, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453863827551015840, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453863827646524177, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453863828644668042, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453863828689048044, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6453863829530348346, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <WeaponData>k__BackingField.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
 --- !u!4 &8265728663106645541 stripped

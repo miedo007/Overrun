@@ -9,26 +9,36 @@ namespace Project.Game.Targets
         
         private void Awake()
         {
-            Target.StateChanged += OnTargetStateChanged;
+            Target.Activated += OnTargetActivated;
+            Target.Deactivated += OnTargetDeactivated;
         }
 
         private void OnDestroy()
         {
-            Target.StateChanged -= OnTargetStateChanged;
+            Target.Activated -= OnTargetActivated;
+            Target.Deactivated -= OnTargetDeactivated;
         }
 
-        private void OnTargetStateChanged(Target target)
+        private void OnTargetActivated(Target target)
         {
-            if (target.Enabled)
+            if (_activeTargets.Contains(target))
             {
-                _activeTargets.Add(target);
+                return;
             }
-            else
-            {
-                _activeTargets.Remove(target);
-            }
+            
+            _activeTargets.Add(target);
         }
 
+        private void OnTargetDeactivated(Target target)
+        {
+            if (!_activeTargets.Contains(target))
+            {
+                return;
+            }
+            
+            _activeTargets.Remove(target);
+        }
+        
         public Target GetClosestTarget(Vector3 position, float range = 5)
         {
             var rangeSqr = range * range;

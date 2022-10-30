@@ -20,6 +20,7 @@ namespace Project.Game.Weapons
         [field: SerializeField] public Animation Animation { get; set; }
         [field: SerializeField] public bool FlipScale { get; set; } = true;
 
+        private Vector3 _localPosition;
         private Quaternion _targetRotation;
         private float _lastActivationTime;
         private Transform _transform;
@@ -28,12 +29,21 @@ namespace Project.Game.Weapons
         [Inject] private readonly HeroInfo _heroInfo;
 
         public WeaponData Data { get; private set; }
-        public WeaponSlot Slot { get; private set; }
         public bool IsActivated { get; private set; } = false;
         public Target CurrentTarget { get; private set; }
 
         public StatInfo AttackRateStat { get; private set; }
         public StatInfo DamageStat { get; private set; }
+
+        public Vector3 LocalPosition
+        {
+            get => _localPosition;
+            set
+            {
+                _localPosition = value;
+                _transform.localPosition = _localPosition;
+            }
+        }
 
         private void Awake()
         {
@@ -44,11 +54,8 @@ namespace Project.Game.Weapons
             }*/
         }
 
-        public void Initialize(WeaponData weaponData, WeaponSlot weaponSlot)
+        public void Initialize(WeaponData weaponData)
         {
-            Slot = weaponSlot;
-            _transform.SetParent(weaponSlot.Transform, true);
-            _transform.localPosition = Vector3.zero;
             Data = weaponData;
 
             AttackRateStat = _heroInfo.GetStat(weaponData.Type.AttackRateStat);
@@ -85,13 +92,14 @@ namespace Project.Game.Weapons
 
         public void Activate(float time, WeaponController weapon)
         {
-            if (CurrentTarget == null || !CurrentTarget.Enabled)
+            if (CurrentTarget == null || !CurrentTarget.IsActivated)
             {
                 return;
             }
             
             _lastActivationTime = time;
-            _transform.rotation = _targetRotation;
+            var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
+            _transform.right = vectorToTarget;
             StartCoroutine(ActivationRoutine(weapon));
         }
 
@@ -103,7 +111,7 @@ namespace Project.Game.Weapons
             IsActivated = false;
         }
 
-        public void UpdateTarget(Target target, float time)
+        public void UpdateTarget(Target target, float time, float directionIfNoTarget)
         {
             if (IsActivated)
             {
@@ -112,24 +120,30 @@ namespace Project.Game.Weapons
 
             CurrentTarget = target;
             
-            if (target == null)
+            if (CurrentTarget == null || !CurrentTarget.IsActivated)
             {
-                _transform.localScale = new Vector3(1, 1, 1);
-                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, Quaternion.identity, 1080 * Time.deltaTime);
+                _transform.localScale = new Vector3(directionIfNoTarget, 1, 1);
+                _transform.right = Vector3.right;
+                //_transform.rotation = Quaternion.RotateTowards(_transform.rotation, Quaternion.identity, 1080 * Time.deltaTime);
             }
             else
             {
+                _transform.localScale = new Vector3(1, 1, 1);
                 // vector from this object towards the target location
-                var vectorToTarget = (target.transform.position - _transform.position).normalized;
+                var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
                 // rotate that vector by 90 degrees around the Z axis
+                /*
                 var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
                 
                 _targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
                 _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, 1080 * Time.deltaTime);
+                */
 
+                _transform.right = vectorToTarget;
+                
                 if (FlipScale)
                 {
-                    _transform.localScale = target.transform.position.x < _transform.position.x 
+                    _transform.localScale = CurrentTarget.Position.x < _transform.position.x 
                         ? FlippedScale
                         : Vector3.one;
                 }
@@ -151,6 +165,12 @@ namespace Project.Game.Weapons
             {
                 Gizmos.DrawWireSphere(transform.position, Data.Range);
             }
+
+            if (CurrentTarget != null)
+            {
+                Gizmos.DrawLine(transform.position, CurrentTarget.Position);
+            }
+            
         }
     }
 }

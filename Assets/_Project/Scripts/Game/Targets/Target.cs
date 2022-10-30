@@ -5,23 +5,40 @@ namespace Project.Game.Targets
 {
     public class Target : MonoBehaviour
     {
-        public static event Action<Target> StateChanged;
+        public static event Action<Target> Activated;
+        public static event Action<Target> Deactivated;
 
-        private bool _enabled = false;
+        private bool _activated = false;
+        private Transform _transform;
 
-        public bool Enabled
+        public bool IsActivated => _activated;
+        public Vector3 Position => _transform.position;
+
+        private void Awake()
         {
-            get => _enabled;
-            set
-            {
-                if (_enabled == value)
-                {
-                    return;
-                }
+            _transform = transform;
+        }
 
-                _enabled = value;
-                StateChanged?.Invoke(this);
+        public void Activate()
+        {
+            if (_activated)
+            {
+                return;
             }
+
+            _activated = true;
+            Activated?.Invoke(this);
+        }
+        
+        public void Deactivate()
+        {
+            if (!_activated)
+            {
+                return;
+            }
+
+            _activated = false;
+            Deactivated?.Invoke(this);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Game.Weapons
 {
@@ -22,12 +23,40 @@ namespace Project.Game.Weapons
 
         private void OnWeaponControllerInitialized()
         {
-            SetSortingOrder(WeaponController.Slot.SortingOrder);
+            //SetSortingOrder(WeaponController.LocalPosition.y <= 0 ? WeaponController.FlippedHorizontal ? : : -2);
         }
 
         private void OnWeaponControllerActivated()
         {
             Animation.Play();
+        }
+
+        private void LateUpdate()
+        {
+            var position = WeaponController.LocalPosition;
+            var isFlipped = transform.localScale.x < 0;
+            if (position.y <= .25f) // Front guns
+            {
+                if (isFlipped)
+                {
+                    SetSortingOrder(position.x <= 0 ? 2 : 3);
+                }
+                else
+                {
+                    SetSortingOrder(position.x <= 0 ? 3 : 2);
+                }
+            }
+            else
+            {
+                if (isFlipped)
+                {
+                    SetSortingOrder(position.x <= 0 ? -3 : -2);
+                }
+                else
+                {
+                    SetSortingOrder(position.x <= 0 ? -2 : -3);
+                }
+            }
         }
 
         public void SetSortingOrder(int sortingOrder)

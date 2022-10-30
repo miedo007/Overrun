@@ -1358,9 +1358,9 @@ MonoBehaviour:
   <Rect>k__BackingField:
     serializedVersion: 2
     x: -7.5
-    y: -7.5
+    y: -8
     width: 15
-    height: 15
+    height: 15.5
 --- !u!4 &600868913
 Transform:
   m_ObjectHideFlags: 0
@@ -2223,7 +2223,7 @@ Transform:
   m_GameObject: {fileID: 824528441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -14, z: 0}
-  m_LocalScale: {x: 28, y: 12.000459, z: 1}
+  m_LocalScale: {x: 28, y: 12.00039, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 154023949}
@@ -6496,10 +6496,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1440190959}
+    - target: {fileID: 1501380780856478763, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1501380781716418642, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -6692,7 +6700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8265728662808973051, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8265728662808973051, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
       propertyPath: m_LocalPosition.y

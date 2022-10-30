@@ -47,7 +47,7 @@ namespace Project.Game.Enemies
 
         public void Initialize(EnemyData enemyData, Vector3 playerPosition)
         {
-            selfTarget.Enabled = false;
+            selfTarget.Deactivate();
             var direction = (playerPosition - _transform.position).normalized;
             FacePlayer(direction);
             CurrentHealth = enemyData.BaseHealth;
@@ -69,7 +69,7 @@ namespace Project.Game.Enemies
 
         public bool ReactToProjectile(ProjectileController projectile, float damage)
         {
-            if (selfTarget.Enabled)
+            if (selfTarget.IsActivated)
             {
                 ApplyDamage(damage);
                 return true;
@@ -95,13 +95,13 @@ namespace Project.Game.Enemies
 
         public void Kill()
         {
-            selfTarget.Enabled = false;
+            selfTarget.Deactivate();
             Killed?.Invoke(this);
         }
 
         public bool ReceiveDamage(float damage)
         {
-            if (selfTarget.Enabled)
+            if (selfTarget.IsActivated)
             {
                 ApplyDamage(damage);
                 return true;
@@ -112,12 +112,12 @@ namespace Project.Game.Enemies
 
         public void Activate()
         {
-            selfTarget.Enabled = true;
+            selfTarget.Activate();
         }
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            if (selfTarget.Enabled)
+            if (selfTarget.IsActivated)
             {
                 TryAttack(other);
             }
@@ -125,7 +125,7 @@ namespace Project.Game.Enemies
 
         private void TryAttack(Collider2D other)
         {
-            if (!selfTarget.Enabled)
+            if (!selfTarget.IsActivated)
             {
                 return;
             }
@@ -148,7 +148,5 @@ namespace Project.Game.Enemies
         {
             TryAttack(other);
         }
-        
-        
     }
 }
