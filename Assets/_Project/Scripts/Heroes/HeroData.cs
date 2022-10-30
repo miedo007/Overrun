@@ -1,4 +1,4 @@
-﻿using Project.Game.Player;
+﻿using Project.Game.Weapons;
 using Project.Stats;
 using UnityEngine;
 
@@ -8,7 +8,8 @@ namespace Project.Heroes
     public class HeroData : ScriptableObject
     {
         [field: SerializeField] public string DisplayName { get; private set; }
-        [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
         [field: SerializeField] public HeroViewController Prefab { get; private set; }
+        [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
+        [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
     }
 }

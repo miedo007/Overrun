@@ -1,5 +1,4 @@
-﻿using System;
-using Mtl.Injection;
+﻿using Mtl.Injection;
 using Project.Heroes;
 using UnityEngine;
 
@@ -26,6 +25,14 @@ namespace Project.Game.Player
         {
             var heroView = Instantiate(_heroInfo.Data.Prefab, transform);
             heroView.Initialize(Character);
+        }
+
+        private void Start()
+        {
+            foreach (var weapon in _heroInfo.Data.StartingWeapons)
+            {
+                _heroInfo.AddWeapon(weapon);
+            }
         }
 
         private void HandleInput()

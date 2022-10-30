@@ -1,14 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Stats;
 using System.Linq;
+using Project.Game.Weapons;
+using UnityEngine;
 
 namespace Project.Heroes
 {
     public class HeroInfo
     {
+        public event Action CurrentWeaponsChanged; 
+
         public HeroData Data { get; private set; }
 
         public List<StatInfo> Stats { get; private set; } = new();
+        public List<WeaponData> CurrentWeapons { get; private set; } = new();
         
         private HeroInfo() {}
 
@@ -28,6 +34,31 @@ namespace Project.Heroes
                 Stats.Add(statOverride == null ? stat.GetLeveledStatInfo(heroLevel) : statOverride.GetLeveledStatInfo(heroLevel));
             }
         }
+
+        public void AddWeapon(WeaponData weaponData)
+        {
+            if (CurrentWeapons.Count == 6)
+            {
+                Debug.LogError("Weapons Full");
+                return;
+            }
+            
+            CurrentWeapons.Add(weaponData);
+            CurrentWeaponsChanged?.Invoke();
+        }
+        
+        public void RemoveWeaponAtIndex(int weaponIndex)
+        {
+            if (weaponIndex >= CurrentWeapons.Count)
+            {
+                Debug.LogError($"No weapon at index {weaponIndex}");
+                return;
+            }
+            
+            CurrentWeapons.RemoveAt(weaponIndex);
+            CurrentWeaponsChanged?.Invoke();
+        }
+        
 
         public StatInfo GetStat(StatData statData)
         {

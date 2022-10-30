@@ -3,6 +3,7 @@ using Mtl.UiFramework;
 using Project.Application;
 using Project.Game.Player;
 using Project.Game.UI;
+using Project.Game.Weapons;
 using UnityEngine;
 
 namespace Project.Game
@@ -17,6 +18,7 @@ namespace Project.Game
         private void Start()
         {
             _uiFrame.Open<HudScreen>();
+            _uiFrame.Open<WeaponTestScreen>();
         }
 
         public void OnReady()

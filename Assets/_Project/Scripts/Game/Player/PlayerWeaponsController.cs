@@ -2,31 +2,55 @@
 using Mtl.Injection;
 using Project.Game.Targets;
 using Project.Game.Weapons;
+using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game.Player
 {
     public class PlayerWeaponsController : MonoBehaviour, IInjectionReady
     {
-        [field: SerializeField] public WeaponData[] WeaponData { get; private set; }
         [field: SerializeField] public SlotConfigData[] WeaponSlotConfigs { get; private set; }
 
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
+        [Inject] private readonly HeroInfo _heroInfo;
+        
         
         private readonly List<WeaponController> _weapons = new();
-
+        
         public void OnReady()
         {
+            _heroInfo.CurrentWeaponsChanged += OnCurrentWeaponsChanged;
+        }
+
+        private void OnCurrentWeaponsChanged()
+        {
+            ClearWeapons();
             PlaceWeapons();
+        }
+
+        private void ClearWeapons()
+        {
+            foreach (var weapon in _weapons)
+            {
+                Destroy(weapon.gameObject);
+            }
+            
+            _weapons.Clear();
         }
 
         private void PlaceWeapons()
         {
-            var slotConfig = WeaponSlotConfigs[WeaponData.Length - 1];
-            for (var i = 0; i < WeaponData.Length; i++)
+            if (_heroInfo.CurrentWeapons.Count <= 0)
             {
-                var data = WeaponData[i];
+                return;
+            }
+            
+            var slotConfig = WeaponSlotConfigs[_heroInfo.CurrentWeapons.Count - 1];
+            
+            for (var i = 0; i < _heroInfo.CurrentWeapons.Count; i++)
+            {
+                var data = _heroInfo.CurrentWeapons[i];
                 var weapon = Instantiate(data.Prefab, transform);
                 weapon.LocalPosition = slotConfig.GetPosition(i);
                 weapon.Initialize(data);
@@ -48,23 +72,5 @@ namespace Project.Game.Player
                 }
             }
         }
-
-        #if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            if (WeaponSlotConfigs.Length <= 0)
-            {
-                return;
-            }
-
-            var configIndex = WeaponData.Length - 1;
-            for (var i = 0; i < WeaponSlotConfigs[configIndex].Count; i++)
-            {
-                var worldPos = transform.TransformPoint(WeaponSlotConfigs[configIndex].GetPosition(i));
-                Gizmos.DrawWireSphere(worldPos, 0.1f);
-                UnityEditor.Handles.Label(worldPos + (Vector3.up * 0.25f), $"{i}");
-            }
-        }
-        #endif
     }
 }

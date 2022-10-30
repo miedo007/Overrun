@@ -129,6 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3a59b8344642aea371f00eff1c490d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ShowDuration>k__BackingField: 0.125
-  <WarningDuration>k__BackingField: 0.375
-  <HideDuration>k__BackingField: 0.125
+  <ShowDuration>k__BackingField: 0.1
+  <WarningDuration>k__BackingField: 0.625
+  <HideDuration>k__BackingField: 0.1
