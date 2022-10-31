@@ -45,15 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c9f803a48048d08a3e36d946cd2970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WeaponData>k__BackingField:
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  <WeaponSlotConfigs>k__BackingField:
-  - {fileID: 11400000, guid: 72b59dd1f933ba54a81f88f46785613d, type: 2}
-  - {fileID: 11400000, guid: 2700ba35f5fa9864ab18ff6b9227a87f, type: 2}
-  - {fileID: 11400000, guid: 4f0acc33b46cf8d43a045fcdff79a888, type: 2}
-  - {fileID: 11400000, guid: db2206a1388803243af26eba52182ef5, type: 2}
-  - {fileID: 11400000, guid: a96fa0feccd3adf429dabc720ef0adde, type: 2}
-  - {fileID: 11400000, guid: e21659c9c87cb014babfc2e0f3ce70a2, type: 2}
+  <RadiusRange>k__BackingField: {x: 0.25, y: 0.75}
 --- !u!114 &425882226003985251
 MonoBehaviour:
   m_ObjectHideFlags: 0

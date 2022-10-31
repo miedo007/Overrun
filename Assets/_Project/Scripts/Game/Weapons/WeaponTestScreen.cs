@@ -11,9 +11,9 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public Button AddRandomButton { get; private set; }
         [field: SerializeField] public Button RemoveRandomButton { get; private set; }
-        [field: SerializeField] public WeaponData[] AllWeapons { get; private set; }
 
         [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly WeaponDatabase _weaponDatabase;
 
         private void Awake()
         {
@@ -29,8 +29,7 @@ namespace Project.Game.Weapons
 
         private void AddRandomWeapon()
         {
-            
-            _heroInfo.AddWeapon(AllWeapons[Random.Range(0, AllWeapons.Length)]);
+            _heroInfo.AddWeapon(_weaponDatabase.GetRandomWeapon());
             RefreshButtonState();
         }
 

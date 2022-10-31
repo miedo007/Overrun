@@ -233,26 +233,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_weapon_controller
       objectReference: {fileID: 0}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9b67f703a8f774b42a1dc5b4a3cead17, type: 2}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
-    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
-      propertyPath: <WeaponData>k__BackingField.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
 --- !u!4 &8265728663106645541 stripped

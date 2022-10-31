@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoader: {fileID: 4287201291991439538}
+  weaponDatabase: {fileID: 11400000, guid: 2f4fdd1bdbf0dff48a69588cc6faeddc, type: 2}
 --- !u!114 &1691584159726164944
 MonoBehaviour:
   m_ObjectHideFlags: 0

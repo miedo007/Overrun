@@ -81,7 +81,7 @@ namespace Project.Game.Weapons
 
         private void OnHeroAttackRateChanged(StatInfo statInfo)
         {
-            _attackDelay = 1f / (Data.AttackRate * AttackRateStat.GetFloatValue());
+            _attackDelay = 1f / (Data.AttacksPerSecond * AttackRateStat.GetFloatValue());
         }
 
         public bool ShouldActivate(float time)

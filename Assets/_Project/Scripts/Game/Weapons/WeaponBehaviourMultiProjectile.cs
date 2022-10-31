@@ -16,10 +16,12 @@ namespace Project.Game.Weapons
         public override IEnumerator ActivationRoutine(WeaponController weapon)
         {
             var barrel = weapon.Barrel;
-            var targetPosition = barrel.position + barrel.right;
+            var barrelPosition = barrel.position;
+            var targetPosition = barrelPosition + barrel.right;
+            var vectorToTarget = (targetPosition - barrelPosition).normalized;
+            
             for (var i = 0; i < ProjectileCount; i++)
             {
-                var vectorToTarget = (targetPosition - barrel.position).normalized;
                 var spreadAngle = Random.Range(ProjectileSpread.x, ProjectileSpread.y);
                 var spreadRotation = Quaternion.AngleAxis(spreadAngle, Vector3.forward);
                 var randomOffsetVector = spreadRotation * vectorToTarget;
