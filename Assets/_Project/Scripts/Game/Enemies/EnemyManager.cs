@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Lean.Pool;
 using Mtl.Injection;
+using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Rooms;
 using UnityEngine;
@@ -12,35 +13,85 @@ namespace Project.Game.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
-        [field: SerializeField] public EnemyData[] EnemyDatas { get; private set; }
+        [field: SerializeField] public EnemyDatabase Enemies { get; private set; }
         [field: SerializeField] public SpawnWarning SpawnWarningPrefab { get; private set; }
 
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly RoomManager _roomManager;
+
+        private SpawnSequence _spawnSequence;
+        private WaveInfo _currentWave;
         
         public List<EnemyController> ActiveEnemies { get; private set; } = new();
 
-        private void Start()
+        public void BeginWave(WaveInfo currentWaveInfo)
         {
+            _currentWave = currentWaveInfo;
+            _spawnSequence = new SpawnSequence(Enemies, _currentWave.SpawnCode);
+            
             StartCoroutine(SpawnRoutine());
+        }
+
+        public void EndWave()
+        {
+            StopAllCoroutines();
+
+            // kill all active enemies
+            
+            for (var index = ActiveEnemies.Count - 1; index >= 0; index--)
+            {
+                var enemy = ActiveEnemies[index];
+                enemy.Cleanup();
+            }
+            
+            ActiveEnemies.Clear();
+            
+            // kill all inactive enemies
+            var inactiveEnemies = GetComponentsInChildren<EnemyController>();
+            
+            foreach (var enemy in inactiveEnemies)
+            {
+                enemy.Cleanup();
+            }
+            
+            // clean up spawn warnings
+            var spawnWarnings = GetComponentsInChildren<SpawnWarning>();
+            
+            foreach (var warning in spawnWarnings)
+            {
+                warning.Hide();
+            }
         }
 
         private IEnumerator SpawnRoutine()
         {
+            var currentIntervalDelay = 2f;
+            
             while (enabled)
             {
-                yield return new WaitForSeconds(Random.Range(0.625f, 1.25f));
-                StartCoroutine(SpawnGroup());
+                foreach (var spawnItem in _spawnSequence.SpawnItems)
+                {
+                    if (spawnItem.IsDelay)
+                    {
+                        yield return new WaitForSeconds(currentIntervalDelay * spawnItem.Quantity);
+                    }
+                    else
+                    {
+                        StartCoroutine(SpawnGroup(spawnItem as SpawnEnemyGroup));
+                    }
+                }
+                
+                yield return new WaitForSeconds(currentIntervalDelay);
+                currentIntervalDelay *= 0.95f;
             }
         }
 
-        private IEnumerator SpawnGroup()
+        private IEnumerator SpawnGroup(SpawnEnemyGroup spawnEnemyGroup)
         {
-            var enemyData = EnemyDatas[Random.Range(0, EnemyDatas.Length)];
+            var enemyData = spawnEnemyGroup.EnemyData;
             var groupCenter = _roomManager.GetValidPositionInRadius(_playerController.Position, 5);
-            var groupSize = enemyData.GetRandomGroupSize();
             
-            for (var i = 0; i < groupSize; i++)
+            for (var i = 0; i < spawnEnemyGroup.Quantity; i++)
             {
                 StartCoroutine(SpawnEnemyRoutine(enemyData, groupCenter));
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.2f));
@@ -50,13 +101,14 @@ namespace Project.Game.Enemies
         private IEnumerator SpawnEnemyRoutine(EnemyData enemyData, Vector3 groupCenter)
         {
             var spawnPoint = _roomManager.GetValidPositionInRadius(groupCenter, 2f);
-            var spawnWarning = LeanPool.Spawn(SpawnWarningPrefab, spawnPoint, Quaternion.identity);
+            var spawnWarning = LeanPool.Spawn(SpawnWarningPrefab, spawnPoint, Quaternion.identity, transform);
             yield return spawnWarning.ShowRoutine();
             
             var enemy = LeanPool.Spawn(enemyData.Prefab, spawnPoint, Quaternion.identity, transform);
             enemy.transform.localScale = Vector3.zero;
             enemy.Initialize(enemyData, _playerController.Position);
             enemy.Killed += OnEnemyKilled;
+            
             yield return enemy.transform.DOScale(1, 0.2f).WaitForCompletion();
             
             spawnWarning.Hide();
@@ -70,7 +122,7 @@ namespace Project.Game.Enemies
         {
             enemy.Killed -= OnEnemyKilled;
             ActiveEnemies.Remove(enemy);
-            LeanPool.Despawn(enemy);
+            enemy.Cleanup();
         }
 
         private void Update()
@@ -82,6 +134,60 @@ namespace Project.Game.Enemies
                 var enemy = ActiveEnemies[i];
                 enemy.Step(dt, time, _playerController.Position);
             }
+        }
+    }
+
+    public class SpawnSequence
+    {
+        public List<SpawnItem> SpawnItems { get; private set; }
+        
+        public SpawnSequence(EnemyDatabase enemies, string spawnCode)
+        {
+            SpawnItems = new List<SpawnItem>();
+            var intervals = spawnCode.Split(',');
+            foreach (var interval in intervals)
+            {
+                // is this a delay interval or enemy group
+                if (interval[0] == '_')
+                {
+                    SpawnItems.Add(new SpawnSequenceDelay
+                    {
+                        Quantity = interval.Length
+                    });
+                }
+                else
+                {
+                    var enemyCode = interval[0];
+                    var enemyCount = int.Parse(interval.Substring(1,interval.Length -1));
+
+                    var spawnItem = new SpawnEnemyGroup
+                    {
+                        EnemyData = enemies.GetEnemyWithCode(enemyCode),
+                        Quantity = enemyCount
+                    };
+
+                    SpawnItems.Add(spawnItem);
+                }
+            }
+        }
+    }
+    
+    public class SpawnItem
+    {
+        public bool IsDelay { get; protected set; }
+        public int Quantity { get; set; }
+    }
+    
+    public class SpawnEnemyGroup : SpawnItem
+    {
+        public EnemyData EnemyData;
+    }
+    
+    public class SpawnSequenceDelay : SpawnItem
+    {
+        public SpawnSequenceDelay()
+        {
+            IsDelay = true;
         }
     }
 }

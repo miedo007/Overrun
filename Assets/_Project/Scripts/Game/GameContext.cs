@@ -1,5 +1,7 @@
 using Project.PopupText;
 using Project.Application;
+using Project.Game.Enemies;
+using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Targets;
 using Project.Heroes;
@@ -13,6 +15,8 @@ namespace Project.Game
         [field: SerializeField] public TargetManager TargetManager { get; private set; }
         [field: SerializeField] public PopupTextManager PopupTextManager { get; private set; }
         [field: SerializeField] public PlayerController PlayerController { get; private set; }
+        [field: SerializeField] public LevelController LevelController { get; private set; }
+        [field: SerializeField] public EnemyManager EnemyManager { get; private set; }
 
         protected override void OnInjectStart()
         {
@@ -26,6 +30,8 @@ namespace Project.Game
             Bind(TargetManager);
             Bind(PopupTextManager);
             Bind(PlayerController);
+            Bind(LevelController);
+            Bind(EnemyManager);
         }
     }
 }

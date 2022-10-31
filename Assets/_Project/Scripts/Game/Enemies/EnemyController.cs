@@ -1,4 +1,5 @@
 ﻿using System;
+using Lean.Pool;
 using Mtl.Injection;
 using Project.Game.Projectiles;
 using Project.Game.Targets;
@@ -15,7 +16,7 @@ namespace Project.Game.Enemies
         public event Action<int> FacingDirectionChanged;
 
         [SerializeField] private Target selfTarget;
-
+        
         [Inject] private readonly PopupTextManager _popupTextManager;
 
         private Transform _transform;
@@ -95,9 +96,20 @@ namespace Project.Game.Enemies
 
         public void Kill()
         {
-            selfTarget.Deactivate();
             Killed?.Invoke(this);
         }
+        
+        public void Cleanup()
+        {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            
+            selfTarget.Deactivate();
+            LeanPool.Despawn(this);
+        }
+        
 
         public bool ReceiveDamage(float damage)
         {

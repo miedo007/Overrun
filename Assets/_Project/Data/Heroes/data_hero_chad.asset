@@ -16,5 +16,5 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 8191813735188580489, guid: 51b0490bd69b79349bbb4b64368a8cd8, type: 3}
   <StatOverrides>k__BackingField: {fileID: 11400000, guid: 8974c4d6b65b40448b1c190153ec45f7, type: 2}
   <StartingWeapons>k__BackingField:
-  - {fileID: 11400000, guid: 41011cefff7bddd46bfaf675e6688360, type: 2}
+  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   <WeaponSlots>k__BackingField: 8

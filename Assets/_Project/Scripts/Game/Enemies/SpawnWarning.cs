@@ -21,6 +21,9 @@ namespace Project.Game.Enemies
         
         public void Hide()
         {
+            StopAllCoroutines();
+            transform.DOKill();
+            
             transform.DOScale(0, HideDuration)
                 .OnComplete(()=>
                     LeanPool.Despawn(this)
