@@ -21,17 +21,23 @@ namespace Project.Game.Weapons
             RemoveRandomButton.onClick.AddListener(RemoveRandomWeapon);
         }
 
-        private void RemoveRandomWeapon()
+        private void RefreshButtonState()
         {
-            _heroInfo.RemoveWeaponAtIndex(Random.Range(0, _heroInfo.CurrentWeapons.Count));
+            AddRandomButton.interactable = _heroInfo.CurrentWeapons.Count < 12;
+            RemoveRandomButton.interactable = _heroInfo.CurrentWeapons.Count > 0;
         }
 
         private void AddRandomWeapon()
         {
-            if (_heroInfo.CurrentWeapons.Count > 0)
-            {
-                _heroInfo.AddWeapon(AllWeapons[Random.Range(0, AllWeapons.Length)]);
-            }
+            
+            _heroInfo.AddWeapon(AllWeapons[Random.Range(0, AllWeapons.Length)]);
+            RefreshButtonState();
+        }
+
+        private void RemoveRandomWeapon()
+        {
+            _heroInfo.RemoveWeaponAtIndex(Random.Range(0, _heroInfo.CurrentWeapons.Count));
+            RefreshButtonState();
         }
     }
 }

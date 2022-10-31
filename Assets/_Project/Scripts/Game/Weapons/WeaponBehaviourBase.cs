@@ -10,12 +10,26 @@ namespace Project.Game.Weapons
             yield break;
         }
 
-        protected IEnumerator WaitForAnimationClip(Animation animation)
+        protected IEnumerator WaitForAnimationClip(Animation animation, float percentage = 1f)
         {
-            while (animation.IsPlaying(animation.clip.name))
+            if (percentage >= 1)
             {
-                yield return null;
+                while (animation.IsPlaying(animation.clip.name))
+                {
+                    yield return null;
+                }
+                
             }
+            else
+            {
+                var time = animation.clip.length * percentage;
+                while (time > 0)
+                {
+                    yield return null;
+                    time -= Time.deltaTime;
+                }
+            }
+            
         }
     }
 }

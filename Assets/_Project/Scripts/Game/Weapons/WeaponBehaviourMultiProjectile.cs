@@ -10,6 +10,7 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public ProjectileData ProjectileData { get; private set; }
         [field: SerializeField] public int ProjectileCount { get; private set; }
+        [field: SerializeField] public float DelayBetweenProjectiles { get; private set; } = -1f;
         [field: SerializeField] public Vector2 ProjectileSpread { get; private set; } = new(-30, 30);
         
         public override IEnumerator ActivationRoutine(WeaponController weapon)
@@ -27,9 +28,19 @@ namespace Project.Game.Weapons
                 
                 var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weapon.Barrel.position, rotation);
                 projectile.Initialize(ProjectileData, weapon.DamageStat.GetFloatValue() * weapon.Data.DamageFactor);
+
+                if (DelayBetweenProjectiles > 0f)
+                {
+                    var time = DelayBetweenProjectiles;
+                    while (time > 0)
+                    {
+                        yield return null;
+                        time -= Time.deltaTime;
+                    }
+                }
             }
             
-            yield return WaitForAnimationClip(weapon.Animation);
+            yield return WaitForAnimationClip(weapon.Animation, 0.5f);
         }
     }
 }

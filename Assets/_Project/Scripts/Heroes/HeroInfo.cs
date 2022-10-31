@@ -37,9 +37,8 @@ namespace Project.Heroes
 
         public void AddWeapon(WeaponData weaponData)
         {
-            if (CurrentWeapons.Count == 6)
+            if (CurrentWeapons.Count == Data.WeaponSlots)
             {
-                Debug.LogError("Weapons Full");
                 return;
             }
             

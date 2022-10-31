@@ -11,5 +11,6 @@ namespace Project.Heroes
         [field: SerializeField] public HeroViewController Prefab { get; private set; }
         [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
         [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
+        [field: SerializeField] public int WeaponSlots { get; set; } = 6;
     }
 }

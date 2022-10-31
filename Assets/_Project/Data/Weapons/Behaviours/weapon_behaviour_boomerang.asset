@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0eb19a15dd046ed8662ba5b7481a9a2, type: 3}
-  m_Name: data_slot_config_3
+  m_Script: {fileID: 11500000, guid: faf300db6e7e4de083e76955ec719a99, type: 3}
+  m_Name: weapon_behaviour_boomerang
   m_EditorClassIdentifier: 
-  <Radius>k__BackingField: 0.5
-  <Count>k__BackingField: 3
-  <AngleOffset>k__BackingField: 60
+  <AnimationClip>k__BackingField: {fileID: 7400000, guid: 1f83d7e8a2a19524b881e73f6f6e14af, type: 2}

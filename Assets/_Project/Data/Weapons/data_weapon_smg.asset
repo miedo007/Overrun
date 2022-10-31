@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
-  m_Name: data_weapon_shotgun
+  m_Name: data_weapon_smg
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: beab32e7f00efac4a8c3ab0d1ddaade3, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}

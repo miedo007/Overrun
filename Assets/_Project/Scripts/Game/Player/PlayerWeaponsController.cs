@@ -9,13 +9,12 @@ namespace Project.Game.Player
 {
     public class PlayerWeaponsController : MonoBehaviour, IInjectionReady
     {
-        [field: SerializeField] public SlotConfigData[] WeaponSlotConfigs { get; private set; }
+        [field: SerializeField, Tooltip("Weapon distance from player from 1-6 weapons")] public Vector2 RadiusRange { get; private set; } = new(0.375f, 0.75f);
 
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly HeroInfo _heroInfo;
-        
-        
+
         private readonly List<WeaponController> _weapons = new();
         
         public void OnReady()
@@ -46,16 +45,25 @@ namespace Project.Game.Player
                 return;
             }
             
-            var slotConfig = WeaponSlotConfigs[_heroInfo.CurrentWeapons.Count - 1];
-            
             for (var i = 0; i < _heroInfo.CurrentWeapons.Count; i++)
             {
                 var data = _heroInfo.CurrentWeapons[i];
                 var weapon = Instantiate(data.Prefab, transform);
-                weapon.LocalPosition = slotConfig.GetPosition(i);
+                weapon.LocalPosition = GetWeaponPosition(i);
                 weapon.Initialize(data);
                 _weapons.Add(weapon);
             }
+        }
+        
+        public Vector3 GetWeaponPosition(int slotIndex)
+        {
+            var weaponCount = _heroInfo.CurrentWeapons.Count;
+            var angleBetween = 360f / weaponCount;
+            var angleOffset = weaponCount == 1 ? 0f : angleBetween * 0.5f;
+            var angle = -angleOffset - (angleBetween * slotIndex);
+            var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, weaponCount / 6f);
+            var position = Quaternion.Euler(0, 0, angle) * (Vector3.down * radius);
+            return position;
         }
 
         private void Update()

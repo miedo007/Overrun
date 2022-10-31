@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f823643c78c4830ae6a38278f74e7dd, type: 3}
+  m_Name: weapon_behaviour_smg
+  m_EditorClassIdentifier: 
+  <ProjectileData>k__BackingField: {fileID: 11400000, guid: ec07b0ad8de760a4abca9172d407e4e8, type: 2}
+  <ProjectileCount>k__BackingField: 8
+  <DelayBetweenProjectiles>k__BackingField: 0.0625
+  <ProjectileSpread>k__BackingField: {x: -3, y: 3}

@@ -48,10 +48,10 @@ namespace Project.Game.Weapons
         private void Awake()
         {
             _transform = transform;
-            /*if (Collider != null)
+            if (Collider != null)
             {
                 Collider.enabled = false;
-            }*/
+            }
         }
 
         public void Initialize(WeaponData weaponData)
@@ -86,7 +86,7 @@ namespace Project.Game.Weapons
 
         public bool ShouldActivate(float time)
         {
-            return time >= _lastActivationTime + _attackDelay;
+            return !IsActivated && time >= _lastActivationTime + _attackDelay;
         }
 
 
@@ -97,7 +97,6 @@ namespace Project.Game.Weapons
                 return;
             }
             
-            _lastActivationTime = time;
             var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
             _transform.right = vectorToTarget;
             StartCoroutine(ActivationRoutine(weapon));
@@ -108,6 +107,7 @@ namespace Project.Game.Weapons
             IsActivated = true;
             Activated?.Invoke();
             yield return Data.BehaviourBase.ActivationRoutine(weapon);
+            _lastActivationTime = Time.time;
             IsActivated = false;
         }
 

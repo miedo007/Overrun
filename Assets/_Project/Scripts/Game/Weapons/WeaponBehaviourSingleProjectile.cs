@@ -14,8 +14,7 @@ namespace Project.Game.Weapons
         {
             var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weapon.Barrel.position, weapon.Barrel.rotation);
             projectile.Initialize(ProjectileData, weapon.DamageStat.GetFloatValue() * weapon.Data.DamageFactor);
-            
-            yield break;
+            yield return WaitForAnimationClip(weapon.Animation, 0.5f);
         }
     }
 }
