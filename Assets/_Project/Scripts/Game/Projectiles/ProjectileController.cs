@@ -13,6 +13,8 @@ namespace Project.Game.Projectiles
         private Transform _transform;
         private float _speed;
         private float _lifespan;
+        private float _criticalChance;
+        private float _criticalMultiplier;
 
         public ProjectileData Data { get; private set; }
         public bool IsActive { get; private set; }
@@ -25,8 +27,11 @@ namespace Project.Game.Projectiles
             _transform = transform;
         }
 
-        public void Initialize(ProjectileData data, float damage)
+        public void Initialize(ProjectileData data, float damage, float criticalChance = 0f, float criticalMultiplier = 0f)
         {
+            _criticalChance = criticalChance;
+            _criticalMultiplier = criticalMultiplier;
+            
             _initializationTime = Time.time;
             Damage = damage;
             
@@ -41,7 +46,7 @@ namespace Project.Game.Projectiles
         
         public void Step(float dt, float time)
         {
-            if (time >= _initializationTime + Data.Lifespan)
+            if (time >= _initializationTime + _lifespan)
             {
                 IsActive = false;
             }
@@ -60,7 +65,9 @@ namespace Project.Game.Projectiles
             var projectileReactor = other.GetComponent<IProjectileReactor>();
             if (projectileReactor != null)
             {
-                if (projectileReactor.ReactToProjectile(this, Damage))
+                var isCritical = Random.value <= _criticalChance;
+                var damage = isCritical ? Damage * _criticalMultiplier : Damage;
+                if (projectileReactor.ReactToProjectile(this, damage, isCritical))
                 {
                     IsActive = false;
                 }

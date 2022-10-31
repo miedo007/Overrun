@@ -48,13 +48,27 @@ namespace Project.Game.Player
         public void Initialize()
         {
             _healthStatInfo = _heroInfo.GetStat(HealthStat);
+            _healthStatInfo.Changed += OnHealthStatChanged;
             CurrentHealth = MaxHealth;
             Initialized?.Invoke();
+        }
+
+        private void OnHealthStatChanged(StatInfo stat)
+        {
+            if (CurrentHealth > stat.GetFloatValue())
+            {
+                CurrentHealth = stat.GetFloatValue();
+            }
         }
 
         public void ReduceHealth(float amount)
         {
             CurrentHealth -= amount;
+        }
+
+        public string GetHealthString()
+        {
+            return $"{Mathf.CeilToInt(_currentHealth)}/{Mathf.RoundToInt(MaxHealth)}";
         }
     }
 }

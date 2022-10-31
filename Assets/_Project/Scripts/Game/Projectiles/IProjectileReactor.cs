@@ -2,6 +2,6 @@
 {
     public interface IProjectileReactor
     {
-        public bool ReactToProjectile(ProjectileController projectile, float damage);
+        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical);
     }
 }

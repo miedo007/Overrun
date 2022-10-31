@@ -68,18 +68,18 @@ namespace Project.Game.Enemies
             FacingDirection = directionToPlayer.x < 0 ? -1 : 1;
         }
 
-        public bool ReactToProjectile(ProjectileController projectile, float damage)
+        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage);
+                ApplyDamage(damage, isCritical);
                 return true;
             }
 
             return false;
         }
 
-        private void ApplyDamage(float damage)
+        private void ApplyDamage(float damage, bool isCritical)
         {
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
@@ -91,7 +91,7 @@ namespace Project.Game.Enemies
                 DamageTaken?.Invoke();
             }
                 
-            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", Color.white, selfTarget.transform.position);
+            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", isCritical ? Color.yellow : Color.white, selfTarget.transform.position);
         }
 
         public void Kill()
@@ -111,11 +111,11 @@ namespace Project.Game.Enemies
         }
         
 
-        public bool ReceiveDamage(float damage)
+        public bool ReceiveDamage(float damage, bool isCritical)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage);
+                ApplyDamage(damage, isCritical);
                 return true;
             }
 
@@ -151,7 +151,7 @@ namespace Project.Game.Enemies
                     return;
                 }
 
-                damageReceiver.ReceiveDamage(Data.MeleeDamage);
+                damageReceiver.ReceiveDamage(Data.MeleeDamage, false);
                 _lastAttackTime = Time.time;
             }
         }

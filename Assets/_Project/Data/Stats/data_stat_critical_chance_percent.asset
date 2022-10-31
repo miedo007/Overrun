@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
-  m_Name: data_character_stats_chad
+  m_Script: {fileID: 11500000, guid: c614427e7cc044fca8de4b441ed1224d, type: 3}
+  m_Name: data_stat_critical_chance_percent
   m_EditorClassIdentifier: 
-  <Stats>k__BackingField: []
+  <DisplayNameKey>k__BackingField: Critical Chance %
+  <DescriptionKey>k__BackingField: Chance of doing Critical Damage on attack
+  <Icon>k__BackingField: {fileID: 0}

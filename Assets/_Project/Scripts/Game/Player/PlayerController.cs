@@ -25,6 +25,11 @@ namespace Project.Game.Player
         {
             var heroView = Instantiate(_heroInfo.Data.Prefab, transform);
             heroView.Initialize(Character);
+
+            foreach (var item in _heroInfo.Data.StartingItems)
+            {
+                _heroInfo.AddItem(item);
+            }
         }
 
         private void Start()

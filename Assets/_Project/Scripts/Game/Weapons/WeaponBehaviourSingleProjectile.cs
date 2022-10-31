@@ -13,7 +13,13 @@ namespace Project.Game.Weapons
         public override IEnumerator ActivationRoutine(WeaponController weapon)
         {
             var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weapon.Barrel.position, weapon.Barrel.rotation);
-            projectile.Initialize(ProjectileData, weapon.DamageStat.GetFloatValue() * weapon.Data.DamageFactor);
+            projectile.Initialize(
+                ProjectileData,
+                weapon.GetDamageValue(false), 
+                weapon.CriticalChanceStat.GetFloatValue(), 
+                weapon.Data.CriticalDamageMultiplier
+            );
+            
             yield return WaitForAnimationClip(weapon.Animation, 0.5f);
         }
     }

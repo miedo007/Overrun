@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c614427e7cc044fca8de4b441ed1224d, type: 3}
-  m_Name: data_stat_attack_rate
+  m_Name: data_stat_cooldown_percent
   m_EditorClassIdentifier: 
-  <DisplayNameKey>k__BackingField: Attack Rate %
-  <DescriptionKey>k__BackingField: Modifies attack rate of all weapons
+  <DisplayNameKey>k__BackingField: Cooldown %
+  <DescriptionKey>k__BackingField: Modifies cooldown of all weapons
   <Icon>k__BackingField: {fileID: 0}

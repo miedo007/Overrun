@@ -5,6 +5,7 @@ using Project.Game.Targets;
 using Project.Heroes;
 using Project.Stats;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Game.Weapons
 {
@@ -32,8 +33,10 @@ namespace Project.Game.Weapons
         public bool IsActivated { get; private set; } = false;
         public Target CurrentTarget { get; private set; }
 
-        public StatInfo AttackRateStat { get; private set; }
+        public StatInfo CooldownReductionStat { get; private set; }
         public StatInfo DamageStat { get; private set; }
+        public StatInfo DamagePercentStat { get; private set; }
+        public StatInfo CriticalChanceStat { get; private set; }
 
         public Vector3 LocalPosition
         {
@@ -58,30 +61,41 @@ namespace Project.Game.Weapons
         {
             Data = weaponData;
 
-            AttackRateStat = _heroInfo.GetStat(weaponData.Type.AttackRateStat);
-            AttackRateStat.Changed += OnHeroAttackRateChanged;
-            OnHeroAttackRateChanged(AttackRateStat);
+            CooldownReductionStat = _heroInfo.GetStat(weaponData.Type.CooldownReductionStat);
+            CooldownReductionStat.Changed += OnHeroCooldownReductionChanged;
+            OnHeroCooldownReductionChanged(CooldownReductionStat);
             
             DamageStat = _heroInfo.GetStat(weaponData.Type.DamageStat);
             DamageStat.Changed += OnDamageStatChanged;
             OnDamageStatChanged(DamageStat);
             
+            DamagePercentStat = _heroInfo.GetStat(weaponData.Type.DamagePercentStat);
+            DamagePercentStat.Changed += OnDamagePercentStatChanged;
+            OnDamagePercentStatChanged(DamagePercentStat);
+
+            CriticalChanceStat = _heroInfo.GetStat(weaponData.Type.CriticalChanceStat);
+
             Initialized?.Invoke();
         }
 
         private void OnDestroy()
         {
-            AttackRateStat.Changed -= OnHeroAttackRateChanged;
+            CooldownReductionStat.Changed -= OnHeroCooldownReductionChanged;
             DamageStat.Changed -= OnDamageStatChanged;
+            DamagePercentStat.Changed -= OnDamagePercentStatChanged;
         }
 
-        private void OnDamageStatChanged(StatInfo obj)
+        private void OnDamageStatChanged(StatInfo statInfo)
         {
         }
 
-        private void OnHeroAttackRateChanged(StatInfo statInfo)
+        private void OnHeroCooldownReductionChanged(StatInfo statInfo)
         {
-            _attackDelay = 1f / (Data.AttacksPerSecond * AttackRateStat.GetFloatValue());
+            _attackDelay = Data.Cooldown * (1f - CooldownReductionStat.GetFloatValue());
+        }
+        
+        private void OnDamagePercentStatChanged(StatInfo statInfo)
+        {
         }
 
         public bool ShouldActivate(float time)
@@ -155,7 +169,8 @@ namespace Project.Game.Weapons
             var damageReceiver = col.GetComponent<IDamageReceiver>();
             if (damageReceiver != null)
             {
-                damageReceiver.ReceiveDamage(DamageStat.GetFloatValue() * Data.DamageFactor);
+                var isCritical = Random.value <= CriticalChanceStat.GetFloatValue();
+                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical);
             }
         }
 
@@ -171,6 +186,27 @@ namespace Project.Game.Weapons
                 Gizmos.DrawLine(transform.position, CurrentTarget.Position);
             }
             
+        }
+
+        public float GetDamageValue(bool isCritical)
+        {
+            var damageStat = DamageStat.GetFloatValue();
+            var damagePercentStat = 1f + DamagePercentStat.GetFloatValue();
+            var weaponDamageFactor = Data.DamageFactor;
+            var total = damageStat * damagePercentStat * weaponDamageFactor;
+
+            if (isCritical)
+            {
+                total *= Data.CriticalDamageMultiplier;
+            }
+            /*
+             Debug.Log($"DamageStat :: {damageStat} \n" +
+                      $"DamagePercentStat :: {damagePercentStat} \n" +
+                      $"Weapon.DamageFactor :: {weaponDamageFactor} \n" +
+                      $"Total :: {total}");
+            */
+            
+            return total;
         }
     }
 }

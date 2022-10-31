@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Project.Stats;
 using System.Linq;
+using Project.Game.Items;
 using Project.Game.Weapons;
 using UnityEngine;
 
 namespace Project.Heroes
 {
+    [System.Serializable]
     public class HeroInfo
     {
         public event Action CurrentWeaponsChanged; 
@@ -62,6 +64,15 @@ namespace Project.Heroes
         public StatInfo GetStat(StatData statData)
         {
             return Stats.FirstOrDefault(x => x.Data == statData);
+        }
+
+        public void AddItem(ItemData item)
+        {
+            foreach (var statModifier in item.StatModifiers)
+            {
+                var statInfo = GetStat(statModifier.StatData);
+                statInfo.AddModifier(statModifier);
+            }
         }
     }
 }

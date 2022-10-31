@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Mtl.Injection;
 using Project.Game.Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace Project.Game.UI
     {
         [SerializeField] private Image meter;
         [SerializeField] private Image previousValueMeter;
+        [SerializeField] private TextMeshProUGUI text;
 
         [Inject] private readonly PlayerHealthController _healthController;
 
@@ -27,7 +29,7 @@ namespace Project.Game.UI
         {
             HealthControllerOnChanged(1f,1f);
         }
-
+        
         private void HealthControllerInitialized()
         {
             HealthControllerOnChanged(1f,1f);
@@ -37,12 +39,15 @@ namespace Project.Game.UI
         {
             previousValueMeter.DOKill();
             meter.DOKill();
+            
             _healthController.Changed -= HealthControllerOnChanged;
             _healthController.Initialized -= HealthControllerInitialized;
         }
 
         private void HealthControllerOnChanged(float previousPercentage, float currentPercentage)
         {
+            text.text = _healthController.GetHealthString();
+            
             previousValueMeter.DOKill();
             meter.DOKill();
             

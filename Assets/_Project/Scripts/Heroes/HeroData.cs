@@ -1,4 +1,5 @@
-﻿using Project.Game.Weapons;
+﻿using Project.Game.Items;
+using Project.Game.Weapons;
 using Project.Stats;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Project.Heroes
         [field: SerializeField] public HeroViewController Prefab { get; private set; }
         [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
         [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
+        [field: SerializeField] public ItemData[] StartingItems { get; private set; }
         [field: SerializeField] public int WeaponSlots { get; set; } = 6;
     }
 }

@@ -17,14 +17,15 @@ namespace Project.Game
         [field: SerializeField] public PlayerController PlayerController { get; private set; }
         [field: SerializeField] public LevelController LevelController { get; private set; }
         [field: SerializeField] public EnemyManager EnemyManager { get; private set; }
+        [field: SerializeField] public HeroInfo HeroInfo { get; private set; }
 
         protected override void OnInjectStart()
         {
             base.OnInjectStart();
             
             var heroRegistry = new HeroRegistry();
-            var heroInfo = heroRegistry.GetActiveHeroInfo();
-            Bind(heroInfo);
+            HeroInfo = heroRegistry.GetActiveHeroInfo();
+            Bind(HeroInfo);
             
             Bind(Joystick);
             Bind(TargetManager);

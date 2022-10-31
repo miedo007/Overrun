@@ -29,7 +29,12 @@ namespace Project.Game.Weapons
                 var rotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
                 
                 var projectile = LeanPool.Spawn(ProjectileData.ProjectilePrefab, weapon.Barrel.position, rotation);
-                projectile.Initialize(ProjectileData, weapon.DamageStat.GetFloatValue() * weapon.Data.DamageFactor);
+                projectile.Initialize(
+                    ProjectileData,
+                    weapon.GetDamageValue(false), 
+                    weapon.CriticalChanceStat.GetFloatValue(), 
+                    weapon.Data.CriticalDamageMultiplier
+                    );
 
                 if (DelayBetweenProjectiles > 0f)
                 {

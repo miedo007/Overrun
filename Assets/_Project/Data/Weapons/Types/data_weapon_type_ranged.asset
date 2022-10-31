@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d334623e9db40b79427851068e48f7b, type: 3}
   m_Name: data_weapon_type_ranged
   m_EditorClassIdentifier: 
-  <AttackRateStat>k__BackingField: {fileID: 11400000, guid: 070fe47ddc6d56941800d0210966c59a, type: 2}
+  <CooldownReductionStat>k__BackingField: {fileID: 11400000, guid: 070fe47ddc6d56941800d0210966c59a, type: 2}
   <DamageStat>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
+  <DamagePercentStat>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
+  <CriticalChanceStat>k__BackingField: {fileID: 11400000, guid: b23e6e4b578bc7f4094e5f0742617e7e, type: 2}

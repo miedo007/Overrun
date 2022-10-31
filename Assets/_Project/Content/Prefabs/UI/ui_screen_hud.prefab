@@ -56,7 +56,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 7
+  m_AdditionalShaderChannelsFlag: 31
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eebdcc79b0c459b9e21557baa886194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HealthMeter>k__BackingField: {fileID: 1322409802290872668}
+  <PlayerHealthMeter>k__BackingField: {fileID: 0}
 --- !u!1 &7521215627414668427
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,17 +223,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d70d34c8772a1e245979e42157742f10, type: 3}
---- !u!114 &1322409802290872668 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4457521484131988181, guid: d70d34c8772a1e245979e42157742f10, type: 3}
-  m_PrefabInstance: {fileID: 3424539573828531081}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e34326b0f34c8d893c94836d190e92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2878040257560178297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 609871356862193136, guid: d70d34c8772a1e245979e42157742f10, type: 3}

@@ -4,6 +4,6 @@ namespace Project.Game.Weapons
 {
     public interface IDamageReceiver
     {
-        public bool ReceiveDamage(float damage);
+        public bool ReceiveDamage(float damage, bool isCritical);
     }
 }

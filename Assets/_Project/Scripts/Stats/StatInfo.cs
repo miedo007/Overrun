@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Project.Stats
@@ -12,27 +14,89 @@ namespace Project.Stats
         [field: SerializeField] public float BaseValue { get; private set; }
         [field: SerializeField] public LevelScaling LevelScaling { get; private set; }
         [field: SerializeField] public RoundingType RoundingType { get; private set; }
+        [field: SerializeField] public bool HasMinValue { get; private set; }
+        [field: SerializeField, ShowIf("HasMinValue")] public float MinValue { get; private set; }
+        [field: SerializeField] public bool HasMaxValue { get; private set; }
+        [field: SerializeField, ShowIf("HasMaxValue")] public float MaxValue { get; private set; }
+
+        private float _modifiedValue;
+        private bool _isDirty = true;
+        private List<StatModifier> _statModifiers = new();
 
         private StatInfo() { }
 
         public StatInfo GetLeveledStatInfo(int level)
         {
-            var statInfo = new StatInfo();
-            statInfo.Data = Data;
-            statInfo.BaseValue = GetBaseFloatValueForLevel(level);
-            statInfo.RoundingType = RoundingType;
-            return statInfo;
+            var levelStatInfo = new StatInfo
+            {
+                Data = Data,
+                BaseValue = GetBaseFloatValueForLevel(level),
+                RoundingType = RoundingType,
+                HasMinValue = HasMinValue,
+                MinValue = MinValue,
+                HasMaxValue = HasMaxValue,
+                MaxValue = MaxValue
+            };
+            return levelStatInfo;
         }
 
         private float GetBaseFloatValueForLevel(int level)
         {
-            // apply modifiers
             return LevelScaling.GetValueForLevel(BaseValue, level);
         }
        
         public float GetFloatValue()
         {
-            return BaseValue;
+            if (_isDirty)
+            {
+                CalculateStat();
+            }
+            
+            return _modifiedValue;
+        }
+
+        public void CalculateStat()
+        {
+            _modifiedValue = BaseValue;
+
+            var sumPercentAdd = 0f;
+
+            for (var i = 0; i < _statModifiers.Count; i++)
+            {
+                var modifier = _statModifiers[i];
+                switch (modifier.ModifierType)
+                {
+                    case StatModifierType.Flat:
+                        _modifiedValue += modifier.Value;
+                        break;
+                    case StatModifierType.PercentAdd:
+                        sumPercentAdd += modifier.Value;
+                        if (i + 1 >= _statModifiers.Count || _statModifiers[i + 1].ModifierType != StatModifierType.PercentAdd)
+                        {
+                            _modifiedValue *=
+                                1 + sumPercentAdd; // Multiply the sum with the "finalValue", like we do for "PercentMult" modifiers
+                            sumPercentAdd = 0; // Reset the sum back to 0
+                        }
+                        break;
+                    case StatModifierType.PercentMult:
+                        _modifiedValue *= 1 + modifier.Value;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            if (HasMinValue && _modifiedValue < MinValue)
+            {
+                _modifiedValue = MinValue;
+            }
+            else if (HasMaxValue && _modifiedValue > MaxValue)
+            {
+                _modifiedValue = MaxValue;
+            }
+            
+            _modifiedValue = (float)Math.Round(_modifiedValue, 4);
+            //Changed?.Invoke(this);
         }
 
         public int GetIntLevel()
@@ -55,6 +119,30 @@ namespace Project.Stats
             }
 
             return intValue;
+        }
+
+        public void AddModifier(StatModifier statModifier)
+        {
+            _statModifiers.Add(statModifier);
+            _statModifiers.Sort(CompareModifierOrder);
+            CalculateStat();
+        }
+        
+        public void RemoveModifier(StatModifier statModifier)
+        {
+            _statModifiers.Remove(statModifier);
+            CalculateStat();
+        }
+        
+        private int CompareModifierOrder(StatModifier a, StatModifier b)
+        {
+            if (a.Order < b.Order)
+                return -1;
+            
+            if (a.Order > b.Order)
+                return 1;
+            
+            return 0;
         }
     }
 
