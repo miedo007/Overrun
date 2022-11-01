@@ -3,6 +3,7 @@ using Mtl.UiFramework;
 using Project.Application;
 using Project.Game.Levels;
 using Project.Game.Player;
+using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
@@ -32,6 +33,14 @@ namespace Project.Game
         
         private void OnWaveCompleted()
         {
+            var shopScreen = _uiFrame.Open<ShopScreen>();
+            shopScreen.OnCloseEvent += OnShopClosed;
+        }
+
+        private void OnShopClosed(UIScreen screen)
+        {
+            screen.OnCloseEvent -= OnShopClosed;
+            
             _heroInfo.AddWeapon(_weaponDatabase.GetRandomWeapon());
             _levelController.BeginNextWave(0,2f);
         }
