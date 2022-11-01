@@ -104,15 +104,14 @@ namespace Project.Game.Weapons
         }
 
 
-        public void Activate(float time, WeaponController weapon)
+        public void Activate(WeaponController weapon)
         {
             if (CurrentTarget == null || !CurrentTarget.IsActivated)
             {
                 return;
             }
-            
-            var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
-            _transform.right = vectorToTarget;
+
+            PointToTarget();
             StartCoroutine(ActivationRoutine(weapon));
         }
 
@@ -125,7 +124,7 @@ namespace Project.Game.Weapons
             IsActivated = false;
         }
 
-        public void UpdateTarget(Target target, float time, float directionIfNoTarget)
+        public void UpdateTarget(Target target, float dt, float directionIfNoTarget)
         {
             if (IsActivated)
             {
@@ -138,20 +137,20 @@ namespace Project.Game.Weapons
             {
                 _transform.localScale = new Vector3(directionIfNoTarget, 1, 1);
                 _transform.right = Vector3.right;
-                //_transform.rotation = Quaternion.RotateTowards(_transform.rotation, Quaternion.identity, 1080 * Time.deltaTime);
+                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, Quaternion.identity, 1080 * dt);
             }
             else
             {
-                _transform.localScale = new Vector3(1, 1, 1);
+                // reset any scale flipping
+                _transform.localScale = Vector3.one;
+                
                 // vector from this object towards the target location
                 var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
                 // rotate that vector by 90 degrees around the Z axis
-                /*
                 var rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
                 
                 _targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
-                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, 1080 * Time.deltaTime);
-                */
+                _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, 1080 * dt);
 
                 _transform.right = vectorToTarget;
                 
@@ -162,6 +161,12 @@ namespace Project.Game.Weapons
                         : Vector3.one;
                 }
             }
+        }
+
+        private void PointToTarget()
+        {
+            var vectorToTarget = (CurrentTarget.Position - _transform.position).normalized;
+            _transform.right = vectorToTarget;
         }
 
         private void OnTriggerEnter2D(Collider2D col)

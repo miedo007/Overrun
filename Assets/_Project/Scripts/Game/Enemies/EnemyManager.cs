@@ -69,11 +69,17 @@ namespace Project.Game.Enemies
             
             while (enabled)
             {
+                float delay;
                 foreach (var spawnItem in _spawnSequence.SpawnItems)
                 {
                     if (spawnItem.IsDelay)
                     {
-                        yield return new WaitForSeconds(currentIntervalDelay * spawnItem.Quantity);
+                        delay = currentIntervalDelay * spawnItem.Quantity;
+                        while (delay > 0)
+                        {
+                            yield return null;
+                            delay -= Time.deltaTime;
+                        }
                     }
                     else
                     {
@@ -81,7 +87,17 @@ namespace Project.Game.Enemies
                     }
                 }
                 
-                yield return new WaitForSeconds(currentIntervalDelay);
+                // Wait before next spawn loop
+                
+                delay = currentIntervalDelay;
+                while (delay > 0)
+                {
+                    yield return null;
+                    delay -= Time.deltaTime;
+                }
+                
+                // Scale the delay between intervals for each loop through the spawn sequence
+                
                 currentIntervalDelay *= 0.95f;
             }
         }
@@ -94,7 +110,13 @@ namespace Project.Game.Enemies
             for (var i = 0; i < spawnEnemyGroup.Quantity; i++)
             {
                 StartCoroutine(SpawnEnemyRoutine(enemyData, groupCenter));
-                yield return new WaitForSeconds(Random.Range(0.1f, 0.2f));
+
+                var delay = Random.Range(0.1f, 0.2f);
+                while (delay > 0)
+                {
+                    yield return null;
+                    delay -= Time.deltaTime;
+                }
             }
         }
 
@@ -102,6 +124,7 @@ namespace Project.Game.Enemies
         {
             var spawnPoint = _roomManager.GetValidPositionInRadius(groupCenter, 2f);
             var spawnWarning = LeanPool.Spawn(SpawnWarningPrefab, spawnPoint, Quaternion.identity, transform);
+            
             yield return spawnWarning.ShowRoutine();
             
             var enemy = LeanPool.Spawn(enemyData.Prefab, spawnPoint, Quaternion.identity, transform);

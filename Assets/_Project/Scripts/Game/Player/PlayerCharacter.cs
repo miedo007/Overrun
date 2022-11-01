@@ -7,7 +7,7 @@ namespace Project.Game.Player
     public class PlayerCharacter : MonoBehaviour
     {
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
-        [field: SerializeField] public float MaxSpeed { get; private set; }
+        [field: SerializeField] public float MaxSpeed { get; set; }
         [field: SerializeField] public float Acceleration { get; private set; }
         [field: SerializeField] public float Drag { get; private set; }
 

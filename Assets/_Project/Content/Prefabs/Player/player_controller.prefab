@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Character>k__BackingField: {fileID: 5278812402053378852}
   <WeaponsController>k__BackingField: {fileID: 8265728663106645542}
+  <SpeedStatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
 --- !u!114 &5278812402053378852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 1440190957}
   <MaxSpeed>k__BackingField: 5
   <Acceleration>k__BackingField: 100
-  <Drag>k__BackingField: 15
+  <Drag>k__BackingField: 25
 --- !u!210 &5182591935649089197
 SortingGroup:
   m_ObjectHideFlags: 0

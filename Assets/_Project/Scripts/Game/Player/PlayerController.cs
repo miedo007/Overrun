@@ -1,5 +1,6 @@
 ﻿using Mtl.Injection;
 using Project.Heroes;
+using Project.Stats;
 using UnityEngine;
 
 namespace Project.Game.Player
@@ -8,11 +9,13 @@ namespace Project.Game.Player
     {
         [field: SerializeField] public PlayerCharacter Character { get; private set; }
         [field: SerializeField] public PlayerWeaponsController WeaponsController { get; private set; }
+        [field: SerializeField] public StatData SpeedStatData { get; private set; }
         
         [Inject] private readonly UltimateJoystick _joystick;
         [Inject] private readonly HeroInfo _heroInfo;
         
         private Transform _transform;
+        private StatInfo _speedStat;
 
         public Vector3 Position => _transform.position;
 
@@ -30,6 +33,10 @@ namespace Project.Game.Player
             {
                 _heroInfo.AddItem(item);
             }
+
+            _speedStat = _heroInfo.GetStat(SpeedStatData);
+            _speedStat.Changed += OnSpeedStatChanged;
+            OnSpeedStatChanged(_speedStat);
         }
 
         private void Start()
@@ -49,6 +56,11 @@ namespace Project.Game.Player
         private void Update()
         {
             HandleInput();
+        }
+        
+        private void OnSpeedStatChanged(StatInfo stat)
+        {
+            Character.MaxSpeed = _speedStat.GetFloatValue();
         }
     }
 }
