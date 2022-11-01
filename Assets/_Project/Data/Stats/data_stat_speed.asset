@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c614427e7cc044fca8de4b441ed1224d, type: 3}
   m_Name: data_stat_speed
   m_EditorClassIdentifier: 
-  <DisplayNameKey>k__BackingField: Max HP
-  <DescriptionKey>k__BackingField: Maximum health points available
-  <Icon>k__BackingField: {fileID: 0}
+  <DisplayNameKey>k__BackingField: Speed
+  <DescriptionKey>k__BackingField: Movement speed
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3952044772429d24b938023199b374d4, type: 3}

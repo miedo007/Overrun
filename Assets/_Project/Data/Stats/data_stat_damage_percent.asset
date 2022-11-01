@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Damage %
   <DescriptionKey>k__BackingField: Modifier for all damage dealt
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 981c0f7a5cdb5f448a7b92fec153f018, type: 3}

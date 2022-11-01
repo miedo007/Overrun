@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Max HP
   <DescriptionKey>k__BackingField: Maximum health points available
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: fd19c94597110b145af62dc4ca104e15, type: 3}

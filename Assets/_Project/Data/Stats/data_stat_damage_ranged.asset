@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Damage - Ranged
   <DescriptionKey>k__BackingField: Base damage for ranged weapon attacks
-  <Icon>k__BackingField: {fileID: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 05fde7a74e894874b8c222605d577fa0, type: 3}
