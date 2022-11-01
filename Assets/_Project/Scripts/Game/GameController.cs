@@ -33,6 +33,14 @@ namespace Project.Game
         
         private void OnWaveCompleted()
         {
+            var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
+            waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
+        }
+
+        private void OnWaveCompleteScreenClosed(UIScreen screen)
+        {
+            screen.OnCloseEvent -= OnWaveCompleteScreenClosed;
+            
             var shopScreen = _uiFrame.Open<ShopScreen>();
             shopScreen.OnCloseEvent += OnShopClosed;
         }
@@ -41,8 +49,8 @@ namespace Project.Game
         {
             screen.OnCloseEvent -= OnShopClosed;
             
-            _heroInfo.AddWeapon(_weaponDatabase.GetRandomWeapon());
-            _levelController.BeginNextWave(0,2f);
+            _heroInfo.AddWeapon(_weaponDatabase.GetRandom());
+            _levelController.BeginNextWave(0,1f);
         }
 
         private void OnLevelCompleted()

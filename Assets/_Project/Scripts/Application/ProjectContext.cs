@@ -1,4 +1,5 @@
 using Mtl.Injection;
+using Project.Game.Items;
 using Project.Game.Weapons;
 using UnityEngine;
 
@@ -8,12 +9,14 @@ namespace Project.Application
     {
         [SerializeField] private SceneLoader sceneLoader;
         [SerializeField] private WeaponDatabase weaponDatabase;
+        [SerializeField] private ItemDatabase itemDatabase;
         
         protected override void OnInjectStart()
         {
             UnityEngine.Application.targetFrameRate = 60;
             Bind(sceneLoader);
             Bind(weaponDatabase);
+            Bind(itemDatabase);
         }
 
         protected override void OnPostSetup()

@@ -16,7 +16,7 @@ MonoBehaviour:
   - <SpawnCode>k__BackingField: a3,b1,_,a2,_,a3,_,a2,b1,b1,_,a2,a2,b1,b1
     <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
-    <Duration>k__BackingField: 15
+    <Duration>k__BackingField: 3
   - <SpawnCode>k__BackingField: b1,b1,_,b1,_,a2,a2,a2,__,b1,a5,_,b1,b1,a4,__,a3,a2
     <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}

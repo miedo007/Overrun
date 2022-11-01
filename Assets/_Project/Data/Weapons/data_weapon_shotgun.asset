@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
   m_Name: data_weapon_shotgun
   m_EditorClassIdentifier: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ab8deb5bf5e977d40a6ed12a49b49d08, type: 3}
+  <DisplayName>k__BackingField: Shotgun
+  <Description>k__BackingField: 
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: beab32e7f00efac4a8c3ab0d1ddaade3, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: b2fb7a6b1449a2f4dbf76ac426a20a04, type: 2}
-  <AttacksPerSecond>k__BackingField: 0.6
+  <Cooldown>k__BackingField: 1
   <DamageFactor>k__BackingField: 1.25
   <Range>k__BackingField: 5
+  <CriticalDamageMultiplier>k__BackingField: 2

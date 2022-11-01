@@ -29,7 +29,7 @@ namespace Project.Game.Weapons
 
         private void AddRandomWeapon()
         {
-            _heroInfo.AddWeapon(_weaponDatabase.GetRandomWeapon());
+            _heroInfo.AddWeapon(_weaponDatabase.GetRandom());
             RefreshButtonState();
         }
 

@@ -8,7 +8,7 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public List<WeaponData> Weapons { get; private set; }
 
-        public WeaponData GetRandomWeapon()
+        public WeaponData GetRandom()
         {
             return Weapons[Random.Range(0, Weapons.Count)];
         }

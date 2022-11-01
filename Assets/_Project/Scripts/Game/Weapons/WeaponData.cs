@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Project.Application;
+using UnityEngine;
 
 namespace Project.Game.Weapons
 {
     [CreateAssetMenu(fileName = "data_weapon_", menuName = "Data/WeaponData", order = 0)]
-    public class WeaponData : ScriptableObject
+    public class WeaponData : BaseData
     {
         [field: SerializeField] public WeaponController Prefab { get; private set; }
         [field: SerializeField] public WeaponTypeData Type { get; private set; }
