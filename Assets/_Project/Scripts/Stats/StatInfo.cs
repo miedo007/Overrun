@@ -21,7 +21,7 @@ namespace Project.Stats
 
         private float _modifiedValue;
         private bool _isDirty = true;
-        private List<StatModifier> _statModifiers = new();
+        public List<StatModifier> StatModifiers { get; private set; } = new();
 
         private StatInfo() { }
 
@@ -61,9 +61,9 @@ namespace Project.Stats
 
             var sumPercentAdd = 0f;
 
-            for (var i = 0; i < _statModifiers.Count; i++)
+            for (var i = 0; i < StatModifiers.Count; i++)
             {
-                var modifier = _statModifiers[i];
+                var modifier = StatModifiers[i];
                 switch (modifier.ModifierType)
                 {
                     case StatModifierType.Flat:
@@ -71,7 +71,7 @@ namespace Project.Stats
                         break;
                     case StatModifierType.PercentAdd:
                         sumPercentAdd += modifier.Value;
-                        if (i + 1 >= _statModifiers.Count || _statModifiers[i + 1].ModifierType != StatModifierType.PercentAdd)
+                        if (i + 1 >= StatModifiers.Count || StatModifiers[i + 1].ModifierType != StatModifierType.PercentAdd)
                         {
                             _modifiedValue *=
                                 1 + sumPercentAdd; // Multiply the sum with the "finalValue", like we do for "PercentMult" modifiers
@@ -123,14 +123,14 @@ namespace Project.Stats
 
         public void AddModifier(StatModifier statModifier)
         {
-            _statModifiers.Add(statModifier);
-            _statModifiers.Sort(CompareModifierOrder);
+            StatModifiers.Add(statModifier);
+            StatModifiers.Sort(CompareModifierOrder);
             CalculateStat();
         }
         
         public void RemoveModifier(StatModifier statModifier)
         {
-            _statModifiers.Remove(statModifier);
+            StatModifiers.Remove(statModifier);
             CalculateStat();
         }
         

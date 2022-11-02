@@ -1,4 +1,5 @@
-﻿using Project.Application;
+﻿using System;
+using Project.Application;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace Project.Game.Shop
     {
         [field: SerializeField] public  Image Icon { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI NameField { get; private set; }
-        
+
         public void Initialize(BaseData data)
         {
             Icon.sprite = data.Sprite;
