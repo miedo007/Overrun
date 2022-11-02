@@ -68,9 +68,11 @@ namespace Project.Heroes
 
         public void AddItem(ItemData item)
         {
+            Debug.Log($"Adding item :: {item.DisplayName}");
             foreach (var statModifier in item.StatModifiers)
             {
                 var statInfo = GetStat(statModifier.StatData);
+                Debug.Log($"Modifying stat :: {statInfo.Data.DisplayNameKey}");
                 statInfo.AddModifier(statModifier);
             }
         }

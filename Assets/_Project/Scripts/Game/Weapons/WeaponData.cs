@@ -1,4 +1,5 @@
 ﻿using Project.Application;
+using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -13,5 +14,19 @@ namespace Project.Game.Weapons
         [field: SerializeField, Tooltip("Multiplied by WeaponType Damage Stat")] public float DamageFactor { get; private set; } = 1f;
         [field: SerializeField] public float Range { get; set; } = 2.5f;
         [field: SerializeField] public float CriticalDamageMultiplier { get; set; } = 2f;
+
+        public override string GetDescriptionForHero(HeroInfo heroInfo)
+        {
+            var baseDamage = DamageFactor * heroInfo.GetStat(Type.DamageStat).GetFloatValue();
+            var cooldown = Cooldown * (1f - heroInfo.GetStat(Type.CooldownReductionStat).GetFloatValue());
+
+            var description = 
+                $"DMG:  <b>{baseDamage:0.0}</b>\n" +
+                $"Crit DMG: <b>{CriticalDamageMultiplier:0.0}</b>\n" +
+                $"Cooldown: <b>{cooldown:0.0}</b>\n" +
+                $"Range: <b>{Range:0.0}</b>";
+
+            return description;
+        }
     }
 }

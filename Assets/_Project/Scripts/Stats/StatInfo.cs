@@ -126,12 +126,14 @@ namespace Project.Stats
             StatModifiers.Add(statModifier);
             StatModifiers.Sort(CompareModifierOrder);
             CalculateStat();
+            Changed?.Invoke(this);
         }
         
         public void RemoveModifier(StatModifier statModifier)
         {
             StatModifiers.Remove(statModifier);
             CalculateStat();
+            Changed?.Invoke(this);
         }
         
         private int CompareModifierOrder(StatModifier a, StatModifier b)

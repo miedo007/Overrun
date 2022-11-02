@@ -7,11 +7,13 @@ namespace Project.Game.Shop
     public class ShopScreen : UIScreen
     {
         [field: SerializeField] public Button NextWaveButton { get; private set; }
+        [field: SerializeField] public Button RerollButton { get; private set; }
         [field: SerializeField] public ShopInventoryView ShopInventory { get; private set; }
 
         private void Awake()
         {
             NextWaveButton.onClick.AddListener(OnNextWaveButtonClicked);
+            RerollButton.onClick.AddListener(OnRerollButtonClicked);
         }
 
         protected override void OnOpened()
@@ -24,5 +26,11 @@ namespace Project.Game.Shop
         {
             Close();
         }
+
+        private void OnRerollButtonClicked()
+        {
+            ShopInventory.Populate();
+        }
+        
     }
 }

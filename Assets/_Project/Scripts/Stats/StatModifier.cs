@@ -8,6 +8,7 @@ namespace Project.Stats
         [field: SerializeField] public StatData StatData { get; private set; }
         [field: SerializeField] public float Value { get; private set; }
         [field: SerializeField] public StatModifierType ModifierType { get; private set; }
+        [field: SerializeField] public bool DisplayAsPercentage { get; set; }
 
         public int Order => (int) ModifierType;
     }

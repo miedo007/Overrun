@@ -1,39 +1,88 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Game.Items;
 using Project.Game.Weapons;
+using Project.Heroes;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Game.Shop
 {
     public class ShopInventoryView : MonoBehaviour
     {
-        [field: SerializeField] public ShopInventoryRow WeaponRow { get; private set; }
-        [field: SerializeField] public ShopInventoryRow ItemRow { get; private set; }
+        [field: SerializeField] public ShopInventoryItemView ItemViewPrefab { get; private set; }
+        [field: SerializeField] public RectTransform Parent { get; private set; }
+        [field: SerializeField] public ScrollRect Scroller { get; private set; }
         
-        [Inject] private readonly WeaponDatabase _weaponDatabase;
-        [Inject] private readonly ItemDatabase _itemDatabase;
+        [Inject] private  WeaponDatabase _weaponDatabase;
+        [Inject] private  ItemDatabase _itemDatabase;
+        [Inject] private  HeroInfo _heroInfo;
+
+        private List<ShopInventoryItemView> CurrentItems = new();
+
 
         public void Populate()
         {
-            var weaponCount = WeaponRow.Slots.Length;
-            var weaponDatas = new List<BaseData>();
+            ClearItems();
+            
+            var weaponCount = 2;
+            var items = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                weaponDatas.Add(_weaponDatabase.GetRandom());
+                items.Add(_weaponDatabase.GetRandom());
             }
 
-            WeaponRow.Populate(weaponDatas);
-            
-            var itemCount = ItemRow.Slots.Length;
-            var itemDatas = new List<BaseData>();
+            var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                itemDatas.Add(_itemDatabase.GetRandom());
+                items.Add(_itemDatabase.GetRandom());
             }
 
-            ItemRow.Populate(itemDatas);
+            foreach (var item in items)
+            {
+                AddItem(item);
+            }
+
+            Scroller.horizontalNormalizedPosition = 0;
+        }
+        
+        public void AddItem(BaseData data)
+        {
+            var itemView = Instantiate(ItemViewPrefab, Parent);
+            itemView.Initialize(data, _heroInfo);
+            itemView.BuyButtonClicked += OnBuyButtonClicked;
+            CurrentItems.Add(itemView);
+        }
+
+        public void ClearItems()
+        {
+            foreach (var item in CurrentItems)
+            {
+                item.BuyButtonClicked -= OnBuyButtonClicked;
+                Destroy(item.gameObject);
+            }
+            
+            CurrentItems.Clear();
+        }
+
+        private void OnBuyButtonClicked(ShopInventoryItemView itemView)
+        {
+            var data = itemView.Data;
+
+            var weaponData = data as WeaponData;
+            if (weaponData != null)
+            {
+                _heroInfo.AddWeapon(weaponData);
+                return;
+            }
+            
+            var itemData = data as ItemData;
+            if (itemData != null)
+            {
+                _heroInfo.AddItem(itemData);
+            }
         }
     }
 }

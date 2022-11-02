@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Damage - Melee
   <DescriptionKey>k__BackingField: Base damage for melee weapon attacks
-  <Icon>k__BackingField: {fileID: 21300000, guid: 8a2fe9cd41acaf04b98ca0678d60f902, type: 3}
+  <Icon>k__BackingField: {fileID: -1330282663, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}

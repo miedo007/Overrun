@@ -48,8 +48,6 @@ namespace Project.Game
         private void OnShopClosed(UIScreen screen)
         {
             screen.OnCloseEvent -= OnShopClosed;
-            
-            _heroInfo.AddWeapon(_weaponDatabase.GetRandom());
             _levelController.BeginNextWave(0,1f);
         }
 
