@@ -70,6 +70,7 @@ namespace Project.Game.Shop
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
             var data = itemView.Data;
+            _heroInfo.ShopCurrency -= data.BasePrice;
 
             var weaponData = data as WeaponData;
             if (weaponData != null)

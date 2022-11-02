@@ -1,4 +1,6 @@
-﻿using Mtl.Injection;
+﻿using System;
+using Mtl.Injection;
+using Project.Game.Collectibles;
 using Project.Heroes;
 using Project.Stats;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace Project.Game.Player
         [field: SerializeField] public PlayerCharacter Character { get; private set; }
         [field: SerializeField] public PlayerWeaponsController WeaponsController { get; private set; }
         [field: SerializeField] public StatData SpeedStatData { get; private set; }
+        [field: SerializeField] public CollectibleData[] StoreCurrencyCollectibles { get; private set; }
         
         [Inject] private readonly UltimateJoystick _joystick;
         [Inject] private readonly HeroInfo _heroInfo;
@@ -22,6 +25,23 @@ namespace Project.Game.Player
         private void Awake()
         {
             _transform = transform;
+            foreach (var collectible in StoreCurrencyCollectibles)
+            {
+                collectible.Collected += OnStoreCurrencyCollected;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var collectible in StoreCurrencyCollectibles)
+            {
+                collectible.Collected -= OnStoreCurrencyCollected;
+            }
+        }
+
+        private void OnStoreCurrencyCollected(CollectibleData obj)
+        {
+            _heroInfo.ShopCurrency += obj.Value;
         }
 
         public void OnReady()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Lean.Pool;
 using Mtl.Injection;
+using Project.Game.Collectibles;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Rooms;
@@ -18,6 +19,7 @@ namespace Project.Game.Enemies
 
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly RoomManager _roomManager;
+        [Inject] private readonly CollectiblesManager _collectiblesManager;
 
         private SpawnSequence _spawnSequence;
         private WaveInfo _currentWave;
@@ -144,6 +146,8 @@ namespace Project.Game.Enemies
         private void OnEnemyKilled(EnemyController enemy)
         {
             enemy.Killed -= OnEnemyKilled;
+
+            _collectiblesManager.SpawnCollectibles(enemy.transform.position, enemy.Data.CollectibleData);
             ActiveEnemies.Remove(enemy);
             enemy.Cleanup();
         }

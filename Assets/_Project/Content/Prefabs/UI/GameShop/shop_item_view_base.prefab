@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 249143726855100433}
   - component: {fileID: 5119538735259988544}
   - component: {fileID: 4101770865699853113}
+  - component: {fileID: 4616248324112063404}
   m_Layer: 5
   m_Name: shop_item_view_base
   m_TagString: Untagged
@@ -419,11 +420,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319395f00f924e9bb5081001206a6d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CanvasGroup>k__BackingField: {fileID: 4616248324112063404}
   <Icon>k__BackingField: {fileID: 6092331943279357613}
   <NameField>k__BackingField: {fileID: 3332479391090263457}
   <DescriptionField>k__BackingField: {fileID: 4410083835017131007}
   <BuyButton>k__BackingField: {fileID: 686609119761409339}
   <CostText>k__BackingField: {fileID: 1803450975815616160}
+--- !u!225 &4616248324112063404
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544994420577736837}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6089446385786500016
 GameObject:
   m_ObjectHideFlags: 0

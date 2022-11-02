@@ -12,12 +12,28 @@ namespace Project.Heroes
     public class HeroInfo
     {
         public event Action CurrentWeaponsChanged; 
+        public event Action ShopCurrencyChanged; 
 
         public HeroData Data { get; private set; }
 
         public List<StatInfo> Stats { get; private set; } = new();
         public List<WeaponData> CurrentWeapons { get; private set; } = new();
-        
+
+        public int ShopCurrency
+        {
+            get => _shopCurrency;
+            set
+            {
+                if (_shopCurrency != value)
+                {
+                    _shopCurrency = Mathf.Clamp(value, 0, int.MaxValue);
+                    ShopCurrencyChanged?.Invoke();
+                }
+            }
+        }
+
+        private int _shopCurrency;
+    
         private HeroInfo() {}
 
         public HeroInfo(HeroData heroData, CharacterStats defaultStats, int heroLevel)
@@ -68,11 +84,9 @@ namespace Project.Heroes
 
         public void AddItem(ItemData item)
         {
-            Debug.Log($"Adding item :: {item.DisplayName}");
             foreach (var statModifier in item.StatModifiers)
             {
                 var statInfo = GetStat(statModifier.StatData);
-                Debug.Log($"Modifying stat :: {statInfo.Data.DisplayNameKey}");
                 statInfo.AddModifier(statModifier);
             }
         }
