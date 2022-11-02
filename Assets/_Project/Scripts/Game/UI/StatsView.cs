@@ -60,7 +60,7 @@ namespace Project.Game.UI
 
                 var hexString = ColorUtility.ToHtmlStringRGBA(color);
                 
-                statsString += ( $"<color=#{hexString}><sprite name={stat.Data.Icon.name}> {value:0.0}</color>\n");
+                statsString += ( $"<color=#{hexString}><sprite name={stat.Data.Icon.name}> {value:0.00}</color>\n");
             }
 
             text.text = statsString;

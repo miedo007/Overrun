@@ -17,28 +17,43 @@ namespace Project.Game.Shop
         [field: SerializeField] public  TextMeshProUGUI DescriptionField { get; private set; }
         [field: SerializeField] public  Button BuyButton { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI CostText { get; private set; }
+
+        private int _cost;
         
         public BaseData Data { get; private set; }
 
         private HeroInfo _heroInfo;
 
-        public void Initialize(BaseData data, HeroInfo hero)
+        private void Awake()
         {
+            BuyButton.onClick.AddListener(OnBuyButtonClicked);
+        }
+
+        public void Initialize(BaseData data, HeroInfo hero, int cost)
+        {
+            _cost = cost;
             _heroInfo = hero;
             Data = data;
             Icon.sprite = data.Sprite;
             NameField.text = data.DisplayName;
             DescriptionField.text = data.GetDescriptionForHero(hero);
-            CostText.text = data.BasePrice.ToString();
-            BuyButton.onClick.AddListener(OnBuyButtonClicked);
+            CostText.text = cost.ToString();
 
             hero.ShopCurrencyChanged += OnShopCurrencyChanged;
             OnShopCurrencyChanged();
         }
 
+        private void OnDestroy()
+        {
+            if (_heroInfo != null)
+            {
+                _heroInfo.ShopCurrencyChanged -= OnShopCurrencyChanged;
+            }
+        }
+
         private void OnShopCurrencyChanged()
         {
-            BuyButton.interactable = Data.BasePrice <= _heroInfo.ShopCurrency;
+            BuyButton.interactable = _cost <= _heroInfo.ShopCurrency;
         }
 
         private void OnBuyButtonClicked()
@@ -47,7 +62,6 @@ namespace Project.Game.Shop
             {
                 CanvasGroup.alpha = 0.25f;
                 CanvasGroup.interactable = false;
-                BuyButton.gameObject.SetActive(false);
                 BuyButtonClicked?.Invoke(this);
             }
         }

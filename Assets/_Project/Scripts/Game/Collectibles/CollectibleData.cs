@@ -8,7 +8,7 @@ namespace Project.Game.Collectibles
     {
         public event Action<CollectibleData> Collected;
         
-        [field: SerializeField] public int Value { get; private set; } = 1;
+        [field: SerializeField] public float Value { get; private set; } = 1;
         [field: SerializeField] public Collectible Prefab { get; private set; }
 
         public void Collect()

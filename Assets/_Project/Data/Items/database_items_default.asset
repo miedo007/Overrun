@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: database_items_default
   m_EditorClassIdentifier: 
   <Items>k__BackingField:
-  - {fileID: 11400000, guid: aff0b9db8101de2438311775f7ebf198, type: 2}
+  - {fileID: 11400000, guid: 11dd2a6ca93df7e47b4957e9f4737ea1, type: 2}
   - {fileID: 11400000, guid: 0f1c2725d97ff8d47ad970a0821be42b, type: 2}
+  - {fileID: 11400000, guid: ccd3f80a1a3e8874ba8c05f9e215de76, type: 2}
+  - {fileID: 11400000, guid: ea9a5872c18ad594bb6727e41e68f156, type: 2}
+  - {fileID: 11400000, guid: aff0b9db8101de2438311775f7ebf198, type: 2}
+  - {fileID: 11400000, guid: 00daca9be1dfcf648a251508fe7fed92, type: 2}

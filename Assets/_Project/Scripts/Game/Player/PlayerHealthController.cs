@@ -55,10 +55,16 @@ namespace Project.Game.Player
 
         private void OnHealthStatChanged(StatInfo stat)
         {
-            if (CurrentHealth > stat.GetFloatValue())
+            var newCurrentHealth = CurrentHealth;
+            
+            // If our max health becomes less than our current health,
+            // update our current health
+            if (newCurrentHealth > stat.GetFloatValue())
             {
-                CurrentHealth = stat.GetFloatValue();
+                newCurrentHealth = stat.GetFloatValue();
             }
+
+            CurrentHealth = newCurrentHealth;
         }
 
         public void ReduceHealth(float amount)

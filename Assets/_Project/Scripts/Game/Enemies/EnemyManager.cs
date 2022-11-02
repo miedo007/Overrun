@@ -23,14 +23,17 @@ namespace Project.Game.Enemies
 
         private SpawnSequence _spawnSequence;
         private WaveInfo _currentWave;
+        private int _currentWaveIndex;
+        private int _currentLevelIndex;
         
         public List<EnemyController> ActiveEnemies { get; private set; } = new();
 
-        public void BeginWave(WaveInfo currentWaveInfo)
+        public void BeginWave(WaveInfo currentWaveInfo, int levelIndex, int waveIndex)
         {
             _currentWave = currentWaveInfo;
             _spawnSequence = new SpawnSequence(Enemies, _currentWave.SpawnCode);
-            
+            _currentLevelIndex = levelIndex;
+            _currentWaveIndex = waveIndex;
             StartCoroutine(SpawnRoutine());
         }
 
@@ -53,6 +56,7 @@ namespace Project.Game.Enemies
             
             foreach (var enemy in inactiveEnemies)
             {
+                enemy.Killed -= OnEnemyKilled;
                 enemy.Cleanup();
             }
             
@@ -131,7 +135,7 @@ namespace Project.Game.Enemies
             
             var enemy = LeanPool.Spawn(enemyData.Prefab, spawnPoint, Quaternion.identity, transform);
             enemy.transform.localScale = Vector3.zero;
-            enemy.Initialize(enemyData, _playerController.Position);
+            enemy.Initialize(enemyData, _playerController.Position, _currentLevelIndex, _currentWaveIndex);
             enemy.Killed += OnEnemyKilled;
             
             yield return enemy.transform.DOScale(1, 0.2f).WaitForCompletion();

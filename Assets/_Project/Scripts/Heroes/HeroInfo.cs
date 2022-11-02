@@ -19,20 +19,20 @@ namespace Project.Heroes
         public List<StatInfo> Stats { get; private set; } = new();
         public List<WeaponData> CurrentWeapons { get; private set; } = new();
 
-        public int ShopCurrency
+        public float ShopCurrency
         {
             get => _shopCurrency;
             set
             {
-                if (_shopCurrency != value)
+                if (!Mathf.Approximately(_shopCurrency, value))
                 {
-                    _shopCurrency = Mathf.Clamp(value, 0, int.MaxValue);
+                    _shopCurrency = Mathf.Clamp(value, 0, float.MaxValue);
                     ShopCurrencyChanged?.Invoke();
                 }
             }
         }
 
-        private int _shopCurrency;
+        private float _shopCurrency;
     
         private HeroInfo() {}
 
@@ -89,6 +89,11 @@ namespace Project.Heroes
                 var statInfo = GetStat(statModifier.StatData);
                 statInfo.AddModifier(statModifier);
             }
+        }
+
+        public int GetShopCurrencyIntValue()
+        {
+            return Mathf.FloorToInt(_shopCurrency);
         }
     }
 }

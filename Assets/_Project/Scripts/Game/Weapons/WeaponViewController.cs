@@ -1,4 +1,5 @@
 ﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -62,6 +63,12 @@ namespace Project.Game.Weapons
         public void SetSortingOrder(int sortingOrder)
         {
             SpriteRenderer.sortingOrder = sortingOrder;
+        }
+
+        [Button()]
+        public void Test()
+        {
+            
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Project.Game
             screen.OnCloseEvent -= OnWaveCompleteScreenClosed;
             
             var shopScreen = _uiFrame.Open<ShopScreen>();
+            shopScreen.Initialize(_levelController.CurrentWaveIndex);
             shopScreen.OnCloseEvent += OnShopClosed;
         }
 

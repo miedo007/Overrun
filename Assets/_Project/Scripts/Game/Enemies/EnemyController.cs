@@ -25,6 +25,7 @@ namespace Project.Game.Enemies
         
         public EnemyData Data { get; private set; }
         public float CurrentHealth { get; private set; }
+        public float CurrentMeleeDamage { get; private set; }
 
         public int FacingDirection
         {
@@ -46,13 +47,21 @@ namespace Project.Game.Enemies
             _transform = transform;
         }
 
-        public void Initialize(EnemyData enemyData, Vector3 playerPosition)
+        public void Initialize(EnemyData enemyData, Vector3 playerPosition, int level, int wave)
         {
             selfTarget.Deactivate();
             var direction = (playerPosition - _transform.position).normalized;
             FacePlayer(direction);
-            CurrentHealth = enemyData.BaseHealth;
+            
             Data = enemyData;
+            CurrentHealth = GetScaledValue(enemyData.BaseHealth, level, wave);
+            CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage, level, wave);
+        }
+
+        private float GetScaledValue(float baseValue, int level, int wave)
+        {
+            var levelScaled = baseValue * Mathf.Pow(Data.LevelScaling, level);
+            return levelScaled * Mathf.Pow(Data.WaveScaling, wave);
         }
 
         public void Step(float dt, float time, Vector3 playerPosition)
@@ -151,7 +160,7 @@ namespace Project.Game.Enemies
                     return;
                 }
 
-                damageReceiver.ReceiveDamage(Data.MeleeDamage, false);
+                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false);
                 _lastAttackTime = Time.time;
             }
         }

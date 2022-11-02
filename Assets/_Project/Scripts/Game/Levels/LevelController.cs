@@ -18,11 +18,13 @@ namespace Project.Game.Levels
         [Inject] private readonly EnemyManager _enemyManager;
 
         public LevelData CurrentLevel { get; private set; }
+        public int CurrentLevelIndex { get; private set; }
         public int CurrentWaveIndex { get; private set; }
         public WaveInfo CurrentWaveInfo{ get; private set; }
         
         public void BeginNextWave(int levelIndex, float delay)
         {
+            CurrentLevelIndex = levelIndex;
             CurrentLevel = Levels.GetLevel(levelIndex);
             StartCoroutine(BeginWaveRoutine(delay));
         }
@@ -50,7 +52,7 @@ namespace Project.Game.Levels
             timerScreen.StartTimer();
             
             // start spawning enemies here
-            _enemyManager.BeginWave(CurrentWaveInfo);
+            _enemyManager.BeginWave(CurrentWaveInfo, CurrentLevelIndex, CurrentWaveIndex);
         }
 
         private void OnTimerCompleted()

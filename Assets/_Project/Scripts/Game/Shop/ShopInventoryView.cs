@@ -20,11 +20,15 @@ namespace Project.Game.Shop
         [Inject] private  ItemDatabase _itemDatabase;
         [Inject] private  HeroInfo _heroInfo;
 
+        private int _waveIndex;
+
         private List<ShopInventoryItemView> CurrentItems = new();
 
 
-        public void Populate()
+        public void Populate(int waveIndex)
         {
+            _waveIndex = waveIndex;
+            
             ClearItems();
             
             var weaponCount = 2;
@@ -51,9 +55,15 @@ namespace Project.Game.Shop
         public void AddItem(BaseData data)
         {
             var itemView = Instantiate(ItemViewPrefab, Parent);
-            itemView.Initialize(data, _heroInfo);
+            var cost = GetScaledCost(data);
+            itemView.Initialize(data, _heroInfo, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
             CurrentItems.Add(itemView);
+        }
+
+        private int GetScaledCost(BaseData data)
+        {
+            return  Mathf.CeilToInt( data.BasePrice * Mathf.Pow(1.75f, _waveIndex));
         }
 
         public void ClearItems()
@@ -70,7 +80,8 @@ namespace Project.Game.Shop
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
             var data = itemView.Data;
-            _heroInfo.ShopCurrency -= data.BasePrice;
+            var cost = GetScaledCost(data);
+            _heroInfo.ShopCurrency -= cost;
 
             var weaponData = data as WeaponData;
             if (weaponData != null)

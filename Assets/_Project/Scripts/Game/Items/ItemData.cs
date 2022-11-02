@@ -26,7 +26,7 @@ namespace Project.Game.Items
                     prefix = "-";
                 }
 
-                if (statModifier.ModifierType == StatModifierType.PercentAdd)
+                if (statModifier.ModifierType == StatModifierType.PercentAdd || statModifier.DisplayAsPercentage)
                 {
                     value *= 100f;
                     postfix = "%";

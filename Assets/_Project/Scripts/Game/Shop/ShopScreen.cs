@@ -17,18 +17,20 @@ namespace Project.Game.Shop
 
         [Inject] private readonly HeroInfo _heroInfo;
 
+        private int _waveIndex;
+
         private void Awake()
         {
             NextWaveButton.onClick.AddListener(OnNextWaveButtonClicked);
             RerollButton.onClick.AddListener(OnRerollButtonClicked);
         }
 
-        protected override void OnOpened()
+        public void Initialize(int waveIndex)
         {
-            base.OnOpened();
-            ShopInventory.Populate();
+            _waveIndex = waveIndex;
+            ShopInventory.Populate(waveIndex: waveIndex);
         }
-
+        
         private void OnNextWaveButtonClicked()
         {
             Close();
@@ -36,7 +38,7 @@ namespace Project.Game.Shop
 
         private void OnRerollButtonClicked()
         {
-            ShopInventory.Populate();
+            ShopInventory.Populate(_waveIndex);
         }
 
         public void OnReady()
