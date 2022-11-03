@@ -46,6 +46,7 @@ namespace Project.Game.Enemies
             for (var index = ActiveEnemies.Count - 1; index >= 0; index--)
             {
                 var enemy = ActiveEnemies[index];
+                enemy.Killed -= OnEnemyKilled;
                 enemy.Cleanup();
             }
             

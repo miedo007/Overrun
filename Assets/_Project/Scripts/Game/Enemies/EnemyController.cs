@@ -55,7 +55,7 @@ namespace Project.Game.Enemies
             
             Data = enemyData;
             CurrentHealth = GetScaledValue(enemyData.BaseHealth, level, wave);
-            CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage, level, wave);
+            CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage, level, 0);
         }
 
         private float GetScaledValue(float baseValue, int level, int wave)
@@ -100,7 +100,7 @@ namespace Project.Game.Enemies
                 DamageTaken?.Invoke();
             }
                 
-            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", isCritical ? Color.yellow : Color.white, selfTarget.transform.position);
+            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
         }
 
         public void Kill()
