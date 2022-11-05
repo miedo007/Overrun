@@ -12,12 +12,14 @@ namespace Project.Heroes
     public class HeroInfo
     {
         public event Action CurrentWeaponsChanged; 
+        public event Action ItemsChanged; 
         public event Action ShopCurrencyChanged; 
 
         public HeroData Data { get; private set; }
 
         public List<StatInfo> Stats { get; private set; } = new();
         public List<WeaponData> CurrentWeapons { get; private set; } = new();
+        public List<ItemData> Items { get; private set; } = new();
 
         public float ShopCurrency
         {
@@ -84,11 +86,15 @@ namespace Project.Heroes
 
         public void AddItem(ItemData item)
         {
+            Items.Add(item);
+            
             foreach (var statModifier in item.StatModifiers)
             {
                 var statInfo = GetStat(statModifier.StatData);
                 statInfo.AddModifier(statModifier);
             }
+            
+            ItemsChanged?.Invoke();
         }
 
         public int GetShopCurrencyIntValue()
