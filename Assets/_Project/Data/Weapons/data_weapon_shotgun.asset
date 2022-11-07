@@ -23,3 +23,4 @@ MonoBehaviour:
   <DamageFactor>k__BackingField: 1.25
   <Range>k__BackingField: 5
   <CriticalDamageMultiplier>k__BackingField: 2
+  <KnockbackMultiplier>k__BackingField: 2

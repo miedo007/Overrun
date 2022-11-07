@@ -16,3 +16,4 @@ MonoBehaviour:
   <DamageStat>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
   <DamagePercentStat>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
   <CriticalChanceStat>k__BackingField: {fileID: 11400000, guid: b23e6e4b578bc7f4094e5f0742617e7e, type: 2}
+  <KnockbackStat>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}

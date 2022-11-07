@@ -157,9 +157,9 @@ namespace Project.Game.Enemies
             enemy.Cleanup();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            var dt = Time.deltaTime;
+            var dt = Time.fixedDeltaTime;
             var time = Time.time;
             for (var i = 0; i < ActiveEnemies.Count; i++)
             {

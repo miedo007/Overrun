@@ -2,6 +2,7 @@
 using Lean.Pool;
 using Mtl.Injection;
 using Project.Game.Projectiles;
+using Project.Game.Rooms;
 using Project.Game.Targets;
 using Project.Game.Weapons;
 using Project.PopupText;
@@ -16,13 +17,18 @@ namespace Project.Game.Enemies
         public event Action<int> FacingDirectionChanged;
 
         [SerializeField] private Target selfTarget;
+        [SerializeField] private new Rigidbody2D rigidbody;
         
         [Inject] private readonly PopupTextManager _popupTextManager;
+        [Inject] private readonly RoomManager _roomManager;
 
         private Transform _transform;
         private int _facingDirection = 1;
         private float _lastAttackTime;
+        private float _lastKnockbackTime;
         
+        private const float KnockbackDuration = 0.1f;
+
         public EnemyData Data { get; private set; }
         public float CurrentHealth { get; private set; }
         public float CurrentMeleeDamage { get; private set; }
@@ -49,6 +55,9 @@ namespace Project.Game.Enemies
 
         public void Initialize(EnemyData enemyData, Vector3 playerPosition, int level, int wave)
         {
+            _lastKnockbackTime = 0f;
+            _lastAttackTime = 0f;
+            
             selfTarget.Deactivate();
             var direction = (playerPosition - _transform.position).normalized;
             FacePlayer(direction);
@@ -66,10 +75,23 @@ namespace Project.Game.Enemies
 
         public void Step(float dt, float time, Vector3 playerPosition)
         {
+            if (time < _lastKnockbackTime + KnockbackDuration)
+            {
+                rigidbody.position = _roomManager.ClampToRoomRect(rigidbody.position, out var didClampX, out var didClampY);
+                if (didClampX || didClampY)
+                {
+                    rigidbody.velocity = Vector2.zero;
+                }
+
+                return;
+            }
+            
             var currentPosition = _transform.position;
             var direction = (playerPosition - currentPosition).normalized;
             FacePlayer(direction);
-            _transform.position = currentPosition + direction * Data.MoveSpeed * dt;
+            //rigidbody.AddForce(direction * Data.MoveSpeed * dt, ForceMode2D.Impulse);
+            rigidbody.velocity = direction * Data.MoveSpeed;
+            //_transform.position = currentPosition + direction * Data.MoveSpeed * dt;
         }
 
         private void FacePlayer(Vector3 directionToPlayer)
@@ -77,18 +99,18 @@ namespace Project.Game.Enemies
             FacingDirection = directionToPlayer.x < 0 ? -1 : 1;
         }
 
-        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical)
+        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 force)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical);
+                ApplyDamage(damage, isCritical, force);
                 return true;
             }
 
             return false;
         }
 
-        private void ApplyDamage(float damage, bool isCritical)
+        private void ApplyDamage(float damage, bool isCritical, Vector2 force)
         {
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
@@ -101,6 +123,8 @@ namespace Project.Game.Enemies
             }
                 
             _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
+            rigidbody.AddForce(force, ForceMode2D.Impulse);
+            _lastKnockbackTime = Time.time;
         }
 
         public void Kill()
@@ -120,11 +144,11 @@ namespace Project.Game.Enemies
         }
         
 
-        public bool ReceiveDamage(float damage, bool isCritical)
+        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical);
+                ApplyDamage(damage, isCritical, force);
                 return true;
             }
 
@@ -136,12 +160,14 @@ namespace Project.Game.Enemies
             selfTarget.Activate();
         }
 
-        public void OnTriggerEnter2D(Collider2D other)
+        public void OnCollisionEnter2D(Collision2D collision)
         {
-            if (selfTarget.IsActivated)
-            {
-                TryAttack(other);
-            }
+            TryAttack(collision.collider);
+        }
+
+        public void OnCollisionStay2D(Collision2D collision)
+        {
+            TryAttack(collision.collider);
         }
 
         private void TryAttack(Collider2D other)
@@ -153,21 +179,15 @@ namespace Project.Game.Enemies
             
             if (Time.time >= _lastAttackTime + Data.MeleeAttackRate)
             {
-                
                 var damageReceiver = other.GetComponent<IDamageReceiver>();
                 if (damageReceiver == null)
                 {
                     return;
                 }
 
-                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false);
+                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero);
                 _lastAttackTime = Time.time;
             }
-        }
-
-        public void OnTriggerStay2D(Collider2D other)
-        {
-            TryAttack(other);
         }
     }
 }

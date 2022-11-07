@@ -17,7 +17,8 @@ namespace Project.Game.Weapons
                 ProjectileData,
                 weapon.GetDamageValue(false), 
                 weapon.CriticalChanceStat.GetFloatValue(), 
-                weapon.Data.CriticalDamageMultiplier
+                weapon.Data.CriticalDamageMultiplier,
+                weapon.KnockbackStat.GetFloatValue()
             );
             
             yield return WaitForAnimationClip(weapon.Animation, 0.5f);

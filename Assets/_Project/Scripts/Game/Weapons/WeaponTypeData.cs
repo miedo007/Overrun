@@ -10,5 +10,6 @@ namespace Project.Game.Weapons
         [field: SerializeField] public StatData DamageStat { get; private set; }
         [field: SerializeField] public StatData DamagePercentStat { get; private set; }
         [field: SerializeField] public StatData CriticalChanceStat { get; private set; }
+        [field: SerializeField] public StatData KnockbackStat { get; private set; }
     }
 }

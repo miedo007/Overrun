@@ -15,6 +15,7 @@ namespace Project.Game.Projectiles
         private float _lifespan;
         private float _criticalChance;
         private float _criticalMultiplier;
+        private float _knockbackForce;
 
         public ProjectileData Data { get; private set; }
         public bool IsActive { get; private set; }
@@ -27,10 +28,11 @@ namespace Project.Game.Projectiles
             _transform = transform;
         }
 
-        public void Initialize(ProjectileData data, float damage, float criticalChance = 0f, float criticalMultiplier = 0f)
+        public void Initialize(ProjectileData data, float damage, float criticalChance = 0f, float criticalMultiplier = 0f, float knockbackForce = 0f)
         {
             _criticalChance = criticalChance;
             _criticalMultiplier = criticalMultiplier;
+            _knockbackForce = knockbackForce;
             
             _initializationTime = Time.time;
             Damage = damage;
@@ -67,7 +69,7 @@ namespace Project.Game.Projectiles
             {
                 var isCritical = Random.value <= _criticalChance;
                 var damage = isCritical ? Damage * _criticalMultiplier : Damage;
-                if (projectileReactor.ReactToProjectile(this, damage, isCritical))
+                if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right * _knockbackForce))
                 {
                     IsActive = false;
                 }

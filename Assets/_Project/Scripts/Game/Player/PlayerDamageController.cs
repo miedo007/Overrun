@@ -15,7 +15,7 @@ namespace Project.Game.Player
         [Inject] private readonly PopupTextManager _popupTextManager;
         
         
-        public bool ReceiveDamage(float damage, bool isCritical)
+        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force)
         {
             _healthController.ReduceHealth(damage);
             _popupTextManager.DisplayTextAtPosition($"{damage:0.#}", DamageTextColor, transform.position, DamageTextPrefab);

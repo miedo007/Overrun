@@ -37,6 +37,7 @@ namespace Project.Game.Weapons
         public StatInfo DamageStat { get; private set; }
         public StatInfo DamagePercentStat { get; private set; }
         public StatInfo CriticalChanceStat { get; private set; }
+        public StatInfo KnockbackStat { get; private set; }
 
         public Vector3 LocalPosition
         {
@@ -74,6 +75,7 @@ namespace Project.Game.Weapons
             OnDamagePercentStatChanged(DamagePercentStat);
 
             CriticalChanceStat = _heroInfo.GetStat(weaponData.Type.CriticalChanceStat);
+            KnockbackStat = _heroInfo.GetStat(weaponData.Type.KnockbackStat);
 
             Initialized?.Invoke();
         }
@@ -174,8 +176,10 @@ namespace Project.Game.Weapons
             var damageReceiver = col.GetComponent<IDamageReceiver>();
             if (damageReceiver != null)
             {
+                var direction = (Vector2)(col.transform.position - _transform.position).normalized;
+                var force = direction.normalized * KnockbackStat.GetFloatValue() * Data.KnockbackMultiplier;
                 var isCritical = Random.value <= CriticalChanceStat.GetFloatValue();
-                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical);
+                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, force);
             }
         }
 

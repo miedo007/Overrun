@@ -14,6 +14,7 @@ namespace Project.Game.Weapons
         [field: SerializeField, Tooltip("Multiplied by WeaponType Damage Stat")] public float DamageFactor { get; private set; } = 1f;
         [field: SerializeField] public float Range { get; set; } = 2.5f;
         [field: SerializeField] public float CriticalDamageMultiplier { get; set; } = 2f;
+        [field: SerializeField] public float KnockbackMultiplier { get; set; } = 1f;
 
         public override string GetDescriptionForHero(HeroInfo heroInfo)
         {

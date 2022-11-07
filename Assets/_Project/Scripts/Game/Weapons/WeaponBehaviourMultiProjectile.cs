@@ -33,7 +33,8 @@ namespace Project.Game.Weapons
                     ProjectileData,
                     weapon.GetDamageValue(false), 
                     weapon.CriticalChanceStat.GetFloatValue(), 
-                    weapon.Data.CriticalDamageMultiplier
+                    weapon.Data.CriticalDamageMultiplier,
+                    weapon.KnockbackStat.GetFloatValue() * weapon.Data.KnockbackMultiplier
                     );
 
                 if (DelayBetweenProjectiles > 0f)
