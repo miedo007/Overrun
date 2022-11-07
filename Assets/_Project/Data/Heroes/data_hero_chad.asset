@@ -18,4 +18,4 @@ MonoBehaviour:
   <StartingWeapons>k__BackingField:
   - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   <StartingItems>k__BackingField: []
-  <WeaponSlots>k__BackingField: 8
+  <WeaponSlots>k__BackingField: 6

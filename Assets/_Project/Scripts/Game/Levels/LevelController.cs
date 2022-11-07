@@ -47,12 +47,12 @@ namespace Project.Game.Levels
             CurrentWaveInfo = CurrentLevel.GetWaveInfo(CurrentWaveIndex);
 
             var timerScreen = _uiFrame.Open<WaveTimerScreen>();
-            timerScreen.DisplayWithDuration(CurrentWaveInfo.Duration);
+            timerScreen.DisplayWithDuration(CurrentLevel.WaveDuration);
             timerScreen.TimerCompleted += OnTimerCompleted;
             timerScreen.StartTimer();
             
             // start spawning enemies here
-            _enemyManager.BeginWave(CurrentWaveInfo, CurrentLevelIndex, CurrentWaveIndex);
+            _enemyManager.BeginWave(CurrentLevel, CurrentLevelIndex, CurrentWaveIndex);
         }
 
         private void OnTimerCompleted()

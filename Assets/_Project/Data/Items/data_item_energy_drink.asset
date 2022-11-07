@@ -15,6 +15,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 0}
   <DisplayName>k__BackingField: Energy Drink
   <Description>k__BackingField: 
+  <BasePrice>k__BackingField: 8
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
     <Value>k__BackingField: 0.1

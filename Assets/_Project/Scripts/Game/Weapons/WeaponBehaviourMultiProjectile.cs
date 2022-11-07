@@ -48,7 +48,8 @@ namespace Project.Game.Weapons
                 }
             }
             
-            yield return WaitForAnimationClip(weapon.Animation, 0.5f);
+            yield break;
+            //yield return WaitForAnimationClip(weapon.Animation, 0.5f);
         }
     }
 }

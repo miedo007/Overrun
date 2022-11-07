@@ -12,28 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfd08fe83e493492accbebbd345024, type: 3}
   m_Name: data_level_test
   m_EditorClassIdentifier: 
+  <BaseEnemyCount>k__BackingField: 70
+  <EnemyCountIncreasePerWave>k__BackingField: 10
+  <WaveDuration>k__BackingField: 45
   <Waves>k__BackingField:
-  - <SpawnCode>k__BackingField: a3,b1,_,a2,_,a3,_,a2,b1,b1,_,a2,a2,b1,b1
-    <Enemies>k__BackingField:
+  - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
-    <Duration>k__BackingField: 30
-  - <SpawnCode>k__BackingField: b1,b1,_,b1,_,a2,a2,a2,__,b1,a5,_,b1,b1,a4,__,a3,a2
-    <Enemies>k__BackingField:
+    <SpawnCode>k__BackingField: 
+  - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
-    <Duration>k__BackingField: 30
-  - <SpawnCode>k__BackingField: b1,b1,_,b1,_,a2,a2,a2,__,b1,a5,_,b1,b1,a4,__,a3,a2
-    <Enemies>k__BackingField:
+    <SpawnCode>k__BackingField: 00010100101
+  - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
-    <Duration>k__BackingField: 40
-  - <SpawnCode>k__BackingField: b1,b1,_,b1,_,a2,a2,a2,__,b1,a5,_,b1,b1,a4,__,a3,a2
-    <Enemies>k__BackingField:
+    <SpawnCode>k__BackingField: 0110000101001
+  - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
-    <Duration>k__BackingField: 50
-  - <SpawnCode>k__BackingField: b1,b1,_,b1,_,a2,a2,a2,__,b1,a5,_,b1,b1,a4,__,a3,a2
-    <Enemies>k__BackingField:
+    <SpawnCode>k__BackingField: 0001110001010
+  - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
-    <Duration>k__BackingField: 60
+    <SpawnCode>k__BackingField: 0001111001000010

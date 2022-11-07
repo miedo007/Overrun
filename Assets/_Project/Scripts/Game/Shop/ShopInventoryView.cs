@@ -62,7 +62,7 @@ namespace Project.Game.Shop
 
         private int GetScaledCost(BaseData data)
         {
-            return  Mathf.CeilToInt( data.BasePrice * Mathf.Pow(1.75f, _waveIndex));
+            return  Mathf.CeilToInt( data.BasePrice * Mathf.Pow(1.9f, _waveIndex));
         }
 
         public void ClearItems()

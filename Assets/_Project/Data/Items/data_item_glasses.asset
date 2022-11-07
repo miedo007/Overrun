@@ -15,7 +15,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 0}
   <DisplayName>k__BackingField: Glasses
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 5
+  <BasePrice>k__BackingField: 7
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: b23e6e4b578bc7f4094e5f0742617e7e, type: 2}
     <Value>k__BackingField: 0.05

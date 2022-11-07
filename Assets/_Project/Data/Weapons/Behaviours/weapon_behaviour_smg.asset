@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: weapon_behaviour_smg
   m_EditorClassIdentifier: 
   <ProjectileData>k__BackingField: {fileID: 11400000, guid: ec07b0ad8de760a4abca9172d407e4e8, type: 2}
-  <ProjectileCount>k__BackingField: 8
-  <DelayBetweenProjectiles>k__BackingField: 0.0625
-  <ProjectileSpread>k__BackingField: {x: 0, y: 0}
+  <ProjectileCount>k__BackingField: 1
+  <DelayBetweenProjectiles>k__BackingField: -1
+  <ProjectileSpread>k__BackingField: {x: -1, y: 1}

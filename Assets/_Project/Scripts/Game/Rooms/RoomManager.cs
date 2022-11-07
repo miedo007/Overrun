@@ -48,5 +48,10 @@ namespace Project.Game.Rooms
             
             return position;
         }
+
+        public Vector3 GetRandomPosition()
+        {
+            return new Vector3(Random.Range(Rect.xMin, Rect.xMax), Random.Range(Rect.yMin, Rect.yMax));
+        }
     }
 }

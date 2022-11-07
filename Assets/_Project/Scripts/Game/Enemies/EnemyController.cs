@@ -121,10 +121,17 @@ namespace Project.Game.Enemies
             {
                 DamageTaken?.Invoke();
             }
-                
-            _popupTextManager.DisplayTextAtPosition($"{Mathf.RoundToInt(damage)}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
+            
             rigidbody.AddForce(force, ForceMode2D.Impulse);
             _lastKnockbackTime = Time.time;
+            
+            var damageInt = Mathf.CeilToInt(damage);
+            if (damageInt <= 0)
+            {
+                return;
+            }
+            
+            _popupTextManager.DisplayTextAtPosition($"{damageInt}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
         }
 
         public void Kill()

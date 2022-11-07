@@ -6,7 +6,20 @@ namespace Project.Game.Levels
     [CreateAssetMenu(fileName = "data_level_", menuName = "Data/Levels/LevelData", order = 0)]
     public class LevelData : ScriptableObject
     {
+        [field: SerializeField] public int BaseEnemyCount { get; private set; } = 60;
+        [field: SerializeField] public int EnemyCountIncreasePerWave { get; private set; } = 15;
+        [field: SerializeField] public int WaveDuration { get; private set; } = 45;
         [field: SerializeField] public WaveInfo[] Waves { get; private set; }
+        
+        public float GetSpawnDelay(int waveIndex)
+        {
+            return (float) WaveDuration / GetEnemyCountForWave(waveIndex);
+        }
+
+        public int GetEnemyCountForWave(int waveIndex)
+        {
+            return BaseEnemyCount + (EnemyCountIncreasePerWave * waveIndex);
+        }
 
         public WaveInfo GetWaveInfo(int index)
         {
@@ -22,8 +35,12 @@ namespace Project.Game.Levels
     [System.Serializable]
     public class WaveInfo
     {
-        [field: SerializeField] public string SpawnCode { get; private set; } = "a3,b1,_,a2,a3,_,a2,b1,b1,_,a2,a3,b1,b1";
         [field: SerializeField] public EnemyData[] Enemies { get; private set; }
-        [field: SerializeField] public int Duration { get; private set; } = 30;
+        [field: SerializeField] public string SpawnCode { get; private set; } = "000";
+
+        public EnemyData GetRandomEnemy()
+        {
+            return Enemies[Random.Range(0, Enemies.Length)];
+        }
     }
 }

@@ -22,16 +22,19 @@ namespace Project.Game.Enemies
         [Inject] private readonly CollectiblesManager _collectiblesManager;
 
         private SpawnSequence _spawnSequence;
+        private LevelData _currentLevel;
         private WaveInfo _currentWave;
         private int _currentWaveIndex;
         private int _currentLevelIndex;
         
         public List<EnemyController> ActiveEnemies { get; private set; } = new();
 
-        public void BeginWave(WaveInfo currentWaveInfo, int levelIndex, int waveIndex)
+        public void BeginWave(LevelData levelData, int levelIndex, int waveIndex)
         {
-            _currentWave = currentWaveInfo;
-            _spawnSequence = new SpawnSequence(Enemies, _currentWave.SpawnCode);
+            _currentLevel = levelData;
+            _currentWave = _currentLevel.GetWaveInfo(waveIndex);
+            
+            _spawnSequence = new SpawnSequence(_currentWave);
             _currentLevelIndex = levelIndex;
             _currentWaveIndex = waveIndex;
             StartCoroutine(SpawnRoutine());
@@ -72,61 +75,25 @@ namespace Project.Game.Enemies
 
         private IEnumerator SpawnRoutine()
         {
-            var currentIntervalDelay = 2f;
+            var spawnDelay = _currentLevel.GetSpawnDelay(_currentWaveIndex);
+            var spawnSequence = new SpawnSequence(_currentLevel.GetWaveInfo(_currentWaveIndex));
             
             while (enabled)
             {
-                float delay;
-                foreach (var spawnItem in _spawnSequence.SpawnItems)
-                {
-                    if (spawnItem.IsDelay)
-                    {
-                        delay = currentIntervalDelay * spawnItem.Quantity;
-                        while (delay > 0)
-                        {
-                            yield return null;
-                            delay -= Time.deltaTime;
-                        }
-                    }
-                    else
-                    {
-                        StartCoroutine(SpawnGroup(spawnItem as SpawnEnemyGroup));
-                    }
-                }
-                
-                // Wait before next spawn loop
-                
-                delay = currentIntervalDelay;
-                while (delay > 0)
+                var position = _roomManager.GetRandomPosition();
+                var enemy = spawnSequence.GetNext();
+
+                StartCoroutine(SpawnEnemyRoutine(enemy, position));
+
+                var time = spawnDelay;
+                while (time > 0)
                 {
                     yield return null;
-                    delay -= Time.deltaTime;
-                }
-                
-                // Scale the delay between intervals for each loop through the spawn sequence
-                
-                currentIntervalDelay *= 0.95f;
-            }
-        }
-
-        private IEnumerator SpawnGroup(SpawnEnemyGroup spawnEnemyGroup)
-        {
-            var enemyData = spawnEnemyGroup.EnemyData;
-            var groupCenter = _roomManager.GetValidPositionInRadius(_playerController.Position, 5);
-            
-            for (var i = 0; i < spawnEnemyGroup.Quantity; i++)
-            {
-                StartCoroutine(SpawnEnemyRoutine(enemyData, groupCenter));
-
-                var delay = Random.Range(0.1f, 0.2f);
-                while (delay > 0)
-                {
-                    yield return null;
-                    delay -= Time.deltaTime;
+                    time -= Time.deltaTime;
                 }
             }
         }
-
+        
         private IEnumerator SpawnEnemyRoutine(EnemyData enemyData, Vector3 groupCenter)
         {
             var spawnPoint = _roomManager.GetValidPositionInRadius(groupCenter, 2f);
@@ -146,8 +113,7 @@ namespace Project.Game.Enemies
             enemy.Activate();
             ActiveEnemies.Add(enemy);
         }
-
-
+        
         private void OnEnemyKilled(EnemyController enemy)
         {
             enemy.Killed -= OnEnemyKilled;
@@ -171,55 +137,61 @@ namespace Project.Game.Enemies
 
     public class SpawnSequence
     {
-        public List<SpawnItem> SpawnItems { get; private set; }
+        public List<EnemyData> SpawnList { get; private set; }
+        public int CurrentIndex { get; private set; }
+        public WaveInfo WaveInfo { get; private set; }
         
-        public SpawnSequence(EnemyDatabase enemies, string spawnCode)
+        public SpawnSequence(WaveInfo waveInfo)
         {
-            SpawnItems = new List<SpawnItem>();
-            var intervals = spawnCode.Split(',');
-            foreach (var interval in intervals)
+            WaveInfo = waveInfo;
+            SpawnList = new List<EnemyData>();
+
+            var spawnCode = waveInfo.SpawnCode;
+
+            if (string.IsNullOrEmpty(spawnCode))
             {
-                // is this a delay interval or enemy group
-                if (interval[0] == '_')
+                return;
+            }
+            
+            var enemyIndices = new int[spawnCode.Length];
+            for (var i = 0; i < spawnCode.Length; i++)
+            {
+                var indexString = spawnCode.Substring(i, 1);
+                if (int.TryParse(indexString, out var enemyIndex))
                 {
-                    SpawnItems.Add(new SpawnSequenceDelay
+                    if (enemyIndex < waveInfo.Enemies.Length)
                     {
-                        Quantity = interval.Length
-                    });
+                        enemyIndices[i] = enemyIndex;
+                    }
+                    else
+                    {
+                        Debug.LogError($"Invalid enemy index - Exceeds Enemy Data Count :: {enemyIndex}");
+                        return;
+                    }
                 }
                 else
                 {
-                    var enemyCode = interval[0];
-                    var enemyCount = int.Parse(interval.Substring(1,interval.Length -1));
-
-                    var spawnItem = new SpawnEnemyGroup
-                    {
-                        EnemyData = enemies.GetEnemyWithCode(enemyCode),
-                        Quantity = enemyCount
-                    };
-
-                    SpawnItems.Add(spawnItem);
+                    Debug.LogError("Invalid enemy index - Unable to parse {indexString}");
+                    return;
                 }
             }
+
+            foreach (var enemyIndex in enemyIndices)
+            {
+                SpawnList.Add(waveInfo.Enemies[enemyIndex]);
+            }
         }
-    }
-    
-    public class SpawnItem
-    {
-        public bool IsDelay { get; protected set; }
-        public int Quantity { get; set; }
-    }
-    
-    public class SpawnEnemyGroup : SpawnItem
-    {
-        public EnemyData EnemyData;
-    }
-    
-    public class SpawnSequenceDelay : SpawnItem
-    {
-        public SpawnSequenceDelay()
+
+        public EnemyData GetNext()
         {
-            IsDelay = true;
+            if (SpawnList.Count <= 0)
+            {
+                return WaveInfo.GetRandomEnemy();
+            }
+
+            var enemyData = SpawnList[CurrentIndex];
+            CurrentIndex = (CurrentIndex + 1) % SpawnList.Count;
+            return enemyData;
         }
     }
 }
