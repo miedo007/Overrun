@@ -12,6 +12,7 @@ namespace Project.Game.Player
         [field: SerializeField] public PlayerCharacter Character { get; private set; }
         [field: SerializeField] public PlayerWeaponsController WeaponsController { get; private set; }
         [field: SerializeField] public StatData SpeedStatData { get; private set; }
+        [field: SerializeField] public Collector Collector { get; private set; }
         [field: SerializeField] public CollectibleData[] StoreCurrencyCollectibles { get; private set; }
         
         [Inject] private readonly UltimateJoystick _joystick;
@@ -57,6 +58,11 @@ namespace Project.Game.Player
             _speedStat = _heroInfo.GetStat(SpeedStatData);
             _speedStat.Changed += OnSpeedStatChanged;
             OnSpeedStatChanged(_speedStat);
+        }
+
+        public void HandleWaveComplete()
+        {
+            Collector.CollectAll();
         }
 
         private void Start()

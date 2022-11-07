@@ -9,13 +9,13 @@ namespace Project.Game.Collectibles
         [field: SerializeField] public LayerMask LayerMask { get; private set; }
         [field: SerializeField] public float CollectSpeed { get; private set; } = 15;
 
-        private List<Collectible> _collectibles = new();
+        private readonly List<Collectible> _collectibles = new();
 
-        private static readonly Collider2D[] Results = new Collider2D[16];
+        private static readonly Collider2D[] Results = new Collider2D[256];
         
         private void LateUpdate()
         {
-            var resultCount =Physics2D.OverlapCircleNonAlloc(transform.position, Range, Results, LayerMask);
+            var resultCount = Physics2D.OverlapCircleNonAlloc(transform.position, Range, Results, LayerMask);
             for (var i = 0; i < resultCount; i++)
             {
                 var collectible = Results[i].GetComponent<Collectible>();
@@ -37,6 +37,20 @@ namespace Project.Game.Collectibles
                 {
                     collectible.Collect();
                     _collectibles.RemoveAt(i);
+                }
+            }
+        }
+
+        public void CollectAll()
+        {
+            var resultCount = Physics2D.OverlapCircleNonAlloc(transform.position, 100, Results, LayerMask);
+            for (var i = 0; i < resultCount; i++)
+            {
+                var collectible = Results[i].GetComponent<Collectible>();
+                if (collectible != null)
+                {
+                    collectible.Precollect();
+                    _collectibles.Add(collectible);
                 }
             }
         }

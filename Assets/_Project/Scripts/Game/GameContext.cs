@@ -27,7 +27,7 @@ namespace Project.Game
             
             var heroRegistry = new HeroRegistry();
             HeroInfo = heroRegistry.GetActiveHeroInfo();
-            HeroInfo.ShopCurrency += 25;
+
             Bind(HeroInfo);
             
             Bind(Joystick);

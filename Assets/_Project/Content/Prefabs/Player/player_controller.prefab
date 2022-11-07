@@ -95,6 +95,7 @@ MonoBehaviour:
   <Character>k__BackingField: {fileID: 5278812402053378852}
   <WeaponsController>k__BackingField: {fileID: 8265728663106645542}
   <SpeedStatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
+  <Collector>k__BackingField: {fileID: 8203443609759402984}
   <StoreCurrencyCollectibles>k__BackingField:
   - {fileID: 11400000, guid: b424575ff157d6f4db1b756bb4d77f5d, type: 2}
 --- !u!114 &5278812402053378852

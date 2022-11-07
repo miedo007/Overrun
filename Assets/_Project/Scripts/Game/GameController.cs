@@ -15,6 +15,7 @@ namespace Project.Game
     {
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly HeroInfo _heroInfo;
@@ -33,6 +34,8 @@ namespace Project.Game
         
         private void OnWaveCompleted()
         {
+            _playerController.HandleWaveComplete();
+            
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
