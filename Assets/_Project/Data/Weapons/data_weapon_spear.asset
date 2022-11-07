@@ -15,7 +15,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 2e65533b5961da5428b30c7968648cec, type: 3}
   <DisplayName>k__BackingField: Spear
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 8
+  <BasePrice>k__BackingField: 15
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: 26abe161c7922b74d8c268906cef9ec5, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: e8ee95598017a1f4197c2d9aee00b170, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 950872a7be108fe4587ec0b2173704cc, type: 2}

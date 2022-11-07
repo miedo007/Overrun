@@ -18,6 +18,7 @@ namespace Project.Game.Shop
         [Inject] private  WeaponDatabase _weaponDatabase;
         [Inject] private  ItemDatabase _itemDatabase;
         [Inject] private  HeroInfo _heroInfo;
+        [Inject] private  GameData _gameData;
 
         private int _waveIndex;
 
@@ -62,7 +63,7 @@ namespace Project.Game.Shop
 
         private int GetScaledCost(BaseData data)
         {
-            return  Mathf.CeilToInt( data.BasePrice * Mathf.Pow(1.9f, _waveIndex));
+            return  Mathf.CeilToInt((data.BasePrice * _gameData.ShopBasePriceMultiplier) * Mathf.Pow(_gameData.ShopPriceIncreaseCoeffecient, _waveIndex));
         }
 
         public void ClearItems()
