@@ -85,7 +85,12 @@ namespace Project.Game
             _playerController.gameObject.SetActive(false);
             
             var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
-            levelFailedScreen.OnCloseEvent += OnLevelCompleteClosed;
+            levelFailedScreen.ConfirmButtonClicked += OnLevelFailConfirmed;
+        }
+
+        private void OnLevelFailConfirmed()
+        {
+            LoadMainMenu();
         }
 
         public void LoadMainMenu()

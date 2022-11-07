@@ -6691,6 +6691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: joystick_movement
       objectReference: {fileID: 0}
+    - target: {fileID: 1622131981743426539, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
+      propertyPath: radiusModifier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1622131981756618199, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_SizeDelta.x
       value: 560

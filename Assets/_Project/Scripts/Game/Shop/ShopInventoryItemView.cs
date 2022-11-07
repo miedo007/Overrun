@@ -60,14 +60,16 @@ namespace Project.Game.Shop
         {
             if (_heroInfo.ShopCurrency >= Data.BasePrice)
             {
-                CanvasGroup.alpha = 0.25f;
-                CanvasGroup.interactable = false;
                 BuyButtonClicked?.Invoke(this);
             }
         }
 
-        protected virtual void OnInitialize(BaseData data)
+        public void Purchase()
         {
+            BuyButton.gameObject.SetActive(false);
+            CanvasGroup.alpha = 0.25f;
+            CanvasGroup.interactable = false;
         }
+
     }
 }

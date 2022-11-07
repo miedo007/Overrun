@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
+using Project.Extensions;
 using Project.Game.Items;
 using Project.Game.Weapons;
 using Project.Heroes;
@@ -44,6 +45,8 @@ namespace Project.Game.Shop
                 items.Add(_itemDatabase.GetRandom());
             }
 
+            items.Shuffle();
+
             foreach (var item in items)
             {
                 AddItem(item);
@@ -80,14 +83,24 @@ namespace Project.Game.Shop
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
             var data = itemView.Data;
+            
             var cost = GetScaledCost(data);
-            _heroInfo.ShopCurrency -= cost;
-
+            if (_heroInfo.ShopCurrency < cost)
+            {
+                // can't afford
+                return;
+            }
+            
             var weaponData = data as WeaponData;
             if (weaponData != null)
             {
+                if (_heroInfo.CurrentWeapons.Count >= _heroInfo.Data.WeaponSlots)
+                {
+                    //TODO :: Indicate to player that their weapon slots are full
+                    return;
+                }
+                
                 _heroInfo.AddWeapon(weaponData);
-                return;
             }
             
             var itemData = data as ItemData;
@@ -95,6 +108,9 @@ namespace Project.Game.Shop
             {
                 _heroInfo.AddItem(itemData);
             }
+            
+            _heroInfo.ShopCurrency -= cost;
+            itemView.Purchase();
         }
     }
 }

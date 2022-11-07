@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using Mtl.UiFramework;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ namespace Project.Game.Levels
 {
     public class LevelFailedScreen : UIScreen
     {
+        public event Action ConfirmButtonClicked;
         
         [field: SerializeField] public Button ConfirmButton { get; private set; }
         [field: SerializeField] public Animation Animation { get; private set; }
@@ -44,10 +46,8 @@ namespace Project.Game.Levels
 
         private void OnConfirmButtonClicked()
         {
-            if (IsOpened)
-            {
-                Close();
-            }
+            ConfirmButton.gameObject.SetActive(false);
+            ConfirmButtonClicked?.Invoke();
         }
     }
 }
