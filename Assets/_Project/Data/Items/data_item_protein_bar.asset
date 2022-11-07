@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
   m_Name: data_item_protein_bar
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 094bf0ced9a130040b67a122ee2c35de, type: 3}
   <DisplayName>k__BackingField: Protein Bar
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 5

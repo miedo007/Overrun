@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
   m_Name: data_item_energy_drink
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: a713de4cadf4bf24ca0d2cd84a909acc, type: 3}
   <DisplayName>k__BackingField: Energy Drink
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 8
