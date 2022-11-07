@@ -90,7 +90,7 @@ namespace Project.Game
 
         public void LoadMainMenu()
         {
-            _sceneLoader.LoadScene(gameObject.scene.name, 0, 0.5f);
+            _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }
         
     }

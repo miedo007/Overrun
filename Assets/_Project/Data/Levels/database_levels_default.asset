@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: database_levels_default
   m_EditorClassIdentifier: 
   <Levels>k__BackingField:
-  - {fileID: 11400000, guid: 0ef3f88054267df42bef14bc48ef9700, type: 2}
   - {fileID: 11400000, guid: 47b0ce98e5b7e7d45b9e0a3615e14606, type: 2}
