@@ -18,6 +18,7 @@ namespace Project.Game
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
+        [Inject] private readonly UltimateJoystick _joystick;
         [Inject] private readonly HeroInfo _heroInfo;
         [Inject] private readonly WeaponDatabase _weaponDatabase;
 
@@ -57,7 +58,15 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
-            _sceneLoader.LoadScene(gameObject.scene.name, 0, 0.5f);
+            _playerController.enabled = false;
+            _joystick.gameObject.SetActive(false);
+            var levelCompleteScreen = _uiFrame.Open<LevelCompleteScreen>();
+            levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
+        }
+
+        private void OnLevelCompleteClosed(UIScreen screen)
+        {
+           LoadMainMenu();
         }
 
         public void OnReady()
@@ -68,7 +77,21 @@ namespace Project.Game
         private void OnPlayerHealthDepleted()
         {
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;
+            _levelController.WaveCompleted -= OnWaveCompleted;
+            _levelController.WaveCompleted -= OnLevelCompleted;
+            
+            _playerController.enabled = false;
+            _joystick.gameObject.SetActive(false);
+            _playerController.gameObject.SetActive(false);
+            
+            var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
+            levelFailedScreen.OnCloseEvent += OnLevelCompleteClosed;
+        }
+
+        public void LoadMainMenu()
+        {
             _sceneLoader.LoadScene(gameObject.scene.name, 0, 0.5f);
         }
+        
     }
 }
