@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using Lean.Pool;
+using Mtl.Injection;
+using Project.Game.Levels;
 using UnityEngine;
 
 namespace Project.Game.Projectiles
 {
-    public class ProjectileManager : MonoBehaviour
+    public class ProjectileManager : MonoBehaviour, IInjectionReady
     {
         private readonly List<ProjectileController> _activeProjectiles = new List<ProjectileController>();
 
-        private void Awake()
+        [Inject] private readonly LevelController _levelController;
+        
+        public void OnReady()
         {
             ProjectileController.Added += OnProjectileAdded;
         }
@@ -16,6 +20,19 @@ namespace Project.Game.Projectiles
         private void OnDestroy()
         {
             ProjectileController.Added -= OnProjectileAdded;
+            _levelController.WaveCompleted -= OnWaveOrLevelComplete;
+            _levelController.LevelCompleted -= OnWaveOrLevelComplete;
+        }
+
+        private void OnWaveOrLevelComplete()
+        {
+            foreach (var projectile in _activeProjectiles)
+            {
+                projectile.Kill();
+                LeanPool.Despawn(projectile);
+            }
+            
+            _activeProjectiles.Clear();
         }
 
         private void OnProjectileAdded(ProjectileController projectile)

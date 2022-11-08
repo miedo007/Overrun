@@ -130,7 +130,7 @@ namespace Project.Game.Enemies
             for (var i = 0; i < ActiveEnemies.Count; i++)
             {
                 var enemy = ActiveEnemies[i];
-                enemy.Step(dt, time, _playerController.Position);
+                enemy.Step(dt, time, _playerController);
             }
         }
     }

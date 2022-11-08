@@ -5889,6 +5889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023029146}
   - component: {fileID: 2023029147}
+  - component: {fileID: 2023029148}
   m_Layer: 0
   m_Name: projectile_manager
   m_TagString: Untagged
@@ -5923,6 +5924,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b222c09bc5b74b60ac2cb57c8999b361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2023029148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023029145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 2023029147}
 --- !u!1 &2055302383
 GameObject:
   m_ObjectHideFlags: 0

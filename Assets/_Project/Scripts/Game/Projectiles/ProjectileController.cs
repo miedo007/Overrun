@@ -80,5 +80,9 @@ namespace Project.Game.Projectiles
                 }
             }
         }
+
+        public void Kill()
+        {
+        }
     }
 }

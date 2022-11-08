@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: data_enemy_pig_faster
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: a300f8c97bd09b0469ec9a63fe9c342d, type: 3}
-  <Code>k__BackingField: 98
+  <Action>k__BackingField: {fileID: 0}
   <BaseHealth>k__BackingField: 1.5
   <MoveSpeed>k__BackingField: 3.125
+  <MovementMode>k__BackingField: 1
   <MeleeAttackRate>k__BackingField: 0.5
   <MeleeDamage>k__BackingField: 1
   <CollectibleData>k__BackingField: {fileID: 0}

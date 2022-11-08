@@ -1,6 +1,7 @@
 ﻿using System;
 using Mtl.Injection;
 using Project.Game.Collectibles;
+using Project.Game.Projectiles;
 using Project.Heroes;
 using Project.Stats;
 using UnityEngine;

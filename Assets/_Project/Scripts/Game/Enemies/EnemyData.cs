@@ -7,14 +7,22 @@ namespace Project.Game.Enemies
     public class EnemyData : ScriptableObject
     {
         [field: SerializeField] public EnemyController Prefab { get; private set; }
-        [field: SerializeField] public char Code { get; private set; }
+        [field: SerializeField] public EnemyActionBase Action { get; private set; }
         [field: SerializeField] public float BaseHealth { get; private set; } = 3;
         [field: SerializeField] public float MoveSpeed { get; private set; } = 3;
+        [field: SerializeField] public MovementMode MovementMode { get; protected set; } = MovementMode.Chase;
         [field: SerializeField] public float MeleeAttackRate { get; set; } = 0.25f;
         [field: SerializeField] public float MeleeDamage { get; set; } = 1f;
         [field: SerializeField] public CollectibleData CollectibleData { get; set; }
         [field: SerializeField] public float LevelScaling { get; set; } = 1.1f;
         [field: SerializeField] public float WaveScaling { get; set; } = 1.8f;
         
+    }
+    
+    public enum MovementMode
+    {
+        None,
+        Chase,
+        Wander
     }
 }

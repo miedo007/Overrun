@@ -1,6 +1,7 @@
 ﻿using System;
 using Lean.Pool;
 using Mtl.Injection;
+using Project.Game.Player;
 using Project.Game.Projectiles;
 using Project.Game.Rooms;
 using Project.Game.Targets;
@@ -24,14 +25,17 @@ namespace Project.Game.Enemies
 
         private Transform _transform;
         private int _facingDirection = 1;
-        private float _lastAttackTime;
+        private float _lastContactAttackTime;
         private float _lastKnockbackTime;
-        
+        private float _lastActionTime;
+        private Vector3 _wanderPosition;
+
         private const float KnockbackDuration = 0.2f;
 
         public EnemyData Data { get; private set; }
         public float CurrentHealth { get; private set; }
         public float CurrentMeleeDamage { get; private set; }
+        public bool IsPerformingAction { get; private set; }
 
         public int FacingDirection
         {
@@ -55,11 +59,14 @@ namespace Project.Game.Enemies
 
         public void Initialize(EnemyData enemyData, Vector3 playerPosition, int level, int wave)
         {
+            var currentPosition = _transform.position;
+            _wanderPosition = currentPosition;
             _lastKnockbackTime = 0f;
-            _lastAttackTime = 0f;
+            _lastContactAttackTime = 0f;
+            _lastActionTime = Time.time;
             
             selfTarget.Deactivate();
-            var direction = (playerPosition - _transform.position).normalized;
+            var direction = (playerPosition - currentPosition).normalized;
             FacePlayer(direction);
             
             Data = enemyData;
@@ -73,26 +80,74 @@ namespace Project.Game.Enemies
             return levelScaled * Mathf.Pow(Data.WaveScaling, wave);
         }
 
-        public void Step(float dt, float time, Vector3 playerPosition)
+        public void Step(float dt, float time, PlayerController playerController)
         {
-            if (time < _lastKnockbackTime + KnockbackDuration)
+            if (IsPerformingAction || !selfTarget.IsActivated)
             {
-                rigidbody.position = _roomManager.ClampToRoomRect(rigidbody.position, out var didClampX, out var didClampY);
-                if (didClampX || didClampY)
-                {
-                    rigidbody.velocity = Vector2.zero;
-                }
-
                 return;
             }
             
-            var currentPosition = _transform.position;
-            var direction = (playerPosition - currentPosition).normalized;
-            FacePlayer(direction);
-            //rigidbody.AddForce(direction * Data.MoveSpeed * dt, ForceMode2D.Impulse);
-            rigidbody.AddForce(direction, ForceMode2D.Impulse);
-            rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
-            //_transform.position = currentPosition + direction * Data.MoveSpeed * dt;
+            if (Data.Action != null && time >= _lastActionTime + Data.Action.Cooldown)
+            {
+                ClampToRoom();
+                rigidbody.velocity = Vector2.zero;
+                IsPerformingAction = true;
+                StartCoroutine(Data.Action.ActionRoutine(this, playerController, time, () =>
+                {
+                    IsPerformingAction = false;
+                    _lastActionTime = Time.time;
+                }));
+                
+                return;
+            }
+            
+            if (time < _lastKnockbackTime + KnockbackDuration)
+            {
+                ClampToRoom();
+                return;
+            }
+            
+            if (Data.MovementMode == MovementMode.Chase)
+            {
+                var playerPosition = playerController.Position;
+                var currentPosition = _transform.position;
+                var direction = (playerPosition - currentPosition).normalized;
+
+                rigidbody.AddForce(direction, ForceMode2D.Impulse);
+                rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
+                
+                FacePlayer(direction);
+            }
+            else if (Data.MovementMode == MovementMode.Wander)
+            {
+                var currentPosition = _transform.position;
+                
+                // are we at our wander target position?
+                if ((_wanderPosition - currentPosition).sqrMagnitude < 0.25f)
+                {
+                    _wanderPosition = _roomManager.GetValidPositionInRadius(currentPosition, 8f);
+                }
+                
+                var direction = (_wanderPosition - currentPosition).normalized;
+
+                rigidbody.AddForce(direction, ForceMode2D.Impulse);
+                rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
+                
+                FacePlayer(direction);
+            }
+            else if (Data.MovementMode == MovementMode.None)
+            {
+                ClampToRoom();
+            }
+        }
+
+        private void ClampToRoom()
+        {
+            rigidbody.position = _roomManager.ClampToRoomRect(rigidbody.position, out var didClampX, out var didClampY);
+            if (didClampX || didClampY)
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
         }
 
         private void FacePlayer(Vector3 directionToPlayer)
@@ -190,7 +245,7 @@ namespace Project.Game.Enemies
                 return;
             }
             
-            if (Time.time >= _lastAttackTime + Data.MeleeAttackRate)
+            if (Time.time >= _lastContactAttackTime + Data.MeleeAttackRate)
             {
                 var damageReceiver = other.GetComponent<IDamageReceiver>();
                 if (damageReceiver == null)
@@ -199,7 +254,7 @@ namespace Project.Game.Enemies
                 }
 
                 damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero, gameObject);
-                _lastAttackTime = Time.time;
+                _lastContactAttackTime = Time.time;
             }
         }
     }

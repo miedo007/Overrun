@@ -13,17 +13,5 @@ namespace Project.Game.Enemies
         {
             return Enemies[Random.Range(0, Enemies.Count)];
         }
-
-        public EnemyData GetEnemyWithCode(char enemyCode)
-        {
-            var enemy = Enemies.FirstOrDefault(x => x.Code == enemyCode);
-            if (enemy == null)
-            {
-                enemy = Enemies[0];
-                Debug.LogWarning($"Invalid spawn code :: {enemyCode} :: Replacing with default enemy");
-            }
-
-            return enemy;
-        }
     }
 }
