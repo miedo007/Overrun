@@ -65,10 +65,5 @@ namespace Project.Game.Weapons
             SpriteRenderer.sortingOrder = sortingOrder;
         }
 
-        [Button()]
-        public void Test()
-        {
-            
-        }
     }
 }
