@@ -13,6 +13,9 @@ namespace Project.Game.Player
         [field: SerializeField, Tooltip("Weapon distance from player from 1-6 weapons")] 
         public Vector2 RadiusRange { get; private set; } = new(0.375f, 0.75f);
 
+        [field: SerializeField] public AnimationCurve RadiusCurve { get; private set; }
+        
+
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly HeroInfo _heroInfo;
@@ -70,7 +73,9 @@ namespace Project.Game.Player
             // don't offset if only one weapon
             var angleOffset = weaponCount == 1 ? 0f : angleBetween * 0.5f;
             var angle = -angleOffset - (angleBetween * slotIndex);
-            var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, weaponCount / 6f);
+            var radiusFactor = RadiusCurve.Evaluate(weaponCount / 6f);
+            var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, radiusFactor);
+            
             var position = Quaternion.Euler(0, 0, angle) * (Vector3.down * radius);
             return position;
         }

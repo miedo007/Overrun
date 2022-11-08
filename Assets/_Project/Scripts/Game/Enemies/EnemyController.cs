@@ -103,14 +103,14 @@ namespace Project.Game.Enemies
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical, force);
+                ApplyDamage(damage, isCritical, force, projectile.gameObject);
                 return true;
             }
 
             return false;
         }
 
-        private void ApplyDamage(float damage, bool isCritical, Vector2 force)
+        private void ApplyDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
         {
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
@@ -151,11 +151,11 @@ namespace Project.Game.Enemies
         }
         
 
-        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force)
+        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical, force);
+                ApplyDamage(damage, isCritical, force, sender);
                 return true;
             }
 
@@ -179,6 +179,11 @@ namespace Project.Game.Enemies
 
         private void TryAttack(Collider2D other)
         {
+            if (other.CompareTag("Enemy"))
+            {
+                return;
+            }
+            
             if (!selfTarget.IsActivated)
             {
                 return;
@@ -192,7 +197,7 @@ namespace Project.Game.Enemies
                     return;
                 }
 
-                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero);
+                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero, gameObject);
                 _lastAttackTime = Time.time;
             }
         }

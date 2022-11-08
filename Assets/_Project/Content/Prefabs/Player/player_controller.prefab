@@ -257,6 +257,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_weapon_controller
       objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusRange>k__BackingField.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusRange>k__BackingField.y
+      value: 0.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.data[0].inSlope
+      value: 3.2531788
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.data[0].outSlope
+      value: 3.2531788
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
+      propertyPath: <RadiusCurve>k__BackingField.m_Curve.Array.data[0].outWeight
+      value: 0.032624114
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
 --- !u!4 &8265728663106645541 stripped

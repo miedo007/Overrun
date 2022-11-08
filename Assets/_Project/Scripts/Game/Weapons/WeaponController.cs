@@ -179,7 +179,7 @@ namespace Project.Game.Weapons
                 var direction = (Vector2)(col.transform.position - _transform.position).normalized;
                 var force = direction.normalized * KnockbackStat.GetFloatValue() * Data.KnockbackMultiplier;
                 var isCritical = Random.value <= CriticalChanceStat.GetFloatValue();
-                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, force);
+                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, force, gameObject);
             }
         }
 
