@@ -7,5 +7,6 @@ namespace Project.Game
     {
         [field: SerializeField] public float ShopPriceIncreaseCoeffecient { get; private set; } = 1.4f;
         [field: SerializeField] public float ShopBasePriceMultiplier { get; private set; } = 1;
+        [field: SerializeField] public float HealthRegenRate { get; private set; } = 2;
     }
 }

@@ -9,6 +9,7 @@ namespace Project.Game.Levels
 {
     public class LevelController : MonoBehaviour
     {
+        public event Action WaveStarted;
         public event Action WaveCompleted;
         public event Action LevelCompleted;
 
@@ -50,6 +51,8 @@ namespace Project.Game.Levels
             timerScreen.DisplayWithDuration(CurrentLevel.WaveDuration);
             timerScreen.TimerCompleted += OnTimerCompleted;
             timerScreen.StartTimer();
+            
+            WaveStarted?.Invoke();
             
             // start spawning enemies here
             _enemyManager.BeginWave(CurrentLevel, CurrentLevelIndex, CurrentWaveIndex);

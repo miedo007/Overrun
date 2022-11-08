@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using Mtl.Injection;
+using Project.Game.Levels;
 using Project.Heroes;
 using Project.Stats;
 using UnityEngine;
@@ -13,13 +15,20 @@ namespace Project.Game.Player
         public event Action Depleted;
 
         [field: SerializeField] public StatData HealthStat { get; private set; }
+        [field: SerializeField] public StatData HealthRegenStat { get; private set; }
+        [field: SerializeField] public StatData HealthStealStat { get; private set; }
 
         private StatInfo _healthStatInfo;
+        private StatInfo _healthRegenStatInfo;
+        private StatInfo _healthStealRegenStatInfo;
+        
         private float _currentHealth;
         
         [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly GameData _gameData;
 
-        public float MaxHealth => _healthStatInfo.GetFloatValue();
+        public float MaxHealth { get; private set; }
 
         public float CurrentHealth
         {
@@ -27,15 +36,21 @@ namespace Project.Game.Player
             set
             {
                 var previousValue = _currentHealth;
-                _currentHealth = value;
+                _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+
+                if (Mathf.Approximately(previousValue, _currentHealth))
+                {
+                    return;
+                }
+                
                 if (_currentHealth <= 0)
                 {
                     _currentHealth = 0;
+                    StopCoroutine(HealthRegenRoutine());
                     Depleted?.Invoke();
                 }
-
-                var maxHp = _healthStatInfo.GetFloatValue();
-                Changed?.Invoke(previousValue / maxHp, _currentHealth / maxHp);
+                
+                Changed?.Invoke(previousValue / MaxHealth, _currentHealth / MaxHealth);
             }
         }
 
@@ -43,30 +58,63 @@ namespace Project.Game.Player
         private void Start()
         {
             Initialize();
+            _levelController.WaveStarted += OnWaveStarted;
+            _levelController.WaveCompleted += OnWaveCompleted;
+            _levelController.LevelCompleted += OnWaveCompleted;
         }
 
         public void Initialize()
         {
             _healthStatInfo = _heroInfo.GetStat(HealthStat);
             _healthStatInfo.Changed += OnHealthStatChanged;
+
+            _healthRegenStatInfo = _heroInfo.GetStat(HealthRegenStat);
+            _healthRegenStatInfo.Changed += OnHealthRegenStatChanged;
+
+            MaxHealth = _healthStatInfo.GetFloatValue();
             CurrentHealth = MaxHealth;
             Initialized?.Invoke();
         }
 
         private void OnHealthStatChanged(StatInfo stat)
         {
-            var newCurrentHealth = CurrentHealth;
-            
-            // If our max health becomes less than our current health,
-            // update our current health
-            if (newCurrentHealth > stat.GetFloatValue())
-            {
-                newCurrentHealth = stat.GetFloatValue();
-            }
+            var previousMaxHealth = MaxHealth;
+            MaxHealth = stat.GetFloatValue();
 
-            CurrentHealth = newCurrentHealth;
+            var delta = MaxHealth - previousMaxHealth;
+            CurrentHealth += delta;
         }
 
+        private void OnHealthRegenStatChanged(StatInfo stat)
+        {
+            
+        }
+
+        private void OnWaveStarted()
+        {
+            StartCoroutine(HealthRegenRoutine());
+        }
+
+        private void OnWaveCompleted()
+        {
+            StopAllCoroutines();
+        }
+
+        private IEnumerator HealthRegenRoutine()
+        {
+            while (enabled)
+            {
+                var time = _gameData.HealthRegenRate;
+                while (time > 0)
+                {
+                    yield return null;
+                    time -= Time.deltaTime;
+                }
+                
+                CurrentHealth += _healthRegenStatInfo.GetFloatValue();
+            }
+        }
+        
         public void ReduceHealth(float amount)
         {
             CurrentHealth -= amount;
@@ -74,7 +122,7 @@ namespace Project.Game.Player
 
         public string GetHealthString()
         {
-            return $"{Mathf.CeilToInt(_currentHealth)}/{Mathf.RoundToInt(MaxHealth)}";
+            return $"{_currentHealth:0.0}<size=75%><alpha=#AA>/{MaxHealth:0.0}";
         }
     }
 }
