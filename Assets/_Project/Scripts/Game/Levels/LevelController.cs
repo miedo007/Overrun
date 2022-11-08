@@ -22,11 +22,13 @@ namespace Project.Game.Levels
         public int CurrentLevelIndex { get; private set; }
         public int CurrentWaveIndex { get; private set; }
         public WaveInfo CurrentWaveInfo{ get; private set; }
-        
+        public bool IsFinalWave { get; private set; }
+
         public void BeginNextWave(int levelIndex, float delay)
         {
             CurrentLevelIndex = levelIndex;
             CurrentLevel = Levels.GetLevel(levelIndex);
+            IsFinalWave = CurrentWaveIndex == CurrentLevel.Waves.Length - 1;
             StartCoroutine(BeginWaveRoutine(delay));
         }
 

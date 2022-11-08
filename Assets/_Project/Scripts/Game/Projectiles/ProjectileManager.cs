@@ -15,6 +15,8 @@ namespace Project.Game.Projectiles
         public void OnReady()
         {
             ProjectileController.Added += OnProjectileAdded;
+            _levelController.WaveCompleted += OnWaveOrLevelComplete;
+            _levelController.LevelCompleted += OnWaveOrLevelComplete;
         }
 
         private void OnDestroy()

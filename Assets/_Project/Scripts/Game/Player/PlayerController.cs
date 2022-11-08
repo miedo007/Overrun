@@ -63,6 +63,7 @@ namespace Project.Game.Player
 
         public void HandleWaveComplete()
         {
+            enabled = false;
             Collector.CollectAll();
         }
 

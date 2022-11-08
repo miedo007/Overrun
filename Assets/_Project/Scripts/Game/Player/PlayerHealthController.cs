@@ -111,7 +111,9 @@ namespace Project.Game.Player
                     time -= Time.deltaTime;
                 }
                 
-                CurrentHealth += _healthRegenStatInfo.GetFloatValue();
+                var newHealth = CurrentHealth + _healthRegenStatInfo.GetFloatValue();
+                // Don't let negative health regen kill the player. Clamp to 0.1
+                CurrentHealth = Mathf.Max(newHealth, 0.1f);
             }
         }
         

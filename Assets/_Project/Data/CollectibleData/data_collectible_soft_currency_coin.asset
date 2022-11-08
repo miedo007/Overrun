@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
-  m_Name: data_game_default
+  m_Script: {fileID: 11500000, guid: 26af5d61f77d481c94a2ab112c485762, type: 3}
+  m_Name: data_collectible_soft_currency_coin
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.35
-  <ShopBasePriceMultiplier>k__BackingField: 0.9
-  <HealthRegenRate>k__BackingField: 2
+  <Value>k__BackingField: 1
+  <Prefab>k__BackingField: {fileID: 2002824749259329096, guid: 8bde536e51a9e5e41b74d9fa1b1cadbc, type: 3}

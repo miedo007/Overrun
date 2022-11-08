@@ -11,6 +11,9 @@ namespace Project.Game.Enemies
     {
         [field: SerializeField] public ProjectileData ProjectileData { get; private set; }
         [field: SerializeField] public Vector3 SpawnOffset { get; private set; }
+        [field: SerializeField] public float DamageFactor { get; private set; } = 0.5f;
+        
+        
 
         protected override IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player, float time)
         {
@@ -26,7 +29,7 @@ namespace Project.Game.Enemies
             
             projectile.Initialize(
                 ProjectileData,
-                enemy.CurrentMeleeDamage, 
+                enemy.CurrentMeleeDamage * DamageFactor, 
                 -1, 
                 -1,
                 0

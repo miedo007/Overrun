@@ -58,7 +58,8 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
-            _playerController.enabled = false;
+            _playerController.HandleWaveComplete();
+            
             _joystick.gameObject.SetActive(false);
             var levelCompleteScreen = _uiFrame.Open<LevelCompleteScreen>();
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;

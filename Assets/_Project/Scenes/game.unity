@@ -5199,6 +5199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703942247}
   - component: {fileID: 1703942246}
+  - component: {fileID: 1703942248}
   m_Layer: 0
   m_Name: collectibles_manager
   m_TagString: Untagged
@@ -5219,6 +5220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DefaultCollectible>k__BackingField: {fileID: 11400000, guid: b424575ff157d6f4db1b756bb4d77f5d, type: 2}
+  <DefaultCollectibleFinalWave>k__BackingField: {fileID: 11400000, guid: 2022bfa17eb3f7a42a6193ca41835bcd, type: 2}
 --- !u!4 &1703942247
 Transform:
   m_ObjectHideFlags: 0
@@ -5234,6 +5236,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1703942248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703942245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 1703942246}
 --- !u!1 &1796115054
 GameObject:
   m_ObjectHideFlags: 0
