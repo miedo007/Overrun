@@ -13,5 +13,6 @@ namespace Project.Game.Projectiles
         [field: SerializeField] public bool RandomLifespan { get; private set; } = false;
         [field: SerializeField, HideIf("RandomLifespan")] public float Lifespan { get; private set; } = 3;
         [field: SerializeField, ShowIf("RandomLifespan")] public Vector2 LifespanRange { get; private set; } = new Vector2(0.5f, 1f);
+        [field: SerializeField] public int BasePierceCount { get; private set; } = 1;
     }
 }

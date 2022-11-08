@@ -15,6 +15,7 @@ namespace Project.Game.Projectiles
         private float _lifespan;
         private float _criticalChance;
         private float _criticalMultiplier;
+        private int _pierceCount;
         private float _knockbackForce;
 
         public ProjectileData Data { get; private set; }
@@ -30,6 +31,7 @@ namespace Project.Game.Projectiles
 
         public void Initialize(ProjectileData data, float damage, float criticalChance = 0f, float criticalMultiplier = 0f, float knockbackForce = 0f)
         {
+            _pierceCount = data.BasePierceCount;
             _criticalChance = criticalChance;
             _criticalMultiplier = criticalMultiplier;
             _knockbackForce = knockbackForce;
@@ -62,8 +64,7 @@ namespace Project.Game.Projectiles
             {
                 return;
             }
-            
-            
+
             var projectileReactor = other.GetComponent<IProjectileReactor>();
             if (projectileReactor != null)
             {
@@ -71,7 +72,11 @@ namespace Project.Game.Projectiles
                 var damage = isCritical ? Damage * _criticalMultiplier : Damage;
                 if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right * _knockbackForce))
                 {
-                    IsActive = false;
+                    _pierceCount--;
+                    if (_pierceCount <= 0)
+                    {
+                        IsActive = false;
+                    }
                 }
             }
         }

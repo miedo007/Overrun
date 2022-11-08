@@ -27,7 +27,7 @@ namespace Project.Game.Enemies
         private float _lastAttackTime;
         private float _lastKnockbackTime;
         
-        private const float KnockbackDuration = 0.1f;
+        private const float KnockbackDuration = 0.2f;
 
         public EnemyData Data { get; private set; }
         public float CurrentHealth { get; private set; }
@@ -90,7 +90,8 @@ namespace Project.Game.Enemies
             var direction = (playerPosition - currentPosition).normalized;
             FacePlayer(direction);
             //rigidbody.AddForce(direction * Data.MoveSpeed * dt, ForceMode2D.Impulse);
-            rigidbody.velocity = direction * Data.MoveSpeed;
+            rigidbody.AddForce(direction, ForceMode2D.Impulse);
+            rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
             //_transform.position = currentPosition + direction * Data.MoveSpeed * dt;
         }
 
