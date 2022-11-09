@@ -57,7 +57,11 @@ namespace Project.Game.Shop
             }
             
             CostText.text = $"<sprite name=currency_ticket> {cost}";
-
+            if (cost < 0)
+            {
+                BuyButton.gameObject.SetActive(false);
+            }
+            
             hero.ShopCurrencyChanged += OnShopCurrencyChanged;
             OnShopCurrencyChanged();
         }

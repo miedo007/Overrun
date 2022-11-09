@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
   m_Name: data_game_default
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.35
+  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.52
   <ShopBasePriceMultiplier>k__BackingField: 0.7
   <HealthRegenRate>k__BackingField: 2

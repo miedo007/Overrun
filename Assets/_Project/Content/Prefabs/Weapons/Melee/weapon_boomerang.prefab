@@ -159,6 +159,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 9037361939565035567, guid: 8961a34667098734d97061133676bc91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710695
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037361939565035567, guid: 8961a34667098734d97061133676bc91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.70710665
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037361939565035567, guid: 8961a34667098734d97061133676bc91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8961a34667098734d97061133676bc91, type: 3}
 --- !u!1 &5592409890753715288 stripped
@@ -191,12 +203,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.12912998, y: 0.16782132}
-      - {x: -0.2280407, y: -0.15230685}
-      - {x: -0.16116399, y: -0.28136477}
-      - {x: 0.13138664, y: -0.14275588}
-      - {x: 0.42645162, y: -0.28277802}
-      - {x: 0.5438897, y: -0.17268106}
+    - - {x: 0.3546791, y: -0.040377885}
+      - {x: 0.037991524, y: 0.3392747}
+      - {x: -0.09176421, y: 0.24491663}
+      - {x: -0.088379204, y: -0.37987167}
+      - {x: 0.050536364, y: -0.45627737}
 --- !u!1 &7701292846902861596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9037361939318503752, guid: 8961a34667098734d97061133676bc91, type: 3}
@@ -243,25 +254,22 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 3589129797798469604}
     m_ColliderPaths:
-    - - X: 21299
-        Y: 2268213
-      - X: -3550407
-        Y: -933068
-      - X: -2881640
-        Y: -2223647
-      - X: 43866
-        Y: -837558
-      - X: 2994516
-        Y: -2237780
-      - X: 4168897
-        Y: -1136810
+    - - X: 2276791
+        Y: 186221
+      - X: -890084
+        Y: 3982747
+      - X: -2187642
+        Y: 3039166
+      - X: -2153792
+        Y: -3208716
+      - X: -764636
+        Y: -3972773
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.2994347, y: -0.22377001}
-      - {x: 0.4168631, y: -0.1136592}
-      - {x: 0.0021117001, y: 0.226805}
-      - {x: -0.3550308, y: -0.093326}
-      - {x: -0.2881386, y: -0.22235261}
-      - {x: 0.0043978, y: -0.0837611}
+    - - {x: -0.076485604, y: -0.3972652}
+      - {x: 0.227665, y: 0.0186388}
+      - {x: -0.0890303, y: 0.3982588}
+      - {x: -0.2187642, y: 0.303903}
+      - {x: -0.2153653, y: -0.3208793}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005

@@ -19,8 +19,7 @@ namespace Project.Game.Shop
                 if (index < items.Count)
                 {
                     var item = items[index];
-                    itemInstance.Icon.sprite = item.Sprite;
-                    itemInstance.Icon.enabled = true;
+                    itemInstance.Initialize(item);
                 }
             }
         }

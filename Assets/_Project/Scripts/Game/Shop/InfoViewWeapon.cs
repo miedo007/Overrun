@@ -29,7 +29,7 @@ namespace Project.Game.Shop
 
             foreach (var stat in _heroInfo.Stats)
             {
-                stat.Changed += OnStatChanged;
+                stat.Changed -= OnStatChanged;
             }
         }
 
@@ -41,6 +41,7 @@ namespace Project.Game.Shop
         public override void Initialize(BaseData data)
         {
             _heroInfo = InjectionContainer.Instance.Injector.Get<HeroInfo>();
+            
             foreach (var stat in _heroInfo.Stats)
             {
                 stat.Changed += OnStatChanged;

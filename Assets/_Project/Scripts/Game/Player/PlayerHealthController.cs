@@ -116,7 +116,7 @@ namespace Project.Game.Player
                 var newHealth = CurrentHealth + _healthRegenStatInfo.GetFloatValue();
                 
                 // Don't let negative health regen kill the player. Clamp to 0.1
-                newHealth = Mathf.Max(newHealth, 0.1f); 
+                newHealth = Mathf.Clamp(newHealth, 0.1f, MaxHealth); 
                 
                 if (!Mathf.Approximately(newHealth, CurrentHealth))
                 {

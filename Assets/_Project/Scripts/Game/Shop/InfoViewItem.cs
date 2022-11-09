@@ -1,6 +1,7 @@
 ﻿using Project.Application;
 using Project.Game.Items;
 using Project.Game.UI;
+using Tromagon.Extensions;
 using UnityEngine;
 
 namespace Project.Game.Shop
@@ -12,6 +13,8 @@ namespace Project.Game.Shop
 
         public override void Initialize(BaseData data)
         {
+            parent.RemoveAllChildren();
+            
             var itemData = data as ItemData;
             if (itemData == null)
             {

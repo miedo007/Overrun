@@ -102,5 +102,22 @@ namespace Project.Heroes
             return Mathf.FloorToInt(_shopCurrency);
         }
 
+        public void RemoveWeapon(WeaponData weaponData)
+        {
+            CurrentWeapons.Remove(weaponData);
+            CurrentWeaponsChanged?.Invoke();
+        }
+
+        public void RemoveItem(ItemData itemData)
+        {
+            Items.Remove(itemData);
+            foreach (var statModifier in itemData.StatModifiers)
+            {
+                var statInfo = GetStat(statModifier.StatData);
+                statInfo.RemoveModifier(statModifier);
+            }
+            ItemsChanged?.Invoke();
+            
+        }
     }
 }

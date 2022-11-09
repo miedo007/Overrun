@@ -1,0 +1,102 @@
+﻿using Mtl.Injection;
+using Mtl.UiFramework;
+using Project.Application;
+using Project.Game.Items;
+using Project.Game.Levels;
+using Project.Game.Weapons;
+using Project.Heroes;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Project.Game.Shop
+{
+    public class ItemDetailsScreen : UIScreen, IPointerClickHandler
+    {
+        [SerializeField] private ShopInventoryItemView itemView;
+        [SerializeField] private Button mergeButton;
+        [SerializeField] private Button sellButton;
+        [SerializeField] private Button closeButton;
+        [SerializeField] private TextMeshProUGUI sellText;
+
+        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly GameData _gameData;
+        [Inject] private readonly LevelController _levelController;
+
+        private string _sellLabel;
+        
+        private BaseData _data;
+
+        private void Awake()
+        {
+            _sellLabel = sellText.text;
+            closeButton.onClick.AddListener(Close);
+            sellButton.onClick.AddListener(OnSellButtonClicked);
+            mergeButton.onClick.AddListener(OnMergeButtonClicked);
+        }
+
+        public void Initialize(BaseData baseData)
+        {
+            _data = baseData;
+
+            var weaponData = baseData as WeaponData;
+            if (weaponData != null)
+            {
+                sellButton.interactable = _heroInfo.CurrentWeapons.Count > 1;
+            }
+            
+            sellText.text = string.Format(_sellLabel, GetSellValue(_data));
+            mergeButton.gameObject.SetActive(baseData as WeaponData != null);
+            itemView.Initialize(baseData, _heroInfo, -1);
+        }
+
+        private void OnSellButtonClicked()
+        {
+            _heroInfo.ShopCurrency += GetSellValue(_data);
+            
+            var weaponData = _data as WeaponData;
+            if (weaponData != null)
+            {
+                SellWeapon(weaponData);
+                Close();
+                return;
+            }
+            
+            var itemData = _data as ItemData;
+            if (itemData != null)
+            {
+                SellItem(itemData);
+                Close();
+            }
+        }
+
+        private void OnMergeButtonClicked()
+        {
+            
+        }
+
+        private void SellItem(ItemData itemData)
+        {
+            _heroInfo.RemoveItem(itemData);
+        }
+
+        private void SellWeapon(WeaponData weaponData)
+        {
+            _heroInfo.RemoveWeapon(weaponData);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Close();
+        }
+
+        private int GetSellValue(BaseData data)
+        {
+            var waveIndex = _levelController.CurrentWaveIndex;
+            return  Mathf.CeilToInt((data.BasePrice * _gameData.ShopBasePriceMultiplier) 
+                                    * Mathf.Pow(_gameData.ShopPriceIncreaseCoeffecient, waveIndex) 
+                                    * _gameData.ResellValue);
+        }
+    }
+}

@@ -86,7 +86,7 @@ MonoBehaviour:
     <HasMaxValue>k__BackingField: 0
     <MaxValue>k__BackingField: 1
   - <Data>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
-    <BaseValue>k__BackingField: 3
+    <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
     <RoundingType>k__BackingField: 0
