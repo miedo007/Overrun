@@ -1,5 +1,4 @@
-﻿using System;
-using Project.Stats;
+﻿using Project.Stats;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,14 +7,14 @@ namespace Project.Game.UI
 {
     public class StatView : MonoBehaviour
     {
-        [field: SerializeField] public Image Icon { get; private set; }
+        [field: SerializeField] public TextMeshProUGUI NameText { get; private set; }
         [field: SerializeField] public TextMeshProUGUI ValueText { get; private set; }
 
         private StatInfo _statInfo;
         
         public void Initialize(StatInfo statInfo)
         {
-            Icon.sprite = statInfo.Data.Icon;
+            NameText.text = $"<sprite name={statInfo.Data.Icon.name}> {statInfo.Data.DisplayNameKey}";
             _statInfo = statInfo;
             _statInfo.Changed += OnStatChanged;
             Refresh(_statInfo);
@@ -38,7 +37,7 @@ namespace Project.Game.UI
         {
             var value = statInfo.GetFloatValue();
             var baseValue = statInfo.BaseValue;
-            ValueText.text = $"{value:0.00}";
+            ValueText.text = statInfo.GetDisplayValue();
 
             var color = Color.white;
             if (value < baseValue)

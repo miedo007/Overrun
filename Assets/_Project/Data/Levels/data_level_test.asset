@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseEnemyCount>k__BackingField: 70
   <EnemyCountIncreasePerWave>k__BackingField: 10
-  <WaveDuration>k__BackingField: 45
+  <WaveDuration>k__BackingField: 1
   <Waves>k__BackingField:
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}

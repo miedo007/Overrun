@@ -14,5 +14,6 @@ namespace Project.Heroes
         [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
         [field: SerializeField] public ItemData[] StartingItems { get; private set; }
         [field: SerializeField] public int WeaponSlots { get; set; } = 6;
+        [field: SerializeField] public int StartingShopCurrency { get; set; } = 0;
     }
 }

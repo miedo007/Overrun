@@ -56,6 +56,8 @@ namespace Project.Game.Player
                 _heroInfo.AddItem(item);
             }
 
+            _heroInfo.ShopCurrency = _heroInfo.Data.StartingShopCurrency;
+            
             _speedStat = _heroInfo.GetStat(SpeedStatData);
             _speedStat.Changed += OnSpeedStatChanged;
             OnSpeedStatChanged(_speedStat);

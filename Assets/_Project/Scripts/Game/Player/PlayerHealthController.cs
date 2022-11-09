@@ -82,7 +82,14 @@ namespace Project.Game.Player
             MaxHealth = stat.GetFloatValue();
 
             var delta = MaxHealth - previousMaxHealth;
-            CurrentHealth += delta;
+            if (delta > 0)
+            {
+                CurrentHealth += delta;
+            }
+            else
+            {
+                CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
+            }
         }
 
         private void OnHealthRegenStatChanged(StatInfo stat)

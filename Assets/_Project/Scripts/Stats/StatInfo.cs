@@ -54,6 +54,19 @@ namespace Project.Stats
             
             return _modifiedValue;
         }
+        
+        
+        public string GetDisplayValue()
+        {
+            var value = GetFloatValue();
+            if (Data.DisplayAsPercent)
+            {
+                value *= 100f;
+            }
+
+            return string.Format(Data.DisplayPattern, value);
+        }
+
 
         public void CalculateStat()
         {

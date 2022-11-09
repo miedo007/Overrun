@@ -15,3 +15,5 @@ MonoBehaviour:
   <DisplayNameKey>k__BackingField: Damage %
   <DescriptionKey>k__BackingField: Modifier for all damage dealt
   <Icon>k__BackingField: {fileID: 731964870, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayAsPercent>k__BackingField: 1
+  <DisplayPattern>k__BackingField: '{0:0}%'

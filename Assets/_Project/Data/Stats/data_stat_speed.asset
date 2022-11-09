@@ -15,3 +15,5 @@ MonoBehaviour:
   <DisplayNameKey>k__BackingField: Speed
   <DescriptionKey>k__BackingField: Movement speed
   <Icon>k__BackingField: {fileID: 1174363307, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayAsPercent>k__BackingField: 0
+  <DisplayPattern>k__BackingField: '{0:0.0}'

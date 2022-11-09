@@ -15,3 +15,5 @@ MonoBehaviour:
   <DisplayNameKey>k__BackingField: Damage - Melee
   <DescriptionKey>k__BackingField: Base damage for melee weapon attacks
   <Icon>k__BackingField: {fileID: -1330282663, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayAsPercent>k__BackingField: 0
+  <DisplayPattern>k__BackingField: '{0:0}'
