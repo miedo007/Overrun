@@ -63,6 +63,11 @@ namespace Project.Stats
             {
                 value *= 100f;
             }
+            
+            if (value - Mathf.Round(value) == 0)
+            {
+                return string.Format(Data.RoundNumberDisplayPattern, value);
+            }
 
             return string.Format(Data.DisplayPattern, value);
         }
@@ -158,6 +163,29 @@ namespace Project.Stats
                 return 1;
             
             return 0;
+        }
+        
+        
+        /// <summary>
+        /// Returns -1 if negatively modified, 0 if unmodified, or 1 if positively modified
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public int GetModifiedDirection()
+        {
+            var value = GetFloatValue();
+            
+            if (Mathf.Approximately(value, BaseValue))
+            {
+                return 0;
+            }
+            
+            if (value < BaseValue)
+            {
+                return -1;
+            }
+
+            return 1;
         }
     }
 

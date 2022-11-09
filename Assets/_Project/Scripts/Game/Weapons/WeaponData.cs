@@ -29,5 +29,68 @@ namespace Project.Game.Weapons
 
             return description;
         }
+
+        public string GetRangeDisplayText(HeroInfo heroInfo)
+        {
+            return GetDisplayStringForValue(Range, false);
+        }
+        
+        public string GetDamageDisplayText(HeroInfo heroInfo)
+        {
+            var projectileCount = 1;
+            var multiProjectileBehavior = BehaviourBase as WeaponBehaviourMultiProjectile;
+            if (multiProjectileBehavior != null)
+            {
+                projectileCount = multiProjectileBehavior.ProjectileCount;
+            }
+
+            var projectileCountString = projectileCount > 1 ? $"{projectileCount}x" : "";
+            var damageStat = heroInfo.GetStat(Type.DamageStat);
+            var damageValue = DamageFactor * damageStat.GetFloatValue();
+            var valueString = GetDisplayStringForValue(damageValue, false);
+            var modifiedDirection = damageStat.GetModifiedDirection();
+            return $"{GetColorStringForModifiedDirection(modifiedDirection)}<b>{projectileCountString}{valueString}</b><alpha=#88>( x<sprite tint=1 name={damageStat.Data.Icon.name}>)";
+        }
+
+        private string GetColorStringForModifiedDirection(int modifiedDirection)
+        {
+            var colorString = "";
+            if (modifiedDirection < 0)
+            {
+                colorString = $"<color={Colors.Negative}>";
+            }
+            else if (modifiedDirection > 0)
+            {
+                colorString = $"<color={Colors.Positive}>";
+            }
+
+            return colorString;
+        }
+
+        public string GetCritDamageDisplayText(HeroInfo heroInfo)
+        {
+            var damageStat = heroInfo.GetStat(Type.DamageStat);
+            var critDamageValue = DamageFactor * damageStat.GetFloatValue() * CriticalDamageMultiplier;
+            var valueString = GetDisplayStringForValue(critDamageValue, false);
+            return $"<b>{valueString}</b>";
+        }
+        
+        public string GetCooldownDisplayText(HeroInfo heroInfo)
+        {
+            var cooldownStat = heroInfo.GetStat(Type.CooldownReductionStat);
+            var cooldownValue = Cooldown * (1f-cooldownStat.GetFloatValue());
+            var valueString = GetDisplayStringForValue(cooldownValue, false);
+            var modifiedDirection = cooldownStat.GetModifiedDirection();
+            return $"{GetColorStringForModifiedDirection(modifiedDirection)}<b>{valueString}s</b><alpha=#88>( x<sprite tint=1 name={cooldownStat.Data.Icon.name}>)";
+        }
+        
+        public string GetKnockbackDisplayText(HeroInfo heroInfo)
+        {
+            var knockbackStat = heroInfo.GetStat(Type.KnockbackStat);
+            var knockbackValue =  KnockbackMultiplier * knockbackStat.GetFloatValue();
+            var valueString = GetDisplayStringForValue(knockbackValue, false);
+            var modifiedDirection = knockbackStat.GetModifiedDirection();
+            return $"{GetColorStringForModifiedDirection(modifiedDirection)}<b>{valueString}</b><alpha=#88>( x<sprite tint=1 name={knockbackStat.Data.Icon.name}>)";
+        }
     }
 }

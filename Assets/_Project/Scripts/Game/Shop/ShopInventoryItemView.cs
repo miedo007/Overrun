@@ -1,5 +1,8 @@
 ﻿using System;
+using DG.Tweening;
 using Project.Application;
+using Project.Game.Items;
+using Project.Game.Weapons;
 using Project.Heroes;
 using TMPro;
 using UnityEngine;
@@ -14,9 +17,11 @@ namespace Project.Game.Shop
         [field: SerializeField] public  CanvasGroup CanvasGroup { get; private set; }
         [field: SerializeField] public  Image Icon { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI NameField { get; private set; }
-        [field: SerializeField] public  TextMeshProUGUI DescriptionField { get; private set; }
+        [field: SerializeField] public InfoViewWeapon WeaponInfoView;
+        [field: SerializeField] public InfoViewItem ItemInfoView;
         [field: SerializeField] public  Button BuyButton { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI CostText { get; private set; }
+        [field: SerializeField] public  LayoutElement LayoutElement { get; private set; }
 
         private int _cost;
         
@@ -36,8 +41,22 @@ namespace Project.Game.Shop
             Data = data;
             Icon.sprite = data.Sprite;
             NameField.text = data.DisplayName;
-            DescriptionField.text = data.GetDescriptionForHero(hero);
-            CostText.text = cost.ToString();
+
+            var isWeapon = data as WeaponData != null;
+            
+            WeaponInfoView.gameObject.SetActive(isWeapon);
+            ItemInfoView.gameObject.SetActive(!isWeapon);
+            
+            if (isWeapon)
+            {
+                WeaponInfoView.Initialize(data);
+            }
+            else
+            {
+                ItemInfoView.Initialize(data);
+            }
+            
+            CostText.text = $"<sprite name=currency_ticket> {cost}";
 
             hero.ShopCurrencyChanged += OnShopCurrencyChanged;
             OnShopCurrencyChanged();
@@ -67,9 +86,15 @@ namespace Project.Game.Shop
         public void Purchase()
         {
             BuyButton.gameObject.SetActive(false);
-            CanvasGroup.alpha = 0.25f;
             CanvasGroup.interactable = false;
+            CanvasGroup.DOFade(0, 0.125f)
+                .OnComplete(ScaleDown);
         }
 
+        private void ScaleDown()
+        {
+            LayoutElement.DOPreferredSize(Vector2.zero, 0.1f)
+                .OnComplete(() => gameObject.SetActive(false));
+        }
     }
 }

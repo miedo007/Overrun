@@ -8,12 +8,14 @@ namespace Project.Game.Levels
     {
         [field: SerializeField] public int BaseEnemyCount { get; private set; } = 60;
         [field: SerializeField] public int EnemyCountIncreasePerWave { get; private set; } = 15;
-        [field: SerializeField] public int WaveDuration { get; private set; } = 45;
+        [field: SerializeField] public int BaseWaveDuration { get; private set; } = 45;
+        [field: SerializeField] public int WaveDurationIncrease { get; private set; } = 10;
+        [field: SerializeField] public int MaxWaveDuration { get; private set; } = 60;
         [field: SerializeField] public WaveInfo[] Waves { get; private set; }
         
         public float GetSpawnDelay(int waveIndex)
         {
-            return (float) WaveDuration / GetEnemyCountForWave(waveIndex);
+            return (float) BaseWaveDuration / GetEnemyCountForWave(waveIndex);
         }
 
         public int GetEnemyCountForWave(int waveIndex)
@@ -29,6 +31,11 @@ namespace Project.Game.Levels
         public bool IsLastWave(int waveIndex)
         {
             return waveIndex == Waves.Length - 1;
+        }
+
+        public int GetWaveDuration(int waveIndex)
+        {
+            return Mathf.Min(MaxWaveDuration, BaseWaveDuration + (WaveDurationIncrease * waveIndex));
         }
     }
 

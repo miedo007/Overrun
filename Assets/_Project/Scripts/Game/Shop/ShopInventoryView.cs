@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
 using Project.Game.Weapons;
 using Project.Heroes;
+using Tromagon.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +27,10 @@ namespace Project.Game.Shop
 
         private List<ShopInventoryItemView> CurrentItems = new();
 
+        private void Awake()
+        {
+            Parent.RemoveAllChildren();
+        }
 
         public void Populate(int waveIndex)
         {

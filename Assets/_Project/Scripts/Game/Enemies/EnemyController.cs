@@ -84,6 +84,7 @@ namespace Project.Game.Enemies
         {
             if (IsPerformingAction || !selfTarget.IsActivated)
             {
+                ClampToRoom();
                 return;
             }
             
@@ -117,6 +118,7 @@ namespace Project.Game.Enemies
                 rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
                 
                 FacePlayer(direction);
+                ClampToRoom();
             }
             else if (Data.MovementMode == MovementMode.Wander)
             {
@@ -134,6 +136,7 @@ namespace Project.Game.Enemies
                 rigidbody.velocity = Vector2.ClampMagnitude(rigidbody.velocity, Data.MoveSpeed);
                 
                 FacePlayer(direction);
+                ClampToRoom();
             }
             else if (Data.MovementMode == MovementMode.None)
             {

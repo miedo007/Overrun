@@ -101,5 +101,6 @@ namespace Project.Heroes
         {
             return Mathf.FloorToInt(_shopCurrency);
         }
+
     }
 }

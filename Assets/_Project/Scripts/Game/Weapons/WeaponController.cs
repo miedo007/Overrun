@@ -104,8 +104,7 @@ namespace Project.Game.Weapons
         {
             return !IsActivated && time >= _lastActivationTime + _attackDelay;
         }
-
-
+        
         public void Activate(WeaponController weapon)
         {
             if (CurrentTarget == null || !CurrentTarget.IsActivated)
@@ -200,7 +199,7 @@ namespace Project.Game.Weapons
         public float GetDamageValue(bool isCritical)
         {
             var damageStat = DamageStat.GetFloatValue();
-            var damagePercentStat = 1f + DamagePercentStat.GetFloatValue();
+            var damagePercentStat = DamagePercentStat.GetFloatValue();
             var weaponDamageFactor = Data.DamageFactor;
             var total = damageStat * damagePercentStat * weaponDamageFactor;
 

@@ -6633,14 +6633,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.0500001
-      objectReference: {fileID: 0}
-    - target: {fileID: 963194229, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_UpdateMethod
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow
       value: 
@@ -6728,15 +6720,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756618199, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 336
+      value: 560
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756618199, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 336
+      value: 560
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756618199, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -153.59998
+      value: -256
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_Pivot.x
@@ -6768,11 +6760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1080
+      value: 1440
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 960
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6804,11 +6796,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 540
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 480
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 1622131981756633077, guid: a1df6fe80f3425846b4ee6d298b88dc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

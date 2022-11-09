@@ -53,6 +53,7 @@ namespace Project.Game
         private void OnShopClosed(UIScreen screen)
         {
             screen.OnCloseEvent -= OnShopClosed;
+            _playerController.enabled = true;
             _levelController.BeginNextWave(0,1f);
         }
 
@@ -80,7 +81,7 @@ namespace Project.Game
         {
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;
             _levelController.WaveCompleted -= OnWaveCompleted;
-            _levelController.WaveCompleted -= OnLevelCompleted;
+            _levelController.LevelCompleted -= OnLevelCompleted;
             
             _playerController.enabled = false;
             _joystick.gameObject.SetActive(false);

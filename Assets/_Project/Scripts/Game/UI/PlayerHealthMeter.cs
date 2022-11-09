@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Mtl.Injection;
 using Project.Game.Player;
 using TMPro;
@@ -19,7 +20,7 @@ namespace Project.Game.UI
 
         public void OnReady()
         {
-            _healthController.Changed += HealthControllerOnChanged;
+            _healthController.Changed += OnChanged;
             _healthController.Initialized += HealthControllerInitialized;
 
             _meterColor = meter.color;
@@ -27,24 +28,40 @@ namespace Project.Game.UI
 
         private void Start()
         {
-            HealthControllerOnChanged(1f,1f);
+            RefreshImmediate();
         }
-        
+
+        private void OnEnable()
+        {
+            if (_healthController != null)
+            {
+                RefreshImmediate();
+            }
+        }
+
+        private void RefreshImmediate()
+        {
+            meter.fillAmount = _healthController.CurrentPercentage;
+        }
+
         private void HealthControllerInitialized()
         {
-            HealthControllerOnChanged(1f,1f);
+            OnChanged(1f,1f);
         }
 
         private void OnDestroy()
         {
             previousValueMeter.DOKill();
             meter.DOKill();
-            
-            _healthController.Changed -= HealthControllerOnChanged;
-            _healthController.Initialized -= HealthControllerInitialized;
+
+            if (_healthController != null)
+            {
+                _healthController.Changed -= OnChanged;
+                _healthController.Initialized -= HealthControllerInitialized;
+            }
         }
 
-        private void HealthControllerOnChanged(float previousPercentage, float currentPercentage)
+        private void OnChanged(float previousPercentage, float currentPercentage)
         {
             text.text = _healthController.GetHealthString();
             

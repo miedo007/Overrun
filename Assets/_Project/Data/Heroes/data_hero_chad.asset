@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
   <StartingItems>k__BackingField: []
   <WeaponSlots>k__BackingField: 6
-  <StartingShopCurrency>k__BackingField: 100
+  <StartingShopCurrency>k__BackingField: 0

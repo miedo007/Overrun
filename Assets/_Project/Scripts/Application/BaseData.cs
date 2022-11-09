@@ -14,5 +14,20 @@ namespace Project.Application
         {
             return Description;
         }
+
+        public string GetDisplayStringForValue(float value, bool displayAsPercentage)
+        {
+            var postfix = displayAsPercentage ? "%" : "";
+            value = displayAsPercentage ? value * 100f : value;
+            
+            if (value - Mathf.Round(value) == 0)
+            {
+                return $"{value:0}{postfix}";
+            }
+            else
+            {
+                return $"{value:0.0}{postfix}";
+            }
+        }
     }
 }

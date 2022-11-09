@@ -16,11 +16,9 @@ namespace Project.Game.Player
 
         [field: SerializeField] public StatData HealthStat { get; private set; }
         [field: SerializeField] public StatData HealthRegenStat { get; private set; }
-        [field: SerializeField] public StatData HealthStealStat { get; private set; }
 
         private StatInfo _healthStatInfo;
         private StatInfo _healthRegenStatInfo;
-        private StatInfo _healthStealRegenStatInfo;
         
         private float _currentHealth;
         
@@ -37,11 +35,6 @@ namespace Project.Game.Player
             {
                 var previousValue = _currentHealth;
                 _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-
-                if (Mathf.Approximately(previousValue, _currentHealth))
-                {
-                    return;
-                }
                 
                 if (_currentHealth <= 0)
                 {
@@ -53,6 +46,8 @@ namespace Project.Game.Player
                 Changed?.Invoke(previousValue / MaxHealth, _currentHealth / MaxHealth);
             }
         }
+
+        public float CurrentPercentage => _currentHealth / MaxHealth;
 
 
         private void Start()
@@ -119,8 +114,14 @@ namespace Project.Game.Player
                 }
                 
                 var newHealth = CurrentHealth + _healthRegenStatInfo.GetFloatValue();
+                
                 // Don't let negative health regen kill the player. Clamp to 0.1
-                CurrentHealth = Mathf.Max(newHealth, 0.1f);
+                newHealth = Mathf.Max(newHealth, 0.1f); 
+                
+                if (!Mathf.Approximately(newHealth, CurrentHealth))
+                {
+                    CurrentHealth = newHealth;
+                }
             }
         }
         

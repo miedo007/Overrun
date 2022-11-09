@@ -30,7 +30,7 @@ namespace Project.Game.Levels
 
         private void UpdateClock()
         {
-            TimeText.text = $"{_currentTime:00}";
+            TimeText.text = $":{_currentTime:00}";
         }
 
         public void StartTimer()

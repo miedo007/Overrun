@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c614427e7cc044fca8de4b441ed1224d, type: 3}
   m_Name: data_stat_cooldown_percent
   m_EditorClassIdentifier: 
-  <DisplayNameKey>k__BackingField: Cooldown %
+  <DisplayNameKey>k__BackingField: Cooldown Reduction
   <DescriptionKey>k__BackingField: Modifies cooldown of all weapons
   <Icon>k__BackingField: {fileID: 147296496, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 1
-  <DisplayPattern>k__BackingField: '{0:0}%'
+  <DisplayPattern>k__BackingField: '{0:0.0}%'
+  <RoundNumberDisplayPattern>k__BackingField: '{0:0}%'

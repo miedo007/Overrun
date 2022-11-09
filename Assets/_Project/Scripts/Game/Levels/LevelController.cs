@@ -50,7 +50,7 @@ namespace Project.Game.Levels
             CurrentWaveInfo = CurrentLevel.GetWaveInfo(CurrentWaveIndex);
 
             var timerScreen = _uiFrame.Open<WaveTimerScreen>();
-            timerScreen.DisplayWithDuration(CurrentLevel.WaveDuration);
+            timerScreen.DisplayWithDuration(CurrentLevel.GetWaveDuration(CurrentWaveIndex));
             timerScreen.TimerCompleted += OnTimerCompleted;
             timerScreen.StartTimer();
             

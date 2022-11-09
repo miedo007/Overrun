@@ -10,5 +10,6 @@ namespace Project.Stats
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public bool DisplayAsPercent { get; private set; }
         [field: SerializeField] public string DisplayPattern { get; private set; }
+        [field: SerializeField] public string RoundNumberDisplayPattern { get; private set; }
     }
 }
