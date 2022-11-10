@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Project.Stats;
 using System.Linq;
 using Mtl.Injection;
+using Project.Application;
 using Project.Game.Items;
 using Project.Game.Weapons;
 using Project.Tiers;
@@ -165,6 +166,12 @@ namespace Project.Heroes
             AddWeapon(nextTier.Data as WeaponData);
             
             return true;
+        }
+
+        public bool CanMerge(BaseData data)
+        {
+            var weaponData = data as WeaponData;
+            return weaponData != null && CanMergeWeapon(weaponData);
         }
     }
 }

@@ -41,8 +41,8 @@ namespace Project.Game.Shop
             
             ClearItems();
             
-            var minTier = _waveIndex - 8;
-            var maxTier = Mathf.FloorToInt(_waveIndex * 0.375f) + 1;
+            var minTier = _waveIndex - 10;
+            var maxTier = Mathf.FloorToInt(_waveIndex * 0.45f) + 1;
 
             var weaponCount = 2;
             var items = new List<BaseData>();

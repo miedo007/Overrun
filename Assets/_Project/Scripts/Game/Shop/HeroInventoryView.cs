@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mtl.Injection;
 using Project.Application;
@@ -21,6 +22,15 @@ namespace Project.Game.Shop
         {
             _heroInfo.CurrentWeaponsChanged += OnCurrentWeaponsChanged;
             _heroInfo.ItemsChanged += OnItemsChanged;
+        }
+
+        private void OnEnable()
+        {
+            if (_heroInfo == null)
+            {
+                return;
+            }
+            
             Refresh();
         }
 

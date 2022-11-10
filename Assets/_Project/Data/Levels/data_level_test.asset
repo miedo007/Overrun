@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cfd08fe83e493492accbebbd345024, type: 3}
   m_Name: data_level_test
   m_EditorClassIdentifier: 
-  <BaseEnemyCount>k__BackingField: 45
-  <EnemyCountIncreasePerWave>k__BackingField: 12
+  <BaseEnemyCount>k__BackingField: 35
+  <EnemyCountIncreasePerWave>k__BackingField: 10
   <BaseWaveDuration>k__BackingField: 30
-  <WaveDurationIncrease>k__BackingField: 10
+  <WaveDurationIncrease>k__BackingField: 5
   <MaxWaveDuration>k__BackingField: 75
   <Waves>k__BackingField:
   - <Enemies>k__BackingField:
