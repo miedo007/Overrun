@@ -132,7 +132,15 @@ namespace Project.Game.Player
 
         public string GetHealthString()
         {
-            return $"{_currentHealth:0.0}<size=75%><alpha=#AA>/{MaxHealth:0.0}";
+            var currentHealthDisplay = _currentHealth - Mathf.Round(_currentHealth) == 0
+                ? $"{_currentHealth:0}"
+                : $"{_currentHealth:0.0}";
+            
+            var maxHealthDisplay = MaxHealth - Mathf.Round(MaxHealth) == 0
+                ? $"{MaxHealth:0}"
+                : $"{MaxHealth:0.0}";
+
+            return $"{currentHealthDisplay}<size=75%><alpha=#AA>/{maxHealthDisplay}";
         }
     }
 }
