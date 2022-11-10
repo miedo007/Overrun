@@ -16,6 +16,7 @@ namespace Project.Game.Shop
         
         [field: SerializeField] public  CanvasGroup CanvasGroup { get; private set; }
         [field: SerializeField] public  Image Icon { get; private set; }
+        [field: SerializeField] public  Image IconBacker { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI NameField { get; private set; }
         [field: SerializeField] public InfoViewWeapon WeaponInfoView;
         [field: SerializeField] public InfoViewItem ItemInfoView;
@@ -40,7 +41,8 @@ namespace Project.Game.Shop
             _heroInfo = hero;
             Data = data;
             Icon.sprite = data.Sprite;
-            NameField.text = data.DisplayName;
+            IconBacker.color = data.Tier.Color;
+            NameField.text = $"{data.DisplayName} {data.Tier.NamePostfix}";
 
             var isWeapon = data as WeaponData != null;
             

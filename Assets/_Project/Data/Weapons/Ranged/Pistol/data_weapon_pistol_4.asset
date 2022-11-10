@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
   m_Name: data_weapon_pistol_4
   m_EditorClassIdentifier: 
+  <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: b8d98dd67d97d5c45a588c59729da467, type: 3}
   <DisplayName>k__BackingField: Pistol
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 15
+  <BasePrice>k__BackingField: 23
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: d1644ba18563e4a4ca6bfad30914bb5e, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: fdbdee9f68b318c4094ff8a659efda0c, type: 2}
-  <Cooldown>k__BackingField: 0.4
-  <DamageFactor>k__BackingField: 0.9
-  <Range>k__BackingField: 5
-  <CriticalDamageMultiplier>k__BackingField: 2
-  <KnockbackMultiplier>k__BackingField: 1
+  <Cooldown>k__BackingField: 0.2
+  <DamageFactor>k__BackingField: 2.5
+  <Range>k__BackingField: 6
+  <CriticalDamageMultiplier>k__BackingField: 3
+  <KnockbackMultiplier>k__BackingField: 2

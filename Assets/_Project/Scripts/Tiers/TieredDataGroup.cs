@@ -8,6 +8,11 @@ namespace Project.Tiers
     public class TieredDataGroup : ScriptableObject
     {
         [field: SerializeField] public List<TierInfo> Tiers { get; private set; } = new();
+
+        public TierInfo GetRandomTier()
+        {
+            return Tiers[Random.Range(0, Tiers.Count)];
+        }
     }
 
     [System.Serializable]

@@ -1109,6 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CanvasGroup>k__BackingField: {fileID: 1257997937345886229}
   <Icon>k__BackingField: {fileID: 425929425644915988}
+  <IconBacker>k__BackingField: {fileID: 1479067960806362900}
   <NameField>k__BackingField: {fileID: 9176685984763553304}
   WeaponInfoView: {fileID: 5415521114362278233}
   ItemInfoView: {fileID: 5596110868024794165}

@@ -42,13 +42,13 @@ namespace Project.Game.Shop
             var items = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandom());
+                items.Add(_weaponDatabase.GetRandomGroup().GetRandomTier().Data);
             }
 
             var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandom());
+                items.Add(_itemDatabase.GetRandomGroup().GetRandomTier().Data);
             }
 
             items.Shuffle();

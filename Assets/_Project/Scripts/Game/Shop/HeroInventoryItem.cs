@@ -10,6 +10,8 @@ namespace Project.Game.Shop
     public class HeroInventoryItem : MonoBehaviour, IPointerClickHandler
     {
         [field: SerializeField] public Image Icon { get; private set; }
+        [field: SerializeField] public Image Frame { get; private set; }
+        [field: SerializeField] public Image Backer { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
 
@@ -18,6 +20,8 @@ namespace Project.Game.Shop
         public void Initialize(BaseData data)
         {
             _data = data;
+            Frame.color = _data.Tier.Color;
+            Backer.color = _data.Tier.Color;
             Icon.sprite = _data.Sprite;
             Icon.enabled = true;
         }

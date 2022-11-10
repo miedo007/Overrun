@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Project.Tiers;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -7,7 +8,13 @@ namespace Project.Game.Weapons
     public class WeaponDatabase : ScriptableObject
     {
         [field: SerializeField] public List<WeaponData> Weapons { get; private set; }
+        [field: SerializeField] public List<TieredDataGroup> WeaponGroups { get; private set; }
 
+        public TieredDataGroup GetRandomGroup()
+        {
+            return WeaponGroups[Random.Range(0, WeaponGroups.Count)];
+        }
+        
         public WeaponData GetRandom()
         {
             return Weapons[Random.Range(0, Weapons.Count)];

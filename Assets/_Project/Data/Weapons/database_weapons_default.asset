@@ -21,3 +21,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
   - {fileID: 11400000, guid: f039b667245c1f24aa9f4ff1468317d4, type: 2}
   - {fileID: 11400000, guid: e204e0c74d681c24185cb95b26d30781, type: 2}
+  <WeaponGroups>k__BackingField:
+  - {fileID: 11400000, guid: 27e0e4a3be4cbca4a82c1c4ad7581652, type: 2}
+  - {fileID: 11400000, guid: 4f2e37a0bb5915e4d96ea775b20295ee, type: 2}
+  - {fileID: 11400000, guid: 978b4b36804142f4f81cf7441a2da1f3, type: 2}
+  - {fileID: 11400000, guid: d5ee0cb5648052e47ad5e7580bc1334d, type: 2}
+  - {fileID: 11400000, guid: 92e3fc41ed7af264db2124883158f825, type: 2}
+  - {fileID: 11400000, guid: a176eced5e3937a42aec79b1658f3a9c, type: 2}
+  - {fileID: 11400000, guid: 6e910af7d7453b749ba1d43d81dd90fa, type: 2}
+  - {fileID: 11400000, guid: 2443ca25e8522be4abd6533c8422e978, type: 2}

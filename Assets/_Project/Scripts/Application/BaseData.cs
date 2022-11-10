@@ -1,10 +1,12 @@
 ﻿using Project.Heroes;
+using Project.Tiers;
 using UnityEngine;
 
 namespace Project.Application
 {
     public class BaseData : ScriptableObject
     {
+        [field: SerializeField] public TierData Tier { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; protected set; }
         [field: SerializeField] public string DisplayName { get; protected set; }
         [field: SerializeField, TextArea] public string Description { get; protected set; }

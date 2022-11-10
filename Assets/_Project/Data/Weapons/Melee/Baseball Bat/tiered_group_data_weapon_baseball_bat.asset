@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1574630dc124be8ba26160e316c8521, type: 3}
+  m_Name: tiered_group_data_weapon_baseball_bat
+  m_EditorClassIdentifier: 
+  <Tiers>k__BackingField:
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 9f10546a33b132c4db6054499f912379, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: c3f353843819ac54ab70417a16d1b9ec, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 2cec98ee43cb0f24fa5e935e56052726, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: dc28daa39a0a89a46a77b47d4bc294b1, type: 2}

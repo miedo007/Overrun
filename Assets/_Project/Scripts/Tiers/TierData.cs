@@ -1,5 +1,4 @@
-﻿using Project.Application;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Tiers
 {

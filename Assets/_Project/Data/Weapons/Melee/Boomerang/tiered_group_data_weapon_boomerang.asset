@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1574630dc124be8ba26160e316c8521, type: 3}
+  m_Name: tiered_group_data_weapon_boomerang
+  m_EditorClassIdentifier: 
+  <Tiers>k__BackingField:
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 77a88f7887f50bf43935c7c69f8aa187, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 484339551b8c93d4c9a830ae5572fd8a, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 69d54f4f1021dc14899be84f5e4566be, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 42669997f33689246b5ad0a19973c916, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: a0f228a87cadd6e4cbfd3323130c474f, type: 2}
