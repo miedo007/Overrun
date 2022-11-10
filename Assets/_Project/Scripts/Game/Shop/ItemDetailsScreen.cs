@@ -39,15 +39,19 @@ namespace Project.Game.Shop
         public void Initialize(BaseData baseData)
         {
             _data = baseData;
+            
+            sellText.text = string.Format(_sellLabel, GetSellValue(_data));
 
-            var weaponData = baseData as WeaponData;
-            if (weaponData != null)
+            var isWeapon = _data as WeaponData != null;
+            mergeButton.gameObject.SetActive(isWeapon);
+            sellButton.gameObject.SetActive(isWeapon);
+            
+            if (isWeapon)
             {
+                mergeButton.interactable = _heroInfo.CanMergeWeapon(_data as WeaponData);
                 sellButton.interactable = _heroInfo.CurrentWeapons.Count > 1;
             }
             
-            sellText.text = string.Format(_sellLabel, GetSellValue(_data));
-            mergeButton.gameObject.SetActive(baseData as WeaponData != null);
             itemView.Initialize(baseData, _heroInfo, -1);
         }
 
@@ -73,7 +77,8 @@ namespace Project.Game.Shop
 
         private void OnMergeButtonClicked()
         {
-            
+            _heroInfo.MergeWeapon(_data as WeaponData);
+            Close();
         }
 
         private void SellItem(ItemData itemData)

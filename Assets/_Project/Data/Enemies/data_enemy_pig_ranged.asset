@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1d9047f8eb66370408f6646b72398741, type: 3}
   <Action>k__BackingField: {fileID: 11400000, guid: 16b42d2714e49db4a9f185407773c7a3, type: 2}
-  <BaseHealth>k__BackingField: 1.5
-  <MoveSpeed>k__BackingField: 2
+  <BaseHealth>k__BackingField: 1.25
+  <MoveSpeed>k__BackingField: 0.5
   <MovementMode>k__BackingField: 2
   <MeleeAttackRate>k__BackingField: 0.375
   <MeleeDamage>k__BackingField: 1
   <CollectibleData>k__BackingField: {fileID: 0}
   <LevelScaling>k__BackingField: 1.1
-  <WaveScaling>k__BackingField: 1.6
+  <WaveScaling>k__BackingField: 1.42

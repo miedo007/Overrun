@@ -25,9 +25,7 @@ namespace Project.Game.Shop
         [Inject("items")] private  TieredGroupDatabase _itemDatabase;
         [Inject] private  HeroInfo _heroInfo;
         [Inject] private  GameData _gameData;
-        [Inject] private readonly LevelController _levelController;
         
-
         private int _waveIndex;
 
         private List<ShopInventoryItemView> CurrentItems = new();
@@ -43,17 +41,20 @@ namespace Project.Game.Shop
             
             ClearItems();
             
+            var minTier = _waveIndex - 8;
+            var maxTier = Mathf.FloorToInt(_waveIndex * 0.375f) + 1;
+
             var weaponCount = 2;
             var items = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandom().GetRandomTier(RarityCurve, _waveIndex-5, _waveIndex+1).Data);
+                items.Add(_weaponDatabase.GetRandom().GetRandomTier(RarityCurve, minTier, maxTier).Data);
             }
 
             var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandom().GetRandomTier(RarityCurve, _waveIndex-5, _waveIndex+1).Data);
+                items.Add(_itemDatabase.GetRandom().GetRandomTier(RarityCurve, minTier, maxTier).Data);
             }
 
             items.Shuffle();

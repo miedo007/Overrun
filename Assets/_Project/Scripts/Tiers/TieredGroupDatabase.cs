@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Project.Application;
+using Project.Game.Weapons;
 using UnityEngine;
 
 namespace Project.Tiers
@@ -13,6 +16,22 @@ namespace Project.Tiers
         {
             return TieredGroups[Random.Range(0, TieredGroups.Count)];
         }
-        
+
+        public TieredDataGroup GetGroupForBaseData(BaseData baseData)
+        {
+            return TieredGroups.FirstOrDefault(x =>
+            {
+                foreach (var tier in x.Tiers)
+                {
+                    if (tier.Data == baseData)
+                    {
+                        return true;
+                    }
+                }
+                
+                return false;
+            });
+
+        }
     }
 }

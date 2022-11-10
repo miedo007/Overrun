@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Project.Stats;
 using System.Linq;
+using Mtl.Injection;
 using Project.Game.Items;
 using Project.Game.Weapons;
+using Project.Tiers;
 using UnityEngine;
 
 namespace Project.Heroes
@@ -118,6 +120,51 @@ namespace Project.Heroes
             }
             ItemsChanged?.Invoke();
             
+        }
+
+        public bool CanMergeWeapon(WeaponData weaponData)
+        {
+            if (CurrentWeapons.Count(x => weaponData == x) < 2)
+            {
+                return false;
+            }
+            
+            var weaponDatabase = InjectionContainer.Instance.Injector.Get<TieredGroupDatabase>("weapons");
+            
+            var tieredGroup = weaponDatabase.GetGroupForBaseData(weaponData);
+            if (tieredGroup != null)
+            {
+                return tieredGroup.CanUpgradeTier(weaponData);
+            }
+
+            return false;
+        }
+
+        public bool MergeWeapon(WeaponData weaponData)
+        {
+            if (!CanMergeWeapon(weaponData))
+            {
+                Debug.Log("Merge failed");
+                return false;
+            }
+
+            var weaponDatabase = InjectionContainer.Instance.Injector.Get<TieredGroupDatabase>("weapons");
+            var tieredGroup = weaponDatabase.GetGroupForBaseData(weaponData);
+            var nextTier = tieredGroup.GetNextTier(weaponData);
+            if (nextTier == null)
+            {
+                Debug.Log("Merge failed = Tier is Null");
+                return false;
+            }
+            
+            // remove old weapons
+            // TODO: Remove from correct slot. For now, just remove first two matching weaponData
+            
+            RemoveWeapon(weaponData);
+            RemoveWeapon(CurrentWeapons.FirstOrDefault(x => x == weaponData));
+            AddWeapon(nextTier.Data as WeaponData);
+            
+            return true;
         }
     }
 }

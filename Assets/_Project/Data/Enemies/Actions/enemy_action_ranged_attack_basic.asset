@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998e4c85260b4b6c82fd12fee1380543, type: 3}
   m_Name: enemy_action_ranged_attack_basic
   m_EditorClassIdentifier: 
-  <Cooldown>k__BackingField: 2.5
+  <Cooldown>k__BackingField: 3.5
   <CanInterrupt>k__BackingField: 0
   <ProjectileData>k__BackingField: {fileID: 11400000, guid: 25464f48b7f494d4d817049308c43583, type: 2}
   <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
+  <DamageFactor>k__BackingField: 0.5

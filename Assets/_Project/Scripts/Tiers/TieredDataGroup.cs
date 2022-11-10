@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Application;
+using Project.Game.Weapons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Tiers
 {
@@ -27,8 +30,8 @@ namespace Project.Tiers
                 }
             }
 
-            minTier = Mathf.Clamp(minTier, 0, Tiers.Count);
-            maxTier = Mathf.Clamp(maxTier, minTier, Tiers.Count);
+            minTier = Mathf.Clamp(minTier, 0, Tiers.Count-1);
+            maxTier = Mathf.Clamp(maxTier, minTier, Tiers.Count-1);
             
             
             if (rarityCurve == null)
@@ -39,6 +42,32 @@ namespace Project.Tiers
             curvedValue = rarityCurve.Evaluate(curvedValue);
             var lerpedIndex = Mathf.RoundToInt(Mathf.Lerp((float) minTier, (float) maxTier, curvedValue));
             return Tiers[lerpedIndex];
+        }
+
+        public bool CanUpgradeTier(BaseData baseData)
+        {
+            for (int i = 0; i < Tiers.Count - 1; i++)
+            {
+                if (Tiers[i].Data == baseData)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public TierInfo GetNextTier(BaseData baseData)
+        {
+            for (int i = 0; i < Tiers.Count - 1; i++)
+            {
+                if (Tiers[i].Data == baseData)
+                {
+                    return Tiers[i+1];
+                }
+            }
+
+            return null;
         }
     }
 
