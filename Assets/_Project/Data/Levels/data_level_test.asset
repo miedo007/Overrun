@@ -16,7 +16,7 @@ MonoBehaviour:
   <EnemyCountIncreasePerWave>k__BackingField: 12
   <BaseWaveDuration>k__BackingField: 30
   <WaveDurationIncrease>k__BackingField: 10
-  <MaxWaveDuration>k__BackingField: 60
+  <MaxWaveDuration>k__BackingField: 75
   <Waves>k__BackingField:
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
@@ -36,6 +36,31 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
     - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
     <SpawnCode>k__BackingField: 00011100210100000011010000001
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+    - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+    - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+    <SpawnCode>k__BackingField: 000110100100201000011010
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+    - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+    - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+    <SpawnCode>k__BackingField: 000110100100201000011010
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+    - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+    - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+    <SpawnCode>k__BackingField: 000110100100201000011010
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+    - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+    - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+    <SpawnCode>k__BackingField: 000110100100201000011010
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+    - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+    - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+    <SpawnCode>k__BackingField: 000110100100201000011010
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
     - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}

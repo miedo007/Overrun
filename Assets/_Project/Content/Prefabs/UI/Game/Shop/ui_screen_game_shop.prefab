@@ -216,6 +216,30 @@ MonoBehaviour:
   <ItemViewPrefab>k__BackingField: {fileID: 4101770865699853113, guid: 72daed6d8cfc6df419a23e843cfd653c, type: 3}
   <Parent>k__BackingField: {fileID: 5994544230645742984}
   <Scroller>k__BackingField: {fileID: 8835106685730567443}
+  <RarityCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0024743092
+      outSlope: -0.0024743092
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.9531915
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 10.595109
+      outSlope: 10.595109
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.060992897
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5002599362479804965
 MonoBehaviour:
   m_ObjectHideFlags: 0

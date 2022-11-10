@@ -5,8 +5,6 @@ using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
-using Project.Game.Weapons;
-using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game
@@ -19,8 +17,6 @@ namespace Project.Game
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly UltimateJoystick _joystick;
-        [Inject] private readonly HeroInfo _heroInfo;
-        [Inject] private readonly WeaponDatabase _weaponDatabase;
 
         private void Start()
         {

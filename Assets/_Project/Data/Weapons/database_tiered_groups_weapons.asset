@@ -9,19 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2a9d2efc1ff4f79bcf590752274fab9, type: 3}
-  m_Name: database_weapons_default
+  m_Script: {fileID: 11500000, guid: a68a4bd625d74b3495d56e3d9933ca5e, type: 3}
+  m_Name: database_tiered_groups_weapons
   m_EditorClassIdentifier: 
-  <Weapons>k__BackingField:
-  - {fileID: 11400000, guid: 47ba48a1c389ee941a141a964b9d8dc2, type: 2}
-  - {fileID: 11400000, guid: 77a88f7887f50bf43935c7c69f8aa187, type: 2}
-  - {fileID: 11400000, guid: 257d3c82bf5f3d64483a8d413572df5c, type: 2}
-  - {fileID: 11400000, guid: 9b67f703a8f774b42a1dc5b4a3cead17, type: 2}
-  - {fileID: 11400000, guid: 41011cefff7bddd46bfaf675e6688360, type: 2}
-  - {fileID: 11400000, guid: 9f38f1b813a437f4a8566e7f5d4c56a9, type: 2}
-  - {fileID: 11400000, guid: f039b667245c1f24aa9f4ff1468317d4, type: 2}
-  - {fileID: 11400000, guid: e204e0c74d681c24185cb95b26d30781, type: 2}
-  <WeaponGroups>k__BackingField:
+  <TieredGroups>k__BackingField:
   - {fileID: 11400000, guid: 27e0e4a3be4cbca4a82c1c4ad7581652, type: 2}
   - {fileID: 11400000, guid: 4f2e37a0bb5915e4d96ea775b20295ee, type: 2}
   - {fileID: 11400000, guid: 978b4b36804142f4f81cf7441a2da1f3, type: 2}

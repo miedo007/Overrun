@@ -4,8 +4,10 @@ using Mtl.Injection;
 using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
+using Project.Game.Levels;
 using Project.Game.Weapons;
 using Project.Heroes;
+using Project.Tiers;
 using Tromagon.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +19,14 @@ namespace Project.Game.Shop
         [field: SerializeField] public ShopInventoryItemView ItemViewPrefab { get; private set; }
         [field: SerializeField] public RectTransform Parent { get; private set; }
         [field: SerializeField] public ScrollRect Scroller { get; private set; }
+        [field: SerializeField] public AnimationCurve RarityCurve { get; private set; }
         
-        [Inject] private  WeaponDatabase _weaponDatabase;
-        [Inject] private  ItemDatabase _itemDatabase;
+        [Inject("weapons")] private  TieredGroupDatabase _weaponDatabase;
+        [Inject("items")] private  TieredGroupDatabase _itemDatabase;
         [Inject] private  HeroInfo _heroInfo;
         [Inject] private  GameData _gameData;
+        [Inject] private readonly LevelController _levelController;
+        
 
         private int _waveIndex;
 
@@ -42,13 +47,13 @@ namespace Project.Game.Shop
             var items = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandomGroup().GetRandomTier().Data);
+                items.Add(_weaponDatabase.GetRandom().GetRandomTier(RarityCurve, _waveIndex-5, _waveIndex+1).Data);
             }
 
             var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandomGroup().GetRandomTier().Data);
+                items.Add(_itemDatabase.GetRandom().GetRandomTier(RarityCurve, _waveIndex-5, _waveIndex+1).Data);
             }
 
             items.Shuffle();

@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoader: {fileID: 4287201291991439538}
-  weaponDatabase: {fileID: 11400000, guid: 2f4fdd1bdbf0dff48a69588cc6faeddc, type: 2}
-  itemDatabase: {fileID: 11400000, guid: b728a63bc242ace42928cb485de4fd86, type: 2}
+  weaponDatabase: {fileID: 11400000, guid: d4c30787a668c834ea3e8ec0a540220f, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 976fb87ec7f6f2a4eb69b10da6d7bcd8, type: 2}
   gameData: {fileID: 11400000, guid: 6abdfce947281bd4a924840b07916b2d, type: 2}
 --- !u!114 &1691584159726164944
 MonoBehaviour:
