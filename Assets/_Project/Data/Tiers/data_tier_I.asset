@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
-  m_Name: data_character_stats_chad
+  m_Script: {fileID: 11500000, guid: 2e8776b4c197452a9a8cedb22241ccf2, type: 3}
+  m_Name: data_tier_I
   m_EditorClassIdentifier: 
-  <Stats>k__BackingField: []
+  Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}

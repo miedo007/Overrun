@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d519f26671f4782a7c365434c122a60, type: 3}
-  m_Name: data_weapon_pistol
+  m_Name: data_weapon_pistol_1
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 21300000, guid: b8d98dd67d97d5c45a588c59729da467, type: 3}
   <DisplayName>k__BackingField: Pistol
