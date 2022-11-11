@@ -32,7 +32,10 @@ namespace Project.Game.Shop
 
         private void Awake()
         {
-            BuyButton.onClick.AddListener(OnBuyButtonClicked);
+            if (BuyButton != null)
+            {
+                BuyButton.onClick.AddListener(OnBuyButtonClicked);
+            }
         }
 
         public void Initialize(BaseData data, HeroInfo hero, int cost)
@@ -57,15 +60,21 @@ namespace Project.Game.Shop
             {
                 ItemInfoView.Initialize(data);
             }
-            
-            CostText.text = $"<sprite name=currency_ticket> {cost}";
-            if (cost < 0)
+
+            if (BuyButton != null)
             {
-                BuyButton.gameObject.SetActive(false);
+                hero.ShopCurrencyChanged += OnShopCurrencyChanged;
+                OnShopCurrencyChanged();
+                
+                if (cost < 0)
+                {
+                    BuyButton.gameObject.SetActive(false);
+                }
+                else
+                {
+                    CostText.text = $"<sprite name=currency_ticket> {cost}";
+                } 
             }
-            
-            hero.ShopCurrencyChanged += OnShopCurrencyChanged;
-            OnShopCurrencyChanged();
         }
 
         private void OnDestroy()

@@ -25,21 +25,21 @@ namespace Project.Heroes
         public List<WeaponData> CurrentWeapons { get; private set; } = new();
         public List<ItemData> Items { get; private set; } = new();
 
-        private int _collectedContainers;
+        private int _waveRewards;
         private float _shopCurrency;
 
-        public int CollectedContainers
+        public int WaveRewards
         {
-            get => _collectedContainers;
+            get => _waveRewards;
             set
             {
-                if (_collectedContainers == value)
+                if (_waveRewards == value)
                 {
                     return;
                 }
 
-                var delta = value - _collectedContainers;
-                _collectedContainers = value;
+                var delta = value - _waveRewards;
+                _waveRewards = value;
                 CollectedContainersChanged?.Invoke(delta);
             }
         }

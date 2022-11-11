@@ -1,10 +1,12 @@
-﻿using Mtl.Injection;
+﻿using System;
+using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
+using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game
@@ -17,10 +19,13 @@ namespace Project.Game
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly PlayerInput _playerInput;
+        [Inject] private readonly HeroInfo _heroInfo;
 
         private void Start()
         {
             _uiFrame.Open<HudScreen>();
+            _uiFrame.Open<DamageOverlayScreen>();
+            
             //_uiFrame.Open<WeaponTestScreen>();
 
             _levelController.WaveCompleted += OnWaveCompleted;
@@ -33,7 +38,6 @@ namespace Project.Game
         {
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
-            
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
@@ -41,6 +45,24 @@ namespace Project.Game
         private void OnWaveCompleteScreenClosed(UIScreen screen)
         {
             screen.OnCloseEvent -= OnWaveCompleteScreenClosed;
+
+            if (_heroInfo.WaveRewards > 0)
+            {
+                var waveRewardsScreen = _uiFrame.Open<WaveRewardsScreen>();
+                waveRewardsScreen.Initialize(_levelController.CurrentWaveIndex);
+                waveRewardsScreen.OnCloseEvent += OnWaveRewardsClosed;
+            }
+            else
+            {
+                var shopScreen = _uiFrame.Open<ShopScreen>();
+                shopScreen.Initialize(_levelController.CurrentWaveIndex);
+                shopScreen.OnCloseEvent += OnShopClosed;
+            }
+        }
+
+        private void OnWaveRewardsClosed(UIScreen screen)
+        {
+            screen.OnCloseEvent -= OnWaveRewardsClosed;
             
             var shopScreen = _uiFrame.Open<ShopScreen>();
             shopScreen.Initialize(_levelController.CurrentWaveIndex);
@@ -50,6 +72,8 @@ namespace Project.Game
         private void OnShopClosed(UIScreen screen)
         {
             screen.OnCloseEvent -= OnShopClosed;
+            
+            _playerController.transform.position = Vector3.zero;
             _playerController.enabled = true;
             
             _playerInput.Show();

@@ -20,7 +20,7 @@ namespace Project.Game.Collectibles
         [Inject] private readonly HeroInfo _heroInfo;
 
         private int _containersDropped;
-
+        
         private void Start()
         {
             _levelController.WaveStarted += OnWaveStarted;
@@ -29,7 +29,7 @@ namespace Project.Game.Collectibles
 
         private void OnContainerCollected(CollectibleData data)
         {
-            _heroInfo.CollectedContainers++;
+            _heroInfo.WaveRewards++;
         }
 
         private void OnWaveStarted()
@@ -41,10 +41,18 @@ namespace Project.Game.Collectibles
         {
             if (collectibleData == null)
             {
-                collectibleData = _levelController.IsFinalWave ? DefaultCollectibleFinalWave : DefaultCollectible;
-                if (_containersDropped < _gameData.MaxContainersPerWave && Random.Range(0f, 200f) < 6)
+                if (_levelController.IsFinalWave)
+                {
+                    collectibleData = DefaultCollectibleFinalWave;
+                }
+                else if (_containersDropped < _gameData.MaxContainersPerWave && Random.Range(0f, 200f) < 2f)
                 {
                     collectibleData = CollectibleContainer;
+                    _containersDropped++;
+                }
+                else
+                {
+                    collectibleData = DefaultCollectible;
                 }
             }
 

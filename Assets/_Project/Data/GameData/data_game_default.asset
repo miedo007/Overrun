@@ -12,7 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
   m_Name: data_game_default
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.38
+  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.45
   <ShopBasePriceMultiplier>k__BackingField: 0.68
   <HealthRegenRate>k__BackingField: 2
   <ResellValue>k__BackingField: 0.5
+  <MaxContainersPerWave>k__BackingField: 5
+  <RarityCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.02603109
+      outSlope: 0.02603109
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.7248227
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 11.535226
+      outSlope: 11.535226
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.068085134
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

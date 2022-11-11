@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CanvasRoot>k__BackingField: {fileID: 2170965435419163059, guid: 01672268fcce7274aacfc0c5e913451c, type: 3}
   screens:
+  - <UIScreen>k__BackingField: {fileID: 5335754410358253090, guid: baea8e43997dcd54a9e4a936b8080814, type: 3}
+    <CreateOnOpen>k__BackingField: 0
+    <DestroyOnClose>k__BackingField: 0
   - <UIScreen>k__BackingField: {fileID: 1448452126338736266, guid: e31a02dac9f2411418bee0982ab6240b, type: 3}
     <CreateOnOpen>k__BackingField: 0
     <DestroyOnClose>k__BackingField: 0
@@ -36,5 +39,8 @@ MonoBehaviour:
     <CreateOnOpen>k__BackingField: 0
     <DestroyOnClose>k__BackingField: 0
   - <UIScreen>k__BackingField: {fileID: -1487702462109747775, guid: b3dd342949c863e4cb38f623ebb0ef42, type: 3}
+    <CreateOnOpen>k__BackingField: 0
+    <DestroyOnClose>k__BackingField: 0
+  - <UIScreen>k__BackingField: {fileID: -309859740962297167, guid: e2c1c64e8938c1e448eca3d3e272fe63, type: 3}
     <CreateOnOpen>k__BackingField: 0
     <DestroyOnClose>k__BackingField: 0

@@ -19,7 +19,6 @@ namespace Project.Game.Shop
         [field: SerializeField] public ShopInventoryItemView ItemViewPrefab { get; private set; }
         [field: SerializeField] public RectTransform Parent { get; private set; }
         [field: SerializeField] public ScrollRect Scroller { get; private set; }
-        [field: SerializeField] public AnimationCurve RarityCurve { get; private set; }
         
         [Inject("weapons")] private  TieredGroupDatabase _weaponDatabase;
         [Inject("items")] private  TieredGroupDatabase _itemDatabase;
@@ -48,13 +47,13 @@ namespace Project.Game.Shop
             var items = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandom().GetRandomTier(RarityCurve, minTier, maxTier).Data);
+                items.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, minTier, maxTier).Data);
             }
 
             var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandom().GetRandomTier(RarityCurve, minTier, maxTier).Data);
+                items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, minTier, maxTier).Data);
             }
 
             items.Shuffle();
@@ -71,16 +70,12 @@ namespace Project.Game.Shop
         public void AddItem(BaseData data)
         {
             var itemView = Instantiate(ItemViewPrefab, Parent);
-            var cost = GetScaledCost(data);
+            var cost = _gameData.GetScaledCost(data, _waveIndex);
             itemView.Initialize(data, _heroInfo, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
             CurrentItems.Add(itemView);
         }
 
-        private int GetScaledCost(BaseData data)
-        {
-            return  Mathf.CeilToInt((data.BasePrice * _gameData.ShopBasePriceMultiplier) * Mathf.Pow(_gameData.ShopPriceIncreaseCoeffecient, _waveIndex));
-        }
 
         public void ClearItems()
         {
@@ -97,7 +92,7 @@ namespace Project.Game.Shop
         {
             var data = itemView.Data;
             
-            var cost = GetScaledCost(data);
+            var cost = _gameData.GetScaledCost(data, _waveIndex);
             if (_heroInfo.ShopCurrency < cost)
             {
                 // can't afford

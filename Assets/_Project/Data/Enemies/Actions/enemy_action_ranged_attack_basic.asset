@@ -16,4 +16,4 @@ MonoBehaviour:
   <CanInterrupt>k__BackingField: 0
   <ProjectileData>k__BackingField: {fileID: 11400000, guid: 25464f48b7f494d4d817049308c43583, type: 2}
   <SpawnOffset>k__BackingField: {x: 0, y: 0.5, z: 0}
-  <DamageFactor>k__BackingField: 0.5
+  <DamageFactor>k__BackingField: 1
