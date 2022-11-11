@@ -143,6 +143,7 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 		}
 	}
 
+
 	void Start ()
 	{
 		// If the game is not running then return.
@@ -298,7 +299,7 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 		// If the joystick has not been initialized properly, then return.
 		if( !joystickState )
 			return;
-
+		
 		// Since the touch has lifted, set the state to false and reset the local pointerId.
 		joystickState = false;
 
@@ -893,7 +894,7 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 	/// <summary>
 	/// Resets the joystick position and input information and stops any coroutines that might have been running.
 	/// </summary>
-	void ResetJoystick ()
+	public void ResetJoystick ()
 	{
 		// Reset all of the controller variables.
 		gravityActive = false;

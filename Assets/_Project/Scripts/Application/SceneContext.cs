@@ -16,7 +16,14 @@ namespace Project.Application
         private void CreateAndBindUiFrame()
         {
             var uiFrame = new UIFrame();
-            uiFrame.Initialize(uiSettings);
+            uiFrame.Initialize(uiSettings, Camera.main);
+
+            // TODO Update ui framework package to allow setting of sorting layer in UI settings data
+            var canvas = GameObject.Find("[UIFrame]").GetComponent<Canvas>();
+            canvas.sortingLayerName = "UI";
+            canvas.sortingOrder = 1;
+            //
+            
             Bind(uiFrame);
         }
     }

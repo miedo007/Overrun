@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8563
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8563
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8563
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -51,9 +63,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304189, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_Radius
+      value: 0.26
+      objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304190, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_Name
-      value: collectible_base
+      value: collectible_ticket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}

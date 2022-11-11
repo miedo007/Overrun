@@ -38,6 +38,8 @@ namespace Project.Game.Shop
             
             Frame.color = _data.Tier.Color;
             Backer.color = _data.Tier.Color;
+            Backer.enabled = true;
+            
             Icon.sprite = _data.Sprite;
             Icon.enabled = true;
         }

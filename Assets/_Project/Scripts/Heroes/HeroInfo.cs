@@ -17,12 +17,32 @@ namespace Project.Heroes
         public event Action CurrentWeaponsChanged; 
         public event Action ItemsChanged; 
         public event Action ShopCurrencyChanged; 
+        public event Action<int> CollectedContainersChanged; 
 
         public HeroData Data { get; private set; }
 
         public List<StatInfo> Stats { get; private set; } = new();
         public List<WeaponData> CurrentWeapons { get; private set; } = new();
         public List<ItemData> Items { get; private set; } = new();
+
+        private int _collectedContainers;
+        private float _shopCurrency;
+
+        public int CollectedContainers
+        {
+            get => _collectedContainers;
+            set
+            {
+                if (_collectedContainers == value)
+                {
+                    return;
+                }
+
+                var delta = value - _collectedContainers;
+                _collectedContainers = value;
+                CollectedContainersChanged?.Invoke(delta);
+            }
+        }
 
         public float ShopCurrency
         {
@@ -36,8 +56,7 @@ namespace Project.Heroes
                 }
             }
         }
-
-        private float _shopCurrency;
+        
     
         private HeroInfo() {}
 

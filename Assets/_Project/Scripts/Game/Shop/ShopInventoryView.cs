@@ -58,6 +58,7 @@ namespace Project.Game.Shop
             }
 
             items.Shuffle();
+            items.Shuffle();
 
             foreach (var item in items)
             {

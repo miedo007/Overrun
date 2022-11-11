@@ -14,7 +14,7 @@ namespace Project.Game.Player
         [field: SerializeField] public Collector Collector { get; private set; }
         [field: SerializeField] public CollectibleData[] StoreCurrencyCollectibles { get; private set; }
         
-        [Inject] private readonly UltimateJoystick _joystick;
+        [Inject] private readonly PlayerInput _playerInput;
         [Inject] private readonly HeroInfo _heroInfo;
         
         private Transform _transform;
@@ -76,7 +76,7 @@ namespace Project.Game.Player
 
         private void HandleInput()
         {
-            var input = new Vector2(_joystick.GetHorizontalAxis(),  _joystick.GetVerticalAxis());
+            var input = new Vector2(_playerInput.GetHorizontalAxis(),  _playerInput.GetVerticalAxis());
             Character.SetMovementDirection(input);
         }
 

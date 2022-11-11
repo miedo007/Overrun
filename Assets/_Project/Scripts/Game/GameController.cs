@@ -16,7 +16,7 @@ namespace Project.Game
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
-        [Inject] private readonly UltimateJoystick _joystick;
+        [Inject] private readonly PlayerInput _playerInput;
 
         private void Start()
         {
@@ -32,6 +32,7 @@ namespace Project.Game
         private void OnWaveCompleted()
         {
             _playerController.HandleWaveComplete();
+            _playerInput.Hide();
             
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
@@ -50,6 +51,8 @@ namespace Project.Game
         {
             screen.OnCloseEvent -= OnShopClosed;
             _playerController.enabled = true;
+            
+            _playerInput.Show();
             _levelController.BeginNextWave(0,1f);
         }
 
@@ -57,8 +60,8 @@ namespace Project.Game
         {
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
+            _playerInput.Hide();
             
-            _joystick.gameObject.SetActive(false);
             var levelCompleteScreen = _uiFrame.Open<LevelCompleteScreen>();
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
         }
@@ -80,9 +83,9 @@ namespace Project.Game
             _levelController.LevelCompleted -= OnLevelCompleted;
             
             _playerController.enabled = false;
-            _joystick.gameObject.SetActive(false);
             _playerController.gameObject.SetActive(false);
-            
+            _playerInput.Hide();
+
             var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
             levelFailedScreen.ConfirmButtonClicked += OnLevelFailConfirmed;
         }

@@ -49,8 +49,15 @@ namespace Project.Game.Collectibles
                 var collectible = Results[i].GetComponent<Collectible>();
                 if (collectible != null)
                 {
-                    collectible.Precollect();
-                    _collectibles.Add(collectible);
+                    if (collectible.Data.AutoCollectOnWaveComplete)
+                    {
+                        collectible.Precollect();
+                        _collectibles.Add(collectible);
+                    }
+                    else
+                    {
+                        collectible.Cleanup();
+                    }
                 }
             }
         }

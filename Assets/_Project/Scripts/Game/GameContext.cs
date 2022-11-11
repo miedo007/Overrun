@@ -12,7 +12,7 @@ namespace Project.Game
 {
     public class GameContext : SceneContext
     {
-        [field: SerializeField] public UltimateJoystick Joystick { get; private set; }
+        [field: SerializeField] public PlayerInput PlayerInput { get; private set; }
         [field: SerializeField] public TargetManager TargetManager { get; private set; }
         [field: SerializeField] public PopupTextManager PopupTextManager { get; private set; }
         [field: SerializeField] public PlayerController PlayerController { get; private set; }
@@ -30,7 +30,7 @@ namespace Project.Game
 
             Bind(HeroInfo);
             
-            Bind(Joystick);
+            Bind(PlayerInput);
             Bind(TargetManager);
             Bind(PopupTextManager);
             Bind(PlayerController);

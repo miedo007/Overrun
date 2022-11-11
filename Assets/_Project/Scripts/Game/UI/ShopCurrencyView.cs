@@ -9,7 +9,6 @@ namespace Project.Game.UI
     {
         [field: SerializeField] public TextMeshProUGUI CurrencyText { get; private set; }
         
-        
         [Inject] private readonly HeroInfo _heroInfo;
         
         public void OnReady()
