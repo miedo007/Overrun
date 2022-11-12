@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Heroes;
@@ -5,8 +6,10 @@ using UnityEngine;
 
 namespace Project.Game.Items
 {
-    public class ItemsManager : MonoBehaviour, IInjectionReady
+    public class ItemBehaviourManager : MonoBehaviour, IInjectionReady
     {
+        public event Action<ItemBehaviour> ItemBehaviourPerformed;
+        
         [SerializeField] private ItemBehaviourTrigger[] behaviourTriggers;
         
         [Inject] private readonly HeroInfo _heroInfo;
@@ -42,12 +45,28 @@ namespace Project.Game.Items
             var behaviours = _triggerBehavioursDict[trigger];
             foreach (var behaviour in behaviours)
             {
-                behaviour.Perform();
+                if (behaviour.Perform(position))
+                {
+                    ItemBehaviourPerformed?.Invoke(behaviour);
+                }
             }
         }
 
         private void OnItemsWillChange()
         {
+            Cleanup();
+        }
+
+        private void Cleanup()
+        {
+            foreach (var kvp in _triggerBehavioursDict)
+            {
+                foreach (var behaviour in kvp.Value)
+                {
+                    behaviour.Cleanup();
+                }
+            }
+            
             _triggerBehavioursDict.Clear();
         }
 

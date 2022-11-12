@@ -36,6 +36,7 @@ namespace Project.Game.Enemies
         public float CurrentHealth { get; private set; }
         public float CurrentMeleeDamage { get; private set; }
         public bool IsPerformingAction { get; private set; }
+        public Vector2 Position => rigidbody.position;
 
         public int FacingDirection
         {
@@ -51,6 +52,7 @@ namespace Project.Game.Enemies
                 FacingDirectionChanged?.Invoke(_facingDirection);
             }
         }
+
 
         private void Awake()
         {
@@ -180,9 +182,8 @@ namespace Project.Game.Enemies
             {
                 DamageTaken?.Invoke();
             }
-            
-            rigidbody.AddForce(force, ForceMode2D.Impulse);
-            _lastKnockbackTime = Time.time;
+
+            Knockback(force);
             
             var damageInt = Mathf.CeilToInt(damage);
             if (damageInt <= 0)
@@ -191,6 +192,12 @@ namespace Project.Game.Enemies
             }
             
             _popupTextManager.DisplayTextAtPosition($"{damageInt}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
+        }
+
+        public void Knockback(Vector2 force)
+        {
+            rigidbody.AddForce(force, ForceMode2D.Impulse);
+            _lastKnockbackTime = Time.time;
         }
 
         public void Kill()

@@ -1,4 +1,5 @@
-﻿using Mtl.Injection;
+﻿using System;
+using Mtl.Injection;
 using Project.Game.Player;
 using UnityEngine;
 
@@ -9,9 +10,8 @@ namespace Project.Game.Items
     {
         [SerializeField] private float amount = 1f;
         [SerializeField] private bool isPercentage = false;
-        [SerializeField] private float chance = 0.01f;
 
-        private PlayerHealthController _healthController;
+        [NonSerialized] private PlayerHealthController _healthController;
 
         public PlayerHealthController HealthController
         {
@@ -26,12 +26,12 @@ namespace Project.Game.Items
             }
         }
 
-        public override void Perform()
+        public override bool OnPerform(Vector3 position)
         {
             var healthController = HealthController;
-            if (healthController.IsFull || Random.value > chance)
+            if (healthController.IsFull)
             {
-                return;
+                return false;
             }
             
             if (isPercentage)
@@ -42,6 +42,8 @@ namespace Project.Game.Items
             {
                 healthController.HealByAmount(amount);
             }
+
+            return true;
         }
 
         public override string GetDescription()
@@ -49,7 +51,12 @@ namespace Project.Game.Items
             var amountDisplayText = isPercentage
                 ? $"{amount * 100:0}% of <sprite tint=1 name={HealthController.HealthStat.Icon.name}>"
                 : $"{amount:0.0}";
-            return $"{chance * 100:0.0}% chance to heal {amountDisplayText}";
+            return $"{Chance * 100:0.0}% chance to heal {amountDisplayText}";
+        }
+
+        public override void Cleanup()
+        {
+            _healthController = null;
         }
     }
 }

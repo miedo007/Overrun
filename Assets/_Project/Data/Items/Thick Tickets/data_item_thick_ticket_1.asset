@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
-  m_Name: data_item_protein_bar_1
+  m_Name: data_item_thick_ticket_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 094bf0ced9a130040b67a122ee2c35de, type: 3}
-  <DisplayName>k__BackingField: Protein Bar
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e6771ad05f9808b41842e8db975c779b, type: 3}
+  <DisplayName>k__BackingField: Thick Ticket
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 15
-  <StatModifiers>k__BackingField:
-  - <StatData>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
-    <Value>k__BackingField: 2
-    <ModifierType>k__BackingField: 0
-    <DisplayAsPercentage>k__BackingField: 0
+  <BasePrice>k__BackingField: 12
+  <StatModifiers>k__BackingField: []
   <Behaviours>k__BackingField:
-  - <Trigger>k__BackingField: {fileID: 11400000, guid: efc994bd928d78a46bfa6f13361623b0, type: 2}
+  - <Trigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
     <Behaviour>k__BackingField: {fileID: 11400000, guid: 01cb458af8ef82841852637a6c2a3c50, type: 2}

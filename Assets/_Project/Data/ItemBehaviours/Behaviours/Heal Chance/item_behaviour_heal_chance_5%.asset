@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: item_behaviour_heal_chance_5%
   m_EditorClassIdentifier: 
   <Description>k__BackingField: 
-  amount: 1
+  amount: 0.5
   isPercentage: 0
   chance: 0.05

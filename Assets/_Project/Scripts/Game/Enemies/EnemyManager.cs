@@ -4,6 +4,7 @@ using DG.Tweening;
 using Lean.Pool;
 using Mtl.Injection;
 using Project.Game.Collectibles;
+using Project.Game.Items;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Rooms;
@@ -16,12 +17,12 @@ namespace Project.Game.Enemies
     {
         [field: SerializeField] public EnemyDatabase Enemies { get; private set; }
         [field: SerializeField] public SpawnWarning SpawnWarningPrefab { get; private set; }
+        [field: SerializeField] public ItemBehaviourTrigger EnemyDeathTrigger { get; private set; }
 
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly RoomManager _roomManager;
         [Inject] private readonly CollectiblesManager _collectiblesManager;
 
-        private SpawnSequence _spawnSequence;
         private LevelData _currentLevel;
         private WaveInfo _currentWave;
         private int _currentWaveIndex;
@@ -34,7 +35,6 @@ namespace Project.Game.Enemies
             _currentLevel = levelData;
             _currentWave = _currentLevel.GetWaveInfo(waveIndex);
             
-            _spawnSequence = new SpawnSequence(_currentWave);
             _currentLevelIndex = levelIndex;
             _currentWaveIndex = waveIndex;
             StartCoroutine(SpawnRoutine());
@@ -120,7 +120,10 @@ namespace Project.Game.Enemies
 
             _collectiblesManager.SpawnCollectibles(enemy.transform.position, enemy.Data.CollectibleData);
             ActiveEnemies.Remove(enemy);
+            
+            var position = enemy.Position;
             enemy.Cleanup();
+            EnemyDeathTrigger.Trigger(position);
         }
 
         private void FixedUpdate()

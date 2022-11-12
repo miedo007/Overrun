@@ -1285,6 +1285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Enemies>k__BackingField: {fileID: 11400000, guid: dfb51b534e36c5d43ae24c27c02131a2, type: 2}
   <SpawnWarningPrefab>k__BackingField: {fileID: 4685870228933656271, guid: 20fe4a4d28787724b8198c8c1ada3cb5, type: 3}
+  <EnemyDeathTrigger>k__BackingField: {fileID: 11400000, guid: efc994bd928d78a46bfa6f13361623b0, type: 2}
 --- !u!114 &526948283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3681,7 +3682,7 @@ GameObject:
   - component: {fileID: 1284449622}
   - component: {fileID: 1284449623}
   m_Layer: 0
-  m_Name: item_manager
+  m_Name: item_behaviour_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3716,6 +3717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behaviourTriggers:
   - {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
+  - {fileID: 11400000, guid: efc994bd928d78a46bfa6f13361623b0, type: 2}
 --- !u!114 &1284449623
 MonoBehaviour:
   m_ObjectHideFlags: 0

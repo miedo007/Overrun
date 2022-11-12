@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5337c0dbd5784b5aa0d349159301d1a3, type: 3}
+  m_Name: item_behaviour_enemy_knockback_5x2m
+  m_EditorClassIdentifier: 
+  <HasRandomChance>k__BackingField: 1
+  <Chance>k__BackingField: 0.05
+  <KnockbackStat>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
+  <KnockbackStrength>k__BackingField: 5
+  <Radius>k__BackingField: 2
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
