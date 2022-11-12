@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: data_collectible_ticket
   m_EditorClassIdentifier: 
   <Value>k__BackingField: 1
+  <AutoCollectOnWaveComplete>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 2002824749259329096, guid: dd3edbf177b449944849400813e10bd0, type: 3}
+  <BehaviourTrigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}

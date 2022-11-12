@@ -24,15 +24,15 @@ namespace Project.Game.Player
         
         public void OnReady()
         {
-            _heroInfo.CurrentWeaponsChanged += OnCurrentWeaponsChanged;
+            _heroInfo.WeaponsChanged += OnWeaponsChanged;
         }
 
         private void OnDestroy()
         {
-            _heroInfo.CurrentWeaponsChanged -= OnCurrentWeaponsChanged;
+            _heroInfo.WeaponsChanged -= OnWeaponsChanged;
         }
 
-        private void OnCurrentWeaponsChanged()
+        private void OnWeaponsChanged()
         {
             ClearWeapons();
             PlaceWeapons();

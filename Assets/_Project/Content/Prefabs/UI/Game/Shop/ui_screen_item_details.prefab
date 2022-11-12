@@ -756,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statModifierViewPrefab: {fileID: 6437613616444992422, guid: 9ddb714d13a79ab47937bfb9ed9f8c06, type: 3}
+  itemBehaviourViewPrefab: {fileID: 4703737097533576508, guid: a82b0ee927d871143af5b775fa64744c, type: 3}
   parent: {fileID: 3149205677532279026}
 --- !u!1 &7499855363771359966
 GameObject:

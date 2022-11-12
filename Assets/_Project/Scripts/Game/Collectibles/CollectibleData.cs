@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Game.Items;
 using UnityEngine;
 
 namespace Project.Game.Collectibles
@@ -11,9 +12,14 @@ namespace Project.Game.Collectibles
         [field: SerializeField] public float Value { get; private set; } = 1;
         [field: SerializeField] public bool AutoCollectOnWaveComplete { get; private set; } = true;
         [field: SerializeField] public Collectible Prefab { get; private set; }
+        [field: SerializeField] public ItemBehaviourTrigger BehaviourTrigger { get; private set; }
 
-        public void Collect()
+        public void Collect(Vector3 position)
         {
+            if (BehaviourTrigger != null)
+            {
+                BehaviourTrigger.Trigger(position);
+            }
             Collected?.Invoke(this);
         }
     }

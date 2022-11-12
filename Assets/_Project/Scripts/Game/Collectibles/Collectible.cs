@@ -1,6 +1,4 @@
-﻿using System;
-using Lean.Pool;
-using TMPro;
+﻿using Lean.Pool;
 using UnityEngine;
 
 namespace Project.Game.Collectibles
@@ -22,7 +20,7 @@ namespace Project.Game.Collectibles
         
         public void Collect()
         {
-            _data.Collect();
+            _data.Collect(transform.position);
             Cleanup();
         }
 

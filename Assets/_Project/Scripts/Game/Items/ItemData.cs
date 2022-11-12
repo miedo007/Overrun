@@ -10,7 +10,8 @@ namespace Project.Game.Items
     public class ItemData : BaseData
     {
         [field: SerializeField] public List<StatModifier> StatModifiers { get; private set; }
-        
+        [field: SerializeField] public List<BehaviourTriggerPair> Behaviours { get; set; }
+
         public override string GetDescriptionForHero(HeroInfo heroInfo)
         {
             var description = "";

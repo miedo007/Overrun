@@ -9,6 +9,7 @@ namespace Project.Game.Shop
     public class InfoViewItem : InfoViewBase
     {
         [SerializeField] private StatModifierView statModifierViewPrefab;
+        [SerializeField] private ItemBehaviourView itemBehaviourViewPrefab;
         [SerializeField] private RectTransform parent;
 
         public override void Initialize(BaseData data)
@@ -26,6 +27,12 @@ namespace Project.Game.Shop
             {
                 var modifierView = Instantiate(statModifierViewPrefab, parent);
                 modifierView.Initialize(statModifier);
+            }
+            
+            foreach (var behaviourPair in itemData.Behaviours)
+            {
+                var behaviourView = Instantiate(itemBehaviourViewPrefab, parent);
+                behaviourView.Initialize(behaviourPair);
             }
         }
     }

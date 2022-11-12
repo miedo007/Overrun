@@ -48,7 +48,7 @@ namespace Project.Game.Player
         }
 
         public float CurrentPercentage => _currentHealth / MaxHealth;
-
+        public bool IsFull => _currentHealth >= MaxHealth;
 
         private void Start()
         {
@@ -141,6 +141,16 @@ namespace Project.Game.Player
                 : $"{MaxHealth:0.0}";
 
             return $"{currentHealthDisplay}<size=75%><alpha=#AA>/{maxHealthDisplay}";
+        }
+
+        public void HealByPercentage(float percentage)
+        {
+            CurrentHealth += (MaxHealth * percentage);
+        }
+        
+        public void HealByAmount(float amount)
+        {
+            CurrentHealth += amount;
         }
     }
 }

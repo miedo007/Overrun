@@ -20,7 +20,7 @@ namespace Project.Game.Shop
 
         public void OnReady()
         {
-            _heroInfo.CurrentWeaponsChanged += OnCurrentWeaponsChanged;
+            _heroInfo.WeaponsChanged += OnWeaponsChanged;
             _heroInfo.ItemsChanged += OnItemsChanged;
         }
 
@@ -39,7 +39,7 @@ namespace Project.Game.Shop
             Refresh();
         }
 
-        private void OnCurrentWeaponsChanged()
+        private void OnWeaponsChanged()
         {
             Refresh();
         }

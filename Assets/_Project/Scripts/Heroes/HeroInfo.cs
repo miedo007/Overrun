@@ -14,7 +14,9 @@ namespace Project.Heroes
     [System.Serializable]
     public class HeroInfo
     {
-        public event Action CurrentWeaponsChanged; 
+        public event Action WeaponsWillChange;
+        public event Action WeaponsChanged; 
+        public event Action ItemsWillChange; 
         public event Action ItemsChanged; 
         public event Action ShopCurrencyChanged; 
         public event Action<int> CollectedContainersChanged; 
@@ -84,8 +86,9 @@ namespace Project.Heroes
                 return;
             }
             
+            WeaponsWillChange?.Invoke();
             CurrentWeapons.Add(weaponData);
-            CurrentWeaponsChanged?.Invoke();
+            WeaponsChanged?.Invoke();
         }
         
         public void RemoveWeaponAtIndex(int weaponIndex)
@@ -96,8 +99,9 @@ namespace Project.Heroes
                 return;
             }
             
+            WeaponsWillChange?.Invoke();
             CurrentWeapons.RemoveAt(weaponIndex);
-            CurrentWeaponsChanged?.Invoke();
+            WeaponsChanged?.Invoke();
         }
         
 
@@ -108,6 +112,8 @@ namespace Project.Heroes
 
         public void AddItem(ItemData item)
         {
+            ItemsWillChange?.Invoke();
+            
             Items.Add(item);
             
             foreach (var statModifier in item.StatModifiers)
@@ -126,12 +132,15 @@ namespace Project.Heroes
 
         public void RemoveWeapon(WeaponData weaponData)
         {
+            
+            WeaponsWillChange?.Invoke();
             CurrentWeapons.Remove(weaponData);
-            CurrentWeaponsChanged?.Invoke();
+            WeaponsChanged?.Invoke();
         }
 
         public void RemoveItem(ItemData itemData)
         {
+            ItemsWillChange?.Invoke();
             Items.Remove(itemData);
             foreach (var statModifier in itemData.StatModifiers)
             {
