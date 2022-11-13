@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4970361530410341431}
   - component: {fileID: 3574385054239453061}
   - component: {fileID: 8838906973405155184}
+  - component: {fileID: 3231700760485280671}
   m_Layer: 5
   m_Name: ui_screen_saga_map
   m_TagString: Untagged
@@ -91,6 +92,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3231700760485280671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4869894483376156364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 3574385054239453061}
 --- !u!1001 &3706795621190392524
 PrefabInstance:
   m_ObjectHideFlags: 0

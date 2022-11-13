@@ -20,6 +20,8 @@ namespace Project.Game
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly PlayerInput _playerInput;
         [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly PlayerInfo _playerInfo;
+        [Inject] private readonly SessionInfo _sessionInfo;
 
         private void Start()
         {
@@ -31,7 +33,8 @@ namespace Project.Game
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
             
-            _levelController.BeginNextWave(0,1f);
+            Debug.Log($"Level Index :: {_sessionInfo.LevelIndex}");
+            _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
         }
         
         private void OnWaveCompleted()
@@ -82,6 +85,7 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
+            _playerInfo.IncrementTopStage();
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
@@ -123,6 +127,13 @@ namespace Project.Game
         {
             _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }
-        
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                OnLevelCompleted();
+            }
+        }
     }
 }

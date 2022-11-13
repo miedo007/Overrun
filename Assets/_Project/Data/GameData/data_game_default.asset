@@ -14,30 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ShopPriceIncreaseCoeffecient>k__BackingField: 1.45
   <ShopBasePriceMultiplier>k__BackingField: 0.68
-  <HealthRegenRate>k__BackingField: 2
   <ResellValue>k__BackingField: 0.5
-  <MaxContainersPerWave>k__BackingField: 5
+  <BaseRerollCost>k__BackingField: 1
+  <RerollIncreasePerWave>k__BackingField: 3
+  <RerollCostCoefficient>k__BackingField: 1.4
   <RarityCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.02603109
-      outSlope: 0.02603109
+      inSlope: 0.04591381
+      outSlope: 0.04591381
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.7248227
+      outWeight: 0.71914893
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 11.535226
-      outSlope: 11.535226
+      inSlope: 21.738722
+      outSlope: 21.738722
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.068085134
+      inWeight: 0.03829789
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <HealthRegenRate>k__BackingField: 2
+  <MaxContainersPerWave>k__BackingField: 5

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Project.Application;
-using Project.Game.Weapons;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

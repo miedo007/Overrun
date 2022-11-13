@@ -1,6 +1,8 @@
 ﻿using System;
+using Mtl.Injection;
 using Mtl.SagaMap;
 using Mtl.UiFramework;
+using Project.Application;
 using UnityEngine;
 
 namespace Project.Scripts.MainMenu.SagaMap
@@ -10,6 +12,8 @@ namespace Project.Scripts.MainMenu.SagaMap
         public event Action<int> LevelSelected;
         
         [SerializeField] private SagaMapController sagaMapController;
+        
+        [Inject] private readonly PlayerInfo _playerInfo;
 
         private void Awake()
         {
@@ -29,7 +33,7 @@ namespace Project.Scripts.MainMenu.SagaMap
         protected override void OnOpened()
         {
             base.OnOpened();
-            sagaMapController.Init(0);
+            sagaMapController.Init(_playerInfo.PlayerSave.TopStageIndex);
         }
     }
 }

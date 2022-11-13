@@ -20,5 +20,5 @@ MonoBehaviour:
   <MeleeAttackRate>k__BackingField: 0.5
   <MeleeDamage>k__BackingField: 1
   <CollectibleData>k__BackingField: {fileID: 0}
-  <LevelScaling>k__BackingField: 1.1
+  <LevelScaling>k__BackingField: 1.2
   <WaveScaling>k__BackingField: 1.5

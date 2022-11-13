@@ -24,4 +24,4 @@ MonoBehaviour:
     <DisplayAsPercentage>k__BackingField: 0
   <Behaviours>k__BackingField:
   - <Trigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
-    <Behaviour>k__BackingField: {fileID: 11400000, guid: b2a55cbed7424f04ab485d8f1ab794ef, type: 2}
+    <Behaviour>k__BackingField: {fileID: 11400000, guid: 81c101695115c5f40adeca620ba511b1, type: 2}

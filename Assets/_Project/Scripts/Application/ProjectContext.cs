@@ -1,4 +1,5 @@
 using Mtl.Injection;
+using Mtl.Save;
 using Project.Game;
 using Project.Game.Items;
 using Project.Game.Weapons;
@@ -13,6 +14,7 @@ namespace Project.Application
         [SerializeField] private TieredGroupDatabase weaponDatabase;
         [SerializeField] private TieredGroupDatabase itemDatabase;
         [SerializeField] private GameData gameData;
+        [SerializeField] private SaveManager saveManager;
         
         protected override void OnInjectStart()
         {
@@ -20,9 +22,22 @@ namespace Project.Application
             Bind(sceneLoader);
             Bind(weaponDatabase, "weapons");
             Bind(itemDatabase, "items");
-            Bind(gameData);
+            Bind(gameData);         
+            Bind(saveManager);
+            Bind(new SessionInfo());
+            
+            var playerInfo = new PlayerInfo();
+            saveManager.TryLoad(playerInfo, (success) =>
+            {
+                if (!success)
+                {
+                    playerInfo.Create();
+                }
+            });
+            
+            InjectAndBind(playerInfo);
         }
-
+        
         protected override void OnPostSetup()
         {
         }
