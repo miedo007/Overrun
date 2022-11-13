@@ -70,6 +70,11 @@ namespace Project.Game.Levels
                 yield return null;
             }
         }
-        
+
+        protected override void OnClosed()
+        {
+            base.OnClosed();
+            StopAllCoroutines();
+        }
     }
 }

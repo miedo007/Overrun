@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <NextWaveButton>k__BackingField: {fileID: 574870069755082223}
+  <NextWaveText>k__BackingField: {fileID: 1691716323291108980}
   <RerollButton>k__BackingField: {fileID: 7651213870755894037}
   <RerollButtonText>k__BackingField: {fileID: 8840254058335580302}
   <ShopInventory>k__BackingField: {fileID: 9039246796066101455}
@@ -1863,6 +1864,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3167326857836907291, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
   m_PrefabInstance: {fileID: 2530787756337470105}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1691716323291108980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+  m_PrefabInstance: {fileID: 2530787756337470105}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3812069226235065303
 PrefabInstance:
   m_ObjectHideFlags: 0

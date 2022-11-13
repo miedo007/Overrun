@@ -1,5 +1,6 @@
 ﻿using Mtl.Injection;
 using Mtl.UiFramework;
+using Project.Game.Levels;
 using Project.Heroes;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Project.Game.Shop
     public class ShopScreen : UIScreen
     {
         [field: SerializeField] public Button NextWaveButton { get; private set; }
+        [field: SerializeField] public TextMeshProUGUI NextWaveText { get; private set; }
         [field: SerializeField] public Button RerollButton { get; private set; }
         [field: SerializeField] public TextMeshProUGUI RerollButtonText { get; private set; }
         [field: SerializeField] public ShopInventoryView ShopInventory { get; private set; }
@@ -17,6 +19,7 @@ namespace Project.Game.Shop
 
         [Inject] private readonly HeroInfo _heroInfo;
         [Inject] private readonly GameData _gameData;
+        [Inject] private readonly LevelController _levelController;
 
 
         private int _waveIndex;
@@ -44,13 +47,22 @@ namespace Project.Game.Shop
             _heroInfo.ShopCurrencyChanged -= OnShopCurrencyChanged;
         }
 
-        public void Initialize(int waveIndex)
+        public void Initialize()
         {
-            _waveIndex = waveIndex;
+            _waveIndex = _levelController.CurrentWaveIndex;
+            if (_levelController.IsFinalWave)
+            {
+                NextWaveText.text = "Begin\nFinal Wave!";
+            }
+            else
+            {
+                NextWaveText.text = $"Begin\nWave {_waveIndex + 1}!";
+            }
+
             _rerollCount = 0;
             UpdateRerollCost();
             
-            ShopInventory.Populate(waveIndex: waveIndex);
+            ShopInventory.Populate(waveIndex: _waveIndex);
         }
 
         private void UpdateRerollCost()

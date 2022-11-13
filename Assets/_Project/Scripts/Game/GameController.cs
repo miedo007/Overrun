@@ -58,7 +58,7 @@ namespace Project.Game
             else
             {
                 var shopScreen = _uiFrame.Open<ShopScreen>();
-                shopScreen.Initialize(_levelController.CurrentWaveIndex);
+                shopScreen.Initialize();
                 shopScreen.OnCloseEvent += OnShopClosed;
             }
         }
@@ -68,7 +68,7 @@ namespace Project.Game
             screen.OnCloseEvent -= OnWaveRewardsClosed;
             
             var shopScreen = _uiFrame.Open<ShopScreen>();
-            shopScreen.Initialize(_levelController.CurrentWaveIndex);
+            shopScreen.Initialize();
             shopScreen.OnCloseEvent += OnShopClosed;
         }
 

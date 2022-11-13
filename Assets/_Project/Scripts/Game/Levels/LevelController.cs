@@ -63,6 +63,7 @@ namespace Project.Game.Levels
         private void OnTimerCompleted()
         {
             var timerScreen = _uiFrame.Get<WaveTimerScreen>();
+            timerScreen.Close();
             timerScreen.TimerCompleted -= OnTimerCompleted;
             
             _enemyManager.EndWave();
@@ -75,6 +76,14 @@ namespace Project.Game.Levels
             {
                 WaveCompleted?.Invoke();
                 CurrentWaveIndex++;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                OnTimerCompleted();
             }
         }
     }
