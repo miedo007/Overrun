@@ -33,7 +33,6 @@ namespace Project.Game
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
             
-            Debug.Log($"Level Index :: {_sessionInfo.LevelIndex}");
             _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
         }
         

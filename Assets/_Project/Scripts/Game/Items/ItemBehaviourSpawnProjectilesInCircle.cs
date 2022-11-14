@@ -15,7 +15,6 @@ namespace Project.Game.Items
         [SerializeField] private int count;
 
         private StatInfo _rangedStatInfo;
-
         
         public StatInfo RangedStatInfo
         {
@@ -47,6 +46,11 @@ namespace Project.Game.Items
             }
 
             return true;
+        }
+
+        public override string GetDescription()
+        {
+            return $"{GetChanceDisplay()} to firs {count} bullets in a ring";
         }
 
         public override void Cleanup()

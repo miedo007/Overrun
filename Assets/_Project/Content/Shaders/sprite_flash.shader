@@ -40,6 +40,7 @@ Shader "sprite_flash"
 			#pragma multi_compile _ PIXELSNAP_ON
 			#pragma multi_compile _ ETC1_EXTERNAL_ALPHA
 			#include "UnityCG.cginc"
+			#define ASE_NEEDS_FRAG_COLOR
 			#pragma multi_compile_instancing
 
 
@@ -116,7 +117,7 @@ Shader "sprite_flash"
 				float4 tex2DNode4 = tex2D( _MainTex, uv_MainTex );
 				float4 color7 = IsGammaSpace() ? float4(1,1,1,1) : float4(1,1,1,1);
 				float _Flash_Instance = UNITY_ACCESS_INSTANCED_PROP(_Flash_arr, _Flash);
-				float4 lerpResult5 = lerp( ( tex2DNode4 * _Color ) , color7 , ( tex2DNode4.a * _Flash_Instance ));
+				float4 lerpResult5 = lerp( ( tex2DNode4 * IN.color ) , color7 , ( tex2DNode4.a * _Flash_Instance ));
 				
 				fixed4 c = lerpResult5;
 				c.rgb *= c.a;
@@ -131,19 +132,20 @@ Shader "sprite_flash"
 }
 /*ASEBEGIN
 Version=19002
-2694.667;153.3333;1778.667;1259;889.333;627.5;1;True;False
+2204.667;64;1778.667;1259;889.3329;624.5;1;True;False
 Node;AmplifyShaderEditor.TemplateShaderPropertyNode;1;-566.3334,-296.8333;Inherit;False;0;0;_MainTex;Shader;False;0;5;SAMPLER2D;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;4;-347.3334,-295.8333;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TemplateShaderPropertyNode;2;-505.3334,-50.83331;Inherit;False;0;0;_Color;Shader;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;6;-247.3334,249.1667;Inherit;False;InstancedProperty;_Flash;Flash;0;0;Create;True;0;0;0;False;0;False;0.52;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.VertexColorNode;10;-512.3329,157.1667;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3;66.66663,-75.83331;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;8;69.66663,61.16669;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ColorNode;7;-183.3334,54.16669;Inherit;False;Constant;_FlashColor;FlashColor;0;0;Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.LerpOp;5;255.6666,-23.83331;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.TemplateShaderPropertyNode;2;-483.3334,-54.83331;Inherit;False;0;0;_Color;Shader;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;510,-17;Float;False;True;-1;2;ASEMaterialInspector;0;8;sprite_flash;0f8ba0101102bb14ebf021ddadce9b49;True;SubShader 0 Pass 0;0;0;SubShader 0 Pass 0;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;4;0;1;0
 WireConnection;3;0;4;0
-WireConnection;3;1;2;0
+WireConnection;3;1;10;0
 WireConnection;8;0;4;4
 WireConnection;8;1;6;0
 WireConnection;5;0;3;0
@@ -151,4 +153,4 @@ WireConnection;5;1;7;0
 WireConnection;5;2;8;0
 WireConnection;0;0;5;0
 ASEEND*/
-//CHKSM=7FF91BBCCD95A50ED04DEF58CD7E971A74C4CCD8
+//CHKSM=FD689A138A3E1CE367F3D3B72A7AB41217D114B6

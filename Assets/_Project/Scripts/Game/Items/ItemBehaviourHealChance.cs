@@ -48,10 +48,9 @@ namespace Project.Game.Items
 
         public override string GetDescription()
         {
-            var amountDisplayText = isPercentage
-                ? $"{amount * 100:0}% of <sprite tint=1 name={HealthController.HealthStat.Icon.name}>"
+            var amountDisplayText = isPercentage ? $"{amount * 100:0}% of <sprite tint=1 name={HealthController.HealthStat.Icon.name}>"
                 : $"{amount:0.0}";
-            return $"{Chance * 100:0.0}% chance to heal {amountDisplayText}";
+            return $"{GetChanceDisplay()} to heal {amountDisplayText}";
         }
 
         public override void Cleanup()

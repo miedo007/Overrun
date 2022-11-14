@@ -39,5 +39,10 @@ namespace Project.Game.Items
         {
             
         }
+        
+        protected string GetChanceDisplay()
+        {
+            return $"{Chance * 100:0.0}% chance";
+        }
     }
 }

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 450578200108067213}
   - component: {fileID: 8018156913885527608}
   - component: {fileID: 2602552320676620366}
+  - component: {fileID: 6544389494162909095}
+  - component: {fileID: 7647833020876797762}
   m_Layer: 5
   m_Name: view_shop_tickets
   m_TagString: Untagged
@@ -93,6 +95,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffade7edb5b1df45a6c3642149606c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6544389494162909095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268322251504479064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bee7d7bdbe4a43849f8f535b41b1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrencyText>k__BackingField: {fileID: 5763508489871785863}
+--- !u!114 &7647833020876797762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268322251504479064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 6544389494162909095}
 --- !u!1 &4440618545257673641
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ namespace Project.Game.Shop
         [field: SerializeField] public Button RerollButton { get; private set; }
         [field: SerializeField] public TextMeshProUGUI RerollButtonText { get; private set; }
         [field: SerializeField] public ShopInventoryView ShopInventory { get; private set; }
-        [field: SerializeField] public TextMeshProUGUI ShopCurrencyText { get; private set; }
 
         [Inject] private readonly HeroInfo _heroInfo;
         [Inject] private readonly GameData _gameData;
@@ -69,7 +68,7 @@ namespace Project.Game.Shop
         {
             _rerollCost = _gameData.GetRerollCost(_waveIndex, _rerollCount);
             RerollButtonText.text = string.Format(_rerollButtonLabel, _rerollCost);
-            RerollButton.interactable = _heroInfo.ShopCurrency >= _rerollCost;
+            OnShopCurrencyChanged();
         }
 
         private void OnNextWaveButtonClicked()
@@ -87,8 +86,7 @@ namespace Project.Game.Shop
 
         private void OnShopCurrencyChanged()
         {
-            RerollButton.interactable = _heroInfo.ShopCurrency >= _rerollCost;
-            ShopCurrencyText.text = $"{_heroInfo.ShopCurrency}";
+            RerollButton.interactable = _heroInfo.GetShopCurrencyIntValue() >= _rerollCost;
         }
     }
 }

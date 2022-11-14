@@ -87,12 +87,12 @@ namespace Project.Game.Shop
 
         private void OnShopCurrencyChanged()
         {
-            BuyButton.interactable = _cost <= _heroInfo.ShopCurrency;
+            BuyButton.interactable = _cost <= _heroInfo.GetShopCurrencyIntValue();
         }
 
         private void OnBuyButtonClicked()
         {
-            if (_heroInfo.ShopCurrency >= Data.BasePrice)
+            if (_heroInfo.GetShopCurrencyIntValue() >= Data.BasePrice)
             {
                 BuyButtonClicked?.Invoke(this);
             }

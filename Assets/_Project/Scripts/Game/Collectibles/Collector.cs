@@ -1,21 +1,29 @@
 ﻿using System.Collections.Generic;
+using Mtl.Injection;
+using Project.Heroes;
+using Project.Stats;
 using UnityEngine;
 
 namespace Project.Game.Collectibles
 {
-    public class Collector : MonoBehaviour
+    public class Collector : MonoBehaviour, IInjectionReady
     {
         [field: SerializeField] public float Range { get; private set; }
+        [field: SerializeField] public StatData PickupRangeModifier { get; private set; }
         [field: SerializeField] public LayerMask LayerMask { get; private set; }
         [field: SerializeField] public float CollectSpeed { get; private set; } = 15;
 
+        [Inject] private readonly HeroInfo _heroInfo;
+
+        private StatInfo _pickupRangeModifierStat;
+        
         private readonly List<Collectible> _collectibles = new();
 
         private static readonly Collider2D[] Results = new Collider2D[256];
         
         private void LateUpdate()
         {
-            var resultCount = Physics2D.OverlapCircleNonAlloc(transform.position, Range, Results, LayerMask);
+            var resultCount = Physics2D.OverlapCircleNonAlloc(transform.position, Range * _pickupRangeModifierStat.GetFloatValue(), Results, LayerMask);
             for (var i = 0; i < resultCount; i++)
             {
                 var collectible = Results[i].GetComponent<Collectible>();
@@ -60,6 +68,11 @@ namespace Project.Game.Collectibles
                     }
                 }
             }
+        }
+
+        public void OnReady()
+        {
+            _pickupRangeModifierStat = _heroInfo.GetStat(PickupRangeModifier);
         }
     }
 }

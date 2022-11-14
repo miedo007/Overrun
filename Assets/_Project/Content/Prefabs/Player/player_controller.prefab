@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 5278812402053378852}
   - {fileID: 8790892790790220526}
   - {fileID: 1440190967}
+  - {fileID: 8203443609759402984}
 --- !u!50 &1440190957
 Rigidbody2D:
   serializedVersion: 4
@@ -95,6 +96,7 @@ MonoBehaviour:
   <Character>k__BackingField: {fileID: 5278812402053378852}
   <WeaponsController>k__BackingField: {fileID: 8265728663106645542}
   <SpeedStatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
+  <TicketStatData>k__BackingField: {fileID: 11400000, guid: 076b9e9900afd104f9858a3c7b58ded5, type: 2}
   <Collector>k__BackingField: {fileID: 8203443609759402984}
   <StoreCurrencyCollectibles>k__BackingField:
   - {fileID: 11400000, guid: b424575ff157d6f4db1b756bb4d77f5d, type: 2}
@@ -139,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HealthStat>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
   <HealthRegenStat>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
-  <HealthStealStat>k__BackingField: {fileID: 11400000, guid: 51abb2caac9ddac4284183458741b277, type: 2}
 --- !u!114 &3289144243730525299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Range>k__BackingField: 2
+  <PickupRangeModifier>k__BackingField: {fileID: 11400000, guid: 8db6f4c80d13acc47ab919a7b68fb525, type: 2}
   <LayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 4096

@@ -1869,6 +1869,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 67.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_base

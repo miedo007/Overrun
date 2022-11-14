@@ -93,7 +93,7 @@ namespace Project.Game.Shop
             var data = itemView.Data;
             
             var cost = _gameData.GetScaledCost(data, _waveIndex);
-            if (_heroInfo.ShopCurrency < cost)
+            if (_heroInfo.GetShopCurrencyIntValue() < cost)
             {
                 // can't afford
                 return;

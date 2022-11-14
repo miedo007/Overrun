@@ -8,7 +8,7 @@ namespace Project.Game.Items
     {
         public event Action<ItemBehaviourTrigger, Vector3> Triggered;
 
-        [field: SerializeField] public string Description { get; private set; }
+        [field: SerializeField, TextArea] public string Description { get; private set; }
         
         public void Trigger(Vector3 position)
         {

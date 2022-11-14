@@ -11,6 +11,7 @@ namespace Project.Game.Player
         [field: SerializeField] public PlayerCharacter Character { get; private set; }
         [field: SerializeField] public PlayerWeaponsController WeaponsController { get; private set; }
         [field: SerializeField] public StatData SpeedStatData { get; private set; }
+        [field: SerializeField] public StatData TicketStatData { get; private set; }
         [field: SerializeField] public Collector Collector { get; private set; }
         [field: SerializeField] public CollectibleData[] StoreCurrencyCollectibles { get; private set; }
         
@@ -19,6 +20,7 @@ namespace Project.Game.Player
         
         private Transform _transform;
         private StatInfo _speedStat;
+        private StatInfo _ticketStat;
 
         public Vector3 Position => _transform.position;
 
@@ -41,7 +43,7 @@ namespace Project.Game.Player
 
         private void OnStoreCurrencyCollected(CollectibleData obj)
         {
-            _heroInfo.ShopCurrency += obj.Value;
+            _heroInfo.ShopCurrency += obj.Value * _ticketStat.GetFloatValue();
         }
 
         public void OnReady()
@@ -59,6 +61,8 @@ namespace Project.Game.Player
             _speedStat = _heroInfo.GetStat(SpeedStatData);
             _speedStat.Changed += OnSpeedStatChanged;
             OnSpeedStatChanged(_speedStat);
+            
+            _ticketStat = _heroInfo.GetStat(TicketStatData);
         }
 
         public void HandleWaveComplete()

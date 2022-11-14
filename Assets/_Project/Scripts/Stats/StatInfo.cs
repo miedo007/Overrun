@@ -64,7 +64,7 @@ namespace Project.Stats
                 value *= 100f;
             }
             
-            if (value - Mathf.Round(value) == 0)
+            if (Mathf.Approximately(value - Mathf.Round(value),0))
             {
                 return string.Format(Data.RoundNumberDisplayPattern, value);
             }
