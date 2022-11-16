@@ -1,4 +1,5 @@
-﻿using Project.Stats;
+﻿using Project.Application;
+using Project.Stats;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,11 +43,11 @@ namespace Project.Game.UI
             var color = Color.white;
             if (value < baseValue)
             {
-                color = Color.red;
+                color = Colors.GetColor(Colors.Negative);
             }
             else if (value > baseValue)
             {
-                color = Color.green;
+                color = Colors.GetColor(Colors.Positive);
             }
 
             ValueText.color = color;

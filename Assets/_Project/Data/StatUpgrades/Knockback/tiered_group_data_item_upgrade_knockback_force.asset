@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1574630dc124be8ba26160e316c8521, type: 3}
+  m_Name: tiered_group_data_item_upgrade_knockback_force
+  m_EditorClassIdentifier: 
+  <Tiers>k__BackingField:
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 0945954cd08adba439d97082ba2e46d6, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 2ffb42c57e806334ea7cd0149f568557, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: b6e3bf2af8fcecf42b9b7cfc03f1a1be, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: a9eb4538cce119d4ab6baeb23d77aea9, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 66a7b232a1bfdb142b0db5c539633800, type: 2}

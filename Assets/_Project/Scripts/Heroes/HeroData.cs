@@ -1,6 +1,7 @@
 ﻿using Project.Game.Items;
 using Project.Game.Weapons;
 using Project.Stats;
+using Project.Tiers;
 using UnityEngine;
 
 namespace Project.Heroes
@@ -12,6 +13,7 @@ namespace Project.Heroes
         [field: SerializeField] public HeroViewController Prefab { get; private set; }
         [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
         [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
+        [field: SerializeField] public TieredGroupDatabase StartingWeaponDatabase { get; set; }
         [field: SerializeField] public ItemData[] StartingItems { get; private set; }
         [field: SerializeField] public int WeaponSlots { get; set; } = 6;
         [field: SerializeField] public int StartingShopCurrency { get; set; } = 0;

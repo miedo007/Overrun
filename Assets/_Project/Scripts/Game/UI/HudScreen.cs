@@ -1,4 +1,5 @@
-﻿using Mtl.Injection;
+﻿using System;
+using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.Levels;
 using TMPro;
@@ -11,13 +12,16 @@ namespace Project.Game.UI
         [field: SerializeField] public TextMeshProUGUI WaveIndexText { get; private set; }
 
         [Inject] private readonly LevelController _levelController;
-        
-        
+
+        private void Awake()
+        {
+            WaveIndexText.enabled = false;
+        }
+
         public void OnReady()
         {
             _levelController.WaveStarted += OnWaveStarted;
             _levelController.WaveCompleted += OnWaveCompleted;
-            OnWaveStarted();
         }
 
         private void OnWaveStarted()

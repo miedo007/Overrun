@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: data_tier_2
   m_EditorClassIdentifier: 
   NamePostfix: III
-  Color: {r: 0.23268957, g: 0.6930076, b: 0.7830189, a: 1}
+  Color: {r: 0, g: 0.6631875, b: 0.7924528, a: 1}

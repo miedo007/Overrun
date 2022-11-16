@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
+  m_Name: data_item_upgrade_knockback_force_1
+  m_EditorClassIdentifier: 
+  <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
+  <Sprite>k__BackingField: {fileID: 1344938742, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayName>k__BackingField: Knockback
+  <Description>k__BackingField: Increase knockback force by {0}
+  <BasePrice>k__BackingField: 0
+  <StatModifiers>k__BackingField:
+  - <StatData>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
+    <Value>k__BackingField: 2
+    <ModifierType>k__BackingField: 0
+    <DisplayAsPercentage>k__BackingField: 0
+  <Behaviours>k__BackingField: []

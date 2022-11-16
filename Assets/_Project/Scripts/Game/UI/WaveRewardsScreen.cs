@@ -78,7 +78,7 @@ namespace Project.Game.UI
 
         private IEnumerator RewardRoutine()
         {
-            var tierRange = _gameData.GetItemTierRange(_waveIndex);
+            var tierRange = _gameData.GetItemTierRangeForWave(_waveIndex);
 
             containerView.SetActive(true);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));

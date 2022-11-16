@@ -16,11 +16,11 @@ namespace Project.Game
         [field: SerializeField, Header("Gameplay")] public float HealthRegenRate { get; private set; } = 2;
         [field: SerializeField] public int MaxContainersPerWave { get; set; } = 3;
 
-        public Vector2Int GetItemTierRange(int waveIndex)
+        public Vector2Int GetItemTierRangeForWave(int waveIndex)
         {
-            return new Vector2Int(waveIndex - 10, Mathf.FloorToInt(waveIndex * 0.45f) + 1 ) ;
+            return new Vector2Int(waveIndex - 10, Mathf.FloorToInt(waveIndex * 0.85f) + 1 ) ;
         }
-
+        
         public int GetSellPrice(BaseData data, int waveIndex)
         {
             return Mathf.CeilToInt((data.BasePrice * ShopBasePriceMultiplier) 

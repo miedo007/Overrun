@@ -28,18 +28,17 @@ namespace Project.Tiers
                 }
             }
 
-            minTier = Mathf.Clamp(minTier, 0, Tiers.Count-1);
-            maxTier = Mathf.Clamp(maxTier, minTier, Tiers.Count-1);
-            
-            
             if (rarityCurve == null)
             {
-                return Tiers[Random.Range(minTier, maxTier)];
+                var randomTier = Random.Range(minTier, maxTier);
+                randomTier = Mathf.Clamp(randomTier, 0, Tiers.Count - 1);
+                return Tiers[randomTier];
             }
             
             curvedValue = rarityCurve.Evaluate(curvedValue);
-            var lerpedIndex = Mathf.RoundToInt(Mathf.Lerp((float) minTier, (float) maxTier, curvedValue));
-            return Tiers[lerpedIndex];
+            var evaluatedIindex = Mathf.RoundToInt(Mathf.Lerp((float) minTier, (float) maxTier, curvedValue));
+            evaluatedIindex = Mathf.Clamp(evaluatedIindex, 0, Tiers.Count - 1);
+            return Tiers[evaluatedIindex];
         }
 
         public bool CanUpgradeTier(BaseData baseData)

@@ -28,8 +28,8 @@ namespace Project.Game.Shop
             if (_data != null && _heroInfo != null && _heroInfo.CanMerge(_data))
             {
                 _mergeSequence = DOTween.Sequence();
-                _mergeSequence.Append(transform.DOScale(1.0375f, 0.125f)
-                        .SetLoops(2, LoopType.Yoyo))
+                _mergeSequence.Append(transform.DOScale(1.1f, 0.125f)
+                        .SetLoops(4, LoopType.Yoyo))
                     .AppendInterval(2f)
                     .SetLoops(-1);
 

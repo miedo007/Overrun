@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: a8a36fd921fc95245a9b68e49ad549c3, type: 3}
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Magnet
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 12
   <StatModifiers>k__BackingField:

@@ -201,5 +201,17 @@ namespace Project.Heroes
             var weaponData = data as WeaponData;
             return weaponData != null && CanMergeWeapon(weaponData);
         }
+
+        public void AddToInventoryFromBaseData(BaseData objData)
+        {
+            if (objData as WeaponData != null)
+            {
+                AddWeapon(objData as WeaponData);
+            }
+            else
+            {
+                AddItem(objData as ItemData);
+            }
+        }
     }
 }

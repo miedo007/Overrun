@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
+  m_Name: data_item_upgrade_melee_damage_4
+  m_EditorClassIdentifier: 
+  <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
+  <Sprite>k__BackingField: {fileID: -1330282663, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayName>k__BackingField: Melee Dmg
+  <Description>k__BackingField: Increase melee weapon damage by {0}
+  <BasePrice>k__BackingField: 0
+  <StatModifiers>k__BackingField:
+  - <StatData>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
+    <Value>k__BackingField: 5
+    <ModifierType>k__BackingField: 0
+    <DisplayAsPercentage>k__BackingField: 0
+  <Behaviours>k__BackingField: []

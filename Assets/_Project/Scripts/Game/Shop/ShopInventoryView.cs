@@ -5,6 +5,7 @@ using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
 using Project.Game.Levels;
+using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
 using Project.Tiers;
@@ -19,6 +20,9 @@ namespace Project.Game.Shop
         [field: SerializeField] public ShopInventoryItemView ItemViewPrefab { get; private set; }
         [field: SerializeField] public RectTransform Parent { get; private set; }
         [field: SerializeField] public ScrollRect Scroller { get; private set; }
+
+        [SerializeField] private DropDownNotification weaponsFullNotification;
+        
         
         [Inject("weapons")] private  TieredGroupDatabase _weaponDatabase;
         [Inject("items")] private  TieredGroupDatabase _itemDatabase;
@@ -104,7 +108,7 @@ namespace Project.Game.Shop
             {
                 if (_heroInfo.CurrentWeapons.Count >= _heroInfo.Data.WeaponSlots)
                 {
-                    //TODO :: Indicate to player that their weapon slots are full
+                    weaponsFullNotification.Display();
                     return;
                 }
                 

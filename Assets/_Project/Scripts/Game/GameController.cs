@@ -7,6 +7,7 @@ using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Heroes;
+using Project.Tiers;
 using UnityEngine;
 
 namespace Project.Game
@@ -22,24 +23,50 @@ namespace Project.Game
         [Inject] private readonly HeroInfo _heroInfo;
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly SessionInfo _sessionInfo;
+        [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
+        [Inject ("items")] private TieredGroupDatabase _itemDatabase;
 
         private void Start()
         {
+            _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
             
             //_uiFrame.Open<WeaponTestScreen>();
+            if (_heroInfo.Data.StartingWeapons.Length <= 0)
+            {
+                var weaponSelector = _uiFrame.Open<RandomItemSelectorScreen>();
+                weaponSelector.Initialize(_heroInfo.Data.StartingWeaponDatabase == null
+                    ? _weaponDatabase 
+                    : _heroInfo.Data.StartingWeaponDatabase );
+                weaponSelector.OnCloseEvent += OnWeaponSelectorClosed;
+            }
+            else
+            {
+                StartLevel();
+            }
+        }
 
+        private void OnWeaponSelectorClosed(UIScreen weaponSelector)
+        {
+            weaponSelector.OnCloseEvent -= OnWeaponSelectorClosed;
+            StartLevel();
+        }
+
+        private void StartLevel()
+        {
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
             
+            _playerInput.Show();
             _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
         }
-        
+
         private void OnWaveCompleted()
         {
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
+            
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
@@ -56,19 +83,28 @@ namespace Project.Game
             }
             else
             {
-                var shopScreen = _uiFrame.Open<ShopScreen>();
-                shopScreen.Initialize();
-                shopScreen.OnCloseEvent += OnShopClosed;
+                var upgradeSelector = _uiFrame.Open<StatUpgradeSelectorScreen>();
+                upgradeSelector.Initialize();
+                upgradeSelector.OnCloseEvent += OnUpgradeSelectorClosed;
             }
+        }
+
+        private void OnUpgradeSelectorClosed(UIScreen screen)
+        {
+            screen.OnCloseEvent -= OnUpgradeSelectorClosed;
+            
+            var shopScreen = _uiFrame.Open<ShopScreen>();
+            shopScreen.Initialize();
+            shopScreen.OnCloseEvent += OnShopClosed;
         }
 
         private void OnWaveRewardsClosed(UIScreen screen)
         {
             screen.OnCloseEvent -= OnWaveRewardsClosed;
             
-            var shopScreen = _uiFrame.Open<ShopScreen>();
-            shopScreen.Initialize();
-            shopScreen.OnCloseEvent += OnShopClosed;
+            var upgradeSelector = _uiFrame.Open<StatUpgradeSelectorScreen>();
+            upgradeSelector.Initialize();
+            upgradeSelector.OnCloseEvent += OnUpgradeSelectorClosed;
         }
 
         private void OnShopClosed(UIScreen screen)
@@ -84,7 +120,11 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
-            _playerInfo.IncrementTopStage();
+            if (_levelController.CurrentLevelIndex >= _playerInfo.PlayerSave.TopStageIndex)
+            {
+                _playerInfo.IncrementTopStage();
+            }
+            
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();

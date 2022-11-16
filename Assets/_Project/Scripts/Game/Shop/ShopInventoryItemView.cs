@@ -38,7 +38,7 @@ namespace Project.Game.Shop
             }
         }
 
-        public void Initialize(BaseData data, HeroInfo hero, int cost)
+        public void Initialize(BaseData data, HeroInfo hero, int cost, string buyButtonString = "")
         {
             _cost = cost;
             _heroInfo = hero;
@@ -70,10 +70,14 @@ namespace Project.Game.Shop
                 {
                     BuyButton.gameObject.SetActive(false);
                 }
-                else
+                else if (string.IsNullOrEmpty(buyButtonString))
                 {
                     CostText.text = $"<sprite name=currency_ticket> {cost}";
-                } 
+                }
+                else
+                {
+                    CostText.text = buyButtonString;
+                }
             }
         }
 
@@ -92,7 +96,7 @@ namespace Project.Game.Shop
 
         private void OnBuyButtonClicked()
         {
-            if (_heroInfo.GetShopCurrencyIntValue() >= Data.BasePrice)
+            if (_heroInfo.GetShopCurrencyIntValue() >= _cost)
             {
                 BuyButtonClicked?.Invoke(this);
             }
