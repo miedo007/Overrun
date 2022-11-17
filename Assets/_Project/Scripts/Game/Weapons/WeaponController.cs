@@ -27,7 +27,7 @@ namespace Project.Game.Weapons
         private Transform _transform;
         private float _attackDelay;
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         public WeaponData Data { get; private set; }
         public bool IsActivated { get; private set; } = false;
@@ -62,20 +62,22 @@ namespace Project.Game.Weapons
         {
             Data = weaponData;
 
-            CooldownReductionStat = _heroInfo.GetStat(weaponData.Type.CooldownReductionStat);
+            var heroInfo = _heroRegistry.ActiveHero;
+
+            CooldownReductionStat = heroInfo.GetStat(weaponData.Type.CooldownReductionStat);
             CooldownReductionStat.Changed += OnHeroCooldownReductionChanged;
             OnHeroCooldownReductionChanged(CooldownReductionStat);
             
-            DamageStat = _heroInfo.GetStat(weaponData.Type.DamageStat);
+            DamageStat = heroInfo.GetStat(weaponData.Type.DamageStat);
             DamageStat.Changed += OnDamageStatChanged;
             OnDamageStatChanged(DamageStat);
             
-            DamagePercentStat = _heroInfo.GetStat(weaponData.Type.DamagePercentStat);
+            DamagePercentStat = heroInfo.GetStat(weaponData.Type.DamagePercentStat);
             DamagePercentStat.Changed += OnDamagePercentStatChanged;
             OnDamagePercentStatChanged(DamagePercentStat);
 
-            CriticalChanceStat = _heroInfo.GetStat(weaponData.Type.CriticalChanceStat);
-            KnockbackStat = _heroInfo.GetStat(weaponData.Type.KnockbackStat);
+            CriticalChanceStat = heroInfo.GetStat(weaponData.Type.CriticalChanceStat);
+            KnockbackStat = heroInfo.GetStat(weaponData.Type.KnockbackStat);
 
             Initialized?.Invoke();
         }

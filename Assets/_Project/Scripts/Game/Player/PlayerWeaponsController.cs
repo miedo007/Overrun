@@ -15,15 +15,16 @@ namespace Project.Game.Player
 
         [field: SerializeField] public AnimationCurve RadiusCurve { get; private set; }
         
-
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
+        private HeroInfo _heroInfo;
         private readonly List<WeaponController> _weapons = new();
         
         public void OnReady()
         {
+            _heroInfo = _heroRegistry.ActiveHero;
             _heroInfo.WeaponsChanged += OnWeaponsChanged;
         }
 
@@ -50,7 +51,7 @@ namespace Project.Game.Player
 
         private void PlaceWeapons()
         {
-            if (_heroInfo.CurrentWeapons.Count <= 0)
+            if (_heroRegistry.ActiveHero.CurrentWeapons.Count <= 0)
             {
                 return;
             }

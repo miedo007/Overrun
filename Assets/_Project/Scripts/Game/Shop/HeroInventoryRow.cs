@@ -12,6 +12,7 @@ namespace Project.Game.Shop
         {
             var count = forceIncludeCount < 0 ? items.Count :
                 forceIncludeCount > items.Count ? forceIncludeCount : items.Count;
+            
             for (var index = 0; index < count; index++)
             {
                 var itemInstance = Instantiate(itemPrefab, transform);

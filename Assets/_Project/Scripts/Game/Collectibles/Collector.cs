@@ -13,7 +13,7 @@ namespace Project.Game.Collectibles
         [field: SerializeField] public LayerMask LayerMask { get; private set; }
         [field: SerializeField] public float CollectSpeed { get; private set; } = 15;
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private StatInfo _pickupRangeModifierStat;
         
@@ -72,7 +72,9 @@ namespace Project.Game.Collectibles
 
         public void OnReady()
         {
-            _pickupRangeModifierStat = _heroInfo.GetStat(PickupRangeModifier);
+            Debug.Log(_heroRegistry.ActiveHero);
+            Debug.Log(_heroRegistry.ActiveHero.Data);
+            _pickupRangeModifierStat = _heroRegistry.ActiveHero.GetStat(PickupRangeModifier);
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
-using Project.Game.Levels;
 using Project.Game.Shop;
 using Project.Heroes;
 using Project.Tiers;
@@ -15,9 +13,8 @@ namespace Project.Game.UI
     {
         [SerializeField] private ShopInventoryItemView[] itemViews;
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
-        [Inject] private readonly LevelController _levelController;
 
         private void Awake()
         {
@@ -30,7 +27,7 @@ namespace Project.Game.UI
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
             Debug.Log("Buy Button Clicked");
-            _heroInfo.AddToInventoryFromBaseData(itemView.Data);
+            _heroRegistry.ActiveHero.AddToInventoryFromBaseData(itemView.Data);
             Close();
         }
 
@@ -54,7 +51,7 @@ namespace Project.Game.UI
                 var tieredDataGroup = itemSelection[i];
                 var upgradeTierInfo = tieredDataGroup.GetRandomTier(_gameData.RarityCurve, maxTier - 5, maxTier);
                 var upgrade = upgradeTierInfo.Data as BaseData;
-                itemViews[i].Initialize(upgrade, _heroInfo, 0, "CHOOSE");
+                itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 0, "CHOOSE");
             }
         }
     }

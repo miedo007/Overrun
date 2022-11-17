@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Heroes;
@@ -15,23 +13,23 @@ namespace Project.Game.Shop
         [SerializeField] private HeroInventoryRow rowPrefab;
         [SerializeField] private RectTransform parent;
 
-        [Inject] private readonly HeroesInfo _heroesInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private HeroInfo _heroInfo;
 
         public void OnReady()
         {
-            _heroesInfo.ActiveHeroChanged += OnActiveHeroChanged;
-            OnActiveHeroChanged(_heroesInfo.ActiveHero);
+            _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
+            _heroInfo = _heroRegistry.ActiveHero;
+            OnActiveHeroChanged(_heroRegistry.ActiveHero);
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)
         {
             if (_heroInfo != null)
             {
-                
-                _heroesInfo.ActiveHero.WeaponsChanged -= OnWeaponsChanged;
-                _heroesInfo.ActiveHero.ItemsChanged -= OnItemsChanged;
+                _heroRegistry.ActiveHero.WeaponsChanged -= OnWeaponsChanged;
+                _heroRegistry.ActiveHero.ItemsChanged -= OnItemsChanged;
             }
 
             _heroInfo = heroInfo;
@@ -41,7 +39,7 @@ namespace Project.Game.Shop
 
         private void OnEnable()
         {
-            if (_heroesInfo.ActiveHero == null)
+            if (_heroInfo == null)
             {
                 return;
             }

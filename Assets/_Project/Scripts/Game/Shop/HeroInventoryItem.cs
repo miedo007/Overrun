@@ -16,14 +16,20 @@ namespace Project.Game.Shop
         [field: SerializeField] public Image Backer { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
-        [Inject] private readonly HeroInfo _heroInfo;
-
+        [Inject] private readonly HeroRegistry _heroRegistry;
+        
+        private HeroInfo _heroInfo;
         private Sequence _mergeSequence;
         private BaseData _data;
 
         public void Initialize(BaseData data)
         {
             _data = data;
+
+            if (_heroRegistry != null)
+            {
+                _heroInfo = _heroRegistry.ActiveHero;
+            }
             
             if (_data != null && _heroInfo != null && _heroInfo.CanMerge(_data))
             {
@@ -60,7 +66,7 @@ namespace Project.Game.Shop
             }
             
             var itemDetailsScreen = _uiFrame.Open<ItemDetailsScreen>();
-            itemDetailsScreen.Initialize(_data);
+            itemDetailsScreen.Initialize(_data, _heroInfo);
         }
     }
 }

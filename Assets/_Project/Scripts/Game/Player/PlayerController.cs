@@ -16,8 +16,9 @@ namespace Project.Game.Player
         [field: SerializeField] public CollectibleData[] StoreCurrencyCollectibles { get; private set; }
         
         [Inject] private readonly PlayerInput _playerInput;
-        [Inject] private readonly HeroInfo _heroInfo;
-        
+        [Inject] private readonly HeroRegistry _heroRegistry;
+
+        private HeroInfo _heroInfo;
         private Transform _transform;
         private StatInfo _speedStat;
         private StatInfo _ticketStat;
@@ -48,6 +49,8 @@ namespace Project.Game.Player
 
         public void OnReady()
         {
+            _heroInfo = _heroRegistry.ActiveHero;
+            
             var heroView = Instantiate(_heroInfo.Data.Prefab, transform);
             heroView.Initialize(Character);
 

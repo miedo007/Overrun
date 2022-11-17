@@ -12,14 +12,14 @@ namespace Project.Game.Items
         
         [SerializeField] private ItemBehaviourTrigger[] behaviourTriggers;
         
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private readonly Dictionary<ItemBehaviourTrigger, List<ItemBehaviour>> _triggerBehavioursDict = new();
 
         public void OnReady()
         {
-            _heroInfo.ItemsWillChange += OnItemsWillChange;
-            _heroInfo.ItemsChanged += OnItemsChanged;
+            _heroRegistry.ActiveHero.ItemsWillChange += OnItemsWillChange;
+            _heroRegistry.ActiveHero.ItemsChanged += OnItemsChanged;
 
             foreach (var trigger in behaviourTriggers)
             {
@@ -29,6 +29,9 @@ namespace Project.Game.Items
 
         private void OnDestroy()
         {
+            _heroRegistry.ActiveHero.ItemsWillChange -= OnItemsWillChange;
+            _heroRegistry.ActiveHero.ItemsChanged -= OnItemsChanged;
+            
             foreach (var trigger in behaviourTriggers)
             {
                 trigger.Triggered -= OnTriggered;
@@ -72,7 +75,7 @@ namespace Project.Game.Items
 
         private void OnItemsChanged()
         {
-            foreach (var item in _heroInfo.Items)
+            foreach (var item in _heroRegistry.ActiveHero.Items)
             {
                 foreach (var pair in item.Behaviours)
                 {

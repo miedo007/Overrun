@@ -20,6 +20,26 @@ namespace Project.Game.Shop
         private HeroInfo _heroInfo;
         private WeaponData _weaponData;
 
+
+        private void OnStatChanged(StatInfo obj)
+        {
+            Refresh();
+        }
+
+        public override void Initialize(BaseData data)
+        {
+            _heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
+            
+            foreach (var stat in _heroInfo.Stats)
+            {
+                stat.Changed += OnStatChanged;
+            }
+            
+            gameObject.name = data.name;
+            _weaponData = data as WeaponData;
+            Refresh();
+        }
+        
         private void OnDestroy()
         {
             if (_heroInfo == null)
@@ -31,25 +51,6 @@ namespace Project.Game.Shop
             {
                 stat.Changed -= OnStatChanged;
             }
-        }
-
-        private void OnStatChanged(StatInfo obj)
-        {
-            Refresh();
-        }
-
-        public override void Initialize(BaseData data)
-        {
-            _heroInfo = InjectionContainer.Instance.Injector.Get<HeroInfo>();
-            
-            foreach (var stat in _heroInfo.Stats)
-            {
-                stat.Changed += OnStatChanged;
-            }
-            
-            gameObject.name = data.name;
-            _weaponData = data as WeaponData;
-            Refresh();
         }
 
         private void Refresh()

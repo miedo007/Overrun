@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mtl.Injection;
-using Project.Game.Collectibles;
 using Project.Heroes;
 using Tromagon.Extensions;
 using UnityEngine;
@@ -13,18 +12,18 @@ namespace Project.Game.UI
         [field: SerializeField] public RectTransform Parent { get; private set; }
         [field: SerializeField] public GameObject ContainerViewPrefab { get; private set; }
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private List<GameObject> _containerViews = new();
 
         private void Start()
         {
-            _heroInfo.CollectedContainersChanged += OnCollectedContainersChanged;
+            _heroRegistry.ActiveHero.CollectedContainersChanged += OnCollectedContainersChanged;
         }
         
         private void OnDestroy()
         {
-            _heroInfo.CollectedContainersChanged -= OnCollectedContainersChanged;
+            _heroRegistry.ActiveHero.CollectedContainersChanged -= OnCollectedContainersChanged;
         }
 
         private void OnEnable()

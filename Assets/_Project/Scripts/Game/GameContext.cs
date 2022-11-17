@@ -20,15 +20,10 @@ namespace Project.Game
         [field: SerializeField] public LevelController LevelController { get; private set; }
         [field: SerializeField] public EnemyManager EnemyManager { get; private set; }
         [field: SerializeField] public CollectiblesManager CollectiblesManager { get; private set; }
-        [field: SerializeField] public HeroInfo HeroInfo { get; private set; }
 
         protected override void OnInjectStart()
         {
             base.OnInjectStart();
-
-            var heroesInfo = InjectionContainer.Instance.Injector.Get<HeroesInfo>();
-            HeroInfo = heroesInfo.GetSelectedHeroInfo();
-            Bind(HeroInfo);
             
             Bind(PlayerInput);
             Bind(TargetManager);

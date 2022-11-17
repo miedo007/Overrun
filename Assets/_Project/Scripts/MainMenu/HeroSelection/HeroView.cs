@@ -17,7 +17,7 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private StatsView statsView;
         [SerializeField] private Image heroImage;
 
-        [Inject] private readonly HeroesInfo _heroesInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
@@ -29,13 +29,14 @@ namespace Project.MainMenu.HeroSelection
 
         private void OnSelectButtonClicked()
         {
-            _heroesInfo.SetSelectedHero(_heroInfo.Data.name);
+            _heroRegistry.SetSelectedHero(_heroInfo.Data.name);
             Selected?.Invoke(_heroInfo.Data);
         }
 
         public void OnReady()
         {
-            _heroesInfo.ActiveHeroChanged += OnActiveHeroChanged;
+            _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
+            OnActiveHeroChanged(_heroRegistry.ActiveHero);
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)

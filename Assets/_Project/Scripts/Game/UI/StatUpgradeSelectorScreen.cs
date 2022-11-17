@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.Items;
@@ -11,15 +9,17 @@ using UnityEngine;
 
 namespace Project.Game.UI
 {
-    public class StatUpgradeSelectorScreen : UIScreen
+    public class StatUpgradeSelectorScreen : UIScreen, IInjectionReady
     {
         [SerializeField] private RectTransform parent;
         [SerializeField] private TieredGroupDatabase upgradeDatabase;
         [SerializeField] private List<StatUpgradeView> upgradeViews;
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
+        
+        private  HeroInfo _heroInfo;
 
         private void Awake()
         {
@@ -68,6 +68,11 @@ namespace Project.Game.UI
 
                 upgradeViews[i].Initialize(upgrade);
             }
+        }
+
+        public void OnReady()
+        {
+            _heroInfo = _heroRegistry.ActiveHero;
         }
     }
 }

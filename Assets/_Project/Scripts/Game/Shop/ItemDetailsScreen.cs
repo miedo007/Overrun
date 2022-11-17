@@ -20,12 +20,11 @@ namespace Project.Game.Shop
         [SerializeField] private Button closeButton;
         [SerializeField] private TextMeshProUGUI sellText;
 
-        [Inject] private readonly HeroInfo _heroInfo;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
 
+        private HeroInfo _heroInfo;
         private string _sellLabel;
-        
         private BaseData _data;
 
         private void Awake()
@@ -36,8 +35,9 @@ namespace Project.Game.Shop
             mergeButton.onClick.AddListener(OnMergeButtonClicked);
         }
 
-        public void Initialize(BaseData baseData)
+        public void Initialize(BaseData baseData, HeroInfo activeHero)
         {
+            _heroInfo = activeHero;
             _data = baseData;
             
             sellText.text = string.Format(_sellLabel, _gameData.GetSellPrice(_data, _levelController.CurrentWaveIndex));

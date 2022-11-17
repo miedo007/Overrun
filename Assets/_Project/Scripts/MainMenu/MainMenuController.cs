@@ -14,11 +14,11 @@ namespace Project.Scripts.MainMenu
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly SessionInfo _sessionInfo;
-        [Inject] private readonly HeroesInfo _heroesInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         public void OnReady()
         {
-            _heroesInfo.LoadSelectedHero();
+            _heroRegistry.LoadSelectedHero();
         }
 
         private void Start()

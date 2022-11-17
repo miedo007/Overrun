@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Lean.Pool;
+﻿using Lean.Pool;
 using Mtl.Injection;
 using Project.Game.Levels;
 using Project.Heroes;
@@ -17,7 +15,7 @@ namespace Project.Game.Collectibles
         
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly GameData _gameData;
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private int _containersDropped;
         
@@ -29,7 +27,7 @@ namespace Project.Game.Collectibles
 
         private void OnContainerCollected(CollectibleData data)
         {
-            _heroInfo.WaveRewards++;
+            _heroRegistry.ActiveHero.WaveRewards++;
         }
 
         private void OnWaveStarted()

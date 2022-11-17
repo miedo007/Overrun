@@ -10,20 +10,20 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private RectTransform parent;
         [SerializeField] private HeroSelectionItemView heroViewPrefab;
 
-        [Inject] private readonly HeroesInfo _heroesInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
 
         private List<HeroSelectionItemView> _heroViews = new();
 
         public void Start()
         {
-            foreach (var hero in _heroesInfo.Database.Heroes)
+            foreach (var hero in _heroRegistry.Database.Heroes)
             {
                 var heroView = Instantiate(heroViewPrefab, parent);
                 heroView.Initialize(hero);
                 _heroViews.Add(heroView);
             }
 
-            _heroesInfo.SetActiveHero(_heroesInfo.Database.DefaultHero);
+            _heroRegistry.SetActiveHero(_heroRegistry.Database.DefaultHero);
         }
     }
 }

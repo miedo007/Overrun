@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project.Heroes
 {
-    public class HeroesInfo : ISavable
+    public class HeroRegistry : ISavable
     {
         public event Action OnChanged;
         public event Action<HeroInfo> ActiveHeroChanged;

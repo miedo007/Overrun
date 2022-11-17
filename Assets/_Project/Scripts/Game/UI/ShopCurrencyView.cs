@@ -9,24 +9,24 @@ namespace Project.Game.UI
     {
         [field: SerializeField] public TextMeshProUGUI CurrencyText { get; private set; }
         
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         
         public void OnReady()
         {
-            _heroInfo.ShopCurrencyChanged += OnShopCurrencyChanged;
+            _heroRegistry.ActiveHero.ShopCurrencyChanged += OnShopCurrencyChanged;
         }
 
         private void OnDestroy()
         {
-            if (_heroInfo != null)
+            if (_heroRegistry.ActiveHero != null)
             {
-                _heroInfo.ShopCurrencyChanged -= OnShopCurrencyChanged;
+                _heroRegistry.ActiveHero.ShopCurrencyChanged -= OnShopCurrencyChanged;
             }
         }
 
         private void OnShopCurrencyChanged()
         {
-            CurrencyText.text = _heroInfo.GetShopCurrencyIntValue().ToString();
+            CurrencyText.text = _heroRegistry.ActiveHero.GetShopCurrencyIntValue().ToString();
         }
     }
 }

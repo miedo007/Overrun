@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
-using Project.Game.Levels;
 using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
@@ -22,11 +20,10 @@ namespace Project.Game.Shop
         [field: SerializeField] public ScrollRect Scroller { get; private set; }
 
         [SerializeField] private DropDownNotification weaponsFullNotification;
-        
-        
+
         [Inject("weapons")] private  TieredGroupDatabase _weaponDatabase;
         [Inject("items")] private  TieredGroupDatabase _itemDatabase;
-        [Inject] private  HeroInfo _heroInfo;
+        [Inject] private  HeroRegistry _heroRegistry;
         [Inject] private  GameData _gameData;
         
         private int _waveIndex;
@@ -75,7 +72,7 @@ namespace Project.Game.Shop
         {
             var itemView = Instantiate(ItemViewPrefab, Parent);
             var cost = _gameData.GetScaledCost(data, _waveIndex);
-            itemView.Initialize(data, _heroInfo, cost);
+            itemView.Initialize(data, _heroRegistry.ActiveHero, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
             CurrentItems.Add(itemView);
         }
@@ -97,7 +94,7 @@ namespace Project.Game.Shop
             var data = itemView.Data;
             
             var cost = _gameData.GetScaledCost(data, _waveIndex);
-            if (_heroInfo.GetShopCurrencyIntValue() < cost)
+            if (_heroRegistry.ActiveHero.GetShopCurrencyIntValue() < cost)
             {
                 // can't afford
                 return;
@@ -106,22 +103,22 @@ namespace Project.Game.Shop
             var weaponData = data as WeaponData;
             if (weaponData != null)
             {
-                if (_heroInfo.CurrentWeapons.Count >= _heroInfo.Data.WeaponSlots)
+                if (_heroRegistry.ActiveHero.CurrentWeapons.Count >= _heroRegistry.ActiveHero.Data.WeaponSlots)
                 {
                     weaponsFullNotification.Display();
                     return;
                 }
                 
-                _heroInfo.AddWeapon(weaponData);
+                _heroRegistry.ActiveHero.AddWeapon(weaponData);
             }
             
             var itemData = data as ItemData;
             if (itemData != null)
             {
-                _heroInfo.AddItem(itemData);
+                _heroRegistry.ActiveHero.AddItem(itemData);
             }
             
-            _heroInfo.ShopCurrency -= cost;
+            _heroRegistry.ActiveHero.ShopCurrency -= cost;
             itemView.Purchase();
         }
     }

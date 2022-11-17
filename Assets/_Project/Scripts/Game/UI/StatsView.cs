@@ -10,7 +10,7 @@ namespace Project.Game.UI
         [SerializeField] private StatView statViewPrefab;
         [SerializeField] private RectTransform parent;
         
-        [Inject] private HeroesInfo _heroesInfo;
+        [Inject] private HeroRegistry _heroRegistry;
 
         private HeroInfo _heroInfo;
 
@@ -33,13 +33,13 @@ namespace Project.Game.UI
 
         public void OnReady()
         {
-            _heroesInfo.ActiveHeroChanged += OnActiveHeroChanged;
+            _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
+            OnActiveHeroChanged(_heroRegistry.ActiveHero);
         }
 
         private void OnDestroy()
         {
-            _heroesInfo.ActiveHeroChanged -= OnActiveHeroChanged;
-            OnActiveHeroChanged(_heroesInfo.ActiveHero);
+            _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)

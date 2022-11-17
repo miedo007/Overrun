@@ -36,7 +36,7 @@ namespace Project.Application
                 }
             });
 
-            var heroesInfo = new HeroesInfo();
+            var heroesInfo = new HeroRegistry();
             saveManager.TryLoad(heroesInfo, success =>
             {
                 if (success)

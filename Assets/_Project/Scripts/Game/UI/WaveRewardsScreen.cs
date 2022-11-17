@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using Mtl.Injection;
 using Mtl.UiFramework;
@@ -27,7 +26,7 @@ namespace Project.Game.UI
         [SerializeField] private TextMeshProUGUI _sellText;
 
         [Inject] private readonly GameData _gameData;
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject("items")] private readonly TieredGroupDatabase _itemDatabase;
 
         private BaseData _currentItem;
@@ -44,13 +43,13 @@ namespace Project.Game.UI
 
         private void OnSellButtonClicked()
         {
-            _heroInfo.ShopCurrency += GetSellValue(_currentItem);
+            _heroRegistry.ActiveHero.ShopCurrency += GetSellValue(_currentItem);
             StartCoroutine(CloseDetailsRoutine());
         }
 
         private void OnKeepButtonClicked()
         {
-            _heroInfo.AddItem(_currentItem as ItemData);
+            _heroRegistry.ActiveHero.AddItem(_currentItem as ItemData);
             StartCoroutine(CloseDetailsRoutine());
         }
 
@@ -83,13 +82,13 @@ namespace Project.Game.UI
             containerView.SetActive(true);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             
-            _heroInfo.WaveRewards--;
+            _heroRegistry.ActiveHero.WaveRewards--;
             containerView.SetActive(false);
 
             _currentItem =
                 _itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange.x, tierRange.y).Data as ItemData;
                 
-            itemDetailsView.Initialize(_currentItem, _heroInfo, -1);
+            itemDetailsView.Initialize(_currentItem, _heroRegistry.ActiveHero, -1);
             _sellText.text = string.Format(_sellLabel, GetSellValue(_currentItem));
 
             yield return itemDetailsRoot.DOScale(1, 0.12f).WaitForCompletion();
@@ -101,7 +100,7 @@ namespace Project.Game.UI
             itemDetailsRoot.DOScale(0, 0.12f);
             yield return _buttonGroup.DOScale(0, 0.125f).WaitForCompletion();
             
-            if (_heroInfo.WaveRewards > 0)
+            if (_heroRegistry.ActiveHero.WaveRewards > 0)
             {
                 StartCoroutine(RewardRoutine());
             }

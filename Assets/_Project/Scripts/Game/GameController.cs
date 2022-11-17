@@ -20,14 +20,18 @@ namespace Project.Game
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly PlayerInput _playerInput;
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
         [Inject ("items")] private TieredGroupDatabase _itemDatabase;
 
+        private HeroInfo _heroInfo;
+
         private void Start()
         {
+            _heroInfo = _heroRegistry.ActiveHero;
+            Debug.LogWarning(_heroInfo.Data);
             _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();

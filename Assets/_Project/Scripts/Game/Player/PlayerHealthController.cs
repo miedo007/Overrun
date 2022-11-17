@@ -22,7 +22,7 @@ namespace Project.Game.Player
         
         private float _currentHealth;
         
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly GameData _gameData;
 
@@ -60,10 +60,10 @@ namespace Project.Game.Player
 
         public void Initialize()
         {
-            _healthStatInfo = _heroInfo.GetStat(HealthStat);
+            _healthStatInfo = _heroRegistry.ActiveHero.GetStat(HealthStat);
             _healthStatInfo.Changed += OnHealthStatChanged;
 
-            _healthRegenStatInfo = _heroInfo.GetStat(HealthRegenStat);
+            _healthRegenStatInfo = _heroRegistry.ActiveHero.GetStat(HealthRegenStat);
             _healthRegenStatInfo.Changed += OnHealthRegenStatChanged;
 
             MaxHealth = _healthStatInfo.GetFloatValue();
