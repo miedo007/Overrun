@@ -3,7 +3,9 @@ using Mtl.Injection;
 using Mtl.SagaMap;
 using Mtl.UiFramework;
 using Project.Application;
+using Project.Heroes;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Scripts.MainMenu.SagaMap
 {
@@ -12,6 +14,7 @@ namespace Project.Scripts.MainMenu.SagaMap
         public event Action<int> LevelSelected;
         
         [SerializeField] private SagaMapController sagaMapController;
+        [SerializeField] private Image characterImage;
         
         [Inject] private readonly PlayerInfo _playerInfo;
 

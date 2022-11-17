@@ -15,7 +15,7 @@ MonoBehaviour:
   <HasRandomChance>k__BackingField: 1
   <Chance>k__BackingField: 0.05
   <KnockbackStat>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
-  <KnockbackStrength>k__BackingField: 5
+  <KnockbackStrength>k__BackingField: 10
   <Radius>k__BackingField: 2
   <LayerMask>k__BackingField:
     serializedVersion: 2

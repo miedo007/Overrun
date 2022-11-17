@@ -45,8 +45,6 @@ namespace Project.Game.UI
         private void OnActiveHeroChanged(HeroInfo heroInfo)
         {
             _heroInfo = heroInfo;
-            Debug.Log("Active Hero Changed");
-            Debug.Log(_heroInfo.Data.name);
             Initialize();
         }
     }

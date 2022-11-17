@@ -27,7 +27,7 @@ namespace Project.Game.Items
             {
                 if (_knockbackStatInfo == null)
                 {            
-                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroInfo>();
+                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
                     _knockbackStatInfo = heroInfo.GetStat(KnockbackStat);
                 }
 

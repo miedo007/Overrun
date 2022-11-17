@@ -27,9 +27,9 @@ namespace Project.Heroes
             }
         }
         
-        public void Initialize()
+        public void Initialize(HeroDatabase database)
         {
-            Database = Resources.Load<HeroDatabase>("database_heroes_default");
+            Database = database;
             ActiveHero = GetSelectedHeroInfo();
         }
 
@@ -44,7 +44,7 @@ namespace Project.Heroes
             if (string.IsNullOrEmpty(savedHeroId))
             {
                 savedHeroId = Database.Heroes[0].name;
-                _save.SelectedHero = savedHeroId;
+                SetSelectedHero(savedHeroId);
             }
             
             var heroData = Database.GetHeroWithId(savedHeroId);
@@ -70,6 +70,7 @@ namespace Project.Heroes
 
         public void SetSelectedHero(string id)
         {
+            Debug.Log($"selected hero changed :: {id}");
             _save.SelectedHero = id;
             OnChanged?.Invoke();
         }

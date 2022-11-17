@@ -44,6 +44,7 @@ namespace Project.Scripts.MainMenu
 
         private void LoadLevel(int levelIndex)
         {
+            _heroRegistry.SetActiveHero(_heroRegistry.GetSelectedHero());
             _sessionInfo.LevelIndex = levelIndex;
             _sceneLoader.LoadScene("game", 0.2f, 0.5f);
         }

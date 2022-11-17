@@ -28,22 +28,21 @@ namespace Project.Application
             Bind(new SessionInfo());
             
             var playerInfo = new PlayerInfo();
+            var playerReadWriter = new FileReadWriter("player");
             saveManager.TryLoad(playerInfo, (success) =>
             {
                 if (!success)
                 {
                     playerInfo.Create();
                 }
-            });
+            }, playerReadWriter);
 
             var heroesInfo = new HeroRegistry();
+            var heroesReadWriter = new FileReadWriter("heroes");
             saveManager.TryLoad(heroesInfo, success =>
             {
-                if (success)
-                {
-                    heroesInfo.Initialize();
-                }
-            });     
+                heroesInfo.Initialize(heroDatabase);
+            }, heroesReadWriter);     
             Bind(heroesInfo);
             
             InjectAndBind(playerInfo);

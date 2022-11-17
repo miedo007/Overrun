@@ -72,8 +72,6 @@ namespace Project.Game.Collectibles
 
         public void OnReady()
         {
-            Debug.Log(_heroRegistry.ActiveHero);
-            Debug.Log(_heroRegistry.ActiveHero.Data);
             _pickupRangeModifierStat = _heroRegistry.ActiveHero.GetStat(PickupRangeModifier);
         }
     }

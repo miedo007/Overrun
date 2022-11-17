@@ -14,11 +14,9 @@ namespace Project.MainMenu.HeroSelection
         
         [SerializeField] private Button selectButton;
         [SerializeField] private Button upgradeButton;
-        [SerializeField] private StatsView statsView;
         [SerializeField] private Image heroImage;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
-        [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
 
@@ -37,6 +35,14 @@ namespace Project.MainMenu.HeroSelection
         {
             _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
             OnActiveHeroChanged(_heroRegistry.ActiveHero);
+        }
+
+        private void OnDestroy()
+        {
+            if (_heroRegistry != null)
+            {
+                _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
+            }
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)

@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2909397895911451013}
   - component: {fileID: 2121711720522902069}
   - component: {fileID: -3002451218774198903}
+  - component: {fileID: 4385621956821561231}
   m_Layer: 5
   m_Name: view_hero_list_item
   m_TagString: Untagged
@@ -245,6 +246,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroImage: {fileID: 5716585935886291718}
   heroNameText: {fileID: 2762707768882066203}
+--- !u!225 &4385621956821561231
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160441875549977284}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2578615892334501504
 GameObject:
   m_ObjectHideFlags: 0

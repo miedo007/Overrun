@@ -22,7 +22,7 @@ namespace Project.Game.Items
             {
                 if (_rangedStatInfo == null)
                 {            
-                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroInfo>();
+                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
                     _rangedStatInfo = heroInfo.GetStat(rangedStat);
                 }
 

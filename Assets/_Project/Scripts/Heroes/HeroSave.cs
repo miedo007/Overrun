@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Mtl.Save;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace Project.Heroes
 {
@@ -11,7 +10,7 @@ namespace Project.Heroes
     public class HeroSave : Save, IHeroSave
     {
         [JsonProperty] public string SelectedHero { get; set; }
-        [JsonProperty] public HeroLevels HeroLevels { get; set; }
+        [JsonProperty] public HeroLevels HeroLevels { get; set; } = new ();
 
         public void Clear()
         {
@@ -24,7 +23,7 @@ namespace Project.Heroes
     [JsonObject(MemberSerialization.OptIn)]
     public class HeroLevels
     {
-        [JsonProperty] public List<HeroLevelPair> SelectedHero { get; set; } = new();
+        [JsonProperty] public List<HeroLevelPair> HeroLevelPairs { get; set; } = new();
     }
     
     [Serializable]

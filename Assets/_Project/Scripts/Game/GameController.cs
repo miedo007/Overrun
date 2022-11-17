@@ -31,24 +31,22 @@ namespace Project.Game
         private void Start()
         {
             _heroInfo = _heroRegistry.ActiveHero;
-            Debug.LogWarning(_heroInfo.Data);
+
             _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
             
             //_uiFrame.Open<WeaponTestScreen>();
-            if (_heroInfo.Data.StartingWeapons.Length <= 0)
-            {
-                var weaponSelector = _uiFrame.Open<RandomItemSelectorScreen>();
-                weaponSelector.Initialize(_heroInfo.Data.StartingWeaponDatabase == null
-                    ? _weaponDatabase 
-                    : _heroInfo.Data.StartingWeaponDatabase );
-                weaponSelector.OnCloseEvent += OnWeaponSelectorClosed;
-            }
-            else
-            {
-                StartLevel();
-            }
+            OpenWeaponSelector();
+        }
+
+        private void OpenWeaponSelector()
+        {
+            var weaponSelector = _uiFrame.Open<RandomItemSelectorScreen>();
+            weaponSelector.Initialize(_heroInfo.Data.StartingWeaponDatabase == null
+                ? _weaponDatabase 
+                : _heroInfo.Data.StartingWeaponDatabase );
+            weaponSelector.OnCloseEvent += OnWeaponSelectorClosed;
         }
 
         private void OnWeaponSelectorClosed(UIScreen weaponSelector)
@@ -166,7 +164,7 @@ namespace Project.Game
             LoadMainMenu();
         }
 
-        public void LoadMainMenu()
+        private void LoadMainMenu()
         {
             _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }

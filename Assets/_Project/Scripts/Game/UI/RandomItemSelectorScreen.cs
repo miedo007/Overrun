@@ -26,7 +26,6 @@ namespace Project.Game.UI
 
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
-            Debug.Log("Buy Button Clicked");
             _heroRegistry.ActiveHero.AddToInventoryFromBaseData(itemView.Data);
             Close();
         }
