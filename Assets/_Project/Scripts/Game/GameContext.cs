@@ -1,3 +1,4 @@
+using Mtl.Injection;
 using Project.PopupText;
 using Project.Application;
 using Project.Game.Collectibles;
@@ -24,10 +25,9 @@ namespace Project.Game
         protected override void OnInjectStart()
         {
             base.OnInjectStart();
-            
-            var heroRegistry = new HeroRegistry();
-            HeroInfo = heroRegistry.GetActiveHeroInfo();
 
+            var heroesInfo = InjectionContainer.Instance.Injector.Get<HeroesInfo>();
+            HeroInfo = heroesInfo.GetSelectedHeroInfo();
             Bind(HeroInfo);
             
             Bind(PlayerInput);

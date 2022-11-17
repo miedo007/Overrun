@@ -14,19 +14,34 @@ namespace Project.Game.Shop
         [SerializeField] private RectTransform headerPrefab;
         [SerializeField] private HeroInventoryRow rowPrefab;
         [SerializeField] private RectTransform parent;
-        
 
-        [Inject] private readonly HeroInfo _heroInfo;
+        [Inject] private readonly HeroesInfo _heroesInfo;
+
+        private HeroInfo _heroInfo;
 
         public void OnReady()
         {
+            _heroesInfo.ActiveHeroChanged += OnActiveHeroChanged;
+            OnActiveHeroChanged(_heroesInfo.ActiveHero);
+        }
+
+        private void OnActiveHeroChanged(HeroInfo heroInfo)
+        {
+            if (_heroInfo != null)
+            {
+                
+                _heroesInfo.ActiveHero.WeaponsChanged -= OnWeaponsChanged;
+                _heroesInfo.ActiveHero.ItemsChanged -= OnItemsChanged;
+            }
+
+            _heroInfo = heroInfo;
             _heroInfo.WeaponsChanged += OnWeaponsChanged;
             _heroInfo.ItemsChanged += OnItemsChanged;
         }
 
         private void OnEnable()
         {
-            if (_heroInfo == null)
+            if (_heroesInfo.ActiveHero == null)
             {
                 return;
             }

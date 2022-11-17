@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
-  m_Name: data_character_stats_chad
+  m_Name: data_character_stats_1
   m_EditorClassIdentifier: 
   <Stats>k__BackingField: []

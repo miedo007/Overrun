@@ -10,6 +10,7 @@ namespace Project.Heroes
     public class HeroData : ScriptableObject
     {
         [field: SerializeField] public string DisplayName { get; private set; }
+        [field: SerializeField] public Sprite Sprite { get; set; }
         [field: SerializeField] public HeroViewController Prefab { get; private set; }
         [field: SerializeField] public CharacterStats StatOverrides { get; private set; }
         [field: SerializeField] public WeaponData[] StartingWeapons { get; private set; }
@@ -17,5 +18,7 @@ namespace Project.Heroes
         [field: SerializeField] public ItemData[] StartingItems { get; private set; }
         [field: SerializeField] public int WeaponSlots { get; set; } = 6;
         [field: SerializeField] public int StartingShopCurrency { get; set; } = 0;
+
+        public string Id => name;
     }
 }

@@ -165,6 +165,7 @@ MonoBehaviour:
   sceneLoader: {fileID: 4287201291991439538}
   weaponDatabase: {fileID: 11400000, guid: d4c30787a668c834ea3e8ec0a540220f, type: 2}
   itemDatabase: {fileID: 11400000, guid: 976fb87ec7f6f2a4eb69b10da6d7bcd8, type: 2}
+  heroDatabase: {fileID: 11400000, guid: cb2ef16a8530d25439655fa91d730738, type: 2}
   gameData: {fileID: 11400000, guid: 6abdfce947281bd4a924840b07916b2d, type: 2}
   saveManager: {fileID: 1822294388874111480}
 --- !u!114 &1691584159726164944

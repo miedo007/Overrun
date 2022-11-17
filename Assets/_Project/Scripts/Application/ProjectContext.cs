@@ -1,8 +1,7 @@
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Game;
-using Project.Game.Items;
-using Project.Game.Weapons;
+using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ namespace Project.Application
         [SerializeField] private SceneLoader sceneLoader;
         [SerializeField] private TieredGroupDatabase weaponDatabase;
         [SerializeField] private TieredGroupDatabase itemDatabase;
+        [SerializeField] private HeroDatabase heroDatabase;
         [SerializeField] private GameData gameData;
         [SerializeField] private SaveManager saveManager;
         
@@ -22,6 +22,7 @@ namespace Project.Application
             Bind(sceneLoader);
             Bind(weaponDatabase, "weapons");
             Bind(itemDatabase, "items");
+            Bind(heroDatabase);
             Bind(gameData);         
             Bind(saveManager);
             Bind(new SessionInfo());
@@ -34,6 +35,16 @@ namespace Project.Application
                     playerInfo.Create();
                 }
             });
+
+            var heroesInfo = new HeroesInfo();
+            saveManager.TryLoad(heroesInfo, success =>
+            {
+                if (success)
+                {
+                    heroesInfo.Initialize();
+                }
+            });     
+            Bind(heroesInfo);
             
             InjectAndBind(playerInfo);
         }
