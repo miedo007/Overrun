@@ -19,7 +19,7 @@ namespace Project.Stats
         [field: SerializeField] public bool HasMaxValue { get; private set; }
         [field: SerializeField, ShowIf("HasMaxValue")] public float MaxValue { get; private set; }
 
-        private int _roundingValue = 2;
+        private int _roundingValue = 4;
         private float _modifiedValue;
         private bool _isDirty = true;
         public List<StatModifier> StatModifiers { get; private set; } = new();
@@ -44,6 +44,10 @@ namespace Project.Stats
         private float GetBaseFloatValueForLevel(int level)
         {
             var baseValue = LevelScaling.GetValueForLevel(BaseValue, level);
+            if (HasMaxValue)
+            {
+                baseValue = Mathf.Min(baseValue, MaxValue);
+            }
             return (float)Math.Round(baseValue, _roundingValue);
         }
        
@@ -60,7 +64,7 @@ namespace Project.Stats
         
         public string GetDisplayValue()
         {
-            var value = GetFloatValue();
+            var value = Data.IsIntValue ? GetIntValue() : GetFloatValue();
             if (Data.DisplayAsPercent)
             {
                 value *= 100f;
@@ -106,22 +110,45 @@ namespace Project.Stats
                 }
             }
 
-            if (HasMinValue && _modifiedValue < MinValue)
+            if (HasMinValue)
             {
-                _modifiedValue = MinValue;
+                _modifiedValue = Mathf.Max(_modifiedValue, MinValue);
             }
-            else if (HasMaxValue && _modifiedValue > MaxValue)
+            
+            if (HasMaxValue)
             {
-                _modifiedValue = MaxValue;
+                _modifiedValue = Mathf.Min(_modifiedValue, MaxValue);
             }
             
             _modifiedValue = (float)Math.Round(_modifiedValue, _roundingValue);
         }
 
-        public int GetIntLevel()
+        public int GetIntValue()
         {
             var intValue = 0;
             var floatValue = GetFloatValue();
+            switch (RoundingType)
+            {
+                case RoundingType.Round:
+                    intValue = Mathf.RoundToInt(floatValue);
+                    break;
+                case RoundingType.Ceil:
+                    intValue = Mathf.CeilToInt(floatValue);
+                    break;
+                case RoundingType.Floor:
+                    intValue = Mathf.FloorToInt(floatValue);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return intValue;
+        }
+        
+        public float GetIntBaseValue()
+        {
+            var intValue = 0;
+            var floatValue = BaseValue;
             switch (RoundingType)
             {
                 case RoundingType.Round:
@@ -194,10 +221,19 @@ namespace Project.Stats
     public class LevelScaling
     {
         [field: SerializeField] public float Coefficient { get; private set; } = 1.09f;
+        [field: SerializeField] public bool IsLinear { get; private set; } = false;
+        [field: SerializeField] public float LinearIncrease { get; private set; } = .1f;
 
         public float GetValueForLevel(float baseValue, int level)
         {
-            return baseValue * Mathf.Pow(Coefficient, level);
+            if (!IsLinear)
+            {
+                return baseValue * Mathf.Pow(Coefficient, level);
+            }
+            else
+            {
+                return baseValue + LinearIncrease * level;
+            }
         }
     }
 

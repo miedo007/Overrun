@@ -23,6 +23,7 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 0
     <DisplayAsPercentage>k__BackingField: 1
   - <StatData>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
-    <Value>k__BackingField: -0.1
+    <Value>k__BackingField: -0.02
     <ModifierType>k__BackingField: 0
-    <DisplayAsPercentage>k__BackingField: 0
+    <DisplayAsPercentage>k__BackingField: 1
+  <Behaviours>k__BackingField: []

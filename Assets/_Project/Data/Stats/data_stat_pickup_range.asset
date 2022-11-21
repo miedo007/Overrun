@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Pickup Range
   <DescriptionKey>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 1579595520, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Icon>k__BackingField: {fileID: -808364891, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 1
   <DisplayPattern>k__BackingField: '{0:0.0}%'
   <RoundNumberDisplayPattern>k__BackingField: '{0:0}%'

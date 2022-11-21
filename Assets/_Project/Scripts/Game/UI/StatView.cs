@@ -36,8 +36,8 @@ namespace Project.Game.UI
 
         private void Refresh(StatInfo statInfo)
         {
-            var value = statInfo.GetFloatValue();
-            var baseValue = statInfo.BaseValue;
+            var value = statInfo.Data.IsIntValue ? statInfo.GetIntValue() : statInfo.GetFloatValue();
+            var baseValue = statInfo.Data.IsIntValue ? statInfo.GetIntBaseValue() : statInfo.BaseValue;
             
             ValueText.text = statInfo.GetDisplayValue();
 

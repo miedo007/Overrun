@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: data_stat_hp_regen
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Health Regen
-  <DescriptionKey>k__BackingField: Health regenerated over time
-  <Icon>k__BackingField: {fileID: -1845695436, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
-  <DisplayAsPercent>k__BackingField: 0
-  <DisplayPattern>k__BackingField: '{0:0.0}'
-  <RoundNumberDisplayPattern>k__BackingField: '{0:0}'
+  <DescriptionKey>k__BackingField: Percentage of MaxHP regenerated over time
+  <Icon>k__BackingField: {fileID: 1606713622, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayAsPercent>k__BackingField: 1
+  <DisplayPattern>k__BackingField: '{0:0.0}%'
+  <RoundNumberDisplayPattern>k__BackingField: '{0:0}%'
+  <IsIntValue>k__BackingField: 0

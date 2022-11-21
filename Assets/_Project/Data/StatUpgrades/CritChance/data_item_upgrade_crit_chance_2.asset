@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_upgrade_crit_chance_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: -1596790530, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Sprite>k__BackingField: {fileID: -308937619, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayName>k__BackingField: Crit Chance
   <Description>k__BackingField: Increase critical hit chance by {0}
   <BasePrice>k__BackingField: 0

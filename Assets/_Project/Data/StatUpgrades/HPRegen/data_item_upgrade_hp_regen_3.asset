@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: data_item_upgrade_hp_regen_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: -1845695436, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Sprite>k__BackingField: {fileID: 1606713622, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayName>k__BackingField: Health Regen
   <Description>k__BackingField: Increase health regeneration by {0}
   <BasePrice>k__BackingField: 0
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
-    <Value>k__BackingField: 0.4
+    <Value>k__BackingField: 0.08
     <ModifierType>k__BackingField: 0
-    <DisplayAsPercentage>k__BackingField: 0
+    <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []

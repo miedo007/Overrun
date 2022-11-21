@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Critical Chance
   <DescriptionKey>k__BackingField: Chance of doing Critical Damage on attack
-  <Icon>k__BackingField: {fileID: -1596790530, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Icon>k__BackingField: {fileID: -308937619, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 1
   <DisplayPattern>k__BackingField: '{0:0.0}%'
   <RoundNumberDisplayPattern>k__BackingField: '{0:0}%'

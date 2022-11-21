@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Max Health
   <DescriptionKey>k__BackingField: Maximum health points available
-  <Icon>k__BackingField: {fileID: -310119787, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Icon>k__BackingField: {fileID: -1969742373, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 0
   <DisplayPattern>k__BackingField: '{0:0.0}'
   <RoundNumberDisplayPattern>k__BackingField: '{0:0}'

@@ -14,9 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Stats>k__BackingField:
   - <Data>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
-    <BaseValue>k__BackingField: 1.5
+    <BaseValue>k__BackingField: 2
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
+      <IsLinear>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 0.5
+    <RoundingType>k__BackingField: 0
+    <HasMinValue>k__BackingField: 0
+    <MinValue>k__BackingField: 0
+    <HasMaxValue>k__BackingField: 0
+    <MaxValue>k__BackingField: 0
+  - <Data>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
+    <BaseValue>k__BackingField: 1
+    <LevelScaling>k__BackingField:
+      <Coefficient>k__BackingField: 1.09
+      <IsLinear>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 0.5
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0

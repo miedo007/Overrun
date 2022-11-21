@@ -11,5 +11,8 @@ namespace Project.Stats
         [field: SerializeField] public bool DisplayAsPercent { get; private set; }
         [field: SerializeField] public string DisplayPattern { get; private set; }
         [field: SerializeField] public string RoundNumberDisplayPattern { get; private set; }
+        [field: SerializeField] public bool IsIntValue { get; private set; } = false;
+        
+        public string Id => name;
     }
 }

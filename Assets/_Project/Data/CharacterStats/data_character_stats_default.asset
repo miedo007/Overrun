@@ -17,6 +17,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 10
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
+      <IsLinear>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 1
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 1
     <MinValue>k__BackingField: 1
@@ -26,6 +28,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 0
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 1
@@ -35,6 +39,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
@@ -44,6 +50,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
@@ -53,6 +61,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
@@ -62,6 +72,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 0
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
@@ -71,6 +83,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 0.03
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 1
     <MinValue>k__BackingField: 0
@@ -80,6 +94,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 5
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 1
     <MinValue>k__BackingField: 1
@@ -89,6 +105,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 1
@@ -98,6 +116,8 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 0.01
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 1
@@ -107,8 +127,21 @@ MonoBehaviour:
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 0
+      <LinearIncrease>k__BackingField: 0.1
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 1
     <HasMaxValue>k__BackingField: 0
     <MaxValue>k__BackingField: 1
+  - <Data>k__BackingField: {fileID: 11400000, guid: a5789d1cb49162e4aa87ca798158bee1, type: 2}
+    <BaseValue>k__BackingField: 3
+    <LevelScaling>k__BackingField:
+      <Coefficient>k__BackingField: 1
+      <IsLinear>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 0.1
+    <RoundingType>k__BackingField: 2
+    <HasMinValue>k__BackingField: 0
+    <MinValue>k__BackingField: 1
+    <HasMaxValue>k__BackingField: 1
+    <MaxValue>k__BackingField: 6

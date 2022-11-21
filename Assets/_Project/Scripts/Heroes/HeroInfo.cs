@@ -84,7 +84,7 @@ namespace Project.Heroes
 
         public void AddWeapon(WeaponData weaponData)
         {
-            if (CurrentWeapons.Count == Data.WeaponSlots)
+            if (!HasFreeWeaponSlot())
             {
                 return;
             }
@@ -111,6 +111,11 @@ namespace Project.Heroes
         public StatInfo GetStat(StatData statData)
         {
             return Stats.FirstOrDefault(x => x.Data == statData);
+        }
+        
+        public StatInfo GetStatWithId(string id)
+        {
+            return Stats.FirstOrDefault(x => x.Data.Id == id);
         }
 
         public void AddItem(ItemData item)
@@ -215,6 +220,16 @@ namespace Project.Heroes
             {
                 AddItem(objData as ItemData);
             }
+        }
+
+        public bool HasFreeWeaponSlot()
+        {
+            return CurrentWeapons.Count < GetWeaponSlotCount();
+        }
+
+        public int GetWeaponSlotCount()
+        {
+            return GetStatWithId("data_stat_weapon_slots").GetIntValue();
         }
     }
 }

@@ -75,17 +75,26 @@ namespace Project.Game.Enemies
 
         private IEnumerator SpawnRoutine()
         {
+            var delayBetweenGroups = 1.5f;
+            var totalEnemyCount = _currentLevel.GetEnemyCountForWave(_currentWaveIndex);
+            var waveDuration = _currentLevel.GetWaveDuration(_currentWaveIndex);
+            var spawnGroupCount = Mathf.FloorToInt(waveDuration / delayBetweenGroups) + 1;
+            var enemyCountPerGroup = Mathf.CeilToInt(totalEnemyCount / (float) spawnGroupCount);
+            
             var spawnDelay = _currentLevel.GetSpawnDelay(_currentWaveIndex);
             var spawnSequence = new SpawnSequence(_currentLevel.GetWaveInfo(_currentWaveIndex));
             
             while (enabled)
             {
-                var position = _roomManager.GetRandomPosition();
-                var enemy = spawnSequence.GetNext();
+                var groupCenter = _roomManager.GetRandomPosition();
+                var groupRadius = Random.Range(3f, 5f);
+                for (int i = 0; i < enemyCountPerGroup; i++)
+                {
+                    var enemy = spawnSequence.GetNext();
+                    StartCoroutine(SpawnEnemyRoutine(enemy, groupCenter, groupRadius));
+                }
 
-                StartCoroutine(SpawnEnemyRoutine(enemy, position));
-
-                var time = spawnDelay;
+                var time = delayBetweenGroups;
                 while (time > 0)
                 {
                     yield return null;
@@ -94,9 +103,9 @@ namespace Project.Game.Enemies
             }
         }
         
-        private IEnumerator SpawnEnemyRoutine(EnemyData enemyData, Vector3 groupCenter)
+        private IEnumerator SpawnEnemyRoutine(EnemyData enemyData, Vector3 groupCenter, float groupRadius)
         {
-            var spawnPoint = _roomManager.GetValidPositionInRadius(groupCenter, 2f);
+            var spawnPoint = _roomManager.GetValidPositionInRadius(groupCenter, groupRadius);
             var spawnWarning = LeanPool.Spawn(SpawnWarningPrefab, spawnPoint, Quaternion.identity, transform);
             
             yield return spawnWarning.ShowRoutine();

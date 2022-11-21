@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c614427e7cc044fca8de4b441ed1224d, type: 3}
-  m_Name: data_stat_speed
+  m_Name: data_stat_weapon_slots
   m_EditorClassIdentifier: 
-  <DisplayNameKey>k__BackingField: Speed
-  <DescriptionKey>k__BackingField: Movement speed
-  <Icon>k__BackingField: {fileID: 305908767, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayNameKey>k__BackingField: Weapon Slots
+  <DescriptionKey>k__BackingField: The number of weapons that can be equipped
+  <Icon>k__BackingField: {fileID: 5560789, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 0
-  <DisplayPattern>k__BackingField: '{0:0.0}'
-  <RoundNumberDisplayPattern>k__BackingField: '{0:0}'
+  <DisplayPattern>k__BackingField: '{0:0}'
+  <RoundNumberDisplayPattern>k__BackingField: '{0}'
+  <IsIntValue>k__BackingField: 1

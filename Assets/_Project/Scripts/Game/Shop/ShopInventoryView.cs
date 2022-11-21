@@ -103,7 +103,7 @@ namespace Project.Game.Shop
             var weaponData = data as WeaponData;
             if (weaponData != null)
             {
-                if (_heroRegistry.ActiveHero.CurrentWeapons.Count >= _heroRegistry.ActiveHero.Data.WeaponSlots)
+                if (!_heroRegistry.ActiveHero.HasFreeWeaponSlot())
                 {
                     weaponsFullNotification.Display();
                     return;

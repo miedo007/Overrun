@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Heroes;
+using Project.Stats;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ namespace Project.Game.Shop
         [SerializeField] private RectTransform headerPrefab;
         [SerializeField] private HeroInventoryRow rowPrefab;
         [SerializeField] private RectTransform parent;
+        [SerializeField] private StatData weaponSlotStat;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
 
@@ -22,6 +25,11 @@ namespace Project.Game.Shop
             _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
             _heroInfo = _heroRegistry.ActiveHero;
             OnActiveHeroChanged(_heroRegistry.ActiveHero);
+        }
+
+        private void OnDestroy()
+        {
+            _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)
@@ -69,8 +77,9 @@ namespace Project.Game.Shop
             weaponHeader.GetComponentInChildren<TextMeshProUGUI>().text = "WEAPONS";
             
             // add enough rows to support heroes max weapon count 
-            var rowCount = _heroInfo.Data.WeaponSlots / 3;
-            rowCount += _heroInfo.Data.WeaponSlots % 3 != 0 ? 1 : 0;
+            var slotCount = _heroInfo.GetWeaponSlotCount();
+            var rowCount = slotCount / 3;
+            rowCount += slotCount % 3 != 0 ? 1 : 0;
 
             var weaponIndex = 0;
             for (var i = 0; i < rowCount; i++)

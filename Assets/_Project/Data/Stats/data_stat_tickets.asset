@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayNameKey>k__BackingField: Tickets
   <DescriptionKey>k__BackingField: Modifies amount of tickets collected
-  <Icon>k__BackingField: {fileID: 469761900, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Icon>k__BackingField: {fileID: -164736604, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayAsPercent>k__BackingField: 1
   <DisplayPattern>k__BackingField: '{0:0.0}%'
   <RoundNumberDisplayPattern>k__BackingField: '{0:0}%'

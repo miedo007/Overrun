@@ -19,9 +19,9 @@ MonoBehaviour:
   <BasePrice>k__BackingField: 25
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
-    <Value>k__BackingField: 3
-    <ModifierType>k__BackingField: 0
-    <DisplayAsPercentage>k__BackingField: 0
+    <Value>k__BackingField: 0.25
+    <ModifierType>k__BackingField: 1
+    <DisplayAsPercentage>k__BackingField: 1
   - <StatData>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
     <Value>k__BackingField: 0.05
     <ModifierType>k__BackingField: 0
