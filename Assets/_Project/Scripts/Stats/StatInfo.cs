@@ -19,6 +19,7 @@ namespace Project.Stats
         [field: SerializeField] public bool HasMaxValue { get; private set; }
         [field: SerializeField, ShowIf("HasMaxValue")] public float MaxValue { get; private set; }
 
+        private int _roundingValue = 2;
         private float _modifiedValue;
         private bool _isDirty = true;
         public List<StatModifier> StatModifiers { get; private set; } = new();
@@ -42,7 +43,8 @@ namespace Project.Stats
 
         private float GetBaseFloatValueForLevel(int level)
         {
-            return LevelScaling.GetValueForLevel(BaseValue, level);
+            var baseValue = LevelScaling.GetValueForLevel(BaseValue, level);
+            return (float)Math.Round(baseValue, _roundingValue);
         }
        
         public float GetFloatValue()
@@ -113,8 +115,7 @@ namespace Project.Stats
                 _modifiedValue = MaxValue;
             }
             
-            _modifiedValue = (float)Math.Round(_modifiedValue, 4);
-            //Changed?.Invoke(this);
+            _modifiedValue = (float)Math.Round(_modifiedValue, _roundingValue);
         }
 
         public int GetIntLevel()

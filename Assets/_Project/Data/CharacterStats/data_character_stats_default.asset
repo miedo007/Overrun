@@ -34,7 +34,7 @@ MonoBehaviour:
   - <Data>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
-      <Coefficient>k__BackingField: 1.09
+      <Coefficient>k__BackingField: 1
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   - <Data>k__BackingField: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
-      <Coefficient>k__BackingField: 1.09
+      <Coefficient>k__BackingField: 1
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0

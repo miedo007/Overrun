@@ -63,9 +63,10 @@ namespace Project.Heroes
             return GetHeroInfo(heroData);
         }
 
-        public HeroInfo GetHeroInfo(HeroData heroData)
+        public HeroInfo GetHeroInfo(HeroData heroData, int level = -1)
         {
-            return new HeroInfo(heroData, Database.DefaultStats, 0);
+            var heroLevel = level < 0 ? _save.GetHeroLevel(heroData.Id) : level;
+            return new HeroInfo(heroData, Database.DefaultStats, heroLevel);
         }
 
         public void SetSelectedHero(string id)
@@ -83,6 +84,15 @@ namespace Project.Heroes
         public void SetActiveHero(HeroData heroData)
         {
             ActiveHero = GetHeroInfo(heroData);
+        }
+
+        public void UpgradeActiveHero()
+        {
+            var heroId = ActiveHero.Data.Id;
+            _save.IncrementHeroLevel(heroId);
+            SetActiveHero(ActiveHero.Data);
+            OnChanged?.Invoke();
+            ActiveHeroChanged?.Invoke(ActiveHero);
         }
     }
 }

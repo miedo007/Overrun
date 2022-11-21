@@ -1,7 +1,6 @@
 ﻿using System;
 using Mtl.Injection;
-using Project.Application;
-using Project.Game.UI;
+using Mtl.Save;
 using Project.Heroes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,12 +16,20 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private Image heroImage;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
+        [Inject] private readonly SaveManager _saveManager;
 
         private HeroInfo _heroInfo;
 
         private void Awake()
         {
             selectButton.onClick.AddListener(OnSelectButtonClicked);
+            upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+        }
+
+        private void OnUpgradeButtonClicked()
+        {
+            _heroRegistry.UpgradeActiveHero();
+            _saveManager.Save();
         }
 
         private void OnSelectButtonClicked()

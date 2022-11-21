@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.rovio.mtl.injection": "1.0.6",
-    "com.rovio.mtl.save": "1.0.1",
+    "com.rovio.mtl.save": "1.0.2",
     "com.rovio.mtl.toolbox": "1.0.15",
     "com.rovio.mtl.ui": "1.1.13",
     "com.rovio.mtl.uiframework": "1.0.2",

@@ -38,9 +38,14 @@ namespace Project.Game.UI
         {
             var value = statInfo.GetFloatValue();
             var baseValue = statInfo.BaseValue;
+            
             ValueText.text = statInfo.GetDisplayValue();
 
             var color = Color.white;
+            if (Mathf.Approximately(value, baseValue))
+            {
+                color = Colors.GetColor(Colors.White);
+            }
             if (value < baseValue)
             {
                 color = Colors.GetColor(Colors.Negative);

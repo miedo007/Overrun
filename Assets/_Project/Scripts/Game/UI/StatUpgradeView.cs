@@ -36,7 +36,7 @@ namespace Project.Game.UI
 
             var statModifier = data.StatModifiers[0];
             nameField.text = $"{_data.DisplayName} {_data.Tier.NamePostfix}";
-            descriptionField.text = string.Format(_data.Description, _data.StatModifiers[0].GetDisplayValue());
+            descriptionField.text = string.Format(_data.Description, statModifier.GetDisplayValue());
         }
     }
 }

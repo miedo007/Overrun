@@ -1,4 +1,5 @@
 ﻿using Project.Game.Player;
+using Project.Game.UI;
 using UnityEngine;
 
 namespace Project.Heroes
@@ -6,6 +7,7 @@ namespace Project.Heroes
     public class HeroViewController : MonoBehaviour
     {
         [field: SerializeField] public Animator Animator { get; private set; }
+        [field: SerializeField] public StatUpgradeList StatUpgradeList { get; private set; }
 
         private bool _isFlipped;
 

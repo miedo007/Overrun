@@ -58,12 +58,15 @@ namespace Project.Heroes
                 }
             }
         }
-        
-    
+
+        public int Level { get; set; }
+
+
         private HeroInfo() {}
 
         public HeroInfo(HeroData heroData, CharacterStats defaultStats, int heroLevel)
         {
+            Level = heroLevel;
             Data = heroData;
             
             foreach (var stat in defaultStats.Stats)
