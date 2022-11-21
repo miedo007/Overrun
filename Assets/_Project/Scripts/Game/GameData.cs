@@ -18,7 +18,7 @@ namespace Project.Game
 
         public Vector2Int GetItemTierRangeForWave(int waveIndex)
         {
-            return new Vector2Int(waveIndex - 10, Mathf.FloorToInt(waveIndex * 0.85f) + 1 ) ;
+            return new Vector2Int(waveIndex - 15, Mathf.FloorToInt(waveIndex * 0.7f) + 1 ) ;
         }
         
         public int GetSellPrice(BaseData data, int waveIndex)

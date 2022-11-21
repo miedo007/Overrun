@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
   m_Name: data_game_default
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.45
-  <ShopBasePriceMultiplier>k__BackingField: 0.68
-  <ResellValue>k__BackingField: 0.5
+  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.25
+  <ShopBasePriceMultiplier>k__BackingField: 0.5
+  <ResellValue>k__BackingField: 0.625
   <BaseRerollCost>k__BackingField: 1
   <RerollIncreasePerWave>k__BackingField: 3
   <RerollCostCoefficient>k__BackingField: 1.4
@@ -24,20 +24,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.23753369
-      outSlope: 0.23753369
+      inSlope: 0.021593973
+      outSlope: 0.021593973
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.09929078
+      outWeight: 0.10921986
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 6.295797
-      outSlope: 6.295797
+      inSlope: 85.53861
+      outSlope: 85.53861
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.14609927
+      inWeight: 0.012765944
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
