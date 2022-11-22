@@ -17,6 +17,7 @@ namespace Project.Stats
         [field: SerializeField] public bool HasMinValue { get; private set; }
         [field: SerializeField, ShowIf("HasMinValue")] public float MinValue { get; private set; }
         [field: SerializeField] public bool HasMaxValue { get; private set; }
+        [field: SerializeField] public bool AllowModifiersBeyondMaxValue { get; private set; }
         [field: SerializeField, ShowIf("HasMaxValue")] public float MaxValue { get; private set; }
 
         private int _roundingValue = 4;
@@ -115,7 +116,7 @@ namespace Project.Stats
                 _modifiedValue = Mathf.Max(_modifiedValue, MinValue);
             }
             
-            if (HasMaxValue)
+            if (HasMaxValue && !AllowModifiersBeyondMaxValue)
             {
                 _modifiedValue = Mathf.Min(_modifiedValue, MaxValue);
             }

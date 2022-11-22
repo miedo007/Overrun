@@ -1,4 +1,5 @@
-﻿using Lean.Pool;
+﻿using System;
+using Lean.Pool;
 using Mtl.Injection;
 using Project.Game.Levels;
 using Project.Heroes;
@@ -23,6 +24,12 @@ namespace Project.Game.Collectibles
         {
             _levelController.WaveStarted += OnWaveStarted;
             CollectibleContainer.Collected += OnContainerCollected;
+        }
+
+        private void OnDestroy()
+        {
+            _levelController.WaveStarted -= OnWaveStarted;
+            CollectibleContainer.Collected -= OnContainerCollected;
         }
 
         private void OnContainerCollected(CollectibleData data)

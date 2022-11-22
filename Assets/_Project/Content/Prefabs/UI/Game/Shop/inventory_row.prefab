@@ -77,3 +77,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 2650105790795811056, guid: 727c8a027feb0e64bb83a1bc53f5974a, type: 3}
+  emptySlotPrefab: {fileID: 9123529177749435493, guid: 219d3545e9fc032448cd7d83ebbadef3, type: 3}
+  placeholderPrefab: {fileID: 9123529177749435493, guid: c016315c4d9760048a3f93b3e6fb3143, type: 3}

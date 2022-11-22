@@ -14,7 +14,6 @@ namespace Project.Game.Shop
         [SerializeField] private RectTransform headerPrefab;
         [SerializeField] private HeroInventoryRow rowPrefab;
         [SerializeField] private RectTransform parent;
-        [SerializeField] private StatData weaponSlotStat;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
 
@@ -75,52 +74,63 @@ namespace Project.Game.Shop
 
             var weaponHeader = Instantiate(headerPrefab, parent);
             weaponHeader.GetComponentInChildren<TextMeshProUGUI>().text = "WEAPONS";
+
+            if (_heroInfo == null)
+            {
+                _heroInfo = _heroRegistry.ActiveHero;
+            }
             
             // add enough rows to support heroes max weapon count 
             var slotCount = _heroInfo.GetWeaponSlotCount();
+            Debug.LogWarning($"SLOT COUNT :: {slotCount}");
             var rowCount = slotCount / 3;
             rowCount += slotCount % 3 != 0 ? 1 : 0;
 
-            var weaponIndex = 0;
+            var slotIndex = 0;
             for (var i = 0; i < rowCount; i++)
             {
-                var weapons = new List<BaseData>();
-                for (var j = weaponIndex; j < weaponIndex + 3; j++)
+                var row = Instantiate(rowPrefab, parent);
+                for (var j = slotIndex; j < slotIndex + 3; j++)
                 {
                     if (j < _heroInfo.CurrentWeapons.Count)
                     {
-                        weapons.Add(_heroInfo.CurrentWeapons[j]);
+                        row.AddItem(_heroInfo.CurrentWeapons[j]);
+                    }
+                    else if (j < slotCount)
+                    {
+                        row.AddEmpty();
+                    }
+                    else
+                    {
+                        row.AddPlaceholder();
                     }
                 }
                 
-                var row = Instantiate(rowPrefab, parent);
-                row.Populate(weapons, 3);
-                
-                weaponIndex += 3;
+                slotIndex += 3;
             }
             
             var itemsHeader = Instantiate(headerPrefab, parent);
             itemsHeader.GetComponentInChildren<TextMeshProUGUI>().text = "ITEMS";
             
-            // add enough rows to support heroes max weapon count 
             rowCount = _heroInfo.Items.Count / 3;
             rowCount += _heroInfo.Items.Count % 3 != 0 ? 1 : 0;
 
             var itemIndex = 0;
             for (var i = 0; i < rowCount; i++)
             {
-                var items = new List<BaseData>();
+                var row = Instantiate(rowPrefab, parent);
+                
                 for (var j = itemIndex; j < itemIndex + 3; j++)
                 {
                     if (j < _heroInfo.Items.Count)
                     {
-                        items.Add(_heroInfo.Items[j]);
+                        row.AddItem(_heroInfo.Items[j]);
+                    }
+                    else
+                    {
+                        row.AddPlaceholder();
                     }
                 }
-                
-                var row = Instantiate(rowPrefab, parent);
-                row.Populate(items, -1);
-                
                 itemIndex += 3;
             }
         }

@@ -7,11 +7,30 @@ namespace Project.Game.Shop
     public class HeroInventoryRow : MonoBehaviour
     {
         [SerializeField] private HeroInventoryItem itemPrefab;
+        [SerializeField] private GameObject emptySlotPrefab;
+        [SerializeField] private GameObject placeholderPrefab;
 
-        public void Populate(List<BaseData> items, int forceIncludeCount)
+        public void AddItem(BaseData item)
         {
-            var count = forceIncludeCount < 0 ? items.Count :
-                forceIncludeCount > items.Count ? forceIncludeCount : items.Count;
+            var itemInstance = Instantiate(itemPrefab, transform);
+            itemInstance.Initialize(item);
+        }
+
+        public void AddEmpty()
+        {
+            Instantiate(emptySlotPrefab, transform);
+        }
+        
+        public void AddPlaceholder()
+        {
+            Instantiate(placeholderPrefab, transform);
+        }
+        
+
+        public void Populate(List<BaseData> items, int forceCount = -1)
+        {
+            var count = forceCount < 0 ? items.Count :
+                forceCount > items.Count ? forceCount : items.Count;
             
             for (var index = 0; index < count; index++)
             {
