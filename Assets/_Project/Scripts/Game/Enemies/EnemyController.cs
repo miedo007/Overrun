@@ -81,15 +81,15 @@ namespace Project.Game.Enemies
             
             CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage,
                 level,
-                0,
+                wave,
                 _gameData.DamageScalingPerLevel,
                 _gameData.DamageScalingPerWave);
         }
 
         private float GetScaledValue(float baseValue, int level, int wave, float levelScaling, float waveScaling)
         {
-            var levelScaled = baseValue * Mathf.Pow(levelScaling, level);
-            return levelScaled * Mathf.Pow(waveScaling, wave);
+            var levelScaled = baseValue * ((level * levelScaling) + 1);
+            return levelScaled * ((wave * waveScaling) + 1);
         }
 
         public void Step(float dt, float time, PlayerController playerController)

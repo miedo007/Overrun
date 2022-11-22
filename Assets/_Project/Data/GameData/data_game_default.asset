@@ -65,7 +65,7 @@ MonoBehaviour:
   <HealthScalingPerLevel>k__BackingField: 1.25
   <HealthScalingPerWave>k__BackingField: 1.5
   <DamageScalingPerLevel>k__BackingField: 1.2
-  <DamageScalingPerWave>k__BackingField: 1.5
+  <DamageScalingPerWave>k__BackingField: 1.3
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1.05
   <RewardWaveScaling>k__BackingField: 1.05

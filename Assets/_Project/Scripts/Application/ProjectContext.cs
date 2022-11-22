@@ -25,7 +25,6 @@ namespace Project.Application
             Bind(heroDatabase);
             Bind(gameData);         
             Bind(saveManager);
-            Bind(new SessionInfo());
             
             var playerInfo = new PlayerInfo();
             var playerReadWriter = new FileReadWriter("player");
@@ -36,6 +35,11 @@ namespace Project.Application
                     playerInfo.Create();
                 }
             }, playerReadWriter);
+            
+            Bind(new SessionInfo
+            {
+                LevelIndex = playerInfo.PlayerSave.TopStageIndex
+            });
 
             var heroesInfo = new HeroRegistry();
             var heroesReadWriter = new FileReadWriter("heroes");

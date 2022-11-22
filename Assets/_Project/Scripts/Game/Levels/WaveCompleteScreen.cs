@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Mtl.UiFramework;
 using Project.Game.UI;
+using TMPro;
 using UnityEngine;
 
 namespace Project.Game.Levels
@@ -11,6 +12,7 @@ namespace Project.Game.Levels
         [SerializeField] private AnimationClip openClip;
         [SerializeField] private AnimationClip closeClip;
         [SerializeField] private CurrencyRewardView currencyRewardView;
+        [SerializeField] private TextMeshProUGUI completionTypeText;
         
         
         protected override void OnOpened()
@@ -18,8 +20,13 @@ namespace Project.Game.Levels
             StartCoroutine(WaitForAnimation());
         }
 
-        public void Initialize(int currencyReward)
+        public void Initialize(int currencyReward, bool isLevelComplete = false)
         {
+            if (isLevelComplete)
+            {
+                completionTypeText.text = "LEVEL";
+            }
+            
             currencyRewardView.SetValue(currencyReward);
         }
 

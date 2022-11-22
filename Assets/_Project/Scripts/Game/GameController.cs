@@ -69,15 +69,22 @@ namespace Project.Game
         {
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
+
+            var currencyReward = ApplySoftCurrencyReward();
             
+            var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
+            waveCompleteScreen.Initialize(currencyReward);
+            waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
+        }
+
+        private int ApplySoftCurrencyReward()
+        {
             var currencyReward =
                 _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.CurrentWaveIndex);
             
             _playerInfo.ChangeCurrency(currencyReward);
             
-            var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
-            waveCompleteScreen.Initialize(currencyReward);
-            waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
+            return currencyReward;
         }
 
         private void OnWaveCompleteScreenClosed(UIScreen screen)
@@ -124,7 +131,8 @@ namespace Project.Game
             _playerController.enabled = true;
             
             _playerInput.Show();
-            _levelController.BeginNextWave(0,1f);
+
+            _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
         }
 
         private void OnLevelCompleted()
@@ -133,12 +141,15 @@ namespace Project.Game
             {
                 _playerInfo.IncrementTopStage();
             }
-            
+
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
-            
-            var levelCompleteScreen = _uiFrame.Open<LevelCompleteScreen>();
+
+            var currencyReward = ApplySoftCurrencyReward();
+
+            var levelCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
+            levelCompleteScreen.Initialize(currencyReward, true);
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
         }
 

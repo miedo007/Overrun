@@ -342,6 +342,7 @@ MonoBehaviour:
   openClip: {fileID: 7400000, guid: dbd67de6a960b2942954b55557bfefd8, type: 2}
   closeClip: {fileID: 7400000, guid: 2f81bb91ef1ae934ba1bda0386a4e899, type: 2}
   currencyRewardView: {fileID: 6707163910866324324}
+  completionTypeText: {fileID: 6004713898722812875}
 --- !u!1 &6913350927682079232
 GameObject:
   m_ObjectHideFlags: 0

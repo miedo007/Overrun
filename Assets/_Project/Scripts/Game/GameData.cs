@@ -51,7 +51,7 @@ namespace Project.Game
 
         public int GetCurrencyReward(int levelIndex, int waveIndex)
         {
-            var scaled = Mathf.CeilToInt(RewardBaseValue * Mathf.Pow(RewardLevelScaling, levelIndex));
+            var scaled = Mathf.CeilToInt((RewardBaseValue * (levelIndex + 1)) * Mathf.Pow(RewardLevelScaling, levelIndex));
             scaled = Mathf.CeilToInt(scaled * Mathf.Pow(RewardWaveScaling, waveIndex));
             return scaled;
         }
