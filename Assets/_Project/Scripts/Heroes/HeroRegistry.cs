@@ -94,5 +94,7 @@ namespace Project.Heroes
             OnChanged?.Invoke();
             ActiveHeroChanged?.Invoke(ActiveHero);
         }
+
+        
     }
 }

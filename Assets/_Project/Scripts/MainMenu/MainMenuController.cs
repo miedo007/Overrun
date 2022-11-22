@@ -4,10 +4,10 @@ using Project.Application;
 using Project.Game;
 using Project.Heroes;
 using Project.MainMenu.HeroSelection;
-using Project.Scripts.MainMenu.SagaMap;
+using Project.MainMenu.SagaMap;
 using UnityEngine;
 
-namespace Project.Scripts.MainMenu
+namespace Project.MainMenu
 {
     public class MainMenuController : MonoBehaviour, IInjectionReady
     {
@@ -24,11 +24,23 @@ namespace Project.Scripts.MainMenu
         private void Start()
         {
             _uiFrame.Open<CurrencyBarScreen>();
+            _uiFrame.Open<SagaMapScreen>();
             
-            var sagamapScreen = _uiFrame.Open<SagaMapScreen>();
-            sagamapScreen.LevelSelected += OnLevelSelected;
-            
-            OpenHeroSelection();
+            var navBar = _uiFrame.Open<NavBarScreen>();
+            navBar.PlayButtonClicked += OnPlayButtonClicked;    
+            navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
+        }
+
+        private void OnPlayButtonClicked()
+        {
+            var sagamap = _uiFrame.Get<SagaMapScreen>();
+            var levelIndex = sagamap.GetSelectedLevel();
+            OnLevelSelected(levelIndex);
+        }
+
+        private void OnUpgradeButtonClicked()
+        {
+            _uiFrame.Open<HeroSelectionScreen>();
         }
 
         private void OpenHeroSelection()
@@ -38,9 +50,6 @@ namespace Project.Scripts.MainMenu
 
         private void OnLevelSelected(int levelIndex)
         {
-            var sagamapScreen = _uiFrame.Get<SagaMapScreen>();
-            sagamapScreen.LevelSelected -= OnLevelSelected;
-            
             LoadLevel(levelIndex);
         }
 

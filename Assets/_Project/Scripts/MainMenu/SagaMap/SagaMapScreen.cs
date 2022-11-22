@@ -7,16 +7,16 @@ using Project.Heroes;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.Scripts.MainMenu.SagaMap
+namespace Project.MainMenu.SagaMap
 {
     public class SagaMapScreen : UIScreen
     {
-        public event Action<int> LevelSelected;
-        
         [SerializeField] private SagaMapController sagaMapController;
         [SerializeField] private Image characterImage;
         
         [Inject] private readonly PlayerInfo _playerInfo;
+
+        private int _currentlySelectedLevel = -1;
 
         private void Awake()
         {
@@ -30,13 +30,20 @@ namespace Project.Scripts.MainMenu.SagaMap
 
         private void OnNodeSelected(int nodeIndex)
         {
-            LevelSelected?.Invoke(nodeIndex);
+            _currentlySelectedLevel = nodeIndex;
         }
 
         protected override void OnOpened()
         {
             base.OnOpened();
-            sagaMapController.Init(_playerInfo.PlayerSave.TopStageIndex);
+            var topStage = _playerInfo.PlayerSave.TopStageIndex;
+            sagaMapController.Init(topStage);
+            OnNodeSelected(topStage);
+        }
+
+        public int GetSelectedLevel()
+        {
+            return _currentlySelectedLevel;
         }
     }
 }

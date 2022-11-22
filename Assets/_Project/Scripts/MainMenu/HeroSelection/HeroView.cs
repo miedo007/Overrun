@@ -17,6 +17,7 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private Button selectButton;
         [SerializeField] private Button upgradeButton;
         [SerializeField] private TextMeshProUGUI upgradeCostText;
+        [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image heroImage;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
@@ -80,6 +81,7 @@ namespace Project.MainMenu.HeroSelection
         private void OnActiveHeroChanged(HeroInfo heroInfo)
         {
             _heroInfo = heroInfo;
+            levelText.text = $"LEVEL {heroInfo.Level + 1}"; 
             heroImage.sprite = _heroInfo.Data.Sprite;
             UpdateUpgradeButton();
         }

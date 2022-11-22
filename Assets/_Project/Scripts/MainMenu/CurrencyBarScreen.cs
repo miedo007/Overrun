@@ -1,6 +1,6 @@
 ﻿using Mtl.UiFramework;
 
-namespace Project.Scripts.MainMenu
+namespace Project.MainMenu
 {
     public class CurrencyBarScreen : UIScreen
     {
