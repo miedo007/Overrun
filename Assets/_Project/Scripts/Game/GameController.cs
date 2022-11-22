@@ -23,6 +23,7 @@ namespace Project.Game
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly SessionInfo _sessionInfo;
+        [Inject] private readonly GameData _gameData;
         [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
         [Inject ("items")] private TieredGroupDatabase _itemDatabase;
 
@@ -69,7 +70,13 @@ namespace Project.Game
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
             
+            var currencyReward =
+                _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.CurrentWaveIndex);
+            
+            _playerInfo.ChangeCurrency(currencyReward);
+            
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
+            waveCompleteScreen.Initialize(currencyReward);
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
 

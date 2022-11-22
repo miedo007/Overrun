@@ -15,3 +15,4 @@ MonoBehaviour:
   <Tiers>k__BackingField:
   - <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
     <Data>k__BackingField: {fileID: 11400000, guid: 143725cb00e7c094093e61aef86adee3, type: 2}
+  <MaxCount>k__BackingField: 3

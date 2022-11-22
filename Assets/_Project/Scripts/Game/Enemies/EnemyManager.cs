@@ -81,13 +81,12 @@ namespace Project.Game.Enemies
             var spawnGroupCount = Mathf.FloorToInt(waveDuration / delayBetweenGroups) + 1;
             var enemyCountPerGroup = Mathf.CeilToInt(totalEnemyCount / (float) spawnGroupCount);
             
-            var spawnDelay = _currentLevel.GetSpawnDelay(_currentWaveIndex);
             var spawnSequence = new SpawnSequence(_currentLevel.GetWaveInfo(_currentWaveIndex));
             
             while (enabled)
             {
-                var groupCenter = _roomManager.GetRandomPosition();
-                var groupRadius = Random.Range(3f, 5f);
+                var groupCenter = _playerController.Position;
+                var groupRadius = Random.Range(4f, 6f);
                 for (int i = 0; i < enemyCountPerGroup; i++)
                 {
                     var enemy = spawnSequence.GetNext();

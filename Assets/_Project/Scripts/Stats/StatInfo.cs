@@ -37,7 +37,8 @@ namespace Project.Stats
                 HasMinValue = HasMinValue,
                 MinValue = MinValue,
                 HasMaxValue = HasMaxValue,
-                MaxValue = MaxValue
+                MaxValue = MaxValue,
+                AllowModifiersBeyondMaxValue = AllowModifiersBeyondMaxValue
             };
             return levelStatInfo;
         }

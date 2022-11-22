@@ -12,24 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
   m_Name: data_game_default
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.3
-  <ShopBasePriceMultiplier>k__BackingField: 0.7
+  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.265
+  <ShopBasePriceMultiplier>k__BackingField: 0.8
   <ResellValue>k__BackingField: 0.625
   <BaseRerollCost>k__BackingField: 1
   <RerollIncreasePerWave>k__BackingField: 3
-  <RerollCostCoefficient>k__BackingField: 1.4
+  <RerollCostCoefficient>k__BackingField: 1.3
   <RarityCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.021593973
-      outSlope: 0.021593973
+      inSlope: 9.645781
+      outSlope: 9.645781
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.10921986
+      outWeight: 0.1480493
+    - serializedVersion: 3
+      time: 0.18698353
+      value: 0.4443674
+      inSlope: 0.0938558
+      outSlope: 0.0938558
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.42123562
+      outWeight: 0.38397023
+    - serializedVersion: 3
+      time: 0.797169
+      value: 0.493811
+      inSlope: 0.10962183
+      outSlope: 0.10962183
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2733938
+      outWeight: 0.58942276
     - serializedVersion: 3
       time: 1
       value: 1
@@ -37,10 +55,20 @@ MonoBehaviour:
       outSlope: 85.53861
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.012765944
+      inWeight: 0.023657976
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   <HealthRegenRate>k__BackingField: 2
   <MaxContainersPerWave>k__BackingField: 5
+  <HealthScalingPerLevel>k__BackingField: 1.25
+  <HealthScalingPerWave>k__BackingField: 1.5
+  <DamageScalingPerLevel>k__BackingField: 1.2
+  <DamageScalingPerWave>k__BackingField: 1.5
+  <RewardBaseValue>k__BackingField: 25
+  <RewardLevelScaling>k__BackingField: 1.05
+  <RewardWaveScaling>k__BackingField: 1.05
+  <UpgradeBaseCost>k__BackingField: 100
+  <UpgradeIncreasePerLevel>k__BackingField: 50
+  <UpgradeCostScaling>k__BackingField: 1.1

@@ -82,7 +82,6 @@ namespace Project.Game.Shop
             
             // add enough rows to support heroes max weapon count 
             var slotCount = _heroInfo.GetWeaponSlotCount();
-            Debug.LogWarning($"SLOT COUNT :: {slotCount}");
             var rowCount = slotCount / 3;
             rowCount += slotCount % 3 != 0 ? 1 : 0;
 

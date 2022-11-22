@@ -23,6 +23,8 @@ namespace Project.Scripts.MainMenu
 
         private void Start()
         {
+            _uiFrame.Open<CurrencyBarScreen>();
+            
             var sagamapScreen = _uiFrame.Open<SagaMapScreen>();
             sagamapScreen.LevelSelected += OnLevelSelected;
             

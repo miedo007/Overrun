@@ -48,7 +48,6 @@ namespace Project.Heroes
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)
         {
-            Debug.Log("Active hero changed");
             _currentHeroInfo = heroInfo;
             Initialize();
         }

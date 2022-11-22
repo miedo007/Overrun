@@ -9,6 +9,7 @@ namespace Project.Tiers
     public class TieredDataGroup : ScriptableObject
     {
         [field: SerializeField] public List<TierInfo> Tiers { get; private set; } = new();
+        [field: SerializeField] public int MaxCount { get; private set; } = -1;
 
         public TierInfo GetRandomTier(AnimationCurve rarityCurve = null, int minTier = -1, int maxTier = -1)
         {

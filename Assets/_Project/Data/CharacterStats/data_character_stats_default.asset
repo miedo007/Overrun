@@ -146,7 +146,7 @@ MonoBehaviour:
     <AllowModifiersBeyondMaxValue>k__BackingField: 0
     <MaxValue>k__BackingField: 1
   - <Data>k__BackingField: {fileID: 11400000, guid: a5789d1cb49162e4aa87ca798158bee1, type: 2}
-    <BaseValue>k__BackingField: 4
+    <BaseValue>k__BackingField: 3
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1
       <IsLinear>k__BackingField: 1
@@ -155,5 +155,5 @@ MonoBehaviour:
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 1
     <HasMaxValue>k__BackingField: 1
-    <AllowModifiersBeyondMaxValue>k__BackingField: 0
+    <AllowModifiersBeyondMaxValue>k__BackingField: 1
     <MaxValue>k__BackingField: 6

@@ -18,7 +18,9 @@ namespace Project.Game.UI
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
-        
+
+        private Dictionary<TieredDataGroup, int> _groupCountDict = new();
+
         private  HeroInfo _heroInfo;
 
         private void Awake()
@@ -52,11 +54,18 @@ namespace Project.Game.UI
             for (int i = 0; i < upgradeViews.Count; i++)
             {
                 var randomStatUpgradeGroup = upgradeDatabase.GetRandom();
-                while (upgradeSelection.Contains(randomStatUpgradeGroup))
+
+                var validSelectionMade = false;
+                while (!validSelectionMade)
                 {
                     randomStatUpgradeGroup = upgradeDatabase.GetRandom();
+                    if (DoesNotExceedMaxCount(randomStatUpgradeGroup) && !upgradeSelection.Contains(randomStatUpgradeGroup))
+                    {
+                        upgradeSelection.Add(randomStatUpgradeGroup);
+                        IncreaseCount(randomStatUpgradeGroup);
+                        validSelectionMade = true;
+                    }
                 }
-                upgradeSelection.Add(randomStatUpgradeGroup);
             }
 
             var tierRange = _gameData.GetItemTierRangeForWave(_levelController.CurrentWaveIndex);
@@ -68,6 +77,36 @@ namespace Project.Game.UI
 
                 upgradeViews[i].Initialize(upgrade);
             }
+        }
+
+        private void IncreaseCount(TieredDataGroup group)
+        {
+            if (group.MaxCount <= 0)
+            {
+                return;
+            }
+
+            if (!_groupCountDict.ContainsKey(group))
+            {
+                _groupCountDict.Add(group, 0);
+            }
+
+            _groupCountDict[group]++;
+        }
+
+        private bool DoesNotExceedMaxCount(TieredDataGroup group)
+        {
+            if (group.MaxCount <= 0)
+            {
+                return true;
+            }
+
+            if (!_groupCountDict.ContainsKey(group))
+            {
+                return true;
+            }
+
+            return _groupCountDict[group] < group.MaxCount;
         }
 
         public void OnReady()

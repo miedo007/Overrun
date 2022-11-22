@@ -1,7 +1,10 @@
 ﻿using System;
 using Mtl.Injection;
 using Mtl.Save;
+using Project.Application;
+using Project.Game;
 using Project.Heroes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +16,13 @@ namespace Project.MainMenu.HeroSelection
         
         [SerializeField] private Button selectButton;
         [SerializeField] private Button upgradeButton;
+        [SerializeField] private TextMeshProUGUI upgradeCostText;
         [SerializeField] private Image heroImage;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly SaveManager _saveManager;
+        [Inject] private readonly GameData _gameData;
+        [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
 
@@ -28,8 +34,32 @@ namespace Project.MainMenu.HeroSelection
 
         private void OnUpgradeButtonClicked()
         {
+            var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
+            _playerInfo.ChangeCurrency(-nextUpgradeCost);
             _heroRegistry.UpgradeActiveHero();
             _saveManager.Save();
+        }
+
+        public void OnReady()
+        {
+            _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
+            OnActiveHeroChanged(_heroRegistry.ActiveHero);
+            
+            _playerInfo.OnCurrencyChanged += OnCurrencyChanged;
+            OnCurrencyChanged();
+        }
+        
+
+        private void OnCurrencyChanged()
+        {
+            UpdateUpgradeButton();
+        }
+
+        private void UpdateUpgradeButton()
+        {
+            var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
+            upgradeButton.interactable = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
+            upgradeCostText.text = $"<sprite name=currency_coin> {nextUpgradeCost}";
         }
 
         private void OnSelectButtonClicked()
@@ -38,24 +68,20 @@ namespace Project.MainMenu.HeroSelection
             Selected?.Invoke(_heroInfo.Data);
         }
 
-        public void OnReady()
-        {
-            _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
-            OnActiveHeroChanged(_heroRegistry.ActiveHero);
-        }
-
         private void OnDestroy()
         {
-            if (_heroRegistry != null)
-            {
-                _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
-            }
+            _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
+            OnActiveHeroChanged(_heroRegistry.ActiveHero);
+            
+            _playerInfo.OnCurrencyChanged -= OnCurrencyChanged;
+            OnCurrencyChanged();
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)
         {
             _heroInfo = heroInfo;
             heroImage.sprite = _heroInfo.Data.Sprite;
+            UpdateUpgradeButton();
         }
     }
 }

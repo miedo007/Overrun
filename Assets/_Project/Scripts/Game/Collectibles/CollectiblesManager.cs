@@ -1,6 +1,7 @@
 ﻿using System;
 using Lean.Pool;
 using Mtl.Injection;
+using Project.Application;
 using Project.Game.Levels;
 using Project.Heroes;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Project.Game.Collectibles
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly HeroRegistry _heroRegistry;
+        [Inject] private readonly PlayerInfo _playerInfo;
 
         private int _containersDropped;
         
@@ -24,12 +26,19 @@ namespace Project.Game.Collectibles
         {
             _levelController.WaveStarted += OnWaveStarted;
             CollectibleContainer.Collected += OnContainerCollected;
+            DefaultCollectibleFinalWave.Collected += OnFinalWaveCollectibleCollected;
         }
 
         private void OnDestroy()
         {
             _levelController.WaveStarted -= OnWaveStarted;
             CollectibleContainer.Collected -= OnContainerCollected;
+            DefaultCollectibleFinalWave.Collected -= OnFinalWaveCollectibleCollected;
+        }
+        
+        private void OnFinalWaveCollectibleCollected(CollectibleData obj)
+        {
+            _playerInfo.ChangeCurrency(Mathf.RoundToInt(obj.Value));
         }
 
         private void OnContainerCollected(CollectibleData data)

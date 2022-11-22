@@ -22,6 +22,7 @@ namespace Project.Game.Enemies
         
         [Inject] private readonly PopupTextManager _popupTextManager;
         [Inject] private readonly RoomManager _roomManager;
+        [Inject] private readonly GameData _gameData;
 
         private Transform _transform;
         private int _facingDirection = 1;
@@ -72,14 +73,23 @@ namespace Project.Game.Enemies
             FacePlayer(direction);
             
             Data = enemyData;
-            CurrentHealth = GetScaledValue(enemyData.BaseHealth, level, wave);
-            CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage, level, 0);
+            CurrentHealth = GetScaledValue(enemyData.BaseHealth,
+                level,
+                wave,
+                _gameData.HealthScalingPerLevel,
+                _gameData.HealthScalingPerWave);
+            
+            CurrentMeleeDamage = GetScaledValue(enemyData.MeleeDamage,
+                level,
+                0,
+                _gameData.DamageScalingPerLevel,
+                _gameData.DamageScalingPerWave);
         }
 
-        private float GetScaledValue(float baseValue, int level, int wave)
+        private float GetScaledValue(float baseValue, int level, int wave, float levelScaling, float waveScaling)
         {
-            var levelScaled = baseValue * Mathf.Pow(Data.LevelScaling, level);
-            return levelScaled * Mathf.Pow(Data.WaveScaling, wave);
+            var levelScaled = baseValue * Mathf.Pow(levelScaling, level);
+            return levelScaled * Mathf.Pow(waveScaling, wave);
         }
 
         public void Step(float dt, float time, PlayerController playerController)

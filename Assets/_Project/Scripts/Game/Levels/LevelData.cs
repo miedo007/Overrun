@@ -10,6 +10,7 @@ namespace Project.Game.Levels
         [field: SerializeField] public int EnemyCountIncreasePerWave { get; private set; } = 15;
         [field: SerializeField] public int BaseWaveDuration { get; private set; } = 45;
         [field: SerializeField] public int WaveDurationIncrease { get; private set; } = 10;
+        [field: SerializeField] public int WaveDurationIncreaseRate { get; private set; } = 3;
         [field: SerializeField] public int MaxWaveDuration { get; private set; } = 60;
         [field: SerializeField] public WaveInfo[] Waves { get; private set; }
         
@@ -35,7 +36,8 @@ namespace Project.Game.Levels
 
         public int GetWaveDuration(int waveIndex)
         {
-            return Mathf.Min(MaxWaveDuration, BaseWaveDuration + (WaveDurationIncrease * waveIndex));
+            var waveDurationIncreaseCount = waveIndex / WaveDurationIncreaseRate;
+            return Mathf.Min(MaxWaveDuration, BaseWaveDuration + (WaveDurationIncrease * waveDurationIncreaseCount));
         }
     }
 

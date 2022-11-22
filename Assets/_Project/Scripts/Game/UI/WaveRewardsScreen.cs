@@ -4,6 +4,7 @@ using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
 using Project.Game.Items;
+using Project.Game.Levels;
 using Project.Game.Shop;
 using Project.Heroes;
 using Project.Tiers;
@@ -27,6 +28,8 @@ namespace Project.Game.UI
 
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly HeroRegistry _heroRegistry;
+        [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly PlayerInfo _playerInfo;
         [Inject("items")] private readonly TieredGroupDatabase _itemDatabase;
 
         private BaseData _currentItem;
@@ -70,11 +73,10 @@ namespace Project.Game.UI
             
             yield return backer.DOFade(1, 0.125f).WaitForCompletion();
             yield return headerRect.DOScale(1, 0.125f).WaitForCompletion();
-
+            
             yield return StartCoroutine(RewardRoutine());
 
         }
-
         private IEnumerator RewardRoutine()
         {
             var tierRange = _gameData.GetItemTierRangeForWave(_waveIndex);
