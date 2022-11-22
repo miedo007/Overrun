@@ -70,5 +70,5 @@ MonoBehaviour:
   <RewardLevelScaling>k__BackingField: 1.05
   <RewardWaveScaling>k__BackingField: 1.05
   <UpgradeBaseCost>k__BackingField: 100
-  <UpgradeIncreasePerLevel>k__BackingField: 50
+  <UpgradeIncreasePerLevel>k__BackingField: 25
   <UpgradeCostScaling>k__BackingField: 1.1
