@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26af90716d104350b6bff52c5c3c77a7, type: 3}
-  m_Name: data_character_stats_default
+  m_Name: data_hero_stats_default
   m_EditorClassIdentifier: 
   <Stats>k__BackingField:
   - <Data>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
@@ -18,7 +18,7 @@ MonoBehaviour:
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
       <IsLinear>k__BackingField: 1
-      <LinearIncrease>k__BackingField: 1
+      <LinearIncrease>k__BackingField: 2
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 1
     <MinValue>k__BackingField: 1
