@@ -48,7 +48,7 @@ namespace Project.Game.Shop
 
         public void Initialize()
         {
-            _waveIndex = _levelController.CurrentWaveIndex;
+            _waveIndex = _levelController.WaveIndex;
             if (_levelController.IsFinalWave)
             {
                 NextWaveText.text = "Begin\nFinal Wave!";

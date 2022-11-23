@@ -11,35 +11,13 @@ namespace Project.Tiers
         [field: SerializeField] public List<TierInfo> Tiers { get; private set; } = new();
         [field: SerializeField] public int MaxCount { get; private set; } = -1;
 
-        public TierInfo GetRandomTier(AnimationCurve rarityCurve = null, int minTier = -1, int maxTier = -1)
+        public TierInfo GetRandomTier(AnimationCurve rarityCurve, Vector2Int tierRange, float chanceIncrease)
         {
-            var curvedValue = Random.value;
-
-            if (minTier < 0 && maxTier < 0)
-            {
-                if (rarityCurve == null)
-                {
-                    return Tiers[Random.Range(0, Tiers.Count)];
-                }
-                else
-                {
-                    curvedValue = rarityCurve.Evaluate(curvedValue);
-                    var randomIndex = Mathf.RoundToInt(curvedValue * Tiers.Count);
-                    return Tiers[randomIndex];
-                }
-            }
-
-            if (rarityCurve == null)
-            {
-                var randomTier = Random.Range(minTier, maxTier);
-                randomTier = Mathf.Clamp(randomTier, 0, Tiers.Count - 1);
-                return Tiers[randomTier];
-            }
-            
-            curvedValue = rarityCurve.Evaluate(curvedValue);
-            var evaluatedIindex = Mathf.RoundToInt(Mathf.Lerp((float) minTier, (float) maxTier, curvedValue));
-            evaluatedIindex = Mathf.Clamp(evaluatedIindex, 0, Tiers.Count - 1);
-            return Tiers[evaluatedIindex];
+            var chance = Random.value + chanceIncrease;
+            chance = rarityCurve.Evaluate(chance);
+            var evaluatedIndex = Mathf.RoundToInt(Mathf.Lerp(tierRange.x, tierRange.y, chance));
+            evaluatedIndex = Mathf.Clamp(evaluatedIndex, 0, Tiers.Count - 1);
+            return Tiers[evaluatedIndex];
         }
 
         public bool CanUpgradeTier(BaseData baseData)

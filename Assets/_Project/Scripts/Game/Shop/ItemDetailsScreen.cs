@@ -40,7 +40,7 @@ namespace Project.Game.Shop
             _heroInfo = activeHero;
             _data = baseData;
             
-            sellText.text = string.Format(_sellLabel, _gameData.GetSellPrice(_data, _levelController.CurrentWaveIndex));
+            sellText.text = string.Format(_sellLabel, _gameData.GetSellPrice(_data, _levelController.WaveIndex));
 
             var isWeapon = _data as WeaponData != null;
             mergeButton.gameObject.SetActive(isWeapon);
@@ -57,7 +57,7 @@ namespace Project.Game.Shop
 
         private void OnSellButtonClicked()
         {
-            _heroInfo.ShopCurrency += _gameData.GetSellPrice(_data, _levelController.CurrentWaveIndex);
+            _heroInfo.ShopCurrency += _gameData.GetSellPrice(_data, _levelController.WaveIndex);
             
             var weaponData = _data as WeaponData;
             if (weaponData != null)

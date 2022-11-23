@@ -24,47 +24,30 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 9.645781
-      outSlope: 9.645781
+      inSlope: 0.15115781
+      outSlope: 0.15115781
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.1480493
-    - serializedVersion: 3
-      time: 0.18698353
-      value: 0.4443674
-      inSlope: 0.0938558
-      outSlope: 0.0938558
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.42123562
-      outWeight: 0.38397023
-    - serializedVersion: 3
-      time: 0.797169
-      value: 0.493811
-      inSlope: 0.10962183
-      outSlope: 0.10962183
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.2733938
-      outWeight: 0.58942276
+      outWeight: 0.43687943
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 85.53861
-      outSlope: 85.53861
+      inSlope: 9.440956
+      outSlope: 9.440956
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.023657976
+      inWeight: 0.08368796
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <ChanceIncreasePerWave>k__BackingField: 0.009
   <HealthRegenRate>k__BackingField: 2
   <MaxContainersPerWave>k__BackingField: 5
-  <HealthScalingPerLevel>k__BackingField: 1
+  <HealthScalingPerLevel>k__BackingField: 1.5
   <HealthScalingPerWave>k__BackingField: 0.75
-  <DamageScalingPerLevel>k__BackingField: 1
+  <DamageScalingPerLevel>k__BackingField: 1.5
   <DamageScalingPerWave>k__BackingField: 0.75
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1.05

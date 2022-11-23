@@ -27,7 +27,7 @@ namespace Project.Game.UI
         private void OnWaveStarted()
         {
             WaveIndexText.enabled = true;
-            WaveIndexText.text = $"WAVE {_levelController.CurrentWaveIndex + 1}";
+            WaveIndexText.text = $"WAVE {_levelController.WaveIndex + 1}";
         }
 
         private void OnWaveCompleted()

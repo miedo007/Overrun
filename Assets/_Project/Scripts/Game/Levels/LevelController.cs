@@ -20,7 +20,7 @@ namespace Project.Game.Levels
 
         public LevelData CurrentLevel { get; private set; }
         public int CurrentLevelIndex { get; private set; }
-        public int CurrentWaveIndex { get; private set; }
+        public int WaveIndex { get; private set; }
         public WaveInfo CurrentWaveInfo{ get; private set; }
         public bool IsFinalWave { get; private set; }
 
@@ -28,7 +28,7 @@ namespace Project.Game.Levels
         {
             CurrentLevelIndex = levelIndex;
             CurrentLevel = Levels.GetLevel(levelIndex);
-            IsFinalWave = CurrentWaveIndex == CurrentLevel.Waves.Length - 1;
+            IsFinalWave = WaveIndex == CurrentLevel.Waves.Length - 1;
             StartCoroutine(BeginWaveRoutine(delay));
         }
 
@@ -38,7 +38,7 @@ namespace Project.Game.Levels
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.IntroCompleted += OnIntroCompleted;
-            waveIntroScreen.DisplayWithWaveIndex(CurrentWaveIndex);
+            waveIntroScreen.DisplayWithWaveIndex(WaveIndex);
         }
 
         private void OnIntroCompleted()
@@ -47,17 +47,17 @@ namespace Project.Game.Levels
             introScreen.IntroCompleted -= OnIntroCompleted;
             introScreen.Close();
 
-            CurrentWaveInfo = CurrentLevel.GetWaveInfo(CurrentWaveIndex);
+            CurrentWaveInfo = CurrentLevel.GetWaveInfo(WaveIndex);
 
             var timerScreen = _uiFrame.Open<WaveTimerScreen>();
-            timerScreen.DisplayWithDuration(CurrentLevel.GetWaveDuration(CurrentWaveIndex));
+            timerScreen.DisplayWithDuration(CurrentLevel.GetWaveDuration(WaveIndex));
             timerScreen.TimerCompleted += OnTimerCompleted;
             timerScreen.StartTimer();
             
             WaveStarted?.Invoke();
             
             // start spawning enemies here
-            _enemyManager.BeginWave(CurrentLevel, CurrentLevelIndex, CurrentWaveIndex);
+            _enemyManager.BeginWave(CurrentLevel, CurrentLevelIndex, WaveIndex);
         }
 
         private void OnTimerCompleted()
@@ -68,14 +68,14 @@ namespace Project.Game.Levels
             
             _enemyManager.EndWave();
             
-            if (CurrentLevel.IsLastWave(CurrentWaveIndex))
+            if (CurrentLevel.IsLastWave(WaveIndex))
             {
                 LevelCompleted?.Invoke();
             }
             else
             {
                 WaveCompleted?.Invoke();
-                CurrentWaveIndex++;
+                WaveIndex++;
             }
         }
 

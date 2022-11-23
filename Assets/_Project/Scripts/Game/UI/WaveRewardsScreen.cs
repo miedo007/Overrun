@@ -87,8 +87,13 @@ namespace Project.Game.UI
             _heroRegistry.ActiveHero.WaveRewards--;
             containerView.SetActive(false);
 
-            _currentItem =
-                _itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange.x, tierRange.y).Data as ItemData;
+            var chanceIncrease = _gameData.GetChanceIncreaseForWave(_waveIndex);
+
+            _currentItem = _itemDatabase.GetRandom()
+                .GetRandomTier(_gameData.RarityCurve,
+                    tierRange,
+                    chanceIncrease)
+                .Data as ItemData;
                 
             itemDetailsView.Initialize(_currentItem, _heroRegistry.ActiveHero, -1);
             _sellText.text = string.Format(_sellLabel, GetSellValue(_currentItem));

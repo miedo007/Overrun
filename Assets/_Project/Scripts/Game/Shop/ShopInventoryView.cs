@@ -46,15 +46,18 @@ namespace Project.Game.Shop
 
             var weaponCount = 2;
             var items = new List<BaseData>();
+            
+            var tierRange = _gameData.GetItemTierRangeForWave(waveIndex);
+            var chanceIncrease = _gameData.GetChanceIncreaseForWave(waveIndex);
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, minTier, maxTier).Data);
+                items.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
 
             var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, minTier, maxTier).Data);
+                items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
 
             items.Shuffle();

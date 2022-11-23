@@ -80,7 +80,7 @@ namespace Project.Game
         private int ApplySoftCurrencyReward()
         {
             var currencyReward =
-                _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.CurrentWaveIndex);
+                _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.WaveIndex);
             
             _playerInfo.ChangeCurrency(currencyReward);
             
@@ -94,7 +94,7 @@ namespace Project.Game
             if (_heroInfo.WaveRewards > 0)
             {
                 var waveRewardsScreen = _uiFrame.Open<WaveRewardsScreen>();
-                waveRewardsScreen.Initialize(_levelController.CurrentWaveIndex);
+                waveRewardsScreen.Initialize(_levelController.WaveIndex);
                 waveRewardsScreen.OnCloseEvent += OnWaveRewardsClosed;
             }
             else

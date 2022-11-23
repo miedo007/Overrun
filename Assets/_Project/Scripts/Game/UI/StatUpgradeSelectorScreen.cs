@@ -67,12 +67,14 @@ namespace Project.Game.UI
                     }
                 }
             }
-
-            var tierRange = _gameData.GetItemTierRangeForWave(_levelController.CurrentWaveIndex);
+            
+            var waveIndex = _levelController.WaveIndex;
+            var tierRange = _gameData.GetItemTierRangeForWave(waveIndex);
+            var chanceIncrease = _gameData.GetChanceIncreaseForWave(waveIndex);
             for (var i = 0; i < upgradeSelection.Count; i++)
             {
                 var tieredDataGroup = upgradeSelection[i];
-                var upgradeTierInfo = tieredDataGroup.GetRandomTier(_gameData.RarityCurve, tierRange.x, tierRange.y);
+                var upgradeTierInfo = tieredDataGroup.GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease);
                 var upgrade = upgradeTierInfo.Data as ItemData;
 
                 upgradeViews[i].Initialize(upgrade);

@@ -32,7 +32,7 @@ namespace Project.Game.Levels
         
         protected override void OnOpened()
         {
-            WaveIndexText.text = $"WAVE {_levelController.CurrentWaveIndex + 1}";
+            WaveIndexText.text = $"WAVE {_levelController.WaveIndex + 1}";
             StartCoroutine(WaitForAnimation());
         }
 
