@@ -16,7 +16,7 @@ MonoBehaviour:
   hapticPreset: -1
   playFx: 0
   fxPrefab: {fileID: 0}
-  fxLifetime: 1
+  fxLifetime: 0.375
   playAudio: 1
   audioData: {fileID: 11400000, guid: 1d80eab269be0d444b674abf210780c4, type: 2}
   playScreenShake: 0

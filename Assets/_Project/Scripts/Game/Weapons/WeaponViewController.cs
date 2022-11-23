@@ -10,6 +10,8 @@ namespace Project.Game.Weapons
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public Animation Animation { get; private set; }
         [field: SerializeField] public Transform FeedbackRoot { get; private set; }
+        [field: SerializeField] public ParticleSystem ActivateFx { get; private set; }
+        
 
         private WeaponData _weaponData;
         
@@ -35,6 +37,11 @@ namespace Project.Game.Weapons
             if (_weaponData.ActivationFeedback != null)
             {
                 _weaponData.ActivationFeedback.Play(FeedbackRoot.position, FeedbackRoot.rotation);
+            }
+
+            if (ActivateFx != null)
+            {
+                ActivateFx.Play();
             }
             
             Animation.Play();

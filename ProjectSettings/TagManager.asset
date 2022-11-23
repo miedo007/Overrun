@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -42,11 +43,17 @@ TagManager:
   - name: Background
     uniqueID: 4161717247
     locked: 0
+  - name: BackgroundFX
+    uniqueID: 1903149623
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Projectiles
     uniqueID: 2601397425
+    locked: 0
+  - name: FX
+    uniqueID: 1689484569
     locked: 0
   - name: PopupText
     uniqueID: 2363125557

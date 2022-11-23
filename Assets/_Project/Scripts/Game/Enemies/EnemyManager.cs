@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Lean.Pool;
 using Mtl.Injection;
+using Project.Feedback;
 using Project.Game.Collectibles;
 using Project.Game.Items;
 using Project.Game.Levels;
@@ -17,6 +18,7 @@ namespace Project.Game.Enemies
     {
         [field: SerializeField] public SpawnWarning SpawnWarningPrefab { get; private set; }
         [field: SerializeField] public ItemBehaviourTrigger EnemyDeathTrigger { get; private set; }
+        [field: SerializeField] public FeedbackData DefaultDeathFeedback { get; private set; }
 
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly RoomManager _roomManager;
@@ -125,6 +127,14 @@ namespace Project.Game.Enemies
         {
             enemy.Killed -= OnEnemyKilled;
 
+            if (enemy.Data.DeathFeedback != null)
+            {
+                enemy.Data.DeathFeedback.Play(enemy.Position, Quaternion.identity);
+            }
+            else
+            {
+                DefaultDeathFeedback.Play(enemy.Position, Quaternion.identity);
+            }
             _collectiblesManager.SpawnCollectibles(enemy.transform.position, enemy.Data.CollectibleData);
             ActiveEnemies.Remove(enemy);
             
