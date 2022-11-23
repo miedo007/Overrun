@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3422200337579179205, guid: cbb60acaa2a8ef44ca02c6a59ac309bf, type: 3}
       propertyPath: m_Name
-      value: hero_view_base
+      value: hero_view_0
       objectReference: {fileID: 0}
+    - target: {fileID: 7464774982517654288, guid: cbb60acaa2a8ef44ca02c6a59ac309bf, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b2f8d346f1041d4e8680f3f784dd30f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb60acaa2a8ef44ca02c6a59ac309bf, type: 3}

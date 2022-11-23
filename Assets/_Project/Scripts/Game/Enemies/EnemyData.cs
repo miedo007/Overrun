@@ -16,6 +16,8 @@ namespace Project.Game.Enemies
         [field: SerializeField] public float MeleeDamage { get; set; } = 1f;
         [field: SerializeField] public CollectibleData CollectibleData { get; set; }
         [field: SerializeField] public FeedbackData DeathFeedback { get; set; }
+        [field: SerializeField] public AnimationClip DeathAnimation { get; set; }
+        [field: SerializeField] public AnimationClip WalkAnimation { get; set; }
     }
     
     public enum MovementMode

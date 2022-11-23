@@ -14,6 +14,8 @@ namespace Project.Game.Enemies
     public class EnemyController : MonoBehaviour, IProjectileReactor, IDamageReceiver
     {
         public event Action DamageTaken;
+        public event Action<EnemyController> WillDie;
+        public event Action<EnemyController> Initialized;
         public event Action<EnemyController> Killed;
         public event Action<int> FacingDirectionChanged;
 
@@ -30,6 +32,7 @@ namespace Project.Game.Enemies
         private float _lastKnockbackTime;
         private float _lastActionTime;
         private Vector3 _wanderPosition;
+        private bool _isDead;
 
         private const float KnockbackDuration = 0.2f;
 
@@ -67,6 +70,7 @@ namespace Project.Game.Enemies
             _lastKnockbackTime = 0f;
             _lastContactAttackTime = 0f;
             _lastActionTime = Time.time;
+            _isDead = false;
             
             selfTarget.Deactivate();
             var direction = (playerPosition - currentPosition).normalized;
@@ -84,6 +88,8 @@ namespace Project.Game.Enemies
                 wave,
                 _gameData.DamageScalingPerLevel,
                 _gameData.DamageScalingPerWave);
+            
+            Initialized?.Invoke(this);
         }
 
         private float GetScaledValue(float baseValue, int level, int wave, float levelScaling, float waveScaling)
@@ -93,7 +99,18 @@ namespace Project.Game.Enemies
         }
 
         public void Step(float dt, float time, PlayerController playerController)
-        {
+        {            
+            if (time < _lastKnockbackTime + KnockbackDuration)
+            {
+                ClampToRoom();
+                return;
+            }
+            
+            if (_isDead)
+            {
+                Kill();
+            }
+            
             if (IsPerformingAction || !selfTarget.IsActivated)
             {
                 ClampToRoom();
@@ -113,12 +130,7 @@ namespace Project.Game.Enemies
                 
                 return;
             }
-            
-            if (time < _lastKnockbackTime + KnockbackDuration)
-            {
-                ClampToRoom();
-                return;
-            }
+
             
             if (Data.MovementMode == MovementMode.Chase)
             {
@@ -183,10 +195,15 @@ namespace Project.Game.Enemies
 
         private void ApplyDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
         {
+            if (_isDead)
+            {
+                return;
+            }
+            
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
             {
-                Kill();
+                Prekill();
             }
             else
             {
@@ -202,6 +219,13 @@ namespace Project.Game.Enemies
             }
             
             _popupTextManager.DisplayTextAtPosition($"{damageInt}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
+        }
+
+        private void Prekill()
+        {
+            selfTarget.Deactivate();
+            WillDie?.Invoke(this);
+            _isDead = true;
         }
 
         public void Knockback(Vector2 force)
@@ -255,6 +279,11 @@ namespace Project.Game.Enemies
 
         private void TryAttack(Collider2D other)
         {
+            if (_isDead)
+            {
+                return;
+            }
+            
             if (other.CompareTag("Enemy"))
             {
                 return;

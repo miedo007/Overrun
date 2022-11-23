@@ -8,6 +8,7 @@ namespace Project.Game.Enemies
     {
         [field: SerializeField] public EnemyController EnemyController { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+        [field: SerializeField] public Animation Animation { get; private set; }
 
         private MaterialPropertyBlock _propertyBlock;
         private Tween _flashTween;
@@ -23,12 +24,26 @@ namespace Project.Game.Enemies
             ResetFlash();
             EnemyController.DamageTaken += OnDamageTaken;
             EnemyController.FacingDirectionChanged += OnFacingDirectionChanged;
+            EnemyController.WillDie += OnWillDie;
+            EnemyController.Initialized += OnInitialized;
         }
 
         private void OnDisable()
         {
             EnemyController.DamageTaken -= OnDamageTaken;
             EnemyController.FacingDirectionChanged -= OnFacingDirectionChanged;
+            EnemyController.WillDie -= OnWillDie;
+            EnemyController.Initialized -= OnInitialized;
+        }
+
+        private void OnInitialized(EnemyController obj)
+        {
+            Animation.Play(EnemyController.Data.WalkAnimation.name);
+        }
+
+        private void OnWillDie(EnemyController obj)
+        {
+            Animation.Play(obj.Data.DeathAnimation.name);
         }
 
         private void OnFacingDirectionChanged(int direction)

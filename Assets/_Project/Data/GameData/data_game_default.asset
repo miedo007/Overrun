@@ -46,7 +46,7 @@ MonoBehaviour:
   <HealthRegenRate>k__BackingField: 2
   <MaxContainersPerWave>k__BackingField: 5
   <HealthScalingPerLevel>k__BackingField: 1.5
-  <HealthScalingPerWave>k__BackingField: 0.75
+  <HealthScalingPerWave>k__BackingField: 1.25
   <DamageScalingPerLevel>k__BackingField: 1.5
   <DamageScalingPerWave>k__BackingField: 0.75
   <RewardBaseValue>k__BackingField: 25
