@@ -50,7 +50,7 @@ MonoBehaviour:
   <DamageScalingPerLevel>k__BackingField: 1.5
   <DamageScalingPerWave>k__BackingField: 0.75
   <RewardBaseValue>k__BackingField: 25
-  <RewardLevelScaling>k__BackingField: 1.05
+  <RewardLevelScaling>k__BackingField: 1.08
   <RewardWaveScaling>k__BackingField: 1.05
   <UpgradeBaseCost>k__BackingField: 100
   <UpgradeIncreasePerLevel>k__BackingField: 25

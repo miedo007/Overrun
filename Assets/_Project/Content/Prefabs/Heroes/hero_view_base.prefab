@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 3422200337579178810}
   - component: {fileID: 3422200337579178809}
   - component: {fileID: 1619936220739059547}
+  - component: {fileID: -1770545102351608553}
   m_Layer: 0
   m_Name: hero_view_base
   m_TagString: Untagged
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 3422200337579178810}
+  <StatUpgradeList>k__BackingField: {fileID: 0}
 --- !u!58 &1619936220739059547
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -201,6 +203,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.33}
   serializedVersion: 2
   m_Radius: 0.38
+--- !u!114 &-1770545102351608553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422200337579179205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41e8e41890463b4792e1bee532f6e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepFeedback: {fileID: 11400000, guid: 235093a155bcbf349ad81f4430b1d6e1, type: 2}
 --- !u!1 &4109062750254942145
 GameObject:
   m_ObjectHideFlags: 0

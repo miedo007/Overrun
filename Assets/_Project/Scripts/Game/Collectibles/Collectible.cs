@@ -20,6 +20,11 @@ namespace Project.Game.Collectibles
         
         public void Collect()
         {
+            if (_data.CollectFeedback != null)
+            {
+                _data.CollectFeedback.Play(transform.position, Quaternion.identity);
+            }
+            
             _data.Collect(transform.position);
             Cleanup();
         }

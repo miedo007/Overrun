@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844128445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.15, z: 0}
-  m_LocalScale: {x: 8.726731, y: 11.6, z: 1}
+  m_LocalPosition: {x: 0, y: -2.57, z: 0}
+  m_LocalScale: {x: 8.819452, y: 12.4845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1895128142}
@@ -75,20 +75,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1895128143}
     m_ColliderPaths:
-    - - X: -87267312
-        Y: 116000000
-      - X: 87267312
-        Y: 116000000
-      - X: 87267312
-        Y: -116000000
-      - X: -87267312
-        Y: -116000000
+    - - X: -88194520
+        Y: 124845000
+      - X: 88194520
+        Y: 124845000
+      - X: 88194520
+        Y: -124845000
+      - X: -88194520
+        Y: -124845000
   m_CompositePaths:
     m_Paths:
-    - - {x: 8.726702, y: -11.6}
-      - {x: 8.726702, y: 11.6}
-      - {x: -8.726731, y: 11.599971}
-      - {x: -8.726702, y: -11.6}
+    - - {x: 8.819423, y: -12.4845}
+      - {x: 8.819423, y: 12.4845}
+      - {x: -8.819452, y: 12.48447}
+      - {x: -8.819423, y: -12.4845}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!1 &963194225
@@ -101,7 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: camera_main
@@ -118,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.0500001, z: -20}
+  m_LocalPosition: {x: 0, y: -0.58549994, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,14 +167,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using Project.Game.Items;
+using Project.Feedback;
 using UnityEngine;
 
 namespace Project.Game.Collectibles
@@ -13,6 +14,7 @@ namespace Project.Game.Collectibles
         [field: SerializeField] public bool AutoCollectOnWaveComplete { get; private set; } = true;
         [field: SerializeField] public Collectible Prefab { get; private set; }
         [field: SerializeField] public ItemBehaviourTrigger BehaviourTrigger { get; private set; }
+        [field: SerializeField] public FeedbackData CollectFeedback { get; private set; }
 
         public void Collect(Vector3 position)
         {
@@ -20,6 +22,7 @@ namespace Project.Game.Collectibles
             {
                 BehaviourTrigger.Trigger(position);
             }
+            
             Collected?.Invoke(this);
         }
     }

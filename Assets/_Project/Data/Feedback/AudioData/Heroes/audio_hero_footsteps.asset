@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99990a2c6a446808c6e0946f75a1d11, type: 3}
+  m_Name: audio_hero_footsteps
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 55cb9835c7c5d5d4ca51e67aecb4b4d0, type: 3}
+  - {fileID: 8300000, guid: 06a5713e73af5fe4fb0d53012873185a, type: 3}
+  - {fileID: 8300000, guid: 07df686e2adfde04cb00c25d4d47d162, type: 3}
+  - {fileID: 8300000, guid: 0975d7c8f406f4248acfa10acad0ef06, type: 3}
+  volumeRange: {x: 0.05, y: 0.1}
+  pitchRange: {x: 1.2, y: 1.5}
+  delayRange: {x: 0.05, y: 0.1}

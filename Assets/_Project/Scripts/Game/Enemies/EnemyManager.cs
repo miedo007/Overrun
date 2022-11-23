@@ -15,7 +15,6 @@ namespace Project.Game.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
-        [field: SerializeField] public EnemyDatabase Enemies { get; private set; }
         [field: SerializeField] public SpawnWarning SpawnWarningPrefab { get; private set; }
         [field: SerializeField] public ItemBehaviourTrigger EnemyDeathTrigger { get; private set; }
 
@@ -75,7 +74,7 @@ namespace Project.Game.Enemies
 
         private IEnumerator SpawnRoutine()
         {
-            var delayBetweenGroups = 1.5f;
+            var delayBetweenGroups = 1.5f * (1 - (.05f * _currentWaveIndex));
             var totalEnemyCount = _currentLevel.GetEnemyCountForWave(_currentWaveIndex);
             var waveDuration = _currentLevel.GetWaveDuration(_currentWaveIndex);
             var spawnGroupCount = Mathf.FloorToInt(waveDuration / delayBetweenGroups) + 1;

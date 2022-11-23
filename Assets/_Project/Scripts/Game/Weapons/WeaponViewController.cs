@@ -9,6 +9,9 @@ namespace Project.Game.Weapons
         [field: SerializeField] public WeaponController WeaponController { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public Animation Animation { get; private set; }
+        [field: SerializeField] public Transform FeedbackRoot { get; private set; }
+
+        private WeaponData _weaponData;
         
         private void Awake()
         {
@@ -24,11 +27,16 @@ namespace Project.Game.Weapons
 
         private void OnWeaponControllerInitialized()
         {
-            //SetSortingOrder(WeaponController.LocalPosition.y <= 0 ? WeaponController.FlippedHorizontal ? : : -2);
+            _weaponData = WeaponController.Data;
         }
 
         private void OnWeaponControllerActivated()
         {
+            if (_weaponData.ActivationFeedback != null)
+            {
+                _weaponData.ActivationFeedback.Play(FeedbackRoot.position, FeedbackRoot.rotation);
+            }
+            
             Animation.Play();
         }
 

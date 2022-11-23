@@ -1,5 +1,6 @@
 ﻿using Project.Application;
 using Project.Heroes;
+using Project.Feedback;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -15,6 +16,7 @@ namespace Project.Game.Weapons
         [field: SerializeField] public float Range { get; set; } = 2.5f;
         [field: SerializeField] public float CriticalDamageMultiplier { get; set; } = 2f;
         [field: SerializeField] public float KnockbackMultiplier { get; set; } = 1f;
+        [field: SerializeField] public FeedbackData ActivationFeedback { get; set; }
 
         public override string GetDescriptionForHero(HeroInfo heroInfo)
         {
