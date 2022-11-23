@@ -25,3 +25,4 @@ MonoBehaviour:
   <Range>k__BackingField: 1.5
   <CriticalDamageMultiplier>k__BackingField: 6
   <KnockbackMultiplier>k__BackingField: 14
+  <ActivationFeedback>k__BackingField: {fileID: 11400000, guid: 1fedab4c065dc344c81cec52e2f644b2, type: 2}

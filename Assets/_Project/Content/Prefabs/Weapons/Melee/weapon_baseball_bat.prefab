@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: <FlipScale>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2691835670077519042, guid: 8961a34667098734d97061133676bc91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.597
+      objectReference: {fileID: 0}
     - target: {fileID: 4373690516925087285, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.339
@@ -222,19 +226,19 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 8745357805755040553}
     m_ColliderPaths:
-    - - X: 8482651
-        Y: 1684158
-      - X: -1276474
-        Y: 1684158
-      - X: -1276474
-        Y: -1684158
-      - X: 8482651
-        Y: -1684158
+    - - X: 9653307
+        Y: 1440436
+      - X: -1452635
+        Y: 1440436
+      - X: -1452635
+        Y: -1440436
+      - X: 9653307
+        Y: -1440436
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.8482358, y: -0.1684158}
-      - {x: 0.8482358, y: 0.1684158}
-      - {x: -0.1276474, y: 0.1683865}
-      - {x: -0.1276181, y: -0.1684158}
+    - - {x: 0.9653014, y: -0.1440436}
+      - {x: 0.9653014, y: 0.1440436}
+      - {x: -0.14526351, y: 0.1440143}
+      - {x: -0.1452342, y: -0.1440436}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a99990a2c6a446808c6e0946f75a1d11, type: 3}
-  m_Name: audio_weapon_pistol_activate
+  m_Name: audio_weapon_shockwave_activate
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 79cbf1459724b2349bda1d7f894682a8, type: 3}
-  volumeRange: {x: 0.125, y: 0.2}
-  pitchRange: {x: 1.3, y: 1.5}
+  - {fileID: 8300000, guid: ea5a4e68d938b284e9bd5dc77e0819c6, type: 3}
+  volumeRange: {x: 0.2, y: 0.25}
+  pitchRange: {x: 1.5, y: 1.6}
   delayRange: {x: 0.05, y: 0.075}

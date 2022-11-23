@@ -59,10 +59,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 6597700622337457177, guid: 8961a34667098734d97061133676bc91, type: 3}
-      propertyPath: <FeedbackRoot>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6989026788217627102, guid: 8961a34667098734d97061133676bc91, type: 3}
       propertyPath: m_Layer
       value: 11
