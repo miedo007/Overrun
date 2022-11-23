@@ -62,10 +62,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   <HealthRegenRate>k__BackingField: 2
   <MaxContainersPerWave>k__BackingField: 5
-  <HealthScalingPerLevel>k__BackingField: 0.5
-  <HealthScalingPerWave>k__BackingField: 0.5
-  <DamageScalingPerLevel>k__BackingField: 0.5
-  <DamageScalingPerWave>k__BackingField: 0.5
+  <HealthScalingPerLevel>k__BackingField: 1
+  <HealthScalingPerWave>k__BackingField: 0.75
+  <DamageScalingPerLevel>k__BackingField: 1
+  <DamageScalingPerWave>k__BackingField: 0.75
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1.05
   <RewardWaveScaling>k__BackingField: 1.05
