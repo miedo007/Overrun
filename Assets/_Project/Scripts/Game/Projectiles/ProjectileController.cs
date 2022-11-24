@@ -72,6 +72,11 @@ namespace Project.Game.Projectiles
                 var damage = isCritical ? Damage * _criticalMultiplier : Damage;
                 if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right * _knockbackForce))
                 {
+                    if (Data.HitFeetback != null)
+                    {
+                        Data.HitFeetback.Play(transform.position, Quaternion.identity);
+                    }
+                    
                     _pierceCount--;
                     if (_pierceCount <= 0)
                     {

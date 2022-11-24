@@ -54,4 +54,7 @@ MonoBehaviour:
   <RewardWaveScaling>k__BackingField: 1.05
   <UpgradeBaseCost>k__BackingField: 100
   <UpgradeIncreasePerLevel>k__BackingField: 25
-  <UpgradeCostScaling>k__BackingField: 1.1
+  <UpgradeCostScaling>k__BackingField: 1.08
+  <InitialSpawnDelay>k__BackingField: 1.75
+  <MinimumSpawnDelay>k__BackingField: 0.75
+  <SpawnDelayReductionPerWave>k__BackingField: 0.0375
