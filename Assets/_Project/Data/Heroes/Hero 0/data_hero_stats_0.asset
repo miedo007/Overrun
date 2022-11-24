@@ -18,20 +18,22 @@ MonoBehaviour:
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
       <IsLinear>k__BackingField: 1
-      <LinearIncrease>k__BackingField: 0.5
+      <LinearIncrease>k__BackingField: 0.3
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
     <HasMaxValue>k__BackingField: 0
+    <AllowModifiersBeyondMaxValue>k__BackingField: 0
     <MaxValue>k__BackingField: 0
   - <Data>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
     <BaseValue>k__BackingField: 1
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
       <IsLinear>k__BackingField: 1
-      <LinearIncrease>k__BackingField: 0.5
+      <LinearIncrease>k__BackingField: 0.3
     <RoundingType>k__BackingField: 0
     <HasMinValue>k__BackingField: 0
     <MinValue>k__BackingField: 0
     <HasMaxValue>k__BackingField: 0
+    <AllowModifiersBeyondMaxValue>k__BackingField: 0
     <MaxValue>k__BackingField: 0

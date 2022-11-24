@@ -31,6 +31,9 @@ namespace Project.Game.UI
         {
             canvasGroup.DOKill();
             rect.DOKill();
+            
+            canvasGroup.alpha = 0;
+            gameObject.SetActive(false);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Application;
 using Project.Extensions;
@@ -34,16 +35,13 @@ namespace Project.Game.Shop
         {
             Parent.RemoveAllChildren();
         }
-
+        
         public void Populate(int waveIndex)
         {
-            _waveIndex = waveIndex;
-            
             ClearItems();
             
-            var minTier = _waveIndex - 10;
-            var maxTier = Mathf.FloorToInt(_waveIndex * 0.45f) + 1;
-
+            _waveIndex = waveIndex;
+            
             var weaponCount = 2;
             var items = new List<BaseData>();
             
@@ -60,7 +58,6 @@ namespace Project.Game.Shop
                 items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
 
-            items.Shuffle();
             items.Shuffle();
 
             foreach (var item in items)

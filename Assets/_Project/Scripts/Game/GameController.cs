@@ -2,6 +2,8 @@
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
+using Project.Game.Cameras;
+using Project.Game.Enemies;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Shop;
@@ -16,6 +18,8 @@ namespace Project.Game
     {
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly EnemyManager _enemyManager;
+        [Inject] private readonly CameraManager _cameraManager;
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly PlayerHealthController _playerHealthController;
         [Inject] private readonly SceneLoader _sceneLoader;
@@ -61,12 +65,14 @@ namespace Project.Game
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
             
-            _playerInput.Show();
-            _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
+            BeginNextWave();
         }
 
         private void OnWaveCompleted()
         {
+            _cameraManager.ZoomIn();
+            _enemyManager.EndWave();
+            
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
 
@@ -132,11 +138,33 @@ namespace Project.Game
             
             _playerInput.Show();
 
-            _levelController.BeginNextWave(_sessionInfo.LevelIndex,1f);
+            BeginNextWave();
+        }
+
+        private void BeginNextWave()
+        {
+            var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
+            waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
+            waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex);
+            
+            _cameraManager.ZoomOut();
+        }
+
+        private void OnWaveIntroCompleted(UIScreen waveIntroScreen)
+        {
+            waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
+            
+            _playerInput.Show();
+            _levelController.BeginNextWave(_sessionInfo.LevelIndex,0.375f);
+            _enemyManager.BeginWave(_levelController.CurrentLevel,
+                _levelController.CurrentLevelIndex,
+                _levelController.WaveIndex);
         }
 
         private void OnLevelCompleted()
         {
+            _enemyManager.EndWave();
+            
             if (_levelController.CurrentLevelIndex >= _playerInfo.PlayerSave.TopStageIndex)
             {
                 _playerInfo.IncrementTopStage();
@@ -152,7 +180,7 @@ namespace Project.Game
             levelCompleteScreen.Initialize(currencyReward, true);
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
         }
-
+        
         private void OnLevelCompleteClosed(UIScreen screen)
         {
            LoadMainMenu();

@@ -30,7 +30,10 @@ namespace Project.Game
         [field: SerializeField, Header("Upgrade Costs")] public int UpgradeBaseCost { get; private set; } = 100;
         [field: SerializeField] public int UpgradeIncreasePerLevel { get; private set; } = 50;
         [field: SerializeField] public float UpgradeCostScaling { get; private set; } = 1.25f;
-        
+        [field: SerializeField] public float InitialSpawnDelay { get; set; } = 1.75f;
+        [field: SerializeField] public float MinimumSpawnDelay { get; set; } = .75f;
+        [field: SerializeField] public float SpawnDelayReductionPerWave { get; set; } = 0.0375f;
+
         public Vector2Int GetItemTierRangeForWave(int waveIndex)
         {
             return new Vector2Int(Mathf.Min(0, waveIndex - 2), Mathf.FloorToInt((waveIndex * 0.2f) + 1) ) ;

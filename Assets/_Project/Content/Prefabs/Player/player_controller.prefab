@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <RadiusRange>k__BackingField.x
-      value: 0.25
+      value: 0.175
       objectReference: {fileID: 0}
     - target: {fileID: 1596045192788323947, guid: 053789756d2360a4f91074c4ac879bf4, type: 3}
       propertyPath: <RadiusRange>k__BackingField.y

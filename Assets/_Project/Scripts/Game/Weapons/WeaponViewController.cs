@@ -51,7 +51,7 @@ namespace Project.Game.Weapons
         {
             var position = WeaponController.LocalPosition;
             var isFlipped = transform.localScale.x < 0;
-            if (position.y <= .25f) // Front guns
+            if (position.y <= 0.25f) // Front guns
             {
                 if (isFlipped)
                 {

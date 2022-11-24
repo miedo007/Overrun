@@ -2091,6 +2091,7 @@ MonoBehaviour:
   <LevelController>k__BackingField: {fileID: 104506373}
   <EnemyManager>k__BackingField: {fileID: 526948282}
   <CollectiblesManager>k__BackingField: {fileID: 1703942246}
+  <CameraManager>k__BackingField: {fileID: 1875759067}
 --- !u!1 &766937568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,7 +2360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &842471242
 Transform:
   m_ObjectHideFlags: 0
@@ -5365,6 +5366,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee9449370ace1354797a7595b59f563d, type: 3}
+--- !u!114 &1875759067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1501380781716418640, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+  m_PrefabInstance: {fileID: 3988112497352343220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a46c97c03b48bc94dd0e92d5c2ec89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877411136
 GameObject:
   m_ObjectHideFlags: 0
@@ -6607,17 +6619,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.35686275
+    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_DeadZoneWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_SoftZoneWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_DeadZoneHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_SoftZoneHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: -1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 656227516, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 656227518, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1440190959}
+    - target: {fileID: 656227518, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.25882354
+      propertyPath: orthographic size
+      value: 10.5
       objectReference: {fileID: 0}
-    - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.08627451
+    - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow

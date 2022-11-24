@@ -1,12 +1,11 @@
-using Mtl.Injection;
 using Project.PopupText;
 using Project.Application;
+using Project.Game.Cameras;
 using Project.Game.Collectibles;
 using Project.Game.Enemies;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Targets;
-using Project.Heroes;
 using UnityEngine;
 
 namespace Project.Game
@@ -20,6 +19,7 @@ namespace Project.Game
         [field: SerializeField] public LevelController LevelController { get; private set; }
         [field: SerializeField] public EnemyManager EnemyManager { get; private set; }
         [field: SerializeField] public CollectiblesManager CollectiblesManager { get; private set; }
+        [field: SerializeField] public CameraManager CameraManager { get; private set; }
 
         protected override void OnInjectStart()
         {
@@ -32,6 +32,7 @@ namespace Project.Game
             Bind(LevelController);
             Bind(EnemyManager);
             Bind(CollectiblesManager);
+            Bind(CameraManager);
         }
     }
 }

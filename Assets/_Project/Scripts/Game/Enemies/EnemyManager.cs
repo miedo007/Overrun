@@ -23,9 +23,9 @@ namespace Project.Game.Enemies
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly RoomManager _roomManager;
         [Inject] private readonly CollectiblesManager _collectiblesManager;
+        [Inject] private readonly GameData _gameData;
 
         private LevelData _currentLevel;
-        private WaveInfo _currentWave;
         private int _currentWaveIndex;
         private int _currentLevelIndex;
         
@@ -34,8 +34,6 @@ namespace Project.Game.Enemies
         public void BeginWave(LevelData levelData, int levelIndex, int waveIndex)
         {
             _currentLevel = levelData;
-            _currentWave = _currentLevel.GetWaveInfo(waveIndex);
-            
             _currentLevelIndex = levelIndex;
             _currentWaveIndex = waveIndex;
             StartCoroutine(SpawnRoutine());
@@ -76,7 +74,9 @@ namespace Project.Game.Enemies
 
         private IEnumerator SpawnRoutine()
         {
-            var delayBetweenGroups = 1.5f * (1 - (.05f * _currentWaveIndex));
+            var delayBetweenGroups = _gameData.InitialSpawnDelay * (1 - (_gameData.SpawnDelayReductionPerWave * _currentWaveIndex));
+            delayBetweenGroups = Mathf.Max(delayBetweenGroups, _gameData.MinimumSpawnDelay);
+            
             var totalEnemyCount = _currentLevel.GetEnemyCountForWave(_currentWaveIndex);
             var waveDuration = _currentLevel.GetWaveDuration(_currentWaveIndex);
             var spawnGroupCount = Mathf.FloorToInt(waveDuration / delayBetweenGroups) + 1;
@@ -87,7 +87,7 @@ namespace Project.Game.Enemies
             while (enabled)
             {
                 var groupCenter = _playerController.Position;
-                var groupRadius = Random.Range(4f, 6f);
+                var groupRadius = Random.Range(2f, 12f);
                 for (int i = 0; i < enemyCountPerGroup; i++)
                 {
                     var enemy = spawnSequence.GetNext();

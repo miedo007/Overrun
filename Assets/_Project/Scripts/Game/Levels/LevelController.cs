@@ -16,7 +16,6 @@ namespace Project.Game.Levels
         [field: SerializeField] public LevelDatabase Levels { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
-        [Inject] private readonly EnemyManager _enemyManager;
 
         public LevelData CurrentLevel { get; private set; }
         public int CurrentLevelIndex { get; private set; }
@@ -35,18 +34,6 @@ namespace Project.Game.Levels
         private IEnumerator BeginWaveRoutine(float delay)
         {
             yield return new WaitForSeconds(delay);
-            
-            var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
-            waveIntroScreen.IntroCompleted += OnIntroCompleted;
-            waveIntroScreen.DisplayWithWaveIndex(WaveIndex);
-        }
-
-        private void OnIntroCompleted()
-        {
-            var introScreen = _uiFrame.Get<WaveIntroScreen>();
-            introScreen.IntroCompleted -= OnIntroCompleted;
-            introScreen.Close();
-
             CurrentWaveInfo = CurrentLevel.GetWaveInfo(WaveIndex);
 
             var timerScreen = _uiFrame.Open<WaveTimerScreen>();
@@ -55,9 +42,6 @@ namespace Project.Game.Levels
             timerScreen.StartTimer();
             
             WaveStarted?.Invoke();
-            
-            // start spawning enemies here
-            _enemyManager.BeginWave(CurrentLevel, CurrentLevelIndex, WaveIndex);
         }
 
         private void OnTimerCompleted()
@@ -65,8 +49,6 @@ namespace Project.Game.Levels
             var timerScreen = _uiFrame.Get<WaveTimerScreen>();
             timerScreen.Close();
             timerScreen.TimerCompleted -= OnTimerCompleted;
-            
-            _enemyManager.EndWave();
             
             if (CurrentLevel.IsLastWave(WaveIndex))
             {

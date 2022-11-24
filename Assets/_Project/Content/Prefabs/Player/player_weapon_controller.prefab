@@ -46,6 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RadiusRange>k__BackingField: {x: 0.25, y: 0.75}
+  <RadiusCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <offset>k__BackingField: {x: 0, y: 0.125, z: 0}
 --- !u!114 &425882226003985251
 MonoBehaviour:
   m_ObjectHideFlags: 0

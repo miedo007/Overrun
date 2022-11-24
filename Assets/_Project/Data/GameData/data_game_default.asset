@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ShopPriceIncreaseCoeffecient>k__BackingField: 1.265
   <ShopBasePriceMultiplier>k__BackingField: 0.8
-  <ResellValue>k__BackingField: 0.625
+  <ResellValue>k__BackingField: 0.375
   <BaseRerollCost>k__BackingField: 1
   <RerollIncreasePerWave>k__BackingField: 3
   <RerollCostCoefficient>k__BackingField: 1.3

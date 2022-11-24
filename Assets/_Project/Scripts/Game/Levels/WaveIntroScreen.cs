@@ -8,8 +8,6 @@ namespace Project.Game.Levels
 {
     public class WaveIntroScreen : UIScreen
     {
-        public event Action IntroCompleted;
-
         [SerializeField] private new Animation animation;
         [SerializeField] private TextMeshProUGUI waveIndexText;
 
@@ -28,7 +26,7 @@ namespace Project.Game.Levels
                 yield return null;
             }
             
-            IntroCompleted?.Invoke();
+            Close();
         }
     }
 }

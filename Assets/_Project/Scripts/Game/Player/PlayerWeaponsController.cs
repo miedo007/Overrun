@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Project.Game.Targets;
 using Project.Game.Weapons;
@@ -14,6 +13,7 @@ namespace Project.Game.Player
         public Vector2 RadiusRange { get; private set; } = new(0.375f, 0.75f);
 
         [field: SerializeField] public AnimationCurve RadiusCurve { get; private set; }
+        [field: SerializeField] public Vector3 offset { get; private set; } = new(0, 0.2f);
         
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
@@ -77,7 +77,7 @@ namespace Project.Game.Player
             var radiusFactor = RadiusCurve.Evaluate(weaponCount / 6f);
             var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, radiusFactor);
             
-            var position = Quaternion.Euler(0, 0, angle) * (Vector3.down * radius);
+            var position = (Quaternion.Euler(0, 0, angle) * (Vector3.down * radius)) + offset;
             return position;
         }
 

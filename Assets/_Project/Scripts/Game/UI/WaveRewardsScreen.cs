@@ -21,15 +21,13 @@ namespace Project.Game.UI
         [SerializeField] private GameObject containerView;
         [SerializeField] private CanvasGroup backer;
         [SerializeField] private RectTransform headerRect;
-        [SerializeField] private Button _sellButton;
-        [SerializeField] private Button _keepButton;
-        [SerializeField] private RectTransform _buttonGroup;
-        [SerializeField] private TextMeshProUGUI _sellText;
+        [SerializeField] private Button sellButton;
+        [SerializeField] private Button keepButton;
+        [SerializeField] private RectTransform buttonGroup;
+        [SerializeField] private TextMeshProUGUI sellText;
 
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly HeroRegistry _heroRegistry;
-        [Inject] private readonly LevelController _levelController;
-        [Inject] private readonly PlayerInfo _playerInfo;
         [Inject("items")] private readonly TieredGroupDatabase _itemDatabase;
 
         private BaseData _currentItem;
@@ -38,10 +36,10 @@ namespace Project.Game.UI
 
         private void Awake()
         {
-            _sellLabel = _sellText.text;
-            _sellButton.onClick.AddListener(OnSellButtonClicked);
-            _keepButton.onClick.AddListener(OnKeepButtonClicked);
-            _keepButton.interactable = true;
+            _sellLabel = sellText.text;
+            sellButton.onClick.AddListener(OnSellButtonClicked);
+            keepButton.onClick.AddListener(OnKeepButtonClicked);
+            keepButton.interactable = true;
         }
 
         private void OnSellButtonClicked()
@@ -68,19 +66,20 @@ namespace Project.Game.UI
             backer.alpha = 0;
             headerRect.localScale = Vector3.zero;
             itemDetailsRoot.localScale = Vector3.zero;
-            _buttonGroup.localScale = Vector3.zero;
+            buttonGroup.localScale = Vector3.zero;
             
             
             yield return backer.DOFade(1, 0.125f).WaitForCompletion();
-            yield return headerRect.DOScale(1, 0.125f).WaitForCompletion();
-            
             yield return StartCoroutine(RewardRoutine());
 
         }
+        
         private IEnumerator RewardRoutine()
         {
             var tierRange = _gameData.GetItemTierRangeForWave(_waveIndex);
-
+            
+            yield return headerRect.DOScale(1, 0.12f).WaitForCompletion();
+            
             containerView.SetActive(true);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             
@@ -96,16 +95,17 @@ namespace Project.Game.UI
                 .Data as ItemData;
                 
             itemDetailsView.Initialize(_currentItem, _heroRegistry.ActiveHero, -1);
-            _sellText.text = string.Format(_sellLabel, GetSellValue(_currentItem));
+            sellText.text = string.Format(_sellLabel, GetSellValue(_currentItem));
 
+            headerRect.DOScale(0, 0.125f);
             yield return itemDetailsRoot.DOScale(1, 0.12f).WaitForCompletion();
-            yield return _buttonGroup.DOScale(1, 0.125f).WaitForCompletion();
+            yield return buttonGroup.DOScale(1, 0.125f).WaitForCompletion();
         }
 
         private IEnumerator CloseDetailsRoutine()
         {
             itemDetailsRoot.DOScale(0, 0.12f);
-            yield return _buttonGroup.DOScale(0, 0.125f).WaitForCompletion();
+            yield return buttonGroup.DOScale(0, 0.125f).WaitForCompletion();
             
             if (_heroRegistry.ActiveHero.WaveRewards > 0)
             {

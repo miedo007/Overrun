@@ -18,7 +18,7 @@ MonoBehaviour:
     <LevelScaling>k__BackingField:
       <Coefficient>k__BackingField: 1.09
       <IsLinear>k__BackingField: 1
-      <LinearIncrease>k__BackingField: 2
+      <LinearIncrease>k__BackingField: 5
     <RoundingType>k__BackingField: 1
     <HasMinValue>k__BackingField: 1
     <MinValue>k__BackingField: 1
