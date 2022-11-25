@@ -795,6 +795,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Android: AMPLIFY_SHADER_EDITOR;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;AMPLIFY_SHADER_EDITOR
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: data_projectile_pistol
   m_EditorClassIdentifier: 
   <ProjectilePrefab>k__BackingField: {fileID: 4387666197315951769, guid: 61074f922df34b24f95ea79a064f17f6, type: 3}
+  <RandomSpeed>k__BackingField: 0
   <Speed>k__BackingField: 20
+  <SpeedRange>k__BackingField: {x: 10, y: 12}
+  <RandomLifespan>k__BackingField: 0
   <Lifespan>k__BackingField: 3
+  <LifespanRange>k__BackingField: {x: 0.5, y: 1}
+  <BasePierceCount>k__BackingField: 1
+  <HitFeetback>k__BackingField: {fileID: 11400000, guid: f4fcb2fa4ca27f44180f00b1996b342e, type: 2}

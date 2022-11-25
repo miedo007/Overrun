@@ -45,13 +45,16 @@ MonoBehaviour:
   <ChanceIncreasePerWave>k__BackingField: 0.009
   <HealthRegenRate>k__BackingField: 2
   <MaxContainersPerWave>k__BackingField: 5
-  <HealthScalingPerLevel>k__BackingField: 1.5
+  <HealthScalingPerLevel>k__BackingField: 1.25
   <HealthScalingPerWave>k__BackingField: 1.25
   <DamageScalingPerLevel>k__BackingField: 1.5
-  <DamageScalingPerWave>k__BackingField: 0.75
+  <DamageScalingPerWave>k__BackingField: 0.375
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1.08
   <RewardWaveScaling>k__BackingField: 1.05
   <UpgradeBaseCost>k__BackingField: 100
   <UpgradeIncreasePerLevel>k__BackingField: 25
-  <UpgradeCostScaling>k__BackingField: 1.1
+  <UpgradeCostScaling>k__BackingField: 1.08
+  <InitialSpawnDelay>k__BackingField: 1.75
+  <MinimumSpawnDelay>k__BackingField: 0.75
+  <SpawnDelayReductionPerWave>k__BackingField: 0.0375

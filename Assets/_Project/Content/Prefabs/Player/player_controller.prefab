@@ -114,8 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 1440190957}
   <MaxSpeed>k__BackingField: 5
-  <Acceleration>k__BackingField: 100
-  <Drag>k__BackingField: 25
+  <Acceleration>k__BackingField: 200
+  <Drag>k__BackingField: 50
 --- !u!210 &5182591935649089197
 SortingGroup:
   m_ObjectHideFlags: 0

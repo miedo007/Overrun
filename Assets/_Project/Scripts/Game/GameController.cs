@@ -163,6 +163,7 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
+            _cameraManager.ZoomIn();
             _enemyManager.EndWave();
             
             if (_levelController.CurrentLevelIndex >= _playerInfo.PlayerSave.TopStageIndex)

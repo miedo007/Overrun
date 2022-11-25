@@ -2334,7 +2334,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08624065, g: 0.25868466, b: 0.3584906, a: 1}
+  m_Color: {r: 0.7311321, g: 1, b: 0.99478775, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3661,7 +3661,7 @@ SpriteRenderer:
   m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08624065, g: 0.25868466, b: 0.3584906, a: 1}
+  m_Color: {r: 0.7311321, g: 1, b: 0.99478775, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4327,7 +4327,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08624065, g: 0.25868466, b: 0.3584906, a: 1}
+  m_Color: {r: 0.7311321, g: 1, b: 0.99478775, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4890,7 +4890,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08624065, g: 0.25868466, b: 0.3584906, a: 1}
+  m_Color: {r: 0.7311321, g: 1, b: 0.99478775, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6619,41 +6619,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_DeadZoneWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_SoftZoneWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_DeadZoneHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_SoftZoneHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 607753992, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_TrackedObjectOffset.y
-      value: -1.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 656227516, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.01
-      objectReference: {fileID: 0}
     - target: {fileID: 656227518, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1440190959}
-    - target: {fileID: 656227518, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: orthographic size
-      value: 10.5
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.y

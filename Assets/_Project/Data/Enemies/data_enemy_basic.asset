@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29570d22a26942ac8b207cc140c0260e, type: 3}
-  m_Name: data_enemy_pig
+  m_Name: data_enemy_basic
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1d9047f8eb66370408f6646b72398741, type: 3}
   <Action>k__BackingField: {fileID: 0}
-  <BaseHealth>k__BackingField: 1.25
+  <BaseHealth>k__BackingField: 1.5
   <MoveSpeed>k__BackingField: 1.25
   <MovementMode>k__BackingField: 1
   <MeleeAttackRate>k__BackingField: 0.375
@@ -22,4 +22,4 @@ MonoBehaviour:
   <CollectibleData>k__BackingField: {fileID: 0}
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
-  <WalkAnimation>k__BackingField: {fileID: 7400000, guid: d4dc698a359082f419f0b6c168ea5861, type: 2}
+  <WalkAnimation>k__BackingField: {fileID: 7400000, guid: 4cf3bd1137c1092448ad0972596bb24f, type: 2}

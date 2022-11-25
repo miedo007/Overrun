@@ -15,7 +15,7 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: a300f8c97bd09b0469ec9a63fe9c342d, type: 3}
   <Action>k__BackingField: {fileID: 0}
   <BaseHealth>k__BackingField: 1.25
-  <MoveSpeed>k__BackingField: 2.5
+  <MoveSpeed>k__BackingField: 3.5
   <MovementMode>k__BackingField: 1
   <MeleeAttackRate>k__BackingField: 0.5
   <MeleeDamage>k__BackingField: 1
