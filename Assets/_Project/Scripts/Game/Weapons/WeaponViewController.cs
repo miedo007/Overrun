@@ -19,12 +19,14 @@ namespace Project.Game.Weapons
         {
             WeaponController.Initialized += OnWeaponControllerInitialized;
             WeaponController.Activated += OnWeaponControllerActivated;
+            WeaponController.MeleeHit += OnWeaponControllerMeleeHit;
         }
 
         private void OnDestroy()
         {
             WeaponController.Initialized -= OnWeaponControllerInitialized;
             WeaponController.Activated -= OnWeaponControllerActivated;
+            WeaponController.MeleeHit += OnWeaponControllerMeleeHit;
         }
 
         private void OnWeaponControllerInitialized()
@@ -45,6 +47,14 @@ namespace Project.Game.Weapons
             }
             
             Animation.Play();
+        }
+
+        private void OnWeaponControllerMeleeHit()
+        {
+            if (_weaponData.MeleeHitFeedback != null)
+            {
+                _weaponData.MeleeHitFeedback.Play(FeedbackRoot.position, FeedbackRoot.rotation);
+            }
         }
 
         private void LateUpdate()

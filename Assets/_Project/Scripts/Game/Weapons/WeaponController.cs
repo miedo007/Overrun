@@ -15,6 +15,7 @@ namespace Project.Game.Weapons
         
         public event Action Initialized;
         public event Action Activated;
+        public event Action MeleeHit;
         
         [field: SerializeField] public Transform Barrel { get; set; }
         [field: SerializeField] public Collider2D Collider { get; set; }
@@ -181,6 +182,7 @@ namespace Project.Game.Weapons
                 var force = direction.normalized * KnockbackStat.GetFloatValue() * Data.KnockbackMultiplier;
                 var isCritical = Random.value <= CriticalChanceStat.GetFloatValue();
                 damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, force, gameObject);
+                MeleeHit?.Invoke();
             }
         }
 

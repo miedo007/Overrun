@@ -17,6 +17,7 @@ namespace Project.Game.Weapons
         [field: SerializeField] public float CriticalDamageMultiplier { get; set; } = 2f;
         [field: SerializeField] public float KnockbackMultiplier { get; set; } = 1f;
         [field: SerializeField] public FeedbackData ActivationFeedback { get; set; }
+        [field: SerializeField] public FeedbackData MeleeHitFeedback { get; set; }
 
         public override string GetDescriptionForHero(HeroInfo heroInfo)
         {
