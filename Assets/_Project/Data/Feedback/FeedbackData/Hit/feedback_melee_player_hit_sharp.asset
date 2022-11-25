@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d91c8c9228a9487ca443ab08d86edf32, type: 3}
-  m_Name: feedback_melee_player_hit_default
+  m_Name: feedback_melee_player_hit_sharp
   m_EditorClassIdentifier: 
   playHaptics: 0
   hapticPreset: -1
@@ -18,7 +18,7 @@ MonoBehaviour:
   fxPrefab: {fileID: 5668418105208733096, guid: 989f14347760849439a1565a3d571304, type: 3}
   fxLifetime: 0.5
   playAudio: 1
-  audioData: {fileID: 11400000, guid: 2ee950255b70faf498b297b472efd35c, type: 2}
+  audioData: {fileID: 11400000, guid: 479969712c1e4cf469a361da7d5879a2, type: 2}
   playScreenShake: 0
   amplitude: 0
   playHitStop: 0
