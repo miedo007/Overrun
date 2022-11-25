@@ -9,8 +9,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2464363063314510666, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: m_Name
-      value: enemy_pig_faster
+      value: enemy_fast
       objectReference: {fileID: 0}
+    - target: {fileID: 5126208443004275603, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589180901118716533, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589180901118716533, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 57b0f9e4f8478c446a0deb5c83e74fe8, type: 2}
     - target: {fileID: 6365086261947818779, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: m_RootOrder
       value: 0

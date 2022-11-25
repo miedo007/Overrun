@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640de5a7535c46cf950c786ed1fda192, type: 3}
   m_Name: item_behaviour_trigger_store_currency_collect
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: On <sprite name=currency_ticket>/<sprite name=currency_coin>
+  <Description>k__BackingField: On <sprite name=currency_ticket> or <sprite name=currency_coin>
     collect

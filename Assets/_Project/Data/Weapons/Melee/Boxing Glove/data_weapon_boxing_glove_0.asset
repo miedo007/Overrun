@@ -20,9 +20,9 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: 80737654d8f53d344826c0833fcf9016, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: e8ee95598017a1f4197c2d9aee00b170, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 2420f1e7a5d2ffd4d92c72270b69c575, type: 2}
-  <Cooldown>k__BackingField: 0.625
-  <DamageFactor>k__BackingField: 3
-  <Range>k__BackingField: 1.5
+  <Cooldown>k__BackingField: 0.4
+  <DamageFactor>k__BackingField: 5
+  <Range>k__BackingField: 2
   <CriticalDamageMultiplier>k__BackingField: 4
   <KnockbackMultiplier>k__BackingField: 10
   <ActivationFeedback>k__BackingField: {fileID: 11400000, guid: 1fedab4c065dc344c81cec52e2f644b2, type: 2}
