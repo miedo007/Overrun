@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.UI;
 using TMPro;
@@ -13,7 +14,8 @@ namespace Project.Game.Levels
         [SerializeField] private AnimationClip closeClip;
         [SerializeField] private CurrencyRewardView currencyRewardView;
         [SerializeField] private TextMeshProUGUI completionTypeText;
-        
+
+        [Inject] private readonly UIFrame _uiFrame;
         
         protected override void OnOpened()
         {
@@ -22,6 +24,8 @@ namespace Project.Game.Levels
 
         public void Initialize(int currencyReward, bool isLevelComplete = false)
         {
+            _uiFrame.Get<HudScreen>().ShowCurrencyBar();
+            
             if (isLevelComplete)
             {
                 completionTypeText.text = "LEVEL";
@@ -49,6 +53,8 @@ namespace Project.Game.Levels
             {
                 yield return null;
             }
+            
+            _uiFrame.Get<HudScreen>().HideCurrencyBar();
             
             Close();
         }

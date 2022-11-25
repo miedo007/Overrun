@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5337c0dbd5784b5aa0d349159301d1a3, type: 3}
-  m_Name: item_behaviour_enemy_knockback_10x3m
+  m_Name: item_behaviour_enemy_knockback_2
   m_EditorClassIdentifier: 
   <HasRandomChance>k__BackingField: 1
-  <Chance>k__BackingField: 0.12
+  <Chance>k__BackingField: 0.2
   <KnockbackStat>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
   <KnockbackStrength>k__BackingField: 10
-  <Radius>k__BackingField: 3
+  <Radius>k__BackingField: 3.5
   <LayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 256

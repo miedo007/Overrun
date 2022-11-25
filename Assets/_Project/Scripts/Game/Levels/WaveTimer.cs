@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
-using Mtl.UiFramework;
+using Project.Application;
 using TMPro;
 using UnityEngine;
 
 namespace Project.Game.Levels
 {
-    public class WaveTimerScreen : UIScreen
+    public class WaveTimer : MonoBehaviour
     {
         public event Action TimerCompleted;
         
@@ -20,8 +20,14 @@ namespace Project.Game.Levels
         private int _currentTime;
         private readonly WaitForSeconds _waitForSecond = new WaitForSeconds(1);
 
+        private void Awake()
+        {
+            Root.gameObject.SetActive(false);
+        }
+
         public void DisplayWithDuration(int duration)
         {
+            Root.gameObject.SetActive(true);
             _currentTime = duration;
             UpdateClock();
             Animation.clip = DisplayClip;
@@ -45,8 +51,21 @@ namespace Project.Game.Levels
                 yield return _waitForSecond;
                 _currentTime--;
                 UpdateClock();
-                Root.localScale = Vector3.one * 1.25f;
-                Root.DOScale(1, 0.125f);
+                
+                if (_currentTime > 5)
+                {
+                    Root.localScale = Vector3.one * 1.25f;
+                    Root.DOScale(1, 0.125f);
+                }
+                else
+                {
+                    Root.localScale = Vector3.one * 1.4f;
+                    Root.DOScale(1, 0.125f);
+                    TimeText.color = Colors.GetColor(Colors.Negative);
+                    TimeText.DOColor(Color.white, 0.8f)
+                        .SetEase(Ease.OutQuad)
+                        .SetDelay(0.125f);
+                }
             }
             
             StartCoroutine(HideRoutine());
@@ -58,7 +77,6 @@ namespace Project.Game.Levels
             Animation.clip = HideClip;
             Animation.Play();
             yield return WaitForAnimation();
-            Close();
         }
 
         private IEnumerator WaitForAnimation()
@@ -71,10 +89,5 @@ namespace Project.Game.Levels
             }
         }
 
-        protected override void OnClosed()
-        {
-            base.OnClosed();
-            StopAllCoroutines();
-        }
     }
 }

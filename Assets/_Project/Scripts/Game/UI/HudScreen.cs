@@ -1,5 +1,4 @@
-﻿using System;
-using Mtl.Injection;
+﻿using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.Levels;
 using TMPro;
@@ -10,12 +9,15 @@ namespace Project.Game.UI
     public class HudScreen : UIScreen, IInjectionReady
     {
         [field: SerializeField] public TextMeshProUGUI WaveIndexText { get; private set; }
+        [field: SerializeField] public RectTransform CurrencyBar { get; private set; }
+        [field: SerializeField] public WaveTimer Timer { get; private set; }
 
         [Inject] private readonly LevelController _levelController;
 
         private void Awake()
         {
             WaveIndexText.enabled = false;
+            HideCurrencyBar();
         }
 
         public void OnReady()
@@ -33,6 +35,16 @@ namespace Project.Game.UI
         private void OnWaveCompleted()
         {
             WaveIndexText.enabled = false;
+        }
+
+        public void ShowCurrencyBar()
+        {
+            CurrencyBar.gameObject.SetActive(true);
+        }
+        
+        public void HideCurrencyBar()
+        {
+            CurrencyBar.gameObject.SetActive(false);
         }
     }
 }

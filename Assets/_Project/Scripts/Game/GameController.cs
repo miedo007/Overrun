@@ -146,7 +146,10 @@ namespace Project.Game
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
             waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex);
-            
+            if (_levelController.IsFinalWave)
+            {
+                _uiFrame.Get<HudScreen>().ShowCurrencyBar();
+            }
             _cameraManager.ZoomOut();
         }
 
@@ -170,7 +173,7 @@ namespace Project.Game
             {
                 _playerInfo.IncrementTopStage();
             }
-
+            
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();

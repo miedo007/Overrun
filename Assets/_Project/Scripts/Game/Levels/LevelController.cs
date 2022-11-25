@@ -2,7 +2,7 @@
 using System.Collections;
 using Mtl.Injection;
 using Mtl.UiFramework;
-using Project.Game.Enemies;
+using Project.Game.UI;
 using UnityEngine;
 
 namespace Project.Game.Levels
@@ -36,19 +36,18 @@ namespace Project.Game.Levels
             yield return new WaitForSeconds(delay);
             CurrentWaveInfo = CurrentLevel.GetWaveInfo(WaveIndex);
 
-            var timerScreen = _uiFrame.Open<WaveTimerScreen>();
-            timerScreen.DisplayWithDuration(CurrentLevel.GetWaveDuration(WaveIndex));
-            timerScreen.TimerCompleted += OnTimerCompleted;
-            timerScreen.StartTimer();
+            var timer = _uiFrame.Get<HudScreen>().Timer;
+            timer.DisplayWithDuration(CurrentLevel.GetWaveDuration(WaveIndex));
+            timer.TimerCompleted += OnTimerCompleted;
+            timer.StartTimer();
             
             WaveStarted?.Invoke();
         }
 
         private void OnTimerCompleted()
         {
-            var timerScreen = _uiFrame.Get<WaveTimerScreen>();
-            timerScreen.Close();
-            timerScreen.TimerCompleted -= OnTimerCompleted;
+            var timer = _uiFrame.Get<HudScreen>().Timer;
+            timer.TimerCompleted -= OnTimerCompleted;
             
             if (CurrentLevel.IsLastWave(WaveIndex))
             {

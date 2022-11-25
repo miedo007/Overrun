@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 5320011597150223316}
   - component: {fileID: 4970361530410341431}
   - component: {fileID: 1386206020122106671}
+  - component: {fileID: 876315003708515599}
   m_Layer: 5
   m_Name: ui_screen_wave_complete
   m_TagString: Untagged
@@ -343,6 +344,20 @@ MonoBehaviour:
   closeClip: {fileID: 7400000, guid: 2f81bb91ef1ae934ba1bda0386a4e899, type: 2}
   currencyRewardView: {fileID: 6707163910866324324}
   completionTypeText: {fileID: 6004713898722812875}
+--- !u!114 &876315003708515599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4869894483376156364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: 1386206020122106671}
 --- !u!1 &6913350927682079232
 GameObject:
   m_ObjectHideFlags: 0
