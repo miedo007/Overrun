@@ -52,11 +52,14 @@ namespace MTLSimpleAudio
             
             AudioData.PlayRequested += AudioDataOnPlayRequested;
             MusicData.PlayRequested += MusicDataOnPlayRequested;
+            MusicData.StopRequested += MusicDataOnStopRequested;
         }
+
         private void OnDisable()
         {
             AudioData.PlayRequested -= AudioDataOnPlayRequested;
             MusicData.PlayRequested -= MusicDataOnPlayRequested;
+            MusicData.StopRequested += MusicDataOnStopRequested;
         }
 
         private void AudioDataOnPlayRequested(AudioInstance audioInstance)
@@ -71,7 +74,7 @@ namespace MTLSimpleAudio
                 audioObject.Play(audioInstance);
             }
         }
-        
+
         private IEnumerator Start()
         {
             // Waiting a frame is required before accessing the audio mixer
@@ -96,5 +99,18 @@ namespace MTLSimpleAudio
             _currentMusicObject.PlayMusic(musicData);
         }
 
+        private void MusicDataOnStopRequested(MusicData musicData)
+        {
+            if (_currentMusicObject != null)
+            {
+                if (_currentMusicObject.Clip != musicData.Clip)
+                {
+                    return;
+                }
+                
+                _currentMusicObject.StopMusic();
+                _currentMusicObject = null;
+            }
+        }
     }
 }

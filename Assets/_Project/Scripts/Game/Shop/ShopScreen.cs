@@ -1,5 +1,6 @@
 ﻿using Mtl.Injection;
 using Mtl.UiFramework;
+using MTLSimpleAudio;
 using Project.Game.Levels;
 using Project.Heroes;
 using TMPro;

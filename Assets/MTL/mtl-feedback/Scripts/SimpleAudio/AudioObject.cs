@@ -6,7 +6,7 @@ namespace MTLSimpleAudio
 {
     public class AudioObject : MonoBehaviour
     {
-        private const float FadeTime = 1;
+        private const float FadeTime = 0.375f;
         
         [SerializeField] private AudioSource audioSource = null;
         public bool IsPlaying => audioSource.isPlaying;

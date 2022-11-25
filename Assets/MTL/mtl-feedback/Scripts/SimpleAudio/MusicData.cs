@@ -7,6 +7,7 @@ namespace MTLSimpleAudio
     public class MusicData : ScriptableObject
     {
         public static event Action<MusicData> PlayRequested;
+        public static event Action<MusicData> StopRequested;
 
         [SerializeField] private AudioClip clip = null;
         [SerializeField] private float volume = 1;
@@ -22,6 +23,11 @@ namespace MTLSimpleAudio
         public void Play()
         {
             PlayRequested?.Invoke(this);
+        }
+
+        public void Stop()
+        {
+            StopRequested?.Invoke(this);
         }
     }
 }

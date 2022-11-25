@@ -4549,6 +4549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00cb1f286d545f9bd1d56636b87c545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveMusic: {fileID: 11400000, guid: bf69921cafcb4994c87032a7ce27b786, type: 2}
+  shopMusic: {fileID: 11400000, guid: 1ea4a043f39f3ec479dda31b3b4d3162, type: 2}
 --- !u!4 &1535895357
 Transform:
   m_ObjectHideFlags: 0
@@ -6625,11 +6627,11 @@ PrefabInstance:
       objectReference: {fileID: 1440190959}
     - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.01
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow

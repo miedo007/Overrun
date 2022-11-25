@@ -592,6 +592,7 @@ MonoBehaviour:
   <RerollButton>k__BackingField: {fileID: 7651213870755894037}
   <RerollButtonText>k__BackingField: {fileID: 8840254058335580302}
   <ShopInventory>k__BackingField: {fileID: 9039246796066101455}
+  <Music>k__BackingField: {fileID: 11400000, guid: 1ea4a043f39f3ec479dda31b3b4d3162, type: 2}
 --- !u!114 &3795720753482701690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using Mtl.Injection;
 using Mtl.UiFramework;
+using MTLSimpleAudio;
 using Project.Application;
 using Project.Game.Cameras;
 using Project.Game.Enemies;
@@ -11,11 +12,15 @@ using Project.Game.UI;
 using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Game
 {
     public class GameController : MonoBehaviour, IInjectionReady
     {
+        [FormerlySerializedAs("gameMusic")] [SerializeField] private MusicData waveMusic;
+        [SerializeField] private MusicData shopMusic;
+
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
@@ -70,6 +75,8 @@ namespace Project.Game
 
         private void OnWaveCompleted()
         {
+            waveMusic.Stop();
+            
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
             
@@ -113,6 +120,8 @@ namespace Project.Game
 
         private void OnUpgradeSelectorClosed(UIScreen screen)
         {
+            shopMusic.Play();
+            
             screen.OnCloseEvent -= OnUpgradeSelectorClosed;
             
             var shopScreen = _uiFrame.Open<ShopScreen>();
@@ -143,6 +152,8 @@ namespace Project.Game
 
         private void BeginNextWave()
         {
+            waveMusic.Play();
+            
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
             waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex);
