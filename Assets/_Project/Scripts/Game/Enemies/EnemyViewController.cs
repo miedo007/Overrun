@@ -43,6 +43,7 @@ namespace Project.Game.Enemies
 
         private void OnWillDie(EnemyController obj)
         {
+            OnDamageTaken();
             Animation.Play(obj.Data.DeathAnimation.name);
         }
 
