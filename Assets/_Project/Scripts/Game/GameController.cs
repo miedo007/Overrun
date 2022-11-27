@@ -38,6 +38,13 @@ namespace Project.Game
 
         private HeroInfo _heroInfo;
 
+
+        public void OnReady()
+        {
+            _playerHealthController.Depleted += OnPlayerHealthDepleted;
+            _levelController.Initialize(_sessionInfo.LevelIndex);
+        }
+        
         private void Start()
         {
             _heroInfo = _heroRegistry.ActiveHero;
@@ -156,7 +163,7 @@ namespace Project.Game
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
-            waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex);
+            waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex, _levelController.IsFinalWave);
             if (_levelController.IsFinalWave)
             {
                 _uiFrame.Get<HudScreen>().ShowCurrencyBar();
@@ -169,7 +176,7 @@ namespace Project.Game
             waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
             
             _playerInput.Show();
-            _levelController.BeginNextWave(_sessionInfo.LevelIndex,0.375f);
+            _levelController.BeginNextWave(0.375f);
             _enemyManager.BeginWave(_levelController.CurrentLevel,
                 _levelController.CurrentLevelIndex,
                 _levelController.WaveIndex);
@@ -200,12 +207,6 @@ namespace Project.Game
         {
            LoadMainMenu();
         }
-
-        public void OnReady()
-        {
-            _playerHealthController.Depleted += OnPlayerHealthDepleted;
-        }
-
         private void OnPlayerHealthDepleted()
         {
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;

@@ -21,7 +21,6 @@ namespace Project.Game.Shop
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
 
-
         private int _waveIndex;
         private int _rerollCount;
         private int _rerollCost;
@@ -52,7 +51,7 @@ namespace Project.Game.Shop
             _waveIndex = _levelController.WaveIndex;
             if (_levelController.IsFinalWave)
             {
-                NextWaveText.text = "Begin\nFinal Wave!";
+                NextWaveText.text = "Final\nWave!";
             }
             else
             {
