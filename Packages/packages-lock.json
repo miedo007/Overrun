@@ -1,7 +1,31 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": {
+      "version": "1.2.168",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unity-packages.rovio.dev"
+    },
+    "com.rovio.beacon.unitysdk": {
+      "version": "6.16.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unity-packages.rovio.dev"
+    },
+    "com.rovio.mtl.bonfire": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.168",
+        "com.rovio.beacon.unitysdk": "6.16.0"
+      },
+      "url": "https://unity-packages.rovio.dev"
+    },
     "com.rovio.mtl.injection": {
-      "version": "1.0.6",
+      "version": "1.0.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -17,14 +41,14 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.toolbox": {
-      "version": "1.0.15",
+      "version": "1.0.25",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.ui": {
-      "version": "1.1.13",
+      "version": "1.1.14",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
