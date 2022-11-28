@@ -10,6 +10,7 @@ namespace Project.Application
     public class ProjectContext : InjectContext
     {
         [SerializeField] private SceneLoader sceneLoader;
+        [SerializeField] private TierDatabase tierDatabase;
         [SerializeField] private TieredGroupDatabase weaponDatabase;
         [SerializeField] private TieredGroupDatabase itemDatabase;
         [SerializeField] private HeroDatabase heroDatabase;
@@ -20,6 +21,7 @@ namespace Project.Application
         {
             UnityEngine.Application.targetFrameRate = 60;
             Bind(sceneLoader);
+            Bind(tierDatabase);
             Bind(weaponDatabase, "weapons");
             Bind(itemDatabase, "items");
             Bind(heroDatabase);

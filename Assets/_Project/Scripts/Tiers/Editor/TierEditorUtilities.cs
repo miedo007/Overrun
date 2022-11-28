@@ -20,7 +20,7 @@ namespace Project.Tiers.Editor
             
             // Load the tiers list
             var guids = AssetDatabase.FindAssets("tiers_list");
-            var tiersList = AssetDatabase.LoadAssetAtPath<TiersList>(AssetDatabase.GUIDToAssetPath(guids[0]));
+            var tiersList = AssetDatabase.LoadAssetAtPath<TierDatabase>(AssetDatabase.GUIDToAssetPath(guids[0]));
             
             // Create a new tiered group
             var tieredGroup = ScriptableObject.CreateInstance<TieredDataGroup>();

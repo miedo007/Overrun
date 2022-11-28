@@ -3,6 +3,7 @@ using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
 using Project.Heroes;
+using Project.Tiers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,9 +15,12 @@ namespace Project.Game.Shop
         [field: SerializeField] public Image Icon { get; private set; }
         [field: SerializeField] public Image Frame { get; private set; }
         [field: SerializeField] public Image Backer { get; private set; }
+        [field: SerializeField] public GameObject MergeableNotif { get; private set; }
+        [field: SerializeField] public Image MergeableNotifImage { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly HeroRegistry _heroRegistry;
+        [Inject] private readonly TierDatabase _tierDatabase;
         
         private HeroInfo _heroInfo;
         private Sequence _mergeSequence;
@@ -33,6 +37,10 @@ namespace Project.Game.Shop
             
             if (_data != null && _heroInfo != null && _heroInfo.CanMerge(_data))
             {
+                MergeableNotif.gameObject.SetActive(true);
+                MergeableNotifImage.color = _tierDatabase.GetNextTier(_data.Tier).Color;
+                
+                /*
                 _mergeSequence = DOTween.Sequence();
                 _mergeSequence.Append(transform.DOScale(1.1f, 0.125f)
                         .SetLoops(4, LoopType.Yoyo))
@@ -40,6 +48,11 @@ namespace Project.Game.Shop
                     .SetLoops(-1);
 
                 _mergeSequence.Play();
+                */
+            }
+            else
+            {
+                MergeableNotif.gameObject.SetActive(false);
             }
             
             Frame.color = _data.Tier.Color;
