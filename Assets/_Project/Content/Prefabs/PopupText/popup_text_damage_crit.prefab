@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ba5338c4b543de93b4673566095c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.5
+  duration: 0.375
   <Text>k__BackingField: {fileID: 3513700771332661673}
 --- !u!1 &2513281670486083252
 GameObject:

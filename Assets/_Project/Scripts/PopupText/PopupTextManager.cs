@@ -24,6 +24,7 @@ namespace Project.PopupText
         [field:SerializeField] public PopupTextItem DamagePrefab { get; set; }
         [field:SerializeField] public PopupTextItem CritDamagePrefab { get; set; }
         [field:SerializeField] public PopupTextItem PlayerDamagePrefab { get; set; }
+        [field:SerializeField] public PopupTextItem PlayerHealingPrefab { get; set; }
 
 
         private void Awake()

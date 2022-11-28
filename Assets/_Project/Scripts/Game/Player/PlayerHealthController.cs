@@ -3,6 +3,7 @@ using System.Collections;
 using Mtl.Injection;
 using Project.Game.Levels;
 using Project.Heroes;
+using Project.PopupText;
 using Project.Stats;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace Project.Game.Player
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly GameData _gameData;
+        [Inject] private readonly PopupTextManager _popupTextManager;
 
         public float MaxHealth { get; private set; }
 
@@ -112,8 +114,9 @@ namespace Project.Game.Player
                     yield return null;
                     time -= Time.deltaTime;
                 }
-                
-                var newHealth = CurrentHealth + (MaxHealth * _healthRegenStatInfo.GetFloatValue());
+
+                var delta = MaxHealth * _healthRegenStatInfo.GetFloatValue();
+                var newHealth = CurrentHealth + delta;
                 
                 // Don't let negative health regen kill the player. Clamp to 0.1
                 newHealth = Mathf.Clamp(newHealth, 0.1f, MaxHealth); 
@@ -121,6 +124,12 @@ namespace Project.Game.Player
                 if (!Mathf.Approximately(newHealth, CurrentHealth))
                 {
                     CurrentHealth = newHealth;
+                    
+                    _popupTextManager.DisplayTextAtPosition($"{Math.Round(delta, 1)}",
+                        transform.position,
+                        delta > 0
+                            ? _popupTextManager.PlayerHealingPrefab
+                            : _popupTextManager.PlayerDamagePrefab);
                 }
             }
         }

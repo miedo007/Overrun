@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 504376211884618014}
   - component: {fileID: 1979829026993262303}
   m_Layer: 0
-  m_Name: popup_text_item
+  m_Name: popup_text_item_player_health_regen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ba5338c4b543de93b4673566095c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.22
+  duration: 0.375
   <Text>k__BackingField: {fileID: 3513700771332661673}
 --- !u!1 &2513281670486083252
 GameObject:
@@ -74,7 +74,7 @@ RectTransform:
   m_GameObject: {fileID: 2513281670486083252}
   m_LocalRotation: {x: 0.01745245, y: 0, z: 0, w: 0.99984777}
   m_LocalPosition: {x: 0, y: 0, z: -0.039}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.29909366, y: 0.29909366, z: 0.29909366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 504376211884618014}
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278249889
+  m_fontColor: {r: 0.63280946, g: 0.9150943, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 504376211884618014}
   - component: {fileID: 1979829026993262303}
   m_Layer: 0
-  m_Name: popup_text_item_player
+  m_Name: popup_text_item_player_damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ RectTransform:
   m_GameObject: {fileID: 2513281670486083252}
   m_LocalRotation: {x: 0.01745245, y: 0, z: 0, w: 0.99984777}
   m_LocalPosition: {x: 0, y: 0, z: -0.039}
-  m_LocalScale: {x: 0.47568056, y: 0.47568056, z: 0.47568056}
+  m_LocalScale: {x: 0.423361, y: 0.423361, z: 0.423361}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 504376211884618014}

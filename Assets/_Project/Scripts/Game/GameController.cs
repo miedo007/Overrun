@@ -184,6 +184,8 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
+            waveMusic.Stop();
+            
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
             
@@ -209,6 +211,8 @@ namespace Project.Game
         }
         private void OnPlayerHealthDepleted()
         {
+            waveMusic.Stop();
+            
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;
             _levelController.WaveCompleted -= OnWaveCompleted;
             _levelController.LevelCompleted -= OnLevelCompleted;
