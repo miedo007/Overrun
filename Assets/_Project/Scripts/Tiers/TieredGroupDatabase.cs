@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Project.Application;
 using Project.Game.Weapons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Tiers
 {
@@ -32,6 +34,22 @@ namespace Project.Tiers
                 return false;
             });
 
+        }
+
+        public BaseData GetItemWithId(string id)
+        {
+            foreach (var tieredGroup in TieredGroups)
+            {
+                foreach (var tier in tieredGroup.Tiers)
+                {
+                    if (string.Equals(tier.Data.Id, id))
+                    {
+                        return tier.Data;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

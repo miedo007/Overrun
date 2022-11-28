@@ -24,10 +24,11 @@ namespace Project.Game.Levels
         public bool IsFinalWave => WaveIndex == CurrentLevel.Waves.Length - 1;
         public int WaveCount => CurrentLevel.Waves.Length;
 
-        public void Initialize(int levelIndex)
+        public void Initialize(int levelIndex, int waveIndex)
         {
             CurrentLevelIndex = levelIndex;
             CurrentLevel = Levels.GetLevel(levelIndex);
+            WaveIndex = waveIndex;
         }
 
         public void BeginNextWave(float delay)

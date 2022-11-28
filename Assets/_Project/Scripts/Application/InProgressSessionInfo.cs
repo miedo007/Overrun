@@ -10,7 +10,7 @@ namespace Project.Application
         public event Action OnChanged;
         public Save Save => _save;
 
-        public IInProgressSessionSave InProgressSessionSave => _save;
+        public IInProgressSessionSave InProgressSave => _save;
         private readonly InProgressSessionSave _save = new InProgressSessionSave();
 
         public void SaveProgress(int levelIndex, int waveIndex, float health, HeroInfo heroInfo)

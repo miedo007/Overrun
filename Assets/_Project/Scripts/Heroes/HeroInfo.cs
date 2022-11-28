@@ -140,7 +140,6 @@ namespace Project.Heroes
 
         public void RemoveWeapon(WeaponData weaponData)
         {
-            
             WeaponsWillChange?.Invoke();
             CurrentWeapons.Remove(weaponData);
             WeaponsChanged?.Invoke();

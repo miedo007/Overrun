@@ -8,10 +8,12 @@ using MTLSimpleAudio;
 using Project.Application;
 using Project.Game.Cameras;
 using Project.Game.Enemies;
+using Project.Game.Items;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
+using Project.Game.Weapons;
 using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
@@ -40,28 +42,59 @@ namespace Project.Game
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject] private readonly GameData _gameData;
         [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
+        [Inject ("items")] private TieredGroupDatabase _itemDatabase;
 
         private HeroInfo _heroInfo;
-
-
+        
         public void OnReady()
         {
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
-            
+            _heroInfo = _heroRegistry.ActiveHero;
+
             var levelIndex = _sessionInfo.LevelIndex;
-            _levelController.Initialize(levelIndex);
+            var waveIndex = 0;
+            
+            if (_inProgressSession.InProgressSave.InProgress)
+            {
+                levelIndex = _inProgressSession.InProgressSave.LevelIndex;
+                waveIndex = _inProgressSession.InProgressSave.WaveIndex;
+
+                foreach (var weaponId in _inProgressSession.InProgressSave.Weapons)
+                {
+                    var weaponData = _weaponDatabase.GetItemWithId(weaponId);
+                    _heroInfo.AddWeapon(weaponData as WeaponData);
+                }
+                
+                foreach (var itemId in _inProgressSession.InProgressSave.Items)
+                {
+                    var itemData = _itemDatabase.GetItemWithId(itemId);
+                    _heroInfo.AddItem(itemData as ItemData);
+                }
+                
+                
+                _heroInfo.ShopCurrency = _inProgressSession.InProgressSave.ShopCurrency;
+                _playerHealthController.CurrentHealth = _inProgressSession.InProgressSave.Health;
+            }
+            
+            
+            _levelController.Initialize(levelIndex, waveIndex);
         }
         
         private void Start()
         {
-            _heroInfo = _heroRegistry.ActiveHero;
-
             _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
             
             //_uiFrame.Open<WeaponTestScreen>();
-            OpenWeaponSelector();
+            if (!_inProgressSession.InProgressSave.InProgress)
+            {
+                OpenWeaponSelector();
+            }
+            else
+            {
+                StartLevel();
+            }
         }
 
         private void OpenWeaponSelector()
