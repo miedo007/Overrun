@@ -1,6 +1,6 @@
 ﻿using Mtl.Injection;
+using Mtl.Toolbox;
 using Project.Game.UI;
-using Tromagon.Extensions;
 using UnityEngine;
 
 namespace Project.Heroes

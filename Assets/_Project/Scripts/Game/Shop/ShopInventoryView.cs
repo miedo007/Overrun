@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mtl.Injection;
+using Mtl.Toolbox;
 using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
@@ -8,7 +8,6 @@ using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
 using Project.Tiers;
-using Tromagon.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 

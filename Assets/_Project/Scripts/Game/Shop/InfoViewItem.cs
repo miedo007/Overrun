@@ -1,7 +1,8 @@
-﻿using Project.Application;
+﻿using Mtl.Toolbox;
+using Project.Application;
 using Project.Game.Items;
 using Project.Game.UI;
-using Tromagon.Extensions;
+
 using UnityEngine;
 
 namespace Project.Game.Shop
