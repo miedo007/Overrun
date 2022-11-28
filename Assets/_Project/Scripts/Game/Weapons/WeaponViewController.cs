@@ -8,6 +8,7 @@ namespace Project.Game.Weapons
     {
         [field: SerializeField] public WeaponController WeaponController { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+        [field: SerializeField] public SpriteRenderer OutlineRenderer { get; private set; }
         [field: SerializeField] public Animation Animation { get; private set; }
         [field: SerializeField] public Transform FeedbackRoot { get; private set; }
         [field: SerializeField] public ParticleSystem ActivateFx { get; private set; }
@@ -32,6 +33,7 @@ namespace Project.Game.Weapons
         private void OnWeaponControllerInitialized()
         {
             _weaponData = WeaponController.Data;
+            OutlineRenderer.color = _weaponData.Tier.OutlineColor;
         }
 
         private void OnWeaponControllerActivated()
@@ -88,6 +90,7 @@ namespace Project.Game.Weapons
         public void SetSortingOrder(int sortingOrder)
         {
             SpriteRenderer.sortingOrder = sortingOrder;
+            OutlineRenderer.sortingOrder = sortingOrder-1;
         }
 
     }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NamePostfix: III
   Color: {r: 0, g: 0.6631875, b: 0.7924528, a: 1}
+  OutlineColor: {r: 0.25943398, g: 1, b: 0.96139413, a: 1}

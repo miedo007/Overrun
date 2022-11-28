@@ -7,5 +7,6 @@ namespace Project.Tiers
     {
         [field: SerializeField] public string NamePostfix = "I";
         [field: SerializeField] public Color Color;
+        [field: SerializeField] public Color OutlineColor;
     }
 }

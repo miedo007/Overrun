@@ -105,11 +105,21 @@ namespace Project.Game.Shop
             {
                 if (!_heroRegistry.ActiveHero.HasFreeWeaponSlot())
                 {
-                    weaponsFullNotification.Display();
-                    return;
+                    // can this weapon be merged with an item in the players inventory?
+                    if (_heroRegistry.ActiveHero.CanMergeWeapon(weaponData, 1))
+                    {
+                        _heroRegistry.ActiveHero.MergeWeapon(weaponData, 1);
+                    }
+                    else
+                    {
+                        weaponsFullNotification.Display();
+                        return;
+                    }
                 }
-                
-                _heroRegistry.ActiveHero.AddWeapon(weaponData);
+                else
+                {
+                    _heroRegistry.ActiveHero.AddWeapon(weaponData);
+                }
             }
             
             var itemData = data as ItemData;

@@ -159,9 +159,9 @@ namespace Project.Heroes
             
         }
 
-        public bool CanMergeWeapon(WeaponData weaponData)
+        public bool CanMergeWeapon(WeaponData weaponData, int requiredCount = 2)
         {
-            if (CurrentWeapons.Count(x => weaponData == x) < 2)
+            if (CurrentWeapons.Count(x => weaponData == x) < requiredCount)
             {
                 return false;
             }
@@ -177,9 +177,9 @@ namespace Project.Heroes
             return false;
         }
 
-        public bool MergeWeapon(WeaponData weaponData)
+        public bool MergeWeapon(WeaponData weaponData, int requiredCount = 2)
         {
-            if (!CanMergeWeapon(weaponData))
+            if (!CanMergeWeapon(weaponData, requiredCount))
             {
                 Debug.Log("Merge failed");
                 return false;
@@ -198,9 +198,12 @@ namespace Project.Heroes
             // TODO: Remove from correct slot. For now, just remove first two matching weaponData
             
             RemoveWeapon(weaponData);
-            RemoveWeapon(CurrentWeapons.FirstOrDefault(x => x == weaponData));
-            AddWeapon(nextTier.Data as WeaponData);
+            if (requiredCount > 1)
+            {
+                RemoveWeapon(CurrentWeapons.FirstOrDefault(x => x == weaponData));
+            }
             
+            AddWeapon(nextTier.Data as WeaponData);
             return true;
         }
 
