@@ -179,9 +179,9 @@ namespace Project.Game.Weapons
             if (damageReceiver != null)
             {
                 var direction = (Vector2)(col.transform.position - _transform.position).normalized;
-                var force = direction.normalized * KnockbackStat.GetFloatValue() * Data.KnockbackMultiplier;
+                var force = KnockbackStat.GetFloatValue() * Data.KnockbackMultiplier;
                 var isCritical = Random.value <= CriticalChanceStat.GetFloatValue();
-                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, force, gameObject);
+                damageReceiver.ReceiveDamage(GetDamageValue(isCritical), isCritical, direction, force, gameObject);
                 MeleeHit?.Invoke();
             }
         }

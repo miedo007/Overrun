@@ -7,6 +7,7 @@ using Project.Game.Rooms;
 using Project.Game.Targets;
 using Project.Game.Weapons;
 using Project.PopupText;
+using SRDebugger.Internal;
 using UnityEngine;
 
 namespace Project.Game.Enemies
@@ -182,18 +183,18 @@ namespace Project.Game.Enemies
             FacingDirection = directionToPlayer.x < 0 ? -1 : 1;
         }
 
-        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 force)
+        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 direction, float force)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical, force, projectile.gameObject);
+                ApplyDamage(damage, isCritical, direction, force, projectile.gameObject);
                 return true;
             }
 
             return false;
         }
 
-        private void ApplyDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
+        private void ApplyDamage(float damage, bool isCritical, Vector2 direction, float force, GameObject sender)
         {
             if (_isDead)
             {
@@ -203,14 +204,14 @@ namespace Project.Game.Enemies
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
             {
-                Prekill();
+                PreKill();
+                Knockback(direction * 10f );
             }
             else
             {
                 DamageTaken?.Invoke();
+                Knockback(direction * force);
             }
-
-            Knockback(force);
             
             var damageInt = Mathf.CeilToInt(damage);
             if (damageInt <= 0)
@@ -221,7 +222,7 @@ namespace Project.Game.Enemies
             _popupTextManager.DisplayTextAtPosition($"{damageInt}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
         }
 
-        private void Prekill()
+        private void PreKill()
         {
             selfTarget.Deactivate();
             WillDie?.Invoke(this);
@@ -251,11 +252,11 @@ namespace Project.Game.Enemies
         }
         
 
-        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
+        public bool ReceiveDamage(float damage, bool isCritical, Vector2 direction, float force, GameObject sender)
         {
             if (selfTarget.IsActivated)
             {
-                ApplyDamage(damage, isCritical, force, sender);
+                ApplyDamage(damage, isCritical, direction, force, sender);
                 return true;
             }
 
@@ -302,7 +303,7 @@ namespace Project.Game.Enemies
                     return;
                 }
 
-                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero, gameObject);
+                damageReceiver.ReceiveDamage(CurrentMeleeDamage, false, Vector2.zero, 0, gameObject);
                 _lastContactAttackTime = Time.time;
             }
         }

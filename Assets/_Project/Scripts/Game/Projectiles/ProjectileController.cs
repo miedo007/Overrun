@@ -53,9 +53,10 @@ namespace Project.Game.Projectiles
             if (time >= _initializationTime + _lifespan)
             {
                 IsActive = false;
+                return;
             }
             
-            _transform.position += _transform.right * _speed * Time.deltaTime;
+            _transform.position += _transform.right * (_speed * Time.deltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -70,7 +71,7 @@ namespace Project.Game.Projectiles
             {
                 var isCritical = Random.value <= _criticalChance;
                 var damage = isCritical ? Damage * _criticalMultiplier : Damage;
-                if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right * _knockbackForce))
+                if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right, _knockbackForce))
                 {
                     if (Data.HitFeetback != null)
                     {
@@ -80,7 +81,7 @@ namespace Project.Game.Projectiles
                     _pierceCount--;
                     if (_pierceCount <= 0)
                     {
-                        IsActive = false;
+                        Kill();
                     }
                 }
             }
@@ -88,6 +89,7 @@ namespace Project.Game.Projectiles
 
         public void Kill()
         {
+            IsActive = false;
         }
     }
 }

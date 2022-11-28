@@ -15,7 +15,7 @@ namespace Project.Game.Player
         [Inject] private readonly PlayerHealthController _healthController;
         [Inject] private readonly PopupTextManager _popupTextManager;
         
-        public bool ReceiveDamage(float damage, bool isCritical, Vector2 force, GameObject sender)
+        public bool ReceiveDamage(float damage, bool isCritical, Vector2 direction, float force, GameObject sender)
         {
             ApplyDamage(damage);
             return true;
@@ -27,7 +27,7 @@ namespace Project.Game.Player
             _popupTextManager.DisplayTextAtPosition($"{damage:0.#}", DamageTextColor, transform.position, DamageTextPrefab);
         }
 
-        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 force)
+        public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 direction, float force)
         {
             ApplyDamage(damage);
             return true;
