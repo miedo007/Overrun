@@ -20,6 +20,11 @@ namespace Project.PopupText
         private Transform _transform;
         
         private readonly List<PopupTextItem> _activeTextItems = new List<PopupTextItem>();
+        
+        [field:SerializeField] public PopupTextItem DamagePrefab { get; set; }
+        [field:SerializeField] public PopupTextItem CritDamagePrefab { get; set; }
+        [field:SerializeField] public PopupTextItem PlayerDamagePrefab { get; set; }
+
 
         private void Awake()
         {
@@ -33,11 +38,11 @@ namespace Project.PopupText
             _rotation = Quaternion.LookRotation(forward, Vector3.up);
         }
         
-        public void DisplayTextAtPosition(string text, Color color, Vector3 position, PopupTextItem textPrefab = null)
+        public void DisplayTextAtPosition(string text, Vector3 position, PopupTextItem textPrefab = null)
         {
             var targetPosition = position + offsets[Random.Range(0, offsets.Length)];
             var textItem = LeanPool.Spawn(textPrefab == null ? textItemPrefab : textPrefab, position, _rotation, _transform);
-            textItem.Initialize(text, color, targetPosition, displayDuration);
+            textItem.Initialize(text, targetPosition);
             _activeTextItems.Add(textItem);
         }
 

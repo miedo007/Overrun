@@ -219,7 +219,9 @@ namespace Project.Game.Enemies
                 return;
             }
             
-            _popupTextManager.DisplayTextAtPosition($"{damageInt}", isCritical ? Color.yellow : Color.white, selfTarget.Position);
+            _popupTextManager.DisplayTextAtPosition($"{damageInt}",
+                selfTarget.Position,
+                isCritical ? _popupTextManager.CritDamagePrefab : _popupTextManager.DamagePrefab);
         }
 
         private void PreKill()

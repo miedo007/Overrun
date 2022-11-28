@@ -24,7 +24,7 @@ namespace Project.Game.Player
         private void ApplyDamage(float damage)
         {
             _healthController.ReduceHealth(damage);
-            _popupTextManager.DisplayTextAtPosition($"{damage:0.#}", DamageTextColor, transform.position, DamageTextPrefab);
+            _popupTextManager.DisplayTextAtPosition($"{damage:0.#}", transform.position, _popupTextManager.PlayerDamagePrefab);
         }
 
         public bool ReactToProjectile(ProjectileController projectile, float damage, bool isCritical, Vector2 direction, float force)
