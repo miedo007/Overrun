@@ -6627,11 +6627,11 @@ PrefabInstance:
       objectReference: {fileID: 1440190959}
     - target: {fileID: 963194227, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 963194228, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.01
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1501380780856478762, guid: dbd250c59312e1f40bc07e24b02548ca, type: 3}
       propertyPath: m_Follow

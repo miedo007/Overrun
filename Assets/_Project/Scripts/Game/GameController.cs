@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Mtl.Bonfire;
 using Mtl.Injection;
+using Mtl.Toolbox;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
 using Project.Application;
@@ -22,6 +24,7 @@ namespace Project.Game
         [SerializeField] private MusicData shopMusic;
 
         [Inject] private readonly UIFrame _uiFrame;
+        [Inject] private readonly IAnalyticsProvider _analyticsProvider;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
         [Inject] private readonly CameraManager _cameraManager;
@@ -34,7 +37,6 @@ namespace Project.Game
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject] private readonly GameData _gameData;
         [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
-        [Inject ("items")] private TieredGroupDatabase _itemDatabase;
 
         private HeroInfo _heroInfo;
 
@@ -42,7 +44,11 @@ namespace Project.Game
         public void OnReady()
         {
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
-            _levelController.Initialize(_sessionInfo.LevelIndex);
+            
+            var levelIndex = _sessionInfo.LevelIndex;
+            //todo: Add analytics for level_summary
+            _analyticsProvider.SendEvent("level_summary", ("level_id", levelIndex));
+            _levelController.Initialize(levelIndex);
         }
         
         private void Start()
@@ -164,10 +170,12 @@ namespace Project.Game
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
             waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex, _levelController.IsFinalWave);
+            
             if (_levelController.IsFinalWave)
             {
                 _uiFrame.Get<HudScreen>().ShowCurrencyBar();
             }
+            
             _cameraManager.ZoomOut();
         }
 
