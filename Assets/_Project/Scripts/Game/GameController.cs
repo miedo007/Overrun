@@ -24,7 +24,7 @@ namespace Project.Game
         [SerializeField] private MusicData shopMusic;
 
         [Inject] private readonly UIFrame _uiFrame;
-        [Inject] private readonly IAnalyticsProvider _analyticsProvider;
+        [Inject] private readonly IAnalyticsManager _analyticsManager;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
         [Inject] private readonly CameraManager _cameraManager;
@@ -46,8 +46,6 @@ namespace Project.Game
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
             
             var levelIndex = _sessionInfo.LevelIndex;
-            //todo: Add analytics for level_summary
-            _analyticsProvider.SendEvent("level_summary", ("level_id", levelIndex));
             _levelController.Initialize(levelIndex);
         }
         
@@ -192,6 +190,8 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
+            SendLevelSummaryEvent(true);
+            
             waveMusic.Stop();
             
             _cameraManager.ZoomIn();
@@ -212,6 +212,15 @@ namespace Project.Game
             levelCompleteScreen.Initialize(currencyReward, true);
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
         }
+
+        private void SendLevelSummaryEvent(bool completed)
+        {
+            _analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent()
+            {
+                Completed = completed,
+                LevelId = _sessionInfo.LevelIndex
+            });
+        }
         
         private void OnLevelCompleteClosed(UIScreen screen)
         {
@@ -219,6 +228,8 @@ namespace Project.Game
         }
         private void OnPlayerHealthDepleted()
         {
+            SendLevelSummaryEvent(false);
+            
             waveMusic.Stop();
             
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;

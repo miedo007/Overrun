@@ -27,7 +27,7 @@ namespace Project.Application
             Bind(beaconWrapper);
 
             var analyticsManager = new AnalyticsManager();
-            Bind<IAnalyticsProvider>(analyticsManager);
+            Bind<IAnalyticsManager>(analyticsManager);
             analyticsManager.Register(beaconWrapper);
             analyticsManager.Register(new GameAnalyticsWrapper());
             
@@ -80,18 +80,6 @@ namespace Project.Application
             bonfire.Initialize(() => sem.Release());
             await sem.WaitAsync();
 
-            const string gameWasLaunched = "GameWasLaunched";
-            if (PlayerPrefs.GetInt(gameWasLaunched, 0) == 1)
-            {
-                var termsOfService = (ITermsOfService)beaconWrapper;
-                termsOfService.Show(_ => sem.Release());
-                await sem.WaitAsync();
-            }
-            else
-            {
-                PlayerPrefs.SetInt(gameWasLaunched, 1);
-                PlayerPrefs.Save();
-            }
         }
     }
 }
