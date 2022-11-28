@@ -38,6 +38,17 @@ namespace Project.Application
             Bind(heroDatabase);
             Bind(gameData);         
             Bind(saveManager);
+
+            var inProgressSession = new InProgressSessionInfo();
+            var inProgressReadWriter = new FileReadWriter("in-progress");
+            saveManager.TryLoad(inProgressSession, (success) =>
+            {
+                if (!success)
+                {
+                    inProgressSession.Create();
+                }
+            }, inProgressReadWriter);
+            Bind(inProgressSession);
             
             var playerInfo = new PlayerInfo();
             var playerReadWriter = new FileReadWriter("player");

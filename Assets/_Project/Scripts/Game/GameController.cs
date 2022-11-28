@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Mtl.Bonfire;
 using Mtl.Injection;
+using Mtl.Save;
 using Mtl.Toolbox;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
@@ -24,6 +25,8 @@ namespace Project.Game
         [SerializeField] private MusicData shopMusic;
 
         [Inject] private readonly UIFrame _uiFrame;
+        [Inject] private readonly InProgressSessionInfo _inProgressSession;
+        [Inject] private readonly SaveManager _saveManager;
         [Inject] private readonly IAnalyticsManager _analyticsManager;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
@@ -163,6 +166,12 @@ namespace Project.Game
 
         private void BeginNextWave()
         {
+            if (_levelController.WaveIndex > 0)
+            {
+                _inProgressSession.SaveProgress(_sessionInfo.LevelIndex, _levelController.WaveIndex, _playerHealthController.CurrentHealth, _heroInfo);
+                _saveManager.Save();
+            }
+            
             waveMusic.Play();
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
@@ -190,6 +199,9 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
+            _inProgressSession.ClearProgress();
+            _saveManager.Save();
+            
             SendLevelSummaryEvent(true);
             
             waveMusic.Stop();
@@ -228,6 +240,9 @@ namespace Project.Game
         }
         private void OnPlayerHealthDepleted()
         {
+            _inProgressSession.ClearProgress();
+            _saveManager.Save();
+            
             SendLevelSummaryEvent(false);
             
             waveMusic.Stop();

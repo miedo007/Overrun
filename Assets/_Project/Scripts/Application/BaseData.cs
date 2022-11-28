@@ -12,6 +12,8 @@ namespace Project.Application
         [field: SerializeField, TextArea] public string Description { get; protected set; }
         [field: SerializeField] public int BasePrice { get; set; } = 5;
 
+        public string Id => name;
+        
         public virtual string GetDescriptionForHero(HeroInfo heroInfo)
         {
             return Description;
