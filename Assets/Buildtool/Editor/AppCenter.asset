@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab54316dbe8f6b42a355dab9b9c14dd, type: 3}
+  m_Name: AppCenter
+  m_EditorClassIdentifier: 
+  Configs:
+  - AppName: blastronauts-ios-alpha
+    AppSecret: 75f6829f-932f-41b7-904a-778bb20aa1c7
+    ReleaseType: Alpha
+    Platform: 9
+    IsSecondary: 0
+    UseCrashes: 1
+    UseDistribute: 1
+    EnableDistributeForDebuggableBuild: 0
+    AutomaticCheckForUpdate: 1
+    UpdateTrack: 1
+    m_organization: 
+    m_apiToken: 
+    m_destinations: []
+  - AppName: blastronauts-android-alpha
+    AppSecret: 6ea27435-3c69-465e-af8c-d498ee4d6243
+    ReleaseType: Alpha
+    Platform: 13
+    IsSecondary: 0
+    UseCrashes: 1
+    UseDistribute: 1
+    EnableDistributeForDebuggableBuild: 0
+    AutomaticCheckForUpdate: 1
+    UpdateTrack: 1
+    m_organization: 
+    m_apiToken: 
+    m_destinations: []

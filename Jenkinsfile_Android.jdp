@@ -1,0 +1,112 @@
+// App name and project path customization points
+appName = 'Blastronauts'
+unityProjectPath = '.'
+
+// Unity build target (one of 'iOS', 'Android', 'StandaloneOSX', 'tvOS', 'WebGL', or 'WSAPlayer')
+buildTarget = 'Android'
+
+properties([
+	parameters([
+		// Names prefixed with '-' and their values will be passed as arguments to Buildtool
+		choice(name: '-config', choices: ['general', 'darkmatter-distribution', 'alpha', 'beta', 'distribution'], description: 'Build configuration'),
+		string(name: '-unityVersion', defaultValue: '', description: 'Leave empty to use project defaults or specify a version such as "2021.3.5f1" or "2021.*"'),
+
+		// Options for execution
+		string(name: 'nodeLabel', defaultValue: "unity_${buildTarget.toLowerCase()}", description: 'Determine the node that executes the job'),
+
+		// Enable or disable stages
+		booleanParam(name: 'cleanWorkspace', defaultValue: false, description: 'Delete files untracked or ignored by git from the workspace'),
+		booleanParam(name: 'runTests', defaultValue: false, description: 'Run tests'),
+		booleanParam(name: 'makeBuild', defaultValue: true, description: 'Make a build')
+	])
+])
+
+def buildtoolBootstrap(String additionalArguments = '') {
+	def arguments = ''
+	params.each { name, value ->
+		if (name[0] == '-' && value != '') {
+			arguments = arguments + ' ' + name + ' ' + value
+		}
+	}
+	
+	return sh(script: 'dotnet Assets/Buildtool/Editor/Bin~/BuildtoolBootstrap.dll'
+					  + ' -projectPath ' + unityProjectPath
+					  + ' -buildTarget ' + buildTarget
+					  + ' -nographics'
+					  + ' ' + arguments
+					  + ' ' + additionalArguments,
+					  returnStatus : true)
+}
+
+pipeline {
+	agent {
+		node {
+			label "${params.nodeLabel}"
+			customWorkspace "workspace/${appName}_${buildTarget}"
+		}
+	}
+
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '50', artifactNumToKeepStr: '50'))
+		timeout(time: 60, unit: 'MINUTES')
+	}
+
+	stages {
+		stage('Cleanup') {
+			when {
+				expression {
+					params.cleanWorkspace == true
+				}
+			}
+			steps {
+				sh 'git clean -xdf'
+			}
+		}
+
+		stage('Tests') {
+			when {
+				expression {
+					params.runTests == true
+				}
+			}
+			steps {
+				script {
+					def testResultsFile = 'TestResults.xml'
+					def value = buildtoolBootstrap('-runTests \
+													-logFile TestLogFile.txt \
+													-testResults ' + testResultsFile)
+
+					nunit(testResultsPattern: testResultsFile,
+						  failIfNoResults: false,
+						  failedTestsFailBuild: true)
+				}
+			}
+		}
+
+		stage('Build') {
+			when {
+				expression {
+					params.makeBuild == true
+				}
+			}
+			steps {
+				withCredentials([string(credentialsId: 'GP_DIST_KEYSTORE_PASS', variable: 'keystore_pass')]) {
+					script {
+                        def value = buildtoolBootstrap('-keystoreName /Volumes/Certificates/android/rovio_android.keystore \
+												        -keystorePass "' + keystore_pass + '" \
+												        -keyaliasName roviokey \
+												        -keyaliasPass "' + keystore_pass + '" ')
+
+						if (value == 0) {
+							currentBuild.result = 'SUCCESS'
+						} else if (value == 2) {
+							currentBuild.result = 'UNSTABLE'
+						} else {
+							error 'Build failed'
+						}
+					}
+				}
+			}
+		}
+	}
+}
