@@ -12,7 +12,6 @@ namespace Project.PopupText
     {
         [SerializeField] private PopupTextItem textItemPrefab;
         [SerializeField] private Vector3[] offsets;
-        [SerializeField] private float displayDuration = 0.375f;
         
         [Inject] private readonly Camera _camera;
 

@@ -120,6 +120,7 @@ namespace Project.Heroes
 
         public void AddItem(ItemData item)
         {
+            Debug.Log(item);
             ItemsWillChange?.Invoke();
             
             Items.Add(item);

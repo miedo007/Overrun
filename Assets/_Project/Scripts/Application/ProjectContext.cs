@@ -5,6 +5,7 @@ using Project.Game;
 using Project.Heroes;
 using Project.Tiers;
 using Mtl.Bonfire;
+using Project.Game.Levels;
 using UnityEngine;
 
 namespace Project.Application
@@ -12,9 +13,11 @@ namespace Project.Application
     public class ProjectContext : InjectContext
     {
         [SerializeField] private SceneLoader sceneLoader;
+        [SerializeField] private LevelDatabase levelDatabase;
         [SerializeField] private TierDatabase tierDatabase;
         [SerializeField] private TieredGroupDatabase weaponDatabase;
         [SerializeField] private TieredGroupDatabase itemDatabase;
+        [SerializeField] private TieredGroupDatabase statUpgradeDatabase;
         [SerializeField] private HeroDatabase heroDatabase;
         [SerializeField] private GameData gameData;
         [SerializeField] private SaveManager saveManager;
@@ -31,10 +34,12 @@ namespace Project.Application
             analyticsManager.Register(beaconWrapper);
             analyticsManager.Register(new GameAnalyticsWrapper());
             
+            Bind(levelDatabase);
             Bind(sceneLoader);
             Bind(tierDatabase);
             Bind(weaponDatabase, "weapons");
             Bind(itemDatabase, "items");
+            Bind(statUpgradeDatabase, "stat_upgrades");
             Bind(heroDatabase);
             Bind(gameData);         
             Bind(saveManager);

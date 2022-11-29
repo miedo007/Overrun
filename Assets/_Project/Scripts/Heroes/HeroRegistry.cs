@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Mtl.Save;
 using UnityEngine;
 
@@ -95,6 +96,14 @@ namespace Project.Heroes
             ActiveHeroChanged?.Invoke(ActiveHero);
         }
 
-        
+        public HeroData GetHeroData(string heroId)
+        {
+            return Database.Heroes.FirstOrDefault(x => x.Id == heroId);
+        }
+
+        public void SetActiveHero(string heroId)
+        {
+            SetActiveHero(GetHeroData(heroId));
+        }
     }
 }

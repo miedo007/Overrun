@@ -10,6 +10,7 @@ namespace Project.Application
     public class InProgressSessionSave : Save, IInProgressSessionSave
     {
         [JsonProperty] public bool InProgress { get; set; }
+        [JsonProperty] public string HeroId { get; set; }
         [JsonProperty] public int LevelIndex { get; set; }
         [JsonProperty] public int WaveIndex { get; set; }
         [JsonProperty] public float ShopCurrency { get; set; }
@@ -20,6 +21,7 @@ namespace Project.Application
         public void Clear()
         {
             InProgress = false;
+            HeroId = "";
             LevelIndex = 0;
             WaveIndex = 0;
             ShopCurrency = 0;
@@ -32,6 +34,7 @@ namespace Project.Application
     public interface IInProgressSessionSave
     {
         bool InProgress { get; }
+        string HeroId { get; }
         int LevelIndex { get; }
         int WaveIndex { get; }
         float ShopCurrency { get; }

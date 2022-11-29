@@ -11,15 +11,14 @@ namespace Project.Game.UI
 {
     public class StatUpgradeSelectorScreen : UIScreen, IInjectionReady
     {
-        [SerializeField] private RectTransform parent;
-        [SerializeField] private TieredGroupDatabase upgradeDatabase;
         [SerializeField] private List<StatUpgradeView> upgradeViews;
 
+        [Inject("stat_upgrades")] private  readonly TieredGroupDatabase _upgradeDatabase;
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
 
-        private Dictionary<TieredDataGroup, int> _groupCountDict = new();
+        private readonly Dictionary<TieredDataGroup, int> _groupCountDict = new();
 
         private  HeroInfo _heroInfo;
 
@@ -53,12 +52,12 @@ namespace Project.Game.UI
             var upgradeSelection = new List<TieredDataGroup>();
             for (int i = 0; i < upgradeViews.Count; i++)
             {
-                var randomStatUpgradeGroup = upgradeDatabase.GetRandom();
+                var randomStatUpgradeGroup = _upgradeDatabase.GetRandom();
 
                 var validSelectionMade = false;
                 while (!validSelectionMade)
                 {
-                    randomStatUpgradeGroup = upgradeDatabase.GetRandom();
+                    randomStatUpgradeGroup = _upgradeDatabase.GetRandom();
                     if (DoesNotExceedMaxCount(randomStatUpgradeGroup) && !upgradeSelection.Contains(randomStatUpgradeGroup))
                     {
                         upgradeSelection.Add(randomStatUpgradeGroup);

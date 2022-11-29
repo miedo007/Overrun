@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Mtl.Save;
 using Project.Heroes;
+using UnityEngine;
 
 namespace Project.Application
 {
@@ -11,11 +12,13 @@ namespace Project.Application
         public Save Save => _save;
 
         public IInProgressSessionSave InProgressSave => _save;
+
         private readonly InProgressSessionSave _save = new InProgressSessionSave();
 
         public void SaveProgress(int levelIndex, int waveIndex, float health, HeroInfo heroInfo)
         {
             _save.InProgress = true;
+            _save.HeroId = heroInfo.Data.Id;
             _save.LevelIndex = levelIndex;
             _save.WaveIndex = waveIndex;
             _save.Health = health;

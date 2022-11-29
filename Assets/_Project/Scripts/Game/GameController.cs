@@ -43,6 +43,7 @@ namespace Project.Game
         [Inject] private readonly GameData _gameData;
         [Inject ("weapons")] private TieredGroupDatabase _weaponDatabase;
         [Inject ("items")] private TieredGroupDatabase _itemDatabase;
+        [Inject ("stat_upgrades")] private TieredGroupDatabase _statUpgradeDatabase;
 
         private HeroInfo _heroInfo;
         
@@ -51,43 +52,28 @@ namespace Project.Game
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
             _heroInfo = _heroRegistry.ActiveHero;
 
-            var levelIndex = _sessionInfo.LevelIndex;
-            var waveIndex = 0;
-            
-            if (_inProgressSession.InProgressSave.InProgress)
-            {
-                levelIndex = _inProgressSession.InProgressSave.LevelIndex;
-                waveIndex = _inProgressSession.InProgressSave.WaveIndex;
-
-                foreach (var weaponId in _inProgressSession.InProgressSave.Weapons)
-                {
-                    var weaponData = _weaponDatabase.GetItemWithId(weaponId);
-                    _heroInfo.AddWeapon(weaponData as WeaponData);
-                }
-                
-                foreach (var itemId in _inProgressSession.InProgressSave.Items)
-                {
-                    var itemData = _itemDatabase.GetItemWithId(itemId);
-                    _heroInfo.AddItem(itemData as ItemData);
-                }
-                
-                
-                _heroInfo.ShopCurrency = _inProgressSession.InProgressSave.ShopCurrency;
-                _playerHealthController.CurrentHealth = _inProgressSession.InProgressSave.Health;
-            }
-            
-            
-            _levelController.Initialize(levelIndex, waveIndex);
         }
         
         private void Start()
         {
+            var hasInProgressSession = _inProgressSession.InProgressSave.InProgress;
+            
+            var levelIndex = _sessionInfo.LevelIndex;
+            var waveIndex = 0;
+            
+            if (hasInProgressSession)
+            {
+                LoadInProgressSession(out levelIndex, out waveIndex);
+            }
+            
+            _levelController.Initialize(levelIndex, waveIndex);
+            
             _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
             
             //_uiFrame.Open<WeaponTestScreen>();
-            if (!_inProgressSession.InProgressSave.InProgress)
+            if (!hasInProgressSession)
             {
                 OpenWeaponSelector();
             }
@@ -201,7 +187,10 @@ namespace Project.Game
         {
             if (_levelController.WaveIndex > 0)
             {
-                _inProgressSession.SaveProgress(_sessionInfo.LevelIndex, _levelController.WaveIndex, _playerHealthController.CurrentHealth, _heroInfo);
+                _inProgressSession.SaveProgress(_sessionInfo.LevelIndex,
+                    _levelController.WaveIndex,
+                    _playerHealthController.CurrentHealth,
+                    _heroInfo);
                 _saveManager.Save();
             }
             
@@ -301,7 +290,42 @@ namespace Project.Game
         {
             _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }
+        
+        private void LoadInProgressSession(out int levelIndex, out int waveIndex)
+        {
+            var save = _inProgressSession.InProgressSave;
+            levelIndex = save.LevelIndex;
+            waveIndex = save.WaveIndex;
+                
+            // Load items & stat upgrades first
+            foreach (var itemId in save.Items)
+            {
+                var itemData = _itemDatabase.GetItemWithId(itemId);
+                if (itemData != null)
+                {
+                    _heroInfo.AddItem(itemData as ItemData);
+                }
+                else
+                {
+                    var statUpgradeData = _statUpgradeDatabase.GetItemWithId(itemId);
+                    if (statUpgradeData != null)
+                    {
+                        _heroInfo.AddItem(statUpgradeData as ItemData);
+                    }
+                }
+            }
 
+            foreach (var weaponId in _inProgressSession.InProgressSave.Weapons)
+            {
+                var weaponData = _weaponDatabase.GetItemWithId(weaponId);
+                _heroInfo.AddWeapon(weaponData as WeaponData);
+            }
+
+            _playerHealthController.CurrentHealth = _inProgressSession.InProgressSave.Health;
+            _heroInfo.ShopCurrency = _inProgressSession.InProgressSave.ShopCurrency;
+        }
+
+        #if UNITY_EDITOR
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.L))
@@ -309,5 +333,6 @@ namespace Project.Game
                 OnLevelCompleted();
             }
         }
+        #endif
     }
 }

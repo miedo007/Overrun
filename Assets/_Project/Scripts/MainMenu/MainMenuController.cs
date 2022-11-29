@@ -15,7 +15,8 @@ namespace Project.MainMenu
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject] private readonly HeroRegistry _heroRegistry;
-
+        [Inject] private readonly InProgressSessionInfo _inProgressSessionInfo;
+        
         public void OnReady()
         {
             _heroRegistry.LoadSelectedHero();
@@ -29,6 +30,29 @@ namespace Project.MainMenu
             var navBar = _uiFrame.Open<NavBarScreen>();
             navBar.PlayButtonClicked += OnPlayButtonClicked;    
             navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
+
+            if (_inProgressSessionInfo.InProgressSave.InProgress)
+            {
+                var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
+                inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
+            }
+        }
+
+        private void InProgressScreenOnConfirmed(bool didConfirm)
+        {
+            var screen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
+            screen.Confirmed -= InProgressScreenOnConfirmed;
+            
+            if (didConfirm)
+            {
+                _heroRegistry.SetSelectedHero(_inProgressSessionInfo.InProgressSave.HeroId);
+                LoadLevel(_inProgressSessionInfo.InProgressSave.LevelIndex);
+            }
+            else
+            {
+                _inProgressSessionInfo.ClearProgress();
+                screen.Close();
+            }
         }
 
         private void OnPlayButtonClicked()
