@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Project.Game.Player;
+using Project.Game.Rooms;
 using UnityEngine;
 
 namespace Project.Game.Enemies
@@ -11,13 +12,18 @@ namespace Project.Game.Enemies
         [field: SerializeField] public float Cooldown { get; protected set; }
         [field: SerializeField] public bool CanInterrupt { get; protected set; }
 
-        public IEnumerator ActionRoutine(EnemyController enemy, PlayerController player, float time, Action onCompleteCallback)
+        public IEnumerator ActionRoutine(EnemyController enemy,
+            PlayerController player,
+            RoomManager roomManager,
+            float time,
+            Action onCompleteCallback)
         {
-            yield return OnPerformActionRoutine(enemy, player, time);
+            yield return OnPerformActionRoutine(enemy, player, roomManager, time);
             onCompleteCallback?.Invoke();
         }
 
-        protected virtual IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player, float time)
+        protected virtual IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player,
+            RoomManager roomManager, float time)
         {
             yield return null;
         }

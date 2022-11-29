@@ -2,6 +2,7 @@
 using Lean.Pool;
 using Project.Game.Player;
 using Project.Game.Projectiles;
+using Project.Game.Rooms;
 using UnityEngine;
 
 namespace Project.Game.Enemies
@@ -15,7 +16,8 @@ namespace Project.Game.Enemies
         
         
 
-        protected override IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player, float time)
+        protected override IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player,
+            RoomManager roomManager, float time)
         {
             var position = enemy.transform.position;
             var targetPosition = player.transform.position;

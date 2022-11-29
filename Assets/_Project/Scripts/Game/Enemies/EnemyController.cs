@@ -7,7 +7,6 @@ using Project.Game.Rooms;
 using Project.Game.Targets;
 using Project.Game.Weapons;
 using Project.PopupText;
-using SRDebugger.Internal;
 using UnityEngine;
 
 namespace Project.Game.Enemies
@@ -43,6 +42,8 @@ namespace Project.Game.Enemies
         public bool IsPerformingAction { get; private set; }
         public Vector2 Position => rigidbody.position;
 
+        public Rigidbody2D Rigidbody => rigidbody;
+
         public int FacingDirection
         {
             get => _facingDirection;
@@ -71,6 +72,7 @@ namespace Project.Game.Enemies
             _lastKnockbackTime = 0f;
             _lastContactAttackTime = 0f;
             _lastActionTime = Time.time;
+            IsPerformingAction = false;
             _isDead = false;
             
             selfTarget.Deactivate();
@@ -123,7 +125,7 @@ namespace Project.Game.Enemies
                 ClampToRoom();
                 rigidbody.velocity = Vector2.zero;
                 IsPerformingAction = true;
-                StartCoroutine(Data.Action.ActionRoutine(this, playerController, time, () =>
+                StartCoroutine(Data.Action.ActionRoutine(this, playerController, _roomManager, time, () =>
                 {
                     IsPerformingAction = false;
                     _lastActionTime = Time.time;
@@ -131,7 +133,6 @@ namespace Project.Game.Enemies
                 
                 return;
             }
-
             
             if (Data.MovementMode == MovementMode.Chase)
             {
@@ -163,22 +164,28 @@ namespace Project.Game.Enemies
                 FacePlayer(direction);
                 ClampToRoom();
             }
+            else if (Data.MovementMode == MovementMode.Charge)
+            {
+            }
             else if (Data.MovementMode == MovementMode.None)
             {
                 ClampToRoom();
             }
         }
 
-        private void ClampToRoom()
+        public bool ClampToRoom()
         {
             rigidbody.position = _roomManager.ClampToRoomRect(rigidbody.position, out var didClampX, out var didClampY);
             if (didClampX || didClampY)
             {
                 rigidbody.velocity = Vector2.zero;
+                return true;
             }
+
+            return false;
         }
 
-        private void FacePlayer(Vector3 directionToPlayer)
+        public void FacePlayer(Vector3 directionToPlayer)
         {
             FacingDirection = directionToPlayer.x < 0 ? -1 : 1;
         }

@@ -53,5 +53,34 @@ namespace Project.Game.Rooms
         {
             return new Vector3(Random.Range(Rect.xMin, Rect.xMax), Random.Range(Rect.yMin, Rect.yMax));
         }
+
+        public bool WillClamp(Vector3 position)
+        {
+            if (position.x < Rect.xMin)
+            {
+                position.x = Rect.xMin;
+                return true;
+            }
+            
+            if (position.x > Rect.xMax)
+            {
+                position.x = Rect.xMax;
+                return true;
+            }
+            
+            if (position.y < Rect.yMin)
+            {
+                position.y = Rect.yMin;
+                return true;
+            }
+            
+            if (position.y > Rect.yMax)
+            {
+                position.y = Rect.yMax;
+                return true;
+            }
+
+            return false;
+        }
     }
 }

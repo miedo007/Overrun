@@ -24,6 +24,7 @@ namespace Project.Game.Enemies
     {
         None,
         Chase,
-        Wander
+        Wander,
+        Charge
     }
 }

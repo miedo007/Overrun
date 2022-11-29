@@ -27,7 +27,7 @@ namespace Project.Application
             UnityEngine.Application.targetFrameRate = 60;
             
             var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
-            Bind(beaconWrapper);
+            Bind<IBonfire>(beaconWrapper);
 
             var analyticsManager = new AnalyticsManager();
             Bind<IAnalyticsManager>(analyticsManager);
@@ -81,23 +81,5 @@ namespace Project.Application
             InjectAndBind(playerInfo);
         }
 
-        protected override void OnPostSetup()
-        {
-            base.OnPostSetup();
-            InitBonfire();
-        }
-
-        private void InitBonfire()
-        {
-            var beaconWrapper = Get<BeaconWrapper>();
-            var bonfire = (IBonfire)beaconWrapper;
-            bonfire.Initialize(InitComplete);
-
-        }
-
-        private void InitComplete()
-        {
-            
-        }
     }
 }
