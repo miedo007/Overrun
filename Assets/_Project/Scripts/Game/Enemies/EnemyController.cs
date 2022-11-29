@@ -221,7 +221,8 @@ namespace Project.Game.Enemies
             if (CurrentHealth <= 0)
             {
                 PreKill();
-                Knockback(direction * 10f );
+                Rigidbody.velocity = Vector2.zero;
+                Knockback(direction * Data.KnockbackForceOnKill);
             }
             else
             {

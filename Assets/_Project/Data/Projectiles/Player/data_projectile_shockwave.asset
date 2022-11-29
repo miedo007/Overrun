@@ -20,4 +20,11 @@ MonoBehaviour:
   <Lifespan>k__BackingField: 0.5
   <LifespanRange>k__BackingField: {x: 0.5, y: 1}
   <BasePierceCount>k__BackingField: 100
-  <HitFeetback>k__BackingField: {fileID: 11400000, guid: f4fcb2fa4ca27f44180f00b1996b342e, type: 2}
+  <HitFeedback>k__BackingField: {fileID: 11400000, guid: f4fcb2fa4ca27f44180f00b1996b342e, type: 2}
+  <ScaleDownOverLife>k__BackingField: 0
+  <ScaleCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -23,3 +23,4 @@ MonoBehaviour:
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
   <WalkAnimation>k__BackingField: {fileID: 7400000, guid: 4cf3bd1137c1092448ad0972596bb24f, type: 2}
+  <KnockbackForceOnKill>k__BackingField: 0

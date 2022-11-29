@@ -17,7 +17,41 @@ MonoBehaviour:
   <Speed>k__BackingField: 0
   <SpeedRange>k__BackingField: {x: 10, y: 12}
   <RandomLifespan>k__BackingField: 0
-  <Lifespan>k__BackingField: 3
+  <Lifespan>k__BackingField: 6
   <LifespanRange>k__BackingField: {x: 0.5, y: 1}
   <BasePierceCount>k__BackingField: 1
-  <HitFeetback>k__BackingField: {fileID: 0}
+  <HitFeedback>k__BackingField: {fileID: 11400000, guid: 23560502add464e40bdcd37c637a7d21, type: 2}
+  <ScaleDownOverLife>k__BackingField: 1
+  <ScaleCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.458087
+    - serializedVersion: 3
+      time: 0.875
+      value: 1
+      inSlope: -0.0020071226
+      outSlope: -0.0020071226
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -49.740414
+      outSlope: -49.740414
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.042698383
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

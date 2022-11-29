@@ -17,6 +17,7 @@ namespace Project.Game.Projectiles
         private float _criticalMultiplier;
         private int _pierceCount;
         private float _knockbackForce;
+        private float _currentLife;
 
         public ProjectileData Data { get; private set; }
         public bool IsActive { get; private set; }
@@ -31,6 +32,7 @@ namespace Project.Game.Projectiles
 
         public void Initialize(ProjectileData data, float damage, float criticalChance = 0f, float criticalMultiplier = 0f, float knockbackForce = 0f)
         {
+            _currentLife = 0;
             _pierceCount = data.BasePierceCount;
             _criticalChance = criticalChance;
             _criticalMultiplier = criticalMultiplier;
@@ -50,13 +52,19 @@ namespace Project.Game.Projectiles
         
         public void Step(float dt, float time)
         {
-            if (time >= _initializationTime + _lifespan)
+            if (_currentLife >= _lifespan)
             {
                 IsActive = false;
                 return;
             }
+
+            if (Data.ScaleDownOverLife)
+            {
+                _transform.localScale = Vector3.one * Data.ScaleCurve.Evaluate((_currentLife / _lifespan));
+            }
             
             _transform.position += _transform.right * (_speed * Time.deltaTime);
+            _currentLife += dt;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -73,9 +81,9 @@ namespace Project.Game.Projectiles
                 var damage = isCritical ? Damage * _criticalMultiplier : Damage;
                 if (projectileReactor.ReactToProjectile(this, damage, isCritical, (Vector2)_transform.right, _knockbackForce))
                 {
-                    if (Data.HitFeetback != null)
+                    if (Data.HitFeedback != null)
                     {
-                        Data.HitFeetback.Play(transform.position, Quaternion.identity);
+                        Data.HitFeedback.Play(transform.position, Quaternion.identity);
                     }
                     
                     _pierceCount--;

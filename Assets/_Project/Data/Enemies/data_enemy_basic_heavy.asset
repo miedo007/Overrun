@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: data_enemy_basic_heavy
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1c1ef78c2fa918a42a7d9fbcd6f0a5fb, type: 3}
-  <Action>k__BackingField: {fileID: 0}
   <BaseHealth>k__BackingField: 6
   <MoveSpeed>k__BackingField: 1
+  <TimedActionCooldown>k__BackingField: 0
   <MovementMode>k__BackingField: 1
   <MeleeAttackRate>k__BackingField: 0.375
-  <MeleeDamage>k__BackingField: 2.5
+  <MeleeDamage>k__BackingField: 3
   <CollectibleData>k__BackingField: {fileID: 0}
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
   <WalkAnimation>k__BackingField: {fileID: 7400000, guid: 4cf3bd1137c1092448ad0972596bb24f, type: 2}
+  <KnockbackForceOnKill>k__BackingField: 10
