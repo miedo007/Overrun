@@ -16,8 +16,5 @@ namespace Project.Game.Projectiles
         [field: SerializeField, ShowIf("RandomLifespan")] public Vector2 LifespanRange { get; private set; } = new Vector2(0.5f, 1f);
         [field: SerializeField] public int BasePierceCount { get; private set; } = 1;
         [field: SerializeField] public FeedbackData HitFeetback { get; private set; }
-        [field: SerializeField] public bool RotateOnSpawn { get; private set; }
-        
-        
     }
 }

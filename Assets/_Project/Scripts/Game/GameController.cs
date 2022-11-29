@@ -29,7 +29,7 @@ namespace Project.Game
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly InProgressSessionInfo _inProgressSession;
         [Inject] private readonly SaveManager _saveManager;
-        [Inject] private readonly IAnalyticsManager _analyticsManager;
+        //[Inject] private readonly IAnalyticsManager _analyticsManager;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
         [Inject] private readonly CameraManager _cameraManager;
