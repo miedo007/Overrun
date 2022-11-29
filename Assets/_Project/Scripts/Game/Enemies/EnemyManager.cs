@@ -82,7 +82,7 @@ namespace Project.Game.Enemies
             var spawnGroupCount = Mathf.FloorToInt(waveDuration / delayBetweenGroups) + 1;
             var enemyCountPerGroup = Mathf.CeilToInt(totalEnemyCount / (float) spawnGroupCount);
             
-            var spawnSequence = new SpawnSequence(_currentLevel.GetWaveInfo(_currentWaveIndex));
+            var spawnSequence = new SpawnSequence(_currentLevel, _currentLevel.GetWaveInfo(_currentWaveIndex));
             
             while (enabled)
             {
@@ -161,12 +161,9 @@ namespace Project.Game.Enemies
         public int CurrentIndex { get; private set; }
         public WaveInfo WaveInfo { get; private set; }
         
-        public SpawnSequence(WaveInfo waveInfo)
+        public SpawnSequence(LevelData levelData, string spawnCode)
         {
-            WaveInfo = waveInfo;
             SpawnList = new List<EnemyData>();
-
-            var spawnCode = waveInfo.SpawnCode;
 
             if (string.IsNullOrEmpty(spawnCode))
             {
@@ -179,7 +176,7 @@ namespace Project.Game.Enemies
                 var indexString = spawnCode.Substring(i, 1);
                 if (int.TryParse(indexString, out var enemyIndex))
                 {
-                    if (enemyIndex < waveInfo.Enemies.Length)
+                    if (enemyIndex < levelData.Enemies.Length)
                     {
                         enemyIndices[i] = enemyIndex;
                     }
@@ -198,7 +195,7 @@ namespace Project.Game.Enemies
 
             foreach (var enemyIndex in enemyIndices)
             {
-                SpawnList.Add(waveInfo.Enemies[enemyIndex]);
+                SpawnList.Add(levelData.Enemies[enemyIndex]);
             }
         }
 

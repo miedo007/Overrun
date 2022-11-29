@@ -20,7 +20,6 @@ namespace Project.Game.Levels
         public LevelData CurrentLevel { get; private set; }
         public int CurrentLevelIndex { get; private set; }
         public int WaveIndex { get; private set; }
-        public WaveInfo CurrentWaveInfo{ get; private set; }
         public bool IsFinalWave => WaveIndex == CurrentLevel.Waves.Length - 1;
         public int WaveCount => CurrentLevel.Waves.Length;
 
@@ -39,7 +38,6 @@ namespace Project.Game.Levels
         private IEnumerator BeginWaveRoutine(float delay)
         {
             yield return new WaitForSeconds(delay);
-            CurrentWaveInfo = CurrentLevel.GetWaveInfo(WaveIndex);
 
             var timer = _uiFrame.Get<HudScreen>().Timer;
             timer.DisplayWithDuration(CurrentLevel.GetWaveDuration(WaveIndex));

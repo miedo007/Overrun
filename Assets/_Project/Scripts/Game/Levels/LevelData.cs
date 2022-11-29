@@ -12,7 +12,8 @@ namespace Project.Game.Levels
         [field: SerializeField] public int WaveDurationIncrease { get; private set; } = 10;
         [field: SerializeField] public int WaveDurationIncreaseRate { get; private set; } = 3;
         [field: SerializeField] public int MaxWaveDuration { get; private set; } = 60;
-        [field: SerializeField] public WaveInfo[] Waves { get; private set; }
+        [field: SerializeField] public EnemyData[] Enemies { get; private set; }
+        [field: SerializeField] public string[] Waves { get; private set; }
         
         public float GetSpawnDelay(int waveIndex)
         {
@@ -24,7 +25,7 @@ namespace Project.Game.Levels
             return BaseEnemyCount + (EnemyCountIncreasePerWave * waveIndex);
         }
 
-        public WaveInfo GetWaveInfo(int index)
+        public string GetWaveInfo(int index)
         {
             return Waves[index];
         }
