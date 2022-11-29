@@ -87,15 +87,17 @@ namespace Project.Application
             InitBonfire();
         }
 
-        private async void InitBonfire()
+        private void InitBonfire()
         {
-            var sem = new SemaphoreSlim(0, 1);
             var beaconWrapper = Get<BeaconWrapper>();
-
             var bonfire = (IBonfire)beaconWrapper;
-            bonfire.Initialize(() => sem.Release());
-            await sem.WaitAsync();
+            bonfire.Initialize(InitComplete);
 
+        }
+
+        private void InitComplete()
+        {
+            
         }
     }
 }
