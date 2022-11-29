@@ -135,5 +135,31 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7223cab5df7da394986499e5b23dee34, type: 3}
+    - target: {fileID: 8322420268677525029, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 6475677690413366566}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+--- !u!1 &9180353801163444560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2464363063314510666, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+  m_PrefabInstance: {fileID: 6725006750383432218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6475677690413366566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9180353801163444560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998e4c85260b4b6c82fd12fee1380543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Cooldown>k__BackingField: 2
+  <CanInterrupt>k__BackingField: 0
+  <ProjectileData>k__BackingField: {fileID: 11400000, guid: 25464f48b7f494d4d817049308c43583, type: 2}
+  <SpawnOffset>k__BackingField: {x: 0, y: 0.8333, z: 0}
+  <DamageFactor>k__BackingField: 2

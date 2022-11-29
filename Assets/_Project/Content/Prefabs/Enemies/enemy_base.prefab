@@ -225,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfTarget: {fileID: 7550262286081149764}
   rigidbody: {fileID: -8706968978736568844}
+  collider: {fileID: -1526049881713648044}
 --- !u!114 &2636251456522072233
 MonoBehaviour:
   m_ObjectHideFlags: 0

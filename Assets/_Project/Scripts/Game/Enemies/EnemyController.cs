@@ -19,8 +19,10 @@ namespace Project.Game.Enemies
         public event Action<EnemyController> Killed;
         public event Action<int> FacingDirectionChanged;
 
+        [SerializeField] private EnemyActionBase action;
         [SerializeField] private Target selfTarget;
         [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeField] private new Collider2D collider;
         
         [Inject] private readonly PopupTextManager _popupTextManager;
         [Inject] private readonly RoomManager _roomManager;
@@ -43,6 +45,7 @@ namespace Project.Game.Enemies
         public Vector2 Position => rigidbody.position;
 
         public Rigidbody2D Rigidbody => rigidbody;
+        public Collider2D Collider => collider;
 
         public int FacingDirection
         {
@@ -58,7 +61,6 @@ namespace Project.Game.Enemies
                 FacingDirectionChanged?.Invoke(_facingDirection);
             }
         }
-
 
         private void Awake()
         {
@@ -120,12 +122,12 @@ namespace Project.Game.Enemies
                 return;
             }
             
-            if (Data.Action != null && time >= _lastActionTime + Data.Action.Cooldown)
+            if (action != null && time >= _lastActionTime + action.Cooldown)
             {
                 ClampToRoom();
                 rigidbody.velocity = Vector2.zero;
                 IsPerformingAction = true;
-                StartCoroutine(Data.Action.ActionRoutine(this, playerController, _roomManager, time, () =>
+                StartCoroutine(action.ActionRoutine(this, playerController, _roomManager, time, () =>
                 {
                     IsPerformingAction = false;
                     _lastActionTime = Time.time;
@@ -251,6 +253,11 @@ namespace Project.Game.Enemies
         
         public void Cleanup()
         {
+            if (IsPerformingAction)
+            {
+                action.Cleanup();
+            }
+            
             if (!gameObject.activeSelf)
             {
                 return;
@@ -285,6 +292,16 @@ namespace Project.Game.Enemies
         public void OnCollisionStay2D(Collision2D collision)
         {
             TryAttack(collision.collider);
+        }
+        
+        public void OnTriggerEnter2D(Collider2D collider)
+        {
+            TryAttack(collider);
+        }
+
+        public void OnTriggerStay2D(Collider2D collision)
+        {
+            TryAttack(collider);
         }
 
         private void TryAttack(Collider2D other)

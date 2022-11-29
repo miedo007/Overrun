@@ -8,7 +8,6 @@ namespace Project.Game.Enemies
     public class EnemyData : ScriptableObject
     {
         [field: SerializeField] public EnemyController Prefab { get; private set; }
-        [field: SerializeField] public EnemyActionBase Action { get; private set; }
         [field: SerializeField] public float BaseHealth { get; private set; } = 3;
         [field: SerializeField] public float MoveSpeed { get; private set; } = 3;
         [field: SerializeField] public MovementMode MovementMode { get; protected set; } = MovementMode.Chase;

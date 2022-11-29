@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Project.Game.Enemies
 {
-    [CreateAssetMenu(fileName = "enemy_behaviour_ranged_attack_", menuName = "Data/Enemies/RangedAttack", order = 0)]
     public class EnemyActionRangedAttack : EnemyActionBase
     {
         [field: SerializeField] public ProjectileData ProjectileData { get; private set; }
@@ -39,5 +38,6 @@ namespace Project.Game.Enemies
             
             yield break;
         }
+
     }
 }

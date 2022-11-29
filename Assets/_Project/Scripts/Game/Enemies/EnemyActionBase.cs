@@ -6,9 +6,8 @@ using UnityEngine;
 
 namespace Project.Game.Enemies
 {
-    public class EnemyActionBase : ScriptableObject
+    public class EnemyActionBase : MonoBehaviour
     {
-        
         [field: SerializeField] public float Cooldown { get; protected set; }
         [field: SerializeField] public bool CanInterrupt { get; protected set; }
 
@@ -34,6 +33,11 @@ namespace Project.Game.Enemies
         }
 
         protected virtual void OnInterrupt()
+        {
+            
+        }
+
+        public virtual void Cleanup()
         {
             
         }
