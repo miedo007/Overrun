@@ -8,18 +8,37 @@ namespace MTLSimpleAudio
     public class AudioData : ScriptableObject
     {
         public static event Action<AudioInstance> PlayRequested;
+        public static event Action<AudioData> Register;
 
         [SerializeField] private AudioClip[] clips = null;
         [SerializeField] private Vector2 volumeRange = Vector2.one;
         [SerializeField] private Vector2 pitchRange = Vector2.one;
         [SerializeField] private Vector2 delayRange = Vector2.zero;
 
-        [NonSerialized] private float _nextPlayTime = 0;
-        
+        public bool IsRegistered { get; set; }
         public int LastIndexPlayed { get; set; }
+        private float NextPlayTime { set; get; }
 
+        public void Initialize()
+        {
+            IsRegistered = true;
+            NextPlayTime = 0;
+        }
+        
+        public void Cleanup()
+        {
+            IsRegistered = false;
+            NextPlayTime = 0;
+        }
+        
         public void Play()
         {
+            if (!IsRegistered)
+            {
+                Register?.Invoke(this);
+                IsRegistered = true;
+            }
+            
             Play(false);
         }
 
@@ -30,7 +49,7 @@ namespace MTLSimpleAudio
 
         private void Play(bool useSpecifiedSource, AudioObject source = null)
         {
-            if (Time.realtimeSinceStartup < _nextPlayTime)
+            if (Time.time < NextPlayTime)
             {
                 return;
             }
@@ -45,7 +64,7 @@ namespace MTLSimpleAudio
             }
 
             LastIndexPlayed = clipIndex;
-            
+
             PlayRequested?.Invoke(new AudioInstance()
             {
                 Clip = clips[clipIndex],
@@ -55,12 +74,12 @@ namespace MTLSimpleAudio
                 Source = source
             });
 
-            _nextPlayTime = Time.realtimeSinceStartup + Random.Range(delayRange.x, delayRange.y);
+            NextPlayTime = Time.time + Random.Range(delayRange.x, delayRange.y);;
         }
         
         public void Play(AudioClip audioClip, float volume = 1, float pitch = 1)
         {
-            if (Time.realtimeSinceStartup < _nextPlayTime)
+            if (Time.time < NextPlayTime)
             {
                 return;
             }
@@ -71,13 +90,10 @@ namespace MTLSimpleAudio
                 Volume = volume,
                 Pitch = pitch
             });
-            
 
-            _nextPlayTime = Time.realtimeSinceStartup + Random.Range(delayRange.x, delayRange.y);
+            NextPlayTime = Time.time + Random.Range(delayRange.x, delayRange.y);
         }
     }
-    
-    
 
     public struct AudioInstance
     {
