@@ -30,7 +30,7 @@ namespace Project.Application
             Bind<IBonfire>(beaconWrapper);
 
             var analyticsManager = new AnalyticsManager();
-            Bind<IAnalyticsManager>(analyticsManager);
+            Bind<IAnalyticsProvider>(analyticsManager);
             analyticsManager.Register(beaconWrapper);
             analyticsManager.Register(new GameAnalyticsWrapper());
             

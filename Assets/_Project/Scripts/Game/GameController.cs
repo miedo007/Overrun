@@ -249,11 +249,11 @@ namespace Project.Game
 
         private void SendLevelSummaryEvent(bool completed)
         {
-            _analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent()
+            /*_analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent()
             {
                 Completed = completed,
                 LevelId = _sessionInfo.LevelIndex
-            });
+            });*/
         }
         
         private void OnLevelCompleteClosed(UIScreen screen)
