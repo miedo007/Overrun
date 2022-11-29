@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29570d22a26942ac8b207cc140c0260e, type: 3}
-  m_Name: data_enemy_ranged
+  m_Name: data_enemy_basic_heavy
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: e4e52e76039ac014ba5d3651f8bed62b, type: 3}
-  <Action>k__BackingField: {fileID: 11400000, guid: 16b42d2714e49db4a9f185407773c7a3, type: 2}
-  <BaseHealth>k__BackingField: 2
-  <MoveSpeed>k__BackingField: 0.5
-  <MovementMode>k__BackingField: 2
+  <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 1c1ef78c2fa918a42a7d9fbcd6f0a5fb, type: 3}
+  <Action>k__BackingField: {fileID: 0}
+  <BaseHealth>k__BackingField: 6
+  <MoveSpeed>k__BackingField: 1
+  <MovementMode>k__BackingField: 1
   <MeleeAttackRate>k__BackingField: 0.375
-  <MeleeDamage>k__BackingField: 1
+  <MeleeDamage>k__BackingField: 2.5
   <CollectibleData>k__BackingField: {fileID: 0}
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
