@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using Lean.Pool;
 using Project.Game.Player;
 using Project.Game.Projectiles;
@@ -13,10 +13,9 @@ namespace Project.Game.Enemies
         [field: SerializeField] public Vector3 SpawnOffset { get; private set; }
         [field: SerializeField] public float DamageFactor { get; private set; } = 0.5f;
         
-        
 
-        protected override IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player,
-            RoomManager roomManager, float time)
+        protected override void OnPerform(EnemyController enemy, PlayerController player, RoomManager roomManager, float time,
+            Action onCompleteCallback)
         {
             var position = enemy.transform.position;
             var targetPosition = player.transform.position;
@@ -36,8 +35,7 @@ namespace Project.Game.Enemies
                 0
             );
             
-            yield break;
+            onCompleteCallback?.Invoke();
         }
-
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: data_enemy_ranged
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: e4e52e76039ac014ba5d3651f8bed62b, type: 3}
-  <Action>k__BackingField: {fileID: 11400000, guid: 16b42d2714e49db4a9f185407773c7a3, type: 2}
   <BaseHealth>k__BackingField: 2
   <MoveSpeed>k__BackingField: 0.5
+  <TimedActionCooldown>k__BackingField: 2
   <MovementMode>k__BackingField: 2
   <MeleeAttackRate>k__BackingField: 0.375
   <MeleeDamage>k__BackingField: 1

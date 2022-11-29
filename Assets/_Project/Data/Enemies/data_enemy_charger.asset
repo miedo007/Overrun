@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: data_enemy_charger
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 61da1dcdd87741049988d5c1307552d6, type: 3}
-  <Action>k__BackingField: {fileID: 11400000, guid: ece2b5dae037a084bbab6f4f4dfdd8d9, type: 2}
   <BaseHealth>k__BackingField: 5
   <MoveSpeed>k__BackingField: 1.5
+  <TimedActionCooldown>k__BackingField: 3
   <MovementMode>k__BackingField: 2
   <MeleeAttackRate>k__BackingField: 0.5
   <MeleeDamage>k__BackingField: 3.5

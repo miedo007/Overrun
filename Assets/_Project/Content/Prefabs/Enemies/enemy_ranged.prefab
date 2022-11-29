@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: action
       value: 
       objectReference: {fileID: 6475677690413366566}
+    - target: {fileID: 8322420268677525029, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: timedAction
+      value: 
+      objectReference: {fileID: 6475677690413366566}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
 --- !u!1 &9180353801163444560 stripped

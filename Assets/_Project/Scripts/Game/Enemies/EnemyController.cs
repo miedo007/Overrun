@@ -8,6 +8,7 @@ using Project.Game.Targets;
 using Project.Game.Weapons;
 using Project.PopupText;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Game.Enemies
 {
@@ -19,7 +20,8 @@ namespace Project.Game.Enemies
         public event Action<EnemyController> Killed;
         public event Action<int> FacingDirectionChanged;
 
-        [SerializeField] private EnemyActionBase action;
+        [SerializeField] private EnemyActionBase timedAction;
+        [SerializeField] private EnemyActionBase deathAction;
         [SerializeField] private Target selfTarget;
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private new Collider2D collider;
@@ -113,6 +115,11 @@ namespace Project.Game.Enemies
             
             if (_isDead)
             {
+                if (deathAction != null)
+                {
+                    deathAction.Perform(this, playerController, _roomManager, time, null);
+                    
+                }
                 Kill();
             }
             
@@ -122,16 +129,16 @@ namespace Project.Game.Enemies
                 return;
             }
             
-            if (action != null && time >= _lastActionTime + action.Cooldown)
+            if (timedAction != null && time >= _lastActionTime + Data.TimedActionCooldown)
             {
                 ClampToRoom();
                 rigidbody.velocity = Vector2.zero;
                 IsPerformingAction = true;
-                StartCoroutine(action.ActionRoutine(this, playerController, _roomManager, time, () =>
+                timedAction.Perform(this, playerController, _roomManager, time, () =>
                 {
                     IsPerformingAction = false;
                     _lastActionTime = Time.time;
-                }));
+                });
                 
                 return;
             }
@@ -255,7 +262,7 @@ namespace Project.Game.Enemies
         {
             if (IsPerformingAction)
             {
-                action.Cleanup();
+                timedAction.Cleanup();
             }
             
             if (!gameObject.activeSelf)
