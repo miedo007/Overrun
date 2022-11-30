@@ -46,15 +46,12 @@ namespace Project.Heroes
 
         public void OnReady()
         {
-            _playerHealthController.Changed += PlayerHealthChanged;
+            _playerHealthController.DamageTaken += OnDamageTaken;
         }
 
-        private void PlayerHealthChanged(float previousPercentage, float currentPercentage)
+        private void OnDamageTaken()
         {
-            if (currentPercentage < previousPercentage)
-            {
-                DamageTakenFeedback.Play(transform.position, Quaternion.identity);
-            }
+            DamageTakenFeedback.Play(transform.position, Quaternion.identity);
         }
     }
 }

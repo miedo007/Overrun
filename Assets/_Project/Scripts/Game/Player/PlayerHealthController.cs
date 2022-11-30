@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Mtl.Injection;
-using Project.Feedback;
 using Project.Game.Levels;
 using Project.Heroes;
 using Project.PopupText;
@@ -14,6 +13,7 @@ namespace Project.Game.Player
     {
         public event Action Initialized;
         public event Action<float, float> Changed;
+        public event Action DamageTaken;
         public event Action Depleted;
 
         [field: SerializeField] public StatData HealthStat { get; private set; }
@@ -138,6 +138,7 @@ namespace Project.Game.Player
         public void ReduceHealth(float amount)
         {
             CurrentHealth -= amount;
+            DamageTaken?.Invoke();
         }
 
         public string GetHealthString()
