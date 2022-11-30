@@ -26,6 +26,7 @@ namespace Project.MainMenu
 
         private void Start()
         {
+            // Set target framerate
             UnityEngine.Application.targetFrameRate = 60;
             
             _uiFrame.Open<CurrencyBarScreen>();
