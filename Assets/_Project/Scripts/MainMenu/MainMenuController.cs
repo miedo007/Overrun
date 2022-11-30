@@ -26,6 +26,8 @@ namespace Project.MainMenu
 
         private void Start()
         {
+            UnityEngine.Application.targetFrameRate = 60;
+            
             _uiFrame.Open<CurrencyBarScreen>();
             _uiFrame.Open<SagaMapScreen>();
             

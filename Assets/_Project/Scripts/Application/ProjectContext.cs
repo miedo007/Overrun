@@ -1,4 +1,3 @@
-using System.Threading;
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Game;
@@ -24,8 +23,6 @@ namespace Project.Application
         
         protected override void OnInjectStart()
         {
-            UnityEngine.Application.targetFrameRate = 60;
-            
             var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
             Bind<IBonfire>(beaconWrapper);
 
