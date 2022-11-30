@@ -56,6 +56,8 @@ namespace Project.Game
         
         private void Start()
         {
+            _playerHealthController.Initialize();
+            
             var hasInProgressSession = _inProgressSession.InProgressSave.InProgress;
             
             var levelIndex = _sessionInfo.LevelIndex;
@@ -296,7 +298,9 @@ namespace Project.Game
             var save = _inProgressSession.InProgressSave;
             levelIndex = save.LevelIndex;
             waveIndex = save.WaveIndex;
-                
+
+            _playerHealthController.CurrentHealth = _playerHealthController.MaxHealth;
+            
             // Load items & stat upgrades first
             foreach (var itemId in save.Items)
             {

@@ -1,7 +1,6 @@
 ﻿using Mtl.Injection;
 using Project.Feedback;
 using Project.Game.Player;
-using Project.Game.UI;
 using UnityEngine;
 
 namespace Project.Heroes
