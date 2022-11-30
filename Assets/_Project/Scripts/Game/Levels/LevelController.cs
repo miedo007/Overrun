@@ -31,8 +31,7 @@ namespace Project.Game.Levels
             WaveIndex = waveIndex;
             Initialized?.Invoke();
         }
-
-
+        
         public void BeginNextWave(float delay)
         {
             StartCoroutine(BeginWaveRoutine(delay));

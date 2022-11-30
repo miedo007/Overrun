@@ -1,4 +1,5 @@
 ﻿using Mtl.Injection;
+using Mtl.Save;
 using Mtl.UiFramework;
 using Project.Application;
 using Project.Game;
@@ -16,6 +17,7 @@ namespace Project.MainMenu
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly InProgressSessionInfo _inProgressSessionInfo;
+        [Inject] private readonly SaveManager _saveManager;
         
         public void OnReady()
         {
@@ -51,6 +53,7 @@ namespace Project.MainMenu
             else
             {
                 _inProgressSessionInfo.ClearProgress();
+                _saveManager.Save();
                 screen.Close();
             }
         }

@@ -39,7 +39,7 @@ namespace Project.Application
                 heroImage.sprite = heroData.Sprite;
             }
 
-            var levelData = _levelDatabase.Levels[save.LevelIndex];
+            var levelData = _levelDatabase.GetLevel(save.LevelIndex);
             levelText.text = $"LEVEL {save.LevelIndex + 1}";
             progressText.text = $"WAVE {save.WaveIndex + 1} of {levelData.Waves.Length}";
         }
