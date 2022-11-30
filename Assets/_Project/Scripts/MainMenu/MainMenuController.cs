@@ -35,8 +35,20 @@ namespace Project.MainMenu
 
             if (_inProgressSessionInfo.InProgressSave.InProgress)
             {
-                var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
-                inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
+                if (_inProgressSessionInfo.IsValid())
+                {
+                    var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
+                    inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
+                }
+                else
+                {
+                    #if UNITY_EDITOR
+                    Debug.LogError("Invalid in progress save. Clear it and ignore it");
+                    #endif
+                    
+                    _inProgressSessionInfo.ClearProgress();
+                    _saveManager.Save();
+                }
             }
         }
 

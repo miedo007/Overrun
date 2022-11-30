@@ -9,25 +9,25 @@ namespace Project.Application
     [JsonObject(MemberSerialization.OptIn)]
     public class InProgressSessionSave : Save, IInProgressSessionSave
     {
-        [JsonProperty] public bool InProgress { get; set; }
-        [JsonProperty] public string HeroId { get; set; }
-        [JsonProperty] public int LevelIndex { get; set; }
-        [JsonProperty] public int WaveIndex { get; set; }
-        [JsonProperty] public float ShopCurrency { get; set; }
-        [JsonProperty] public float Health { get; set; }
-        [JsonProperty] public List<string> Weapons { get; set; }
-        [JsonProperty] public List<string> Items { get; set; }
+        [JsonProperty] public bool InProgress { get; set; } = false;
+        [JsonProperty] public string HeroId { get; set; } = "";
+        [JsonProperty] public int LevelIndex { get; set; } = -1;
+        [JsonProperty] public int WaveIndex { get; set; } = -1;
+        [JsonProperty] public float ShopCurrency { get; set; } = -1;
+        [JsonProperty] public float Health { get; set; } = -1;
+        [JsonProperty] public List<string> Weapons { get; set; } = new();
+        [JsonProperty] public List<string> Items { get; set; } = new();
 
         public void Clear()
         {
             InProgress = false;
             HeroId = "";
-            LevelIndex = 0;
-            WaveIndex = 0;
-            ShopCurrency = 0;
-            Health = 0;
-            Weapons = null;
-            Items = null;
+            LevelIndex = -1;
+            WaveIndex = -1;
+            ShopCurrency = -1;
+            Health = -1;
+            Weapons = new();
+            Items = new();
         }
     }
 

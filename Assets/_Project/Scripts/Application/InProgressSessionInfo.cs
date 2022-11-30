@@ -43,16 +43,21 @@ namespace Project.Application
         {
         }
 
+        public bool IsValid()
+        {
+            return _save.LevelIndex >= 0 &&
+                   _save.WaveIndex >= 0 &&
+                   _save.Health > 0 &&
+                   _save.ShopCurrency >= 0 &&
+                   !string.IsNullOrEmpty(_save.HeroId) &&
+                   _save.Items != null &&
+                   _save.Weapons != null &&
+                   _save.Weapons.Count > 0;
+        }
+
         public void ClearProgress()
         {
-            _save.InProgress = false;
-            _save.LevelIndex = 0;
-            _save.WaveIndex = 0;
-            _save.Health = 0f;
-            _save.ShopCurrency = 0f;
-            _save.Items = null;
-            _save.Weapons = null;
-            
+            _save.Clear();
             OnChanged?.Invoke();
         }
     }
