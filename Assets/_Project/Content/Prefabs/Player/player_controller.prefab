@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HealthStat>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
   <HealthRegenStat>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
+  <DamageTakenFeedback>k__BackingField: {fileID: 11400000, guid: a87957ce741167449acac2108d2e9910, type: 2}
 --- !u!114 &3289144243730525299
 MonoBehaviour:
   m_ObjectHideFlags: 0
