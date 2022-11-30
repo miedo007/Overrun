@@ -41,7 +41,7 @@ namespace Project.MainMenu
 
         private void OnCurrencyChanged()
         {
-            var upgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
+            var upgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level + 1);
             upgradeNotification.Show(_playerInfo.PlayerSave.Currency >= upgradeCost);
         }
     }
