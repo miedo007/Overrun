@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: e6771ad05f9808b41842e8db975c779b, type: 3}
-  <DisplayName>k__BackingField: Thick Ticket
-  <Description>k__BackingField: 
+  <DisplayName>k__BackingField: Force Matter
+  <Description>k__BackingField: Chance to apply force to surrounding enemies when
+    collecting matter
   <BasePrice>k__BackingField: 10
   <StatModifiers>k__BackingField: []
   <Behaviours>k__BackingField:

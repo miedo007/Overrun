@@ -175,6 +175,15 @@ namespace Project.Game
         {
             screen.OnCloseEvent -= OnShopClosed;
             
+            if (_levelController.WaveIndex > 0)
+            {
+                _inProgressSession.SaveProgress(_sessionInfo.LevelIndex,
+                    _levelController.WaveIndex,
+                    _playerHealthController.CurrentHealth,
+                    _heroInfo);
+                _saveManager.Save();
+            }
+            
             _playerController.transform.position = Vector3.zero;
             _playerController.enabled = true;
             
@@ -185,15 +194,6 @@ namespace Project.Game
 
         private void BeginNextWave()
         {
-            if (_levelController.WaveIndex > 0)
-            {
-                _inProgressSession.SaveProgress(_sessionInfo.LevelIndex,
-                    _levelController.WaveIndex,
-                    _playerHealthController.CurrentHealth,
-                    _heroInfo);
-                _saveManager.Save();
-            }
-            
             waveMusic.Play();
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
