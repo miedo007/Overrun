@@ -12,6 +12,7 @@ namespace Project.Game.Levels
         public event Action WaveStarted;
         public event Action WaveCompleted;
         public event Action LevelCompleted;
+        public event Action Initialized;
 
         [field: SerializeField] public LevelDatabase LevelDatabase { get; private set; }
 
@@ -28,6 +29,7 @@ namespace Project.Game.Levels
             CurrentLevelIndex = levelIndex;
             CurrentLevel = LevelDatabase.GetLevel(levelIndex);
             WaveIndex = waveIndex;
+            Initialized?.Invoke();
         }
 
 

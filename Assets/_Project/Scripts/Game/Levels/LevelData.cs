@@ -1,5 +1,6 @@
 ﻿using NaughtyAttributes;
 using Project.Game.Enemies;
+using Project.Game.Rooms;
 using UnityEngine;
 
 namespace Project.Game.Levels
@@ -15,7 +16,8 @@ namespace Project.Game.Levels
         [field: SerializeField] public int MaxWaveDuration { get; private set; } = 60;
         [field: SerializeField] public EnemyData[] Enemies { get; private set; }
         [field: SerializeField] public string[] Waves { get; private set; }
-        
+        [field: SerializeField] public RoomData RoomData { get; set; }
+
         public float GetSpawnDelay(int waveIndex)
         {
             return (float) BaseWaveDuration / GetEnemyCountForWave(waveIndex);
