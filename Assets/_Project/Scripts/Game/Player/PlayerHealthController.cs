@@ -55,7 +55,6 @@ namespace Project.Game.Player
 
         private void Start()
         {
-            Initialize();
             _levelController.WaveStarted += OnWaveStarted;
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnWaveCompleted;
