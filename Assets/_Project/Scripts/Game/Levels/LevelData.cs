@@ -1,4 +1,5 @@
-﻿using Project.Game.Enemies;
+﻿using NaughtyAttributes;
+using Project.Game.Enemies;
 using UnityEngine;
 
 namespace Project.Game.Levels
@@ -40,6 +41,23 @@ namespace Project.Game.Levels
             var waveDurationIncreaseCount = waveIndex / WaveDurationIncreaseRate;
             return Mathf.Min(MaxWaveDuration, BaseWaveDuration + (WaveDurationIncrease * waveDurationIncreaseCount));
         }
+        
+        #if UNITY_EDITOR
+        [Button("Test Level")]
+        public void TestLevel()
+        {
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+            var assets = UnityEditor.AssetDatabase.FindAssets("database_levels_default");
+            var levelDatabasePath = UnityEditor.AssetDatabase.GUIDToAssetPath(assets[0]);
+            var levelDatabase = UnityEditor.AssetDatabase.LoadAssetAtPath<LevelDatabase>(levelDatabasePath);
+            levelDatabase.TestLevel = this;
+            levelDatabase.IsTesting = true;
+            UnityEditor.EditorApplication.isPlaying = true;
+        }
+        #endif
     }
 
     [System.Serializable]

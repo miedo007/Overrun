@@ -13,22 +13,23 @@ namespace Project.Game.Levels
         public event Action WaveCompleted;
         public event Action LevelCompleted;
 
-        [field: SerializeField] public LevelDatabase Levels { get; private set; }
+        [field: SerializeField] public LevelDatabase LevelDatabase { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
 
         public LevelData CurrentLevel { get; private set; }
         public int CurrentLevelIndex { get; private set; }
         public int WaveIndex { get; private set; }
-        public bool IsFinalWave => WaveIndex == CurrentLevel.Waves.Length - 1;
+        public bool IsFinalWave => CurrentLevel.IsLastWave(WaveIndex);
         public int WaveCount => CurrentLevel.Waves.Length;
 
         public void Initialize(int levelIndex, int waveIndex)
         {
             CurrentLevelIndex = levelIndex;
-            CurrentLevel = Levels.GetLevel(levelIndex);
+            CurrentLevel = LevelDatabase.GetLevel(levelIndex);
             WaveIndex = waveIndex;
         }
+
 
         public void BeginNextWave(float delay)
         {

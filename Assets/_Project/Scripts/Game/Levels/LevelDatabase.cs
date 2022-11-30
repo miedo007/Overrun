@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 namespace Project.Game.Levels
 {
@@ -6,9 +7,19 @@ namespace Project.Game.Levels
     public class LevelDatabase : ScriptableObject
     {
         [field: SerializeField] public LevelData[] Levels { get; private set; }
+        [field: SerializeField, Header("EDITOR ONLY")] public bool IsTesting { get; set; }
+        [field: SerializeField] public LevelData TestLevel { get; set; }
+        
 
         public LevelData GetLevel(int index)
         {
+#if UNITY_EDITOR
+            if (IsTesting)
+            {
+                return TestLevel;
+            }
+#endif
+            
             return Levels[index % Levels.Length];
         }
     }
