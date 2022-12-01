@@ -173,6 +173,7 @@ MonoBehaviour:
   heroDatabase: {fileID: 11400000, guid: cb2ef16a8530d25439655fa91d730738, type: 2}
   gameData: {fileID: 11400000, guid: 6abdfce947281bd4a924840b07916b2d, type: 2}
   saveManager: {fileID: 1822294388874111480}
+  feedbackController: {fileID: 1619203127490441689}
 --- !u!114 &1691584159726164944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +244,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5213741ff99673242be5cd913d712d22, type: 3}
+--- !u!114 &1619203127490441689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 42768782127531197, guid: 5213741ff99673242be5cd913d712d22, type: 3}
+  m_PrefabInstance: {fileID: 1652646590725551460}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eca815146e449caa1247743193917e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1619203127490441694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 42768782127531194, guid: 5213741ff99673242be5cd913d712d22, type: 3}

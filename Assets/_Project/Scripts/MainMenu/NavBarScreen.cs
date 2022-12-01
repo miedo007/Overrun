@@ -21,6 +21,7 @@ namespace Project.MainMenu
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
+        [Inject] private readonly UIFrame _uiFrame;
         
         private void Awake()
         {

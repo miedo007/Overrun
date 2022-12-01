@@ -15,6 +15,7 @@ using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
+using Project.Settings;
 using Project.Tiers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -83,6 +84,11 @@ namespace Project.Game
             {
                 StartLevel();
             }
+        }
+
+        private void OnSettingsScreenOpened(UIScreen obj)
+        {
+            throw new System.NotImplementedException();
         }
 
         private void OpenWeaponSelector()

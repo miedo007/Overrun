@@ -47,3 +47,6 @@ MonoBehaviour:
   - <UIScreen>k__BackingField: {fileID: 731323147382696782, guid: 009e6b331e8a22445a4d5124d92c64f5, type: 3}
     <CreateOnOpen>k__BackingField: 0
     <DestroyOnClose>k__BackingField: 0
+  - <UIScreen>k__BackingField: {fileID: 1138839139982347577, guid: a97a8f85f9990f9418bf61061a076e42, type: 3}
+    <CreateOnOpen>k__BackingField: 0
+    <DestroyOnClose>k__BackingField: 0

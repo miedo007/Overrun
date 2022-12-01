@@ -1,8 +1,10 @@
 ﻿using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.Levels;
+using Project.Settings;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Game.UI
 {
@@ -10,14 +12,22 @@ namespace Project.Game.UI
     {
         [field: SerializeField] public TextMeshProUGUI WaveIndexText { get; private set; }
         [field: SerializeField] public RectTransform CurrencyBar { get; private set; }
-        [field: SerializeField] public WaveTimer Timer { get; private set; }
+        [field: SerializeField] public WaveTimer Timer { get; private set; } 
+        [field: SerializeField] public Button SettingsButton { get; private set; } 
 
         [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly UIFrame _uiFrame;
 
         private void Awake()
         {
+            SettingsButton.onClick.AddListener(OpenSettings);
             WaveIndexText.enabled = false;
             HideCurrencyBar();
+        }
+
+        private void OpenSettings()
+        {
+            _uiFrame.Open<PauseScreen>();
         }
 
         public void OnReady()

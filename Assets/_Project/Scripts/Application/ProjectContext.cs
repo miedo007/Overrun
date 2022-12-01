@@ -4,6 +4,7 @@ using Project.Game;
 using Project.Heroes;
 using Project.Tiers;
 using Mtl.Bonfire;
+using Project.Feedback;
 using Project.Game.Levels;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Project.Application
         [SerializeField] private HeroDatabase heroDatabase;
         [SerializeField] private GameData gameData;
         [SerializeField] private SaveManager saveManager;
+        [SerializeField] private FeedbackController feedbackController;
         
         protected override void OnInjectStart()
         {
@@ -40,6 +42,7 @@ namespace Project.Application
             Bind(heroDatabase);
             Bind(gameData);         
             Bind(saveManager);
+            Bind(feedbackController);
 
             var inProgressSession = new InProgressSessionInfo();
             var inProgressReadWriter = new FileReadWriter("in-progress");
