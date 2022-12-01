@@ -25,14 +25,13 @@ namespace Project.Application
         
         protected override void OnInjectStart()
         {
-
             UnityEngine.Application.targetFrameRate = 60;
             
             var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
-            Bind<IBonfire>(beaconWrapper);
+            Bind(beaconWrapper);
 
             var analyticsManager = new AnalyticsManager();
-            Bind<IAnalyticsProvider>(analyticsManager);
+            Bind<IAnalyticsManager>(analyticsManager);
             analyticsManager.Register(beaconWrapper);
             analyticsManager.Register(new GameAnalyticsWrapper());
             
