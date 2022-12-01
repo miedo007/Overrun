@@ -1699,10 +1699,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7080675956736295596, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
-      propertyPath: weaponsFullNotification
-      value: 
-      objectReference: {fileID: 6023482783718675062}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
 --- !u!224 &1159074807374628040 stripped
@@ -1710,17 +1706,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1092010967217888939, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
   m_PrefabInstance: {fileID: 2247936495676627555}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6023482783718675062 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5523088767676221461, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
-  m_PrefabInstance: {fileID: 2247936495676627555}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c68f186d7e2846c08953d1e136598d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9039246796066101455 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7080675956736295596, guid: 4bedf374b9cedf748a65e53015003967, type: 3}

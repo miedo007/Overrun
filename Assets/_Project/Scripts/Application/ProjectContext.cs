@@ -1,3 +1,4 @@
+using Mtl.Bonfire;
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Game;
@@ -27,13 +28,13 @@ namespace Project.Application
 
             UnityEngine.Application.targetFrameRate = 60;
             
-            /*var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
+            var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
             Bind<IBonfire>(beaconWrapper);
 
             var analyticsManager = new AnalyticsManager();
             Bind<IAnalyticsProvider>(analyticsManager);
             analyticsManager.Register(beaconWrapper);
-            analyticsManager.Register(new GameAnalyticsWrapper());*/
+            analyticsManager.Register(new GameAnalyticsWrapper());
             
             Bind(levelDatabase);
             Bind(sceneLoader);

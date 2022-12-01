@@ -126,7 +126,7 @@ MonoBehaviour:
   <ItemViewPrefab>k__BackingField: {fileID: 4101770865699853113, guid: 72daed6d8cfc6df419a23e843cfd653c, type: 3}
   <Parent>k__BackingField: {fileID: 5477116441959376875}
   <Scroller>k__BackingField: {fileID: 7327036555549683568}
-  weaponsFullNotification: {fileID: 0}
+  weaponsFullNotification: {fileID: 5523088767676221461}
 --- !u!114 &6511795805224257606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1684881678389572016}
   rect: {fileID: 4625361882554383792}
-  audio: {fileID: 11400000, guid: 6b06356792b442247932cd7f89ff1ea7, type: 2}
+  audioData: {fileID: 11400000, guid: 6b06356792b442247932cd7f89ff1ea7, type: 2}
 --- !u!1 &8695883427098424766
 GameObject:
   m_ObjectHideFlags: 0

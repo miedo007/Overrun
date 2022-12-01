@@ -1,4 +1,5 @@
-﻿using Mtl.Injection;
+﻿using Mtl.Bonfire;
+using Mtl.Injection;
 using Mtl.Save;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
@@ -27,7 +28,7 @@ namespace Project.Game
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly InProgressSessionInfo _inProgressSession;
         [Inject] private readonly SaveManager _saveManager;
-        //[Inject] private readonly IAnalyticsManager _analyticsManager;
+        [Inject] private readonly IAnalyticsManager _analyticsManager;
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
         [Inject] private readonly CameraManager _cameraManager;
@@ -72,7 +73,6 @@ namespace Project.Game
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
             
-            //_uiFrame.Open<WeaponTestScreen>();
             if (!hasInProgressSession)
             {
                 OpenWeaponSelector();
@@ -81,11 +81,6 @@ namespace Project.Game
             {
                 StartLevel();
             }
-        }
-
-        private void OnSettingsScreenOpened(UIScreen obj)
-        {
-            throw new System.NotImplementedException();
         }
 
         private void OpenWeaponSelector()
@@ -254,11 +249,11 @@ namespace Project.Game
 
         private void SendLevelSummaryEvent(bool completed)
         {
-            /*_analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent()
+            _analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent
             {
                 Completed = completed,
                 LevelId = _sessionInfo.LevelIndex
-            });*/
+            });
         }
         
         private void OnLevelCompleteClosed(UIScreen screen)

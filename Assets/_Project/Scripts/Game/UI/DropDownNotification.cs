@@ -8,7 +8,7 @@ namespace Project.Game.UI
     {
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private RectTransform rect;
-        [SerializeField] private AudioData audio;
+        [SerializeField] private AudioData audioData;
         
         private void Awake()
         {
@@ -20,7 +20,7 @@ namespace Project.Game.UI
             canvasGroup.DOKill();
             rect.DOKill();
             
-            audio.Play();
+            audioData.Play();
             gameObject.SetActive(true);
             canvasGroup.alpha = 0;
             canvasGroup.DOFade(1,0.2f);
