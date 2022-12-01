@@ -22,12 +22,13 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.bonfire": {
-      "version": "1.0.2",
+      "version": "1.0.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.google.external-dependency-manager": "1.2.168",
-        "com.rovio.beacon.unitysdk": "6.16.0"
+        "com.rovio.beacon.unitysdk": "6.16.0",
+        "com.rovio.mtl.toolbox": "1.0.26"
       },
       "url": "https://unity-packages.rovio.dev"
     },
@@ -57,8 +58,8 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.toolbox": {
-      "version": "1.0.25",
-      "depth": 0,
+      "version": "1.0.26",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://unity-packages.rovio.dev"
