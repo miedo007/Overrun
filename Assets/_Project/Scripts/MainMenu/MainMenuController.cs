@@ -6,6 +6,7 @@ using Project.Game;
 using Project.Heroes;
 using Project.MainMenu.HeroSelection;
 using Project.MainMenu.SagaMap;
+using Project.Settings;
 using UnityEngine;
 
 namespace Project.MainMenu
@@ -26,7 +27,12 @@ namespace Project.MainMenu
 
         private void Start()
         {
-            _uiFrame.Open<CurrencyBarScreen>();
+            // Set target framerate
+            UnityEngine.Application.targetFrameRate = 60;
+            
+            var hudScreen = _uiFrame.Open<MainMenuHudScreen>();
+            hudScreen.SettingsButtonClicked += OnSettingsButtonCLicked;
+            
             _uiFrame.Open<SagaMapScreen>();
             
             var navBar = _uiFrame.Open<NavBarScreen>();
@@ -50,6 +56,11 @@ namespace Project.MainMenu
                     _saveManager.Save();
                 }
             }
+        }
+
+        private void OnSettingsButtonCLicked()
+        {
+            _uiFrame.Open<SettingsScreen>();
         }
 
         private void InProgressScreenOnConfirmed(bool didConfirm)

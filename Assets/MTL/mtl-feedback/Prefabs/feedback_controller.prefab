@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHapticRate: 0.1
   impulseSource: {fileID: 42768782127531196}
+  <Audio>k__BackingField: {fileID: 7815323658689628581}
 --- !u!114 &42768782127531196
 MonoBehaviour:
   m_ObjectHideFlags: 0

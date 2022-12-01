@@ -7,9 +7,11 @@ namespace Project.Game.Player
     {
         [SerializeField] private UltimateJoystick _ultimateJoystick;
         [SerializeField] private CanvasGroup _canvasGroup;
+        public bool IsActive { get; set; }
 
         public void Show()
         {
+            IsActive = true;
             gameObject.SetActive(true);
             _canvasGroup.interactable = true;
             _ultimateJoystick.ResetJoystick();
@@ -24,12 +26,17 @@ namespace Project.Game.Player
             if (!immediate)
             {
                 _canvasGroup.DOFade(0, 0.125f)
-                    .OnComplete(()=>gameObject.SetActive(false));
+                    .OnComplete(() =>
+                    {
+                        gameObject.SetActive(false);
+                        IsActive = false;
+                    });
             }
             else
             {
                 _canvasGroup.alpha = 0;
                 gameObject.SetActive(false);
+                IsActive = false;
             }
         }
         

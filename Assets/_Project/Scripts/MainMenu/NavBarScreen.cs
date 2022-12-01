@@ -21,6 +21,7 @@ namespace Project.MainMenu
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
+        [Inject] private readonly UIFrame _uiFrame;
         
         private void Awake()
         {
@@ -41,7 +42,7 @@ namespace Project.MainMenu
 
         private void OnCurrencyChanged()
         {
-            var upgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
+            var upgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level + 1);
             upgradeNotification.Show(_playerInfo.PlayerSave.Currency >= upgradeCost);
         }
     }

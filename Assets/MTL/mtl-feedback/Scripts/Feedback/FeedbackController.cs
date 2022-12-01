@@ -3,6 +3,7 @@ using Cinemachine;
 using Project.Application;
 using Lean.Pool;
 using Lofelt.NiceVibrations;
+using MTLSimpleAudio;
 using UnityEngine;
 
 namespace Project.Feedback
@@ -11,13 +12,15 @@ namespace Project.Feedback
     {
         [SerializeField] private float maxHapticRate = 0.05f;
         [SerializeField] private CinemachineImpulseSource impulseSource;
+
+        [field: SerializeField] public SimpleAudio Audio { get; private set; }
+        
         
         private float _nextHapticTime;
         private bool _currentlyHitStopped;
 
         private static bool _screenShakeActive = true;
 
-        
         public void Start()
         {
             _screenShakeActive = GetScreenShakeActive();
