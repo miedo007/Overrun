@@ -1,6 +1,7 @@
 ﻿using Mtl.Injection;
 using Mtl.Save;
 using Mtl.UiFramework;
+using MTLSimpleAudio;
 using Project.Application;
 using Project.Game;
 using Project.Heroes;
@@ -13,6 +14,8 @@ namespace Project.MainMenu
 {
     public class MainMenuController : MonoBehaviour, IInjectionReady
     {
+        [SerializeField] private MusicData musicData;
+        
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly SessionInfo _sessionInfo;
@@ -27,6 +30,8 @@ namespace Project.MainMenu
 
         private void Start()
         {
+            musicData.Play();
+            
             // Set target framerate
             UnityEngine.Application.targetFrameRate = 60;
             

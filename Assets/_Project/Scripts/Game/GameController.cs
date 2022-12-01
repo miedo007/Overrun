@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using Mtl.Bonfire;
-using Mtl.Injection;
+﻿using Mtl.Injection;
 using Mtl.Save;
-using Mtl.Toolbox;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
 using Project.Application;
@@ -15,7 +12,6 @@ using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
-using Project.Settings;
 using Project.Tiers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,6 +22,7 @@ namespace Project.Game
     {
         [FormerlySerializedAs("gameMusic")] [SerializeField] private MusicData waveMusic;
         [SerializeField] private MusicData shopMusic;
+        [SerializeField] private MusicData menuMusic;
 
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly InProgressSessionInfo _inProgressSession;
@@ -116,7 +113,7 @@ namespace Project.Game
 
         private void OnWaveCompleted()
         {
-            waveMusic.Stop();
+            menuMusic.Play();
             
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
@@ -234,7 +231,7 @@ namespace Project.Game
             
             SendLevelSummaryEvent(true);
             
-            waveMusic.Stop();
+            menuMusic.Play();
             
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
@@ -275,7 +272,7 @@ namespace Project.Game
             
             SendLevelSummaryEvent(false);
             
-            waveMusic.Stop();
+            menuMusic.Play();
             
             _playerHealthController.Depleted -= OnPlayerHealthDepleted;
             _levelController.WaveCompleted -= OnWaveCompleted;
