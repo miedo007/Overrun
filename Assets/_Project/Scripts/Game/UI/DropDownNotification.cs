@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using MTLSimpleAudio;
 using UnityEngine;
 
 namespace Project.Game.UI
@@ -7,6 +8,7 @@ namespace Project.Game.UI
     {
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private RectTransform rect;
+        [SerializeField] private AudioData audio;
         
         private void Awake()
         {
@@ -18,6 +20,7 @@ namespace Project.Game.UI
             canvasGroup.DOKill();
             rect.DOKill();
             
+            audio.Play();
             gameObject.SetActive(true);
             canvasGroup.alpha = 0;
             canvasGroup.DOFade(1,0.2f);

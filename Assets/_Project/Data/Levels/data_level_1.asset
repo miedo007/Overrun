@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23cfd08fe83e493492accbebbd345024, type: 3}
+  m_Name: data_level_1
+  m_EditorClassIdentifier: 
+  <BaseEnemyCount>k__BackingField: 30
+  <EnemyCountIncreasePerWave>k__BackingField: 10
+  <BaseWaveDuration>k__BackingField: 25
+  <WaveDurationIncrease>k__BackingField: 5
+  <WaveDurationIncreaseRate>k__BackingField: 3
+  <MaxWaveDuration>k__BackingField: 60
+  <Enemies>k__BackingField:
+  - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
+  - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
+  - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
+  - {fileID: 11400000, guid: 2e616ae9b25cd6d4685a0d6cff032e53, type: 2}
+  - {fileID: 11400000, guid: bc4261d269439d448b287bc73b81303e, type: 2}
+  <Waves>k__BackingField:
+  - 00011300000111000
+  - 000113030001110002
+  - 0011100303110012003011103300110010201
+  - 00111003333031100120030112103300110010201
+  - 00111003333031100120030112103300110010201
+  - 00111103330000130311012110120030112103300110010201
+  - 010000330331003311002110010333111000002
+  - 010000330331003311002110010333111000002
+  - 00111103330000130311012110120030112103300110010201
+  - 00111003333031100120030112103300110010201
+  - 000113030001110002
+  - 010000330331003311002110010333111000002
+  - 00111003333031100120030112103300110010201
+  - 00111003333031100120030112103300110010201
+  - 000000400033300000440000000000333030020000000004
+  <RoomData>k__BackingField: {fileID: 0}
