@@ -206,7 +206,7 @@ namespace Project.Game
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
             waveIntroScreen.OnCloseEvent += OnWaveIntroCompleted;
-            waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex, _levelController.IsFinalWave);
+            waveIntroScreen.DisplayWithWaveIndex(_levelController.WaveIndex, _levelController.WaveCount, _levelController.IsFinalWave);
             
             if (_levelController.IsFinalWave)
             {

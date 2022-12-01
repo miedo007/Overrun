@@ -270,7 +270,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WAVE
 
-    <size=150%>{0}'
+    <size=150%>{0}</size> of <size=150%>{1}</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
   m_sharedMaterial: {fileID: -8216763396484538535, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
