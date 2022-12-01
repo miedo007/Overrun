@@ -13,9 +13,11 @@ namespace Project.MainMenu
     {
         public event Action UpgradeButtonClicked;
         public event Action PlayButtonClicked;
+        public event Action SettingsButtonClicked;
 
         [SerializeField] private Button playButton;
         [SerializeField] private Button upgradeButton;
+        [SerializeField] private Button settingsButton;
         [SerializeField] private Notification upgradeNotification;
 
         [Inject] private readonly PlayerInfo _playerInfo;
@@ -26,6 +28,7 @@ namespace Project.MainMenu
         private void Awake()
         {
             playButton.onClick.AddListener(()=>PlayButtonClicked?.Invoke());
+            settingsButton.onClick.AddListener(()=>SettingsButtonClicked?.Invoke());
             upgradeButton.onClick.AddListener(()=>UpgradeButtonClicked?.Invoke());
         }
 

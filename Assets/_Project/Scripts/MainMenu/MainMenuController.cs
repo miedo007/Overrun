@@ -35,14 +35,13 @@ namespace Project.MainMenu
             // Set target framerate
             UnityEngine.Application.targetFrameRate = 60;
             
-            var hudScreen = _uiFrame.Open<MainMenuHudScreen>();
-            hudScreen.SettingsButtonClicked += OnSettingsButtonCLicked;
-            
+            _uiFrame.Open<MainMenuHudScreen>();
             _uiFrame.Open<SagaMapScreen>();
             
             var navBar = _uiFrame.Open<NavBarScreen>();
             navBar.PlayButtonClicked += OnPlayButtonClicked;    
             navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
+            navBar.SettingsButtonClicked += OnSettingsButtonCLicked;
 
             if (_inProgressSessionInfo.InProgressSave.InProgress)
             {

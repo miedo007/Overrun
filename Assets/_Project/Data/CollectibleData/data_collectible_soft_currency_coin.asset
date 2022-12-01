@@ -16,3 +16,4 @@ MonoBehaviour:
   <AutoCollectOnWaveComplete>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 2002824749259329096, guid: 8bde536e51a9e5e41b74d9fa1b1cadbc, type: 3}
   <BehaviourTrigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
+  <CollectFeedback>k__BackingField: {fileID: 11400000, guid: abda30084cae5df48a4c07c263be851f, type: 2}

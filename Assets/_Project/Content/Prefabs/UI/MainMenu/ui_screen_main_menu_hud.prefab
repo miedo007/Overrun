@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e517502ebbbb482bbd3fb216e4ba5673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsButton: {fileID: 733093765468519617}
 --- !u!114 &6375739671787386180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: button_settings Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4913257503262681262, guid: e59e9404fbccc62469979a1fed78f024, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e59e9404fbccc62469979a1fed78f024, type: 3}
 --- !u!224 &377617775147341996 stripped
@@ -349,14 +352,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1999094648448732685, guid: e59e9404fbccc62469979a1fed78f024, type: 3}
   m_PrefabInstance: {fileID: 2198782050686473889}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &733093765468519617 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1490652192076589664, guid: e59e9404fbccc62469979a1fed78f024, type: 3}
-  m_PrefabInstance: {fileID: 2198782050686473889}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
