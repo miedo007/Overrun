@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HasRandomChance>k__BackingField: 1
   <Chance>k__BackingField: 0.05
-  amount: 0.5
-  isPercentage: 0
+  amount: 0.05
+  isPercentage: 1
