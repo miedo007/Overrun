@@ -592,7 +592,6 @@ MonoBehaviour:
   <RerollButton>k__BackingField: {fileID: 7651213870755894037}
   <RerollButtonText>k__BackingField: {fileID: 8840254058335580302}
   <ShopInventory>k__BackingField: {fileID: 9039246796066101455}
-  <Music>k__BackingField: {fileID: 11400000, guid: 1ea4a043f39f3ec479dda31b3b4d3162, type: 2}
 --- !u!114 &3795720753482701690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,6 +1853,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.80630493
       objectReference: {fileID: 0}
+    - target: {fileID: 4989537319447743760, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bc1b4e1f3235664bb3e3f695c82c0af, type: 2}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_next_wave
@@ -2152,6 +2155,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.35569763
       objectReference: {fileID: 0}
+    - target: {fileID: 4989537319447743760, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: f79fa8c8f6207c844aa32ed6208bcf40, type: 2}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_reroll

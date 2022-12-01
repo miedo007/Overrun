@@ -2188,6 +2188,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 59.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4989537319447743760, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: f79fa8c8f6207c844aa32ed6208bcf40, type: 2}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_sell
@@ -2682,6 +2686,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 67.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4989537319447743760, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bc1b4e1f3235664bb3e3f695c82c0af, type: 2}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_keep

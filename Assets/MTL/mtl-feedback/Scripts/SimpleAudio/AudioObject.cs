@@ -21,7 +21,7 @@ namespace MTLSimpleAudio
             
             if (despawnOnCompletion)
             {
-                LeanPool.Despawn(this, audioInstance.Clip.length / audioSource.pitch);
+                LeanPool.Despawn(this, (audioInstance.Clip.length / audioSource.pitch) + 0.125f);
             }
         }
 

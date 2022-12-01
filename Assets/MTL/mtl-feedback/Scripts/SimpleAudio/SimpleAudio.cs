@@ -96,6 +96,7 @@ namespace MTLSimpleAudio
         {
             // Waiting a frame is required before accessing the audio mixer
             yield return null;
+            yield return null;
             SetSoundEffectsActive(GetSoundEffectsActive());
             SetMusicActive(GetMusicActive());
         }

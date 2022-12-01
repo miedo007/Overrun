@@ -1826,6 +1826,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 46.615906
       objectReference: {fileID: 0}
+    - target: {fileID: 4989537319447743760, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: ed2da7ab6b4946f459bac2c3fa11762d, type: 2}
     - target: {fileID: 8387332711101574584, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Name
       value: button_upgrade

@@ -334,8 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98cd33addc34398a1b3c854e9c5785b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1334306189159858156}
-  upgradeDatabase: {fileID: 11400000, guid: 936dd3ba14a000349b94bc415965ac5a, type: 2}
   upgradeViews:
   - {fileID: 5483893693513990907}
   - {fileID: 6964707514458945817}
@@ -462,6 +460,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2845576883464537615, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bc1b4e1f3235664bb3e3f695c82c0af, type: 2}
     - target: {fileID: 3886749640827638297, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -651,6 +653,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2845576883464537615, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bc1b4e1f3235664bb3e3f695c82c0af, type: 2}
     - target: {fileID: 3886749640827638297, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -840,6 +846,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2845576883464537615, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
+      propertyPath: onPressFeedback
+      value: 
+      objectReference: {fileID: 11400000, guid: 7bc1b4e1f3235664bb3e3f695c82c0af, type: 2}
     - target: {fileID: 3886749640827638297, guid: fcec5f2f0b516f64db5713cc7f3a5ddb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

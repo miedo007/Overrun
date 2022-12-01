@@ -17,7 +17,7 @@ namespace MTLSimpleAudio
 
         public bool IsRegistered { get; set; }
         public int LastIndexPlayed { get; set; }
-        private float NextPlayTime { set; get; }
+        [NonSerialized] private float NextPlayTime = 0;
 
         public void Initialize()
         {
@@ -53,7 +53,7 @@ namespace MTLSimpleAudio
             {
                 return;
             }
-
+            
             var clipIndex = 0;
             if (clips.Length > 1)
             {

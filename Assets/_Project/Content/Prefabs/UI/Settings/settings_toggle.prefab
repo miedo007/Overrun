@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2262311432864330682}
   - component: {fileID: 1970026493595535724}
   - component: {fileID: 3545403148554203670}
+  - component: {fileID: 4046309967298929321}
   m_Layer: 5
   m_Name: toggle
   m_TagString: Untagged
@@ -92,6 +93,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4046309967298929321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792587759294140189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0676fc2d1ad7bce448974b4f35c1cbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPressFeedback: {fileID: 11400000, guid: 8b471c4b381ee93468d882c4c29200d2, type: 2}
+  manualSetup: 0
 --- !u!1 &4943452289642167289
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +530,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
