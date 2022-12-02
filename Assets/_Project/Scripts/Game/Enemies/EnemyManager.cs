@@ -176,20 +176,19 @@ namespace Project.Game.Enemies
                 var indexString = spawnCode.Substring(i, 1);
                 if (int.TryParse(indexString, out var enemyIndex))
                 {
+                    enemyIndex = Mathf.Clamp(enemyIndex, 0, levelData.Enemies.Length - 1);
                     if (enemyIndex < levelData.Enemies.Length)
                     {
                         enemyIndices[i] = enemyIndex;
                     }
                     else
                     {
-                        Debug.LogError($"Invalid enemy index - Exceeds Enemy Data Count :: {enemyIndex}");
-                        return;
+                        enemyIndices[i] = 0;
                     }
                 }
                 else
                 {
-                    Debug.LogError("Invalid enemy index - Unable to parse {indexString}");
-                    return;
+                    enemyIndices[i] = 0;
                 }
             }
 

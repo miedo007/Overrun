@@ -7,6 +7,7 @@ namespace Project.Game.Levels
     public class LevelDatabase : ScriptableObject
     {
         [field: SerializeField] public LevelData[] Levels { get; private set; }
+        [field: SerializeField] public LevelData[] RepeatedLevels { get; private set; }
         [field: SerializeField, Header("EDITOR ONLY")] public bool IsTesting { get; set; }
         [field: SerializeField] public LevelData TestLevel { get; set; }
         
@@ -19,8 +20,13 @@ namespace Project.Game.Levels
                 return TestLevel;
             }
 #endif
+
+            if (index < Levels.Length)
+            {
+                return Levels[index];
+            }
             
-            return Levels[index % Levels.Length];
+            return RepeatedLevels[index % RepeatedLevels.Length];
         }
     }
 }
