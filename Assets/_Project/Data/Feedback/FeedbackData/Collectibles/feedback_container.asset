@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91c8c9228a9487ca443ab08d86edf32, type: 3}
+  m_Name: feedback_container
+  m_EditorClassIdentifier: 
+  playHaptics: 0
+  hapticPreset: -1
+  playFx: 1
+  fxPrefab: {fileID: 9109936408049361115, guid: da792f70f2536c74d848e93aacda0637, type: 3}
+  fxLifetime: 0.5
+  playAudio: 1
+  audioData: {fileID: 11400000, guid: 58d687e7122116a4e917688313173456, type: 2}
+  playScreenShake: 0
+  amplitude: 0
+  playHitStop: 0
+  hitStopTime: 0.05

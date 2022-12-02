@@ -1313,8 +1313,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5763508489871785863, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
+--- !u!1 &1651436489556385364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2268322251504479064, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
+  m_PrefabInstance: {fileID: 689516579505419532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &245649881472274994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651436489556385364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.11764707, g: 0.227451, b: 0.49411768, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3f91331724a9da84197e9b6d94f0483c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+  borderWidth: 0
+  falloffDistance: 1
 --- !u!224 &5201167701779792803 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4737758060804077231, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}

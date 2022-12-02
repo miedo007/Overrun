@@ -3,8 +3,8 @@ using DG.Tweening;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
+using Project.Feedback;
 using Project.Game.Items;
-using Project.Game.Levels;
 using Project.Game.Shop;
 using Project.Heroes;
 using Project.Tiers;
@@ -25,6 +25,8 @@ namespace Project.Game.UI
         [SerializeField] private Button keepButton;
         [SerializeField] private RectTransform buttonGroup;
         [SerializeField] private TextMeshProUGUI sellText;
+        [SerializeField] private FeedbackData displayContainerFeedback;
+        [SerializeField] private FeedbackData displayRewardFeedback;
 
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly HeroRegistry _heroRegistry;
@@ -80,7 +82,9 @@ namespace Project.Game.UI
             
             yield return headerRect.DOScale(1, 0.12f).WaitForCompletion();
             
+            displayContainerFeedback.Play(containerView.transform.position, Quaternion.identity);
             containerView.SetActive(true);
+            
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             
             _heroRegistry.ActiveHero.WaveRewards--;
@@ -98,6 +102,9 @@ namespace Project.Game.UI
             sellText.text = string.Format(_sellLabel, GetSellValue(_currentItem));
 
             headerRect.DOScale(0, 0.125f);
+            
+            displayRewardFeedback.Play(itemDetailsRoot.transform.position, Quaternion.identity, 0.05f);
+            
             yield return itemDetailsRoot.DOScale(1, 0.12f).WaitForCompletion();
             yield return buttonGroup.DOScale(1, 0.125f).WaitForCompletion();
         }

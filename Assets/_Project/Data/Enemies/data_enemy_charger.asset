@@ -15,7 +15,7 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 3326800173408816191, guid: 61da1dcdd87741049988d5c1307552d6, type: 3}
   <BaseHealth>k__BackingField: 5
   <MoveSpeed>k__BackingField: 1.5
-  <TimedActionCooldown>k__BackingField: 3
+  <TimedActionCooldown>k__BackingField: 2
   <MovementMode>k__BackingField: 2
   <MeleeAttackRate>k__BackingField: 0.5
   <MeleeDamage>k__BackingField: 3.5
@@ -23,3 +23,4 @@ MonoBehaviour:
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
   <WalkAnimation>k__BackingField: {fileID: 7400000, guid: 57b0f9e4f8478c446a0deb5c83e74fe8, type: 2}
+  <KnockbackForceOnKill>k__BackingField: 10

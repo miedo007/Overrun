@@ -1033,6 +1033,8 @@ MonoBehaviour:
   keepButton: {fileID: 8178118507793874356}
   buttonGroup: {fileID: 5978760492894947749}
   sellText: {fileID: 1610923704514668594}
+  displayContainerFeedback: {fileID: 11400000, guid: 75ca5b63a55cfdf4c9579cb303f83828, type: 2}
+  displayRewardFeedback: {fileID: 11400000, guid: f528b1e39d06acb42b152e12749a2536, type: 2}
 --- !u!114 &-3972961376148329543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,7 +1353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3054922581875543207
 RectTransform:
   m_ObjectHideFlags: 0

@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyText: {fileID: 8394563509238188497}
+  iconRect: {fileID: 1745435876571512956}
 --- !u!1 &4901336386295220603
 GameObject:
   m_ObjectHideFlags: 0

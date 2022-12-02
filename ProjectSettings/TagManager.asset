@@ -64,3 +64,6 @@ TagManager:
   - name: UI
     uniqueID: 2431365283
     locked: 0
+  - name: UIForegroundFX
+    uniqueID: 2920879755
+    locked: 0
