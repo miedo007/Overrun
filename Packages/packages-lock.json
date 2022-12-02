@@ -22,7 +22,7 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.bonfire": {
-      "version": "1.0.6",
+      "version": "1.0.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -33,7 +33,7 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.buildtool": {
-      "version": "1.0.9",
+      "version": "1.0.10",
       "depth": 0,
       "source": "registry",
       "dependencies": {

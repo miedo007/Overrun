@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.rovio.mtl.bonfire": "1.0.6",
-    "com.rovio.mtl.buildtool": "1.0.9",
+    "com.rovio.mtl.bonfire": "1.0.8",
+    "com.rovio.mtl.buildtool": "1.0.10",
     "com.rovio.mtl.injection": "1.0.9",
     "com.rovio.mtl.save": "1.0.2",
     "com.rovio.mtl.toolbox": "1.0.25",

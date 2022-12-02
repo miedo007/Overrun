@@ -221,7 +221,11 @@ namespace Project.Game
 
         private void OnLevelCompleted()
         {
-            _inProgressSession.ClearProgress();
+            _inProgressSession.ClearProgress();            
+            if (_levelController.CurrentLevelIndex >= _playerInfo.PlayerSave.TopStageIndex)
+            {
+                _playerInfo.IncrementTopStage();
+            }
             _saveManager.Save();
             
             SendLevelSummaryEvent(true);
@@ -230,11 +234,7 @@ namespace Project.Game
             
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
-            
-            if (_levelController.CurrentLevelIndex >= _playerInfo.PlayerSave.TopStageIndex)
-            {
-                _playerInfo.IncrementTopStage();
-            }
+
             
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
@@ -252,7 +252,8 @@ namespace Project.Game
             _analyticsManager.SendLevelSummaryEvent(new LevelSummaryEvent
             {
                 Completed = completed,
-                LevelId = _sessionInfo.LevelIndex
+                LevelId = _sessionInfo.LevelIndex,
+                CheckpointCount = _levelController.WaveIndex
             });
         }
         
@@ -260,6 +261,7 @@ namespace Project.Game
         {
            LoadMainMenu();
         }
+        
         private void OnPlayerHealthDepleted()
         {
             _inProgressSession.ClearProgress();
