@@ -29,7 +29,7 @@ namespace Project.Game.Enemies
         [Inject] private readonly PopupTextManager _popupTextManager;
         [Inject] private readonly RoomManager _roomManager;
         [Inject] private readonly GameData _gameData;
-
+        
         private Transform _transform;
         private int _facingDirection = 1;
         private float _lastContactAttackTime;
@@ -48,6 +48,8 @@ namespace Project.Game.Enemies
 
         public Rigidbody2D Rigidbody => rigidbody;
         public Collider2D Collider => collider;
+        public float BaseMass { get; private set; }
+        public bool IsTrigger { get; private set; }
 
         public int FacingDirection
         {
@@ -67,6 +69,8 @@ namespace Project.Game.Enemies
         private void Awake()
         {
             _transform = transform;
+            IsTrigger = Collider.isTrigger;
+            BaseMass = Rigidbody.mass;
         }
 
         public void Initialize(EnemyData enemyData, Vector3 playerPosition, int level, int wave)
@@ -78,6 +82,8 @@ namespace Project.Game.Enemies
             _lastActionTime = Time.time;
             IsPerformingAction = false;
             _isDead = false;
+            Rigidbody.mass = BaseMass;
+            Collider.isTrigger = IsTrigger;
             
             selfTarget.Deactivate();
             var direction = (playerPosition - currentPosition).normalized;
