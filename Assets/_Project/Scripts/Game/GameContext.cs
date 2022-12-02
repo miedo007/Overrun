@@ -3,6 +3,7 @@ using Project.Application;
 using Project.Game.Cameras;
 using Project.Game.Collectibles;
 using Project.Game.Enemies;
+using Project.Game.Items;
 using Project.Game.Levels;
 using Project.Game.Player;
 using Project.Game.Targets;
@@ -20,6 +21,7 @@ namespace Project.Game
         [field: SerializeField] public EnemyManager EnemyManager { get; private set; }
         [field: SerializeField] public CollectiblesManager CollectiblesManager { get; private set; }
         [field: SerializeField] public CameraManager CameraManager { get; private set; }
+        [field: SerializeField] public ItemBehaviourManager ItemBehaviourManager { get; private set; }
 
         protected override void OnInjectStart()
         {
@@ -33,6 +35,7 @@ namespace Project.Game
             Bind(EnemyManager);
             Bind(CollectiblesManager);
             Bind(CameraManager);
+            Bind(ItemBehaviourManager);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Project.Feedback;
+using UnityEngine;
 
 namespace Project.Game.Items
 {
@@ -6,6 +7,7 @@ namespace Project.Game.Items
     {
         [field: SerializeField] public bool HasRandomChance { get; private set; } = true;
         [field: SerializeField] public float Chance { get; private set; } = 0.01f;
+        [field: SerializeField] public FeedbackData activationFeedback { get; private set; }
 
         public bool Perform(Vector3 position)
         {
@@ -14,7 +16,16 @@ namespace Project.Game.Items
                 return false;
             }
             
-            return OnPerform(position);
+            if (OnPerform(position))
+            {
+                if (activationFeedback != null)
+                {
+                    activationFeedback.Play(GetFeedbackPosition(position), Quaternion.identity);
+                }
+                return true;
+            }
+
+            return false;
         }
         
         public virtual bool OnPerform(Vector3 position)
@@ -33,6 +44,11 @@ namespace Project.Game.Items
         public virtual string GetDescription()
         {
             return name;
+        }
+
+        public virtual Vector3 GetFeedbackPosition(Vector3 defaultPosition)
+        {
+            return defaultPosition;
         }
 
         public virtual void Cleanup()

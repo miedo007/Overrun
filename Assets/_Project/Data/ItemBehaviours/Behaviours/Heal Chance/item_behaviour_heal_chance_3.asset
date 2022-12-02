@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: item_behaviour_heal_chance_3
   m_EditorClassIdentifier: 
   <HasRandomChance>k__BackingField: 1
-  <Chance>k__BackingField: 0.09
-  amount: 0.05
+  <Chance>k__BackingField: 0.12
+  <activationFeedback>k__BackingField: {fileID: 11400000, guid: 71a42d6d26d3fbc4babeb1da8679a532, type: 2}
+  amount: 0.03
   isPercentage: 1

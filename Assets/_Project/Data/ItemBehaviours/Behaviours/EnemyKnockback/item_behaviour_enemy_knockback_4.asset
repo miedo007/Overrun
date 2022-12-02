@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: item_behaviour_enemy_knockback_4
   m_EditorClassIdentifier: 
   <HasRandomChance>k__BackingField: 1
-  <Chance>k__BackingField: 3
+  <Chance>k__BackingField: 0.25
+  <activationFeedback>k__BackingField: {fileID: 11400000, guid: 90d93c51571392a4ca9a56450d7368aa, type: 2}
   <KnockbackStat>k__BackingField: {fileID: 11400000, guid: 486c6ee982d9810479882b8766176dc1, type: 2}
   <KnockbackStrength>k__BackingField: 10
   <Radius>k__BackingField: 4

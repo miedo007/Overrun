@@ -8,13 +8,13 @@ namespace Project.Game.Items
 {
     public class ItemBehaviourManager : MonoBehaviour, IInjectionReady
     {
-        public event Action<ItemBehaviour> ItemBehaviourPerformed;
+        public event Action<BehaviourItemPair> ItemBehaviourPerformed;
         
         [SerializeField] private ItemBehaviourTrigger[] behaviourTriggers;
         
         [Inject] private readonly HeroRegistry _heroRegistry;
 
-        private readonly Dictionary<ItemBehaviourTrigger, List<ItemBehaviour>> _triggerBehavioursDict = new();
+        private readonly Dictionary<ItemBehaviourTrigger, List<BehaviourItemPair>> _triggerBehavioursDict = new();
 
         public void OnReady()
         {
@@ -45,12 +45,12 @@ namespace Project.Game.Items
                 return;
             }
 
-            var behaviours = _triggerBehavioursDict[trigger];
-            foreach (var behaviour in behaviours)
+            var behaviourItemPairs = _triggerBehavioursDict[trigger];
+            foreach (var pair in behaviourItemPairs)
             {
-                if (behaviour.Perform(position))
+                if (pair.Behaviour.Perform(position))
                 {
-                    ItemBehaviourPerformed?.Invoke(behaviour);
+                    ItemBehaviourPerformed?.Invoke(pair);
                 }
             }
         }
@@ -64,9 +64,9 @@ namespace Project.Game.Items
         {
             foreach (var kvp in _triggerBehavioursDict)
             {
-                foreach (var behaviour in kvp.Value)
+                foreach (var behaviourItemPair in kvp.Value)
                 {
-                    behaviour.Cleanup();
+                    behaviourItemPair.Behaviour.Cleanup();
                 }
             }
             
@@ -81,10 +81,14 @@ namespace Project.Game.Items
                 {
                     if (!_triggerBehavioursDict.ContainsKey(pair.Trigger))
                     {
-                        _triggerBehavioursDict.Add(pair.Trigger, new List<ItemBehaviour>());
+                        _triggerBehavioursDict.Add(pair.Trigger, new List<BehaviourItemPair>());
                     }
                     
-                    _triggerBehavioursDict[pair.Trigger].Add(pair.Behaviour);
+                    _triggerBehavioursDict[pair.Trigger].Add(new BehaviourItemPair
+                    {
+                        Item = item,
+                        Behaviour = pair.Behaviour
+                    });
                 }
             }
         }
@@ -98,5 +102,11 @@ namespace Project.Game.Items
     {
         [field: SerializeField] public ItemBehaviourTrigger Trigger { get; private set; }
         [field: SerializeField] public ItemBehaviour Behaviour { get; private set; }
+    }
+
+    public class BehaviourItemPair
+    {
+        public ItemBehaviour Behaviour { get; set; }
+        public ItemData Item { get; set; }
     }
 }

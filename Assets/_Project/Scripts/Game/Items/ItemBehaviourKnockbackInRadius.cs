@@ -71,6 +71,11 @@ namespace Project.Game.Items
             return true;
         }
 
+        public override Vector3 GetFeedbackPosition(Vector3 defaultPosition)
+        {
+            return PlayerController.Position;
+        }
+
         public override string GetDescription()
         {
             return $"{Chance * 100:0.0}% chance to knock back enemies within {Radius:0.0}m";

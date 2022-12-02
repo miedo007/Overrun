@@ -426,6 +426,10 @@ PrefabInstance:
       propertyPath: <CollectiblesManager>k__BackingField
       value: 
       objectReference: {fileID: 1703942246}
+    - target: {fileID: 1887386223408177528, guid: bfcb6652d43d8d04fbb3bf0f36ade3cf, type: 3}
+      propertyPath: <ItemBehaviourManager>k__BackingField
+      value: 
+      objectReference: {fileID: 8958734335818028619}
     - target: {fileID: 1887386223408177534, guid: bfcb6652d43d8d04fbb3bf0f36ade3cf, type: 3}
       propertyPath: m_Name
       value: game_context
@@ -1129,3 +1133,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cebad36bc4299894babfdc215d8632ed, type: 3}
+--- !u!114 &8958734335818028619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8958734336816345884, guid: cebad36bc4299894babfdc215d8632ed, type: 3}
+  m_PrefabInstance: {fileID: 8958734335818028618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09fd591ad18ad74195cbec6050e005d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

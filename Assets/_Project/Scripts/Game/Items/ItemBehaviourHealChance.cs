@@ -26,6 +26,11 @@ namespace Project.Game.Items
             }
         }
 
+        public override Vector3 GetFeedbackPosition(Vector3 defaultPosition)
+        {
+            return _healthController.transform.position;
+        }
+
         public override bool OnPerform(Vector3 position)
         {
             var healthController = HealthController;

@@ -1,7 +1,6 @@
 ﻿using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Game.Levels;
-using Project.Settings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
