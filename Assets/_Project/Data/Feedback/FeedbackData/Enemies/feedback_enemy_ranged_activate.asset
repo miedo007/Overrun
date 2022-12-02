@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d91c8c9228a9487ca443ab08d86edf32, type: 3}
-  m_Name: feedback_hero_damage_taken
+  m_Name: feedback_enemy_ranged_activate
   m_EditorClassIdentifier: 
   playHaptics: 0
   hapticPreset: -1
@@ -18,8 +18,8 @@ MonoBehaviour:
   fxPrefab: {fileID: 0}
   fxLifetime: 1
   playAudio: 1
-  audioData: {fileID: 11400000, guid: 5b719b54b9fbdc74c9dcaacaf27a29c2, type: 2}
-  playScreenShake: 1
-  amplitude: 1
-  playHitStop: 1
-  hitStopTime: 0.025
+  audioData: {fileID: 11400000, guid: bdb44f77bad852b42ad398444a9edec7, type: 2}
+  playScreenShake: 0
+  amplitude: 0.5
+  playHitStop: 0
+  hitStopTime: 0.05

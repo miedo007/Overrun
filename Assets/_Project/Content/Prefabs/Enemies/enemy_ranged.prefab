@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CanInterrupt>k__BackingField: 0
+  <ActivateFeedback>k__BackingField: {fileID: 11400000, guid: 0d3ade50dead4a54eb5dea93b9984366, type: 2}
   <ProjectileData>k__BackingField: {fileID: 11400000, guid: 25464f48b7f494d4d817049308c43583, type: 2}
   <SpawnOffset>k__BackingField: {x: 0, y: 0.8333, z: 0}
   <DamageFactor>k__BackingField: 1

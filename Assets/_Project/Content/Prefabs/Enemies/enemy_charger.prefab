@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CanInterrupt>k__BackingField: 0
+  <ActivateFeedback>k__BackingField: {fileID: 11400000, guid: b13f414efb08ca64d8ce90bb828568e6, type: 2}
   speed: 10
   chargeFx: {fileID: 8979002724309458181}
 --- !u!1001 &8979002724309481003
