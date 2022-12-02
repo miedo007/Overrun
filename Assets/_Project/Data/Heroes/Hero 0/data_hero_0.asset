@@ -18,6 +18,5 @@ MonoBehaviour:
   <StatOverrides>k__BackingField: {fileID: 11400000, guid: 8974c4d6b65b40448b1c190153ec45f7, type: 2}
   <StartingWeapons>k__BackingField: []
   <StartingWeaponDatabase>k__BackingField: {fileID: 0}
-  <StartingItems>k__BackingField:
-  - {fileID: 11400000, guid: 174617b500b87d34da176a7cec732990, type: 2}
+  <StartingItems>k__BackingField: []
   <StartingShopCurrency>k__BackingField: 0
