@@ -18,7 +18,7 @@ MonoBehaviour:
   <TimedActionCooldown>k__BackingField: 2
   <MovementMode>k__BackingField: 2
   <MeleeAttackRate>k__BackingField: 0.5
-  <MeleeDamage>k__BackingField: 3.5
+  <MeleeDamage>k__BackingField: 1.5
   <CollectibleData>k__BackingField: {fileID: 0}
   <DeathFeedback>k__BackingField: {fileID: 0}
   <DeathAnimation>k__BackingField: {fileID: 7400000, guid: 70b9280322c840e4d8fd56a2db8afae8, type: 2}
