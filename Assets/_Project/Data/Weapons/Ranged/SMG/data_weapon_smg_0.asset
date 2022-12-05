@@ -21,8 +21,9 @@ MonoBehaviour:
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 4f72da614f7256e43a3b4ecd2d5d4f07, type: 2}
   <Cooldown>k__BackingField: 0.2
-  <DamageFactor>k__BackingField: 0.375
+  <DamageFactor>k__BackingField: 0.5
   <Range>k__BackingField: 5
   <CriticalDamageMultiplier>k__BackingField: 2
   <KnockbackMultiplier>k__BackingField: 0.5
   <ActivationFeedback>k__BackingField: {fileID: 11400000, guid: f5d559298da42eb4983913c8dbabb122, type: 2}
+  <MeleeHitFeedback>k__BackingField: {fileID: 0}

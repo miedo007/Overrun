@@ -67,9 +67,8 @@ namespace Project.Game.Levels
                         .SetDelay(0.125f);
                 }
             }
-            
-            StartCoroutine(HideRoutine());
-            TimerCompleted?.Invoke();
+
+            Stop();
         }
         
         public IEnumerator HideRoutine()
@@ -89,5 +88,11 @@ namespace Project.Game.Levels
             }
         }
 
+        public void Stop()
+        {
+            StopAllCoroutines();
+            StartCoroutine(HideRoutine());
+            TimerCompleted?.Invoke();
+        }
     }
 }

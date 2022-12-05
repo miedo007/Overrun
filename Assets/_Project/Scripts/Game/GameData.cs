@@ -28,7 +28,6 @@ namespace Project.Game
         [field: SerializeField] public float RewardWaveScaling { get; private set; } = 1.25f;
         
         [field: SerializeField, Header("Upgrade Costs")] public int UpgradeBaseCost { get; private set; } = 100;
-        [field: SerializeField] public int UpgradeIncreasePerLevel { get; private set; } = 50;
         [field: SerializeField] public float UpgradeCostScaling { get; private set; } = 1.25f;
         [field: SerializeField] public float InitialSpawnDelay { get; set; } = 1.75f;
         [field: SerializeField] public float MinimumSpawnDelay { get; set; } = .75f;
@@ -59,16 +58,15 @@ namespace Project.Game
 
         public int GetCurrencyReward(int levelIndex, int waveIndex)
         {
-            var scaled = Mathf.CeilToInt((RewardBaseValue * (levelIndex + 1)) * Mathf.Pow(RewardLevelScaling, levelIndex));
-            scaled = Mathf.CeilToInt(scaled * Mathf.Pow(RewardWaveScaling, waveIndex));
-            return scaled;
+            var scaled = RewardBaseValue * (1 + (levelIndex * RewardLevelScaling));
+            scaled *= (1 + (waveIndex * RewardWaveScaling));
+            return Mathf.CeilToInt(scaled);
         }
         
         public int GetUpgradeCost(int levelIndex)
         {
-            var baseCost = UpgradeBaseCost + (UpgradeIncreasePerLevel * levelIndex);
-            var scaled = Mathf.CeilToInt(baseCost * Mathf.Pow(UpgradeCostScaling, levelIndex));
-            return scaled;
+            var baseCost = UpgradeBaseCost * (1 + (UpgradeCostScaling * levelIndex));
+            return Mathf.CeilToInt(baseCost);
         }
 
         public float GetChanceIncreaseForWave(int waveIndex)

@@ -65,12 +65,16 @@ namespace Project.Game.Levels
             }
         }
 
+        #if UNITY_EDITOR
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                OnTimerCompleted();
+                var timer = _uiFrame.Get<HudScreen>().Timer;
+                timer.Stop();
             }
         }
+        
+        #endif
     }
 }
