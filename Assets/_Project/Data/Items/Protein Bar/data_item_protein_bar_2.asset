@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 094bf0ced9a130040b67a122ee2c35de, type: 3}
   <DisplayName>k__BackingField: Protein Bar
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Increases melee weapon damage (<sprite tint=1 name=sprite_sheet_stats_5>)
   <BasePrice>k__BackingField: 18
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
   <Behaviours>k__BackingField:
   - <Trigger>k__BackingField: {fileID: 11400000, guid: efc994bd928d78a46bfa6f13361623b0, type: 2}
     <Behaviour>k__BackingField: {fileID: 11400000, guid: 01cb458af8ef82841852637a6c2a3c50, type: 2}
+  <ShowDescription>k__BackingField: 1

@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: d49aa0e1e38070c41bb87e2e5fccd4de, type: 3}
   <DisplayName>k__BackingField: Vitamin
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Increases health regeneration (<sprite tint=1 name=sprite_sheet_stats_1>)
   <BasePrice>k__BackingField: 15
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
@@ -23,3 +23,4 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 0
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []
+  <ShowDescription>k__BackingField: 1

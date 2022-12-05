@@ -6,5 +6,6 @@
         public const string SoundEnabled = "pref_sound";
         public const string MusicEnabled = "pref_music";
         public const string ScreenShakeEnabled = "pref_screen_shake";
+        public const string CraftingTutorialCompleted = "crafting_tutorial_completed";
     }
 }

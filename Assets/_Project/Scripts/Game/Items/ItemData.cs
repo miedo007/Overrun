@@ -11,6 +11,7 @@ namespace Project.Game.Items
     {
         [field: SerializeField] public List<StatModifier> StatModifiers { get; private set; }
         [field: SerializeField] public List<BehaviourTriggerPair> Behaviours { get; set; }
+        [field: SerializeField] public bool ShowDescription { get; set; } = true;
 
         public override string GetDescriptionForHero(HeroInfo heroInfo)
         {

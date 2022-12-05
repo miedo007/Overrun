@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: c94855d9ac3fcf24185907b41b4d4cac, type: 3}
   <DisplayName>k__BackingField: Apple
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Increases maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)
   <BasePrice>k__BackingField: 19
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
   <Behaviours>k__BackingField:
   - <Trigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
     <Behaviour>k__BackingField: {fileID: 11400000, guid: 81c101695115c5f40adeca620ba511b1, type: 2}
+  <ShowDescription>k__BackingField: 1

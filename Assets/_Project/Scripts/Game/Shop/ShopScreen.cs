@@ -1,6 +1,7 @@
 ﻿using Mtl.Injection;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
+using Project.Application;
 using Project.Game.Levels;
 using Project.Heroes;
 using TMPro;
@@ -16,6 +17,7 @@ namespace Project.Game.Shop
         [field: SerializeField] public Button RerollButton { get; private set; }
         [field: SerializeField] public TextMeshProUGUI RerollButtonText { get; private set; }
         [field: SerializeField] public ShopInventoryView ShopInventory { get; private set; }
+        [field: SerializeField] public ShopTutorial ShopTutorial { get; private set; }
 
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
@@ -36,6 +38,14 @@ namespace Project.Game.Shop
         protected override void OnOpened()
         {
             base.OnOpened();
+            if (!PlayerPrefs.HasKey(PrefKeys.CraftingTutorialCompleted))
+            {
+                ShopTutorial.Initialize();
+            }
+            else
+            {
+                ShopTutorial.gameObject.SetActive(false);
+            }
             
             _heroRegistry.ActiveHero.ShopCurrencyChanged += OnShopCurrencyChanged;
             OnShopCurrencyChanged();

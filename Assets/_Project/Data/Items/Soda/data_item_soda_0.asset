@@ -15,7 +15,8 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 98e9b4b4c324fd24eb561dcb5138ca60, type: 3}
   <DisplayName>k__BackingField: Soda
-  <Description>k__BackingField: 
+  <Description>k__BackingField: Increases weapon cooldown reduction (<sprite tint=1
+    name=sprite_sheet_stats_3>), but decreases maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)
   <BasePrice>k__BackingField: 11
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 070fe47ddc6d56941800d0210966c59a, type: 2}
@@ -27,3 +28,4 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 1
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []
+  <ShowDescription>k__BackingField: 1

@@ -15,7 +15,8 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: b917660b8679c644f80e16881a5644e1, type: 3}
   <DisplayName>k__BackingField: Toxic Sludge
-  <Description>k__BackingField: 
+  <Description>k__BackingField: ' Increases all damage (<sprite tint=1 name=sprite_sheet_stats_6>),
+    but reduces health regeneration (<sprite tint=1 name=sprite_sheet_stats_1>)'
   <BasePrice>k__BackingField: 18
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
@@ -27,3 +28,4 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 0
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []
+  <ShowDescription>k__BackingField: 1
