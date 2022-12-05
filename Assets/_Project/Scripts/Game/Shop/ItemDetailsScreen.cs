@@ -5,6 +5,7 @@ using Project.Game.Items;
 using Project.Game.Levels;
 using Project.Game.Weapons;
 using Project.Heroes;
+using Project.Tiers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,9 +20,11 @@ namespace Project.Game.Shop
         [SerializeField] private Button sellButton;
         [SerializeField] private Button closeButton;
         [SerializeField] private TextMeshProUGUI sellText;
+        [SerializeField] private MergeableNotification mergeableNotification;
 
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly TierDatabase _tierDatabase;
 
         private HeroInfo _heroInfo;
         private string _sellLabel;
@@ -37,6 +40,8 @@ namespace Project.Game.Shop
 
         public void Initialize(BaseData baseData, HeroInfo activeHero)
         {
+            mergeableNotification.Deactivate();
+            
             _heroInfo = activeHero;
             _data = baseData;
             
@@ -48,7 +53,14 @@ namespace Project.Game.Shop
             
             if (isWeapon)
             {
-                mergeButton.interactable = _heroInfo.CanMergeWeapon(_data as WeaponData);
+                var canMerge = _heroInfo.CanMergeWeapon(_data as WeaponData);
+                mergeButton.interactable = canMerge;
+                
+                if (canMerge)
+                {
+                    mergeableNotification.Activate(_tierDatabase.GetNextTier(_data.Tier).Color);
+                }
+                
                 sellButton.interactable = _heroInfo.CurrentWeapons.Count > 1;
             }
             

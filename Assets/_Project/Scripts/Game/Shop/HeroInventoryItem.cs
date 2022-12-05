@@ -15,8 +15,7 @@ namespace Project.Game.Shop
         [field: SerializeField] public Image Icon { get; private set; }
         [field: SerializeField] public Image Frame { get; private set; }
         [field: SerializeField] public Image Backer { get; private set; }
-        [field: SerializeField] public GameObject MergeableNotif { get; private set; }
-        [field: SerializeField] public Image MergeableNotifImage { get; private set; }
+        [field: SerializeField] public MergeableNotification MergeableNotif { get; private set; }
 
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly HeroRegistry _heroRegistry;
@@ -37,22 +36,11 @@ namespace Project.Game.Shop
             
             if (_data != null && _heroInfo != null && _heroInfo.CanMerge(_data))
             {
-                MergeableNotif.gameObject.SetActive(true);
-                MergeableNotifImage.color = _tierDatabase.GetNextTier(_data.Tier).Color;
-                
-                /*
-                _mergeSequence = DOTween.Sequence();
-                _mergeSequence.Append(transform.DOScale(1.1f, 0.125f)
-                        .SetLoops(4, LoopType.Yoyo))
-                    .AppendInterval(2f)
-                    .SetLoops(-1);
-
-                _mergeSequence.Play();
-                */
+                MergeableNotif.Activate(_tierDatabase.GetNextTier(_data.Tier).Color);
             }
             else
             {
-                MergeableNotif.gameObject.SetActive(false);
+                MergeableNotif.Deactivate();
             }
             
             Frame.color = _data.Tier.Color;

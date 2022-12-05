@@ -1,9 +1,10 @@
 ﻿using System;
 using DG.Tweening;
+using Mtl.Injection;
 using Project.Application;
-using Project.Game.Items;
 using Project.Game.Weapons;
 using Project.Heroes;
+using Project.Tiers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,11 @@ namespace Project.Game.Shop
         [field: SerializeField] public  Button BuyButton { get; private set; }
         [field: SerializeField] public  TextMeshProUGUI CostText { get; private set; }
         [field: SerializeField] public  LayoutElement LayoutElement { get; private set; }
+        [field: SerializeField] public  MergeableNotification MergeableNotification { get; private set; }
 
+        [Inject] private readonly TierDatabase _tierDatabase;
+
+        private bool _affordable;
         private int _cost;
         
         public BaseData Data { get; private set; }
@@ -40,6 +45,11 @@ namespace Project.Game.Shop
 
         public void Initialize(BaseData data, HeroInfo hero, int cost, string buyButtonString = "")
         {
+            if (MergeableNotification != null)
+            {
+                MergeableNotification.Deactivate();
+            }
+            
             _cost = cost;
             _heroInfo = hero;
             Data = data;
@@ -64,6 +74,7 @@ namespace Project.Game.Shop
             if (BuyButton != null)
             {
                 hero.ShopCurrencyChanged += OnShopCurrencyChanged;
+                hero.WeaponsChanged += OnWeaponsChanged;
                 OnShopCurrencyChanged();
                 
                 if (cost < 0)
@@ -79,19 +90,58 @@ namespace Project.Game.Shop
                     CostText.text = buyButtonString;
                 }
             }
+            
+            RefreshMergeableNotification();
         }
-
         private void OnDestroy()
         {
             if (_heroInfo != null)
             {
                 _heroInfo.ShopCurrencyChanged -= OnShopCurrencyChanged;
+                _heroInfo.WeaponsChanged -= OnWeaponsChanged;
             }
         }
 
         private void OnShopCurrencyChanged()
         {
-            BuyButton.interactable = _cost <= _heroInfo.GetShopCurrencyIntValue();
+            _affordable = _cost <= _heroInfo.GetShopCurrencyIntValue();
+            BuyButton.interactable = _affordable;
+            RefreshMergeableNotification();
+        }
+
+        private void OnWeaponsChanged()
+        {
+            RefreshMergeableNotification();
+        }
+
+        private void RefreshMergeableNotification()
+        {
+            if (MergeableNotification == null)
+            {
+                return;
+            }
+
+            if (!_affordable)
+            {
+                MergeableNotification.Deactivate();
+                return;
+            }
+
+            var weaponData = Data as WeaponData;
+            if (weaponData == null)
+            {
+                MergeableNotification.Deactivate();
+                return;
+            }
+            
+            if (!_heroInfo.HasFreeWeaponSlot() && _heroInfo.CanMergeWeapon(weaponData, 1))
+            {
+                MergeableNotification.Activate(_tierDatabase.GetNextTier(weaponData.Tier).Color);
+            }
+            else
+            {
+                MergeableNotification.Deactivate();
+            }
         }
 
         private void OnBuyButtonClicked()
