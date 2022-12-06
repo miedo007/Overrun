@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
-  m_Name: data_item_upgrade_damage_percent_0
+  m_Name: data_item_upgrade_pickup_range_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
-  <Sprite>k__BackingField: {fileID: -1379831335, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
-  <DisplayName>k__BackingField: Damage %
-  <Description>k__BackingField: Increase overall damage by {0}
+  <Sprite>k__BackingField: {fileID: -808364891, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <DisplayName>k__BackingField: Pickup Range
+  <Description>k__BackingField: Increase pickup range by {0}
   <BasePrice>k__BackingField: 0
   <StatModifiers>k__BackingField:
-  - <StatData>k__BackingField: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
-    <Value>k__BackingField: 0.1
+  - <StatData>k__BackingField: {fileID: 11400000, guid: 8db6f4c80d13acc47ab919a7b68fb525, type: 2}
+    <Value>k__BackingField: 0.2
     <ModifierType>k__BackingField: 0
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []

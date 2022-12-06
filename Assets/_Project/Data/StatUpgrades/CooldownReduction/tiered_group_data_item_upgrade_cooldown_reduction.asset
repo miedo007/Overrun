@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1574630dc124be8ba26160e316c8521, type: 3}
+  m_Name: tiered_group_data_item_upgrade_cooldown_reduction
+  m_EditorClassIdentifier: 
+  <Tiers>k__BackingField:
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: dc7db70920727b34095da12bb4fb74d6, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 7586634e2b5008c49801346665f46656, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: bd55fb3a12ca1884c8909b0bd7e71cc7, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 7ea6343bbd2e08e4db2e0ddcc69e9a12, type: 2}
+  - <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
+    <Data>k__BackingField: {fileID: 11400000, guid: 3d474c56d3e483a4f95f10d42bfd8aea, type: 2}
+  <MaxCount>k__BackingField: -1

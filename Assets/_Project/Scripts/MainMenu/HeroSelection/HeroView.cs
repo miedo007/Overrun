@@ -36,8 +36,8 @@ namespace Project.MainMenu.HeroSelection
         private void OnUpgradeButtonClicked()
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
-            _playerInfo.ChangeCurrency(-nextUpgradeCost);
             _heroRegistry.UpgradeActiveHero();
+            _playerInfo.ChangeCurrency(-nextUpgradeCost);
             _saveManager.Save();
         }
 
