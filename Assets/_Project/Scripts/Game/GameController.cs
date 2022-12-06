@@ -56,7 +56,7 @@ namespace Project.Game
         private void Start()
         {
             _playerHealthController.Initialize();
-            
+
             var hasInProgressSession = _inProgressSession.InProgressSave.InProgress;
             
             var levelIndex = _sessionInfo.LevelIndex;
@@ -235,7 +235,6 @@ namespace Project.Game
             _cameraManager.ZoomIn();
             _enemyManager.EndWave();
 
-            
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
@@ -253,7 +252,8 @@ namespace Project.Game
             {
                 Completed = completed,
                 LevelId = _sessionInfo.LevelIndex,
-                CheckpointCount = _levelController.WaveIndex
+                CheckpointCount = _levelController.WaveCount,
+                CheckpointCleared = _levelController.WaveIndex
             });
         }
         

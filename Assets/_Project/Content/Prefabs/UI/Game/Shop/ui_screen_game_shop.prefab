@@ -688,7 +688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &880643782963210016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1726,7 +1726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092010967217888939, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -230
+      value: -126.42
       objectReference: {fileID: 0}
     - target: {fileID: 1092010967217888939, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1762,7 +1762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092010967217888939, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 35
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 1092010967217888939, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1779,6 +1779,10 @@ PrefabInstance:
     - target: {fileID: 1569150035443290722, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_Name
       value: shop_inventory_view
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625361882554383792, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.104553
       objectReference: {fileID: 0}
     - target: {fileID: 5477116441959376875, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_SizeDelta.x

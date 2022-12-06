@@ -33,22 +33,22 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 9.440956
-      outSlope: 9.440956
+      inSlope: 5.8052135
+      outSlope: 5.8052135
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.08368796
+      inWeight: 0.13303167
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   <ChanceIncreasePerWave>k__BackingField: 0.009
-  <HealthRegenRate>k__BackingField: 2
+  <HealthRegenRate>k__BackingField: 2.5
   <MaxContainersPerWave>k__BackingField: 5
-  <HealthScalingPerLevel>k__BackingField: 1.12
-  <HealthScalingPerWave>k__BackingField: 0.9625
+  <HealthScalingPerLevel>k__BackingField: 1.18
+  <HealthScalingPerWave>k__BackingField: 1.1
   <DamageScalingPerLevel>k__BackingField: 0.93
-  <DamageScalingPerWave>k__BackingField: 0.425
+  <DamageScalingPerWave>k__BackingField: 0.45
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1
   <RewardWaveScaling>k__BackingField: 0.125

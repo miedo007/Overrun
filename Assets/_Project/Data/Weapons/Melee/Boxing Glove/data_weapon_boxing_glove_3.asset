@@ -21,7 +21,7 @@ MonoBehaviour:
   <Type>k__BackingField: {fileID: 11400000, guid: e8ee95598017a1f4197c2d9aee00b170, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 2420f1e7a5d2ffd4d92c72270b69c575, type: 2}
   <Cooldown>k__BackingField: 0.25
-  <DamageFactor>k__BackingField: 8
+  <DamageFactor>k__BackingField: 18.42
   <Range>k__BackingField: 2
   <CriticalDamageMultiplier>k__BackingField: 5.5
   <KnockbackMultiplier>k__BackingField: 13
