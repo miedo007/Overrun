@@ -125,7 +125,13 @@ namespace Project.Game.Shop
                 return;
             }
 
-            if (!_affordable || _purchased)
+            if (_purchased)
+            {
+                MergeableNotification.Deactivate();
+                return;
+            }
+
+            if (!_affordable)
             {
                 MergeableNotification.Deactivate();
                 return;
@@ -143,7 +149,10 @@ namespace Project.Game.Shop
                 MergeableNotification.Activate(_tierDatabase.GetNextTier(weaponData.Tier).Color);
                 if (!PrefKeys.HasCompletedAutoMergeTutorial())
                 {
-                    _uiFrame.Open<AutoMergeTutorialScreen>();
+                    if (!_uiFrame.Get<AutoMergeTutorialScreen>().IsOpened)
+                    {
+                        _uiFrame.Open<AutoMergeTutorialScreen>();
+                    }
                 }
             }
             else

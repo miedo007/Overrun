@@ -78,8 +78,7 @@ namespace Project.Game.Shop
             itemView.BuyButtonClicked += OnBuyButtonClicked;
             CurrentItems.Add(itemView);
         }
-
-
+        
         public void ClearItems()
         {
             foreach (var item in CurrentItems)
@@ -105,40 +104,49 @@ namespace Project.Game.Shop
             var weaponData = data as WeaponData;
             if (weaponData != null)
             {
-                if (!_heroRegistry.ActiveHero.HasFreeWeaponSlot())
+                PurchaseWeapon(itemView, weaponData, cost);
+            }
+            else
+            {
+                var itemData = data as ItemData;
+                if (itemData != null)
                 {
-                    // can this weapon be merged with an item in the players inventory?
-                    if (_heroRegistry.ActiveHero.CanMergeWeapon(weaponData, 1))
-                    {
-                        _heroRegistry.ActiveHero.MergeWeapon(weaponData, 1);
-                    }
-                    else
-                    {
-                        weaponsFullNotification.Display();
-                        return;
-                    }
+                    PurchaseItem(itemView, itemData, cost);
                 }
-                else
+            }
+        }
+
+        private void PurchaseItem(ShopInventoryItemView itemView, ItemData itemData, int cost)
+        {
+            itemView.Purchase();
+            _heroRegistry.ActiveHero.ShopCurrency -= cost;
+            _heroRegistry.ActiveHero.AddItem(itemData);
+            if (!PrefKeys.HasCompletedItemsTutorial())
+            {
+                _uiFrame.Open<ItemTutorialScreen>();
+            }
+        }
+
+        private void PurchaseWeapon(ShopInventoryItemView itemView, WeaponData weaponData, int cost)
+        {
+            if (!_heroRegistry.ActiveHero.HasFreeWeaponSlot())
+            {
+                // can this weapon be merged with an item in the players inventory?
+                if (_heroRegistry.ActiveHero.CanMergeWeapon(weaponData, 1))
                 {
-                    _heroRegistry.ActiveHero.ShopCurrency -= cost;
                     itemView.Purchase();
-                    _heroRegistry.ActiveHero.AddWeapon(weaponData);
+                    _heroRegistry.ActiveHero.ShopCurrency -= cost;
+                    _heroRegistry.ActiveHero.MergeWeapon(weaponData, 1);
+                    return;
                 }
 
+                weaponsFullNotification.Display();
                 return;
             }
-            
-            var itemData = data as ItemData;
-            if (itemData != null)
-            {
-                _heroRegistry.ActiveHero.ShopCurrency -= cost;
-                itemView.Purchase();
-                _heroRegistry.ActiveHero.AddItem(itemData);
-                if (!PrefKeys.HasCompletedItemsTutorial())
-                {
-                    _uiFrame.Open<ItemTutorialScreen>();
-                }
-            }
+
+            itemView.Purchase();
+            _heroRegistry.ActiveHero.ShopCurrency -= cost;
+            _heroRegistry.ActiveHero.AddWeapon(weaponData);
         }
     }
 }
