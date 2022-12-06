@@ -307,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2
+      value: -153
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -332,7 +332,7 @@ PrefabInstance:
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: If a <b>weapon</b> in the crafting list has the <b>merge</b> icon      
-        , crafting it will automatically merge it with the matching weapon in your
+        , crafting it will automatically merge it with a matching weapon in your
         inventory, creating a <b>higher level</b> weapon.
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}

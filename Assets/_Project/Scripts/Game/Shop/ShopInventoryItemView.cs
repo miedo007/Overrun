@@ -32,6 +32,7 @@ namespace Project.Game.Shop
         [Inject] private readonly UIFrame _uiFrame;
 
         private bool _affordable;
+        private bool _purchased;
         private int _cost;
         
         public BaseData Data { get; private set; }
@@ -124,7 +125,7 @@ namespace Project.Game.Shop
                 return;
             }
 
-            if (!_affordable)
+            if (!_affordable || _purchased)
             {
                 MergeableNotification.Deactivate();
                 return;
@@ -161,6 +162,7 @@ namespace Project.Game.Shop
 
         public void Purchase()
         {
+            _purchased = true;
             BuyButton.gameObject.SetActive(false);
             CanvasGroup.interactable = false;
             CanvasGroup.DOFade(0, 0.125f)

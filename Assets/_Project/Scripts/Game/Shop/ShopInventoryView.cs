@@ -120,22 +120,25 @@ namespace Project.Game.Shop
                 }
                 else
                 {
+                    _heroRegistry.ActiveHero.ShopCurrency -= cost;
+                    itemView.Purchase();
                     _heroRegistry.ActiveHero.AddWeapon(weaponData);
                 }
+
+                return;
             }
             
             var itemData = data as ItemData;
             if (itemData != null)
             {
+                _heroRegistry.ActiveHero.ShopCurrency -= cost;
+                itemView.Purchase();
                 _heroRegistry.ActiveHero.AddItem(itemData);
                 if (!PrefKeys.HasCompletedItemsTutorial())
                 {
                     _uiFrame.Open<ItemTutorialScreen>();
                 }
             }
-            
-            _heroRegistry.ActiveHero.ShopCurrency -= cost;
-            itemView.Purchase();
         }
     }
 }
