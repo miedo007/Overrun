@@ -1,7 +1,9 @@
 ﻿using System;
 using DG.Tweening;
 using Mtl.Injection;
+using Mtl.UiFramework;
 using Project.Application;
+using Project.Game.Tutorials;
 using Project.Game.Weapons;
 using Project.Heroes;
 using Project.Tiers;
@@ -27,6 +29,7 @@ namespace Project.Game.Shop
         [field: SerializeField] public  MergeableNotification MergeableNotification { get; private set; }
 
         [Inject] private readonly TierDatabase _tierDatabase;
+        [Inject] private readonly UIFrame _uiFrame;
 
         private bool _affordable;
         private int _cost;
@@ -137,6 +140,10 @@ namespace Project.Game.Shop
             if (!_heroInfo.HasFreeWeaponSlot() && _heroInfo.CanMergeWeapon(weaponData, 1))
             {
                 MergeableNotification.Activate(_tierDatabase.GetNextTier(weaponData.Tier).Color);
+                if (!PrefKeys.HasCompletedAutoMergeTutorial())
+                {
+                    _uiFrame.Open<AutoMergeTutorialScreen>();
+                }
             }
             else
             {

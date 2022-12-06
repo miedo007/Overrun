@@ -3,6 +3,7 @@ using Mtl.UiFramework;
 using MTLSimpleAudio;
 using Project.Application;
 using Project.Game.Levels;
+using Project.Game.Tutorials;
 using Project.Heroes;
 using TMPro;
 using UnityEngine;
@@ -17,11 +18,11 @@ namespace Project.Game.Shop
         [field: SerializeField] public Button RerollButton { get; private set; }
         [field: SerializeField] public TextMeshProUGUI RerollButtonText { get; private set; }
         [field: SerializeField] public ShopInventoryView ShopInventory { get; private set; }
-        [field: SerializeField] public ShopTutorial ShopTutorial { get; private set; }
-
+        
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly GameData _gameData;
         [Inject] private readonly LevelController _levelController;
+        [Inject] private readonly UIFrame _uiFrame;
 
         private int _waveIndex;
         private int _rerollCount;
@@ -38,13 +39,10 @@ namespace Project.Game.Shop
         protected override void OnOpened()
         {
             base.OnOpened();
-            if (!PlayerPrefs.HasKey(PrefKeys.CraftingTutorialCompleted))
+            
+            if (!PrefKeys.HasCompletedCraftingTutorial())
             {
-                ShopTutorial.Initialize();
-            }
-            else
-            {
-                ShopTutorial.gameObject.SetActive(false);
+                _uiFrame.Open<CraftingTutorialScreen>();
             }
             
             _heroRegistry.ActiveHero.ShopCurrencyChanged += OnShopCurrencyChanged;

@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using Mtl.Injection;
+using Mtl.UiFramework;
 using Project.Application;
+using Project.Game.Tutorials;
 using UnityEngine;
 
 namespace Project.Game.Shop
@@ -7,9 +10,12 @@ namespace Project.Game.Shop
     public class HeroInventoryRow : MonoBehaviour
     {
         [SerializeField] private HeroInventoryItem itemPrefab;
-        [SerializeField] private GameObject emptySlotPrefab;
+        [SerializeField] private EmptySlot emptySlotPrefab;
         [SerializeField] private GameObject placeholderPrefab;
 
+        [Inject] private readonly UIFrame _uiFrame;
+        
+        
         public void AddItem(BaseData item)
         {
             var itemInstance = Instantiate(itemPrefab, transform);
@@ -18,9 +24,18 @@ namespace Project.Game.Shop
 
         public void AddEmpty()
         {
-            Instantiate(emptySlotPrefab, transform);
+            var emptySlot = Instantiate(emptySlotPrefab, transform);
+            emptySlot.Clicked += OnEmptySlotClicked;
         }
-        
+
+        private void OnEmptySlotClicked(EmptySlot emptySlot)
+        {
+            if (!PrefKeys.HasCompletedWeaponSlotTutorial())
+            {
+                _uiFrame.Open<WeaponSlotTutorialScreen>();
+            }
+        }
+
         public void AddPlaceholder()
         {
             Instantiate(placeholderPrefab, transform);

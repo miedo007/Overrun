@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 450780301619438775}
   - component: {fileID: 1223542728023579855}
   - component: {fileID: -4977811184333532691}
+  - component: {fileID: 2937689498798009030}
   m_Layer: 5
   m_Name: inventory_row
   m_TagString: Untagged
@@ -77,5 +78,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 2650105790795811056, guid: 727c8a027feb0e64bb83a1bc53f5974a, type: 3}
-  emptySlotPrefab: {fileID: 9123529177749435493, guid: 219d3545e9fc032448cd7d83ebbadef3, type: 3}
+  emptySlotPrefab: {fileID: -6954164768599076144, guid: 219d3545e9fc032448cd7d83ebbadef3, type: 3}
   placeholderPrefab: {fileID: 9123529177749435493, guid: c016315c4d9760048a3f93b3e6fb3143, type: 3}
+--- !u!114 &2937689498798009030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837482914317315734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ef57fe8b47470ea3123181fb8f25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  injectedBehaviors:
+  - {fileID: -4977811184333532691}

@@ -2,6 +2,7 @@
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
+using Project.Game.Tutorials;
 using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
@@ -37,6 +38,11 @@ namespace Project.Game.Shop
             if (_data != null && _heroInfo != null && _heroInfo.CanMerge(_data))
             {
                 MergeableNotif.Activate(_tierDatabase.GetNextTier(_data.Tier).Color);
+                
+                if (!PrefKeys.HasCompletedWeaponMergeTutorial())
+                {
+                    _uiFrame.Open<WeaponMergeTutorialScreen>();
+                }
             }
             else
             {

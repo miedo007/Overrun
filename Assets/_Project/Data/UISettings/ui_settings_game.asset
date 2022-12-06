@@ -50,3 +50,18 @@ MonoBehaviour:
   - <UIScreen>k__BackingField: {fileID: 1138839139982347577, guid: a97a8f85f9990f9418bf61061a076e42, type: 3}
     <CreateOnOpen>k__BackingField: 0
     <DestroyOnClose>k__BackingField: 0
+  - <UIScreen>k__BackingField: {fileID: 3308993717271918492, guid: f7567ff2f05b0f9428ba0925a058f30b, type: 3}
+    <CreateOnOpen>k__BackingField: 1
+    <DestroyOnClose>k__BackingField: 1
+  - <UIScreen>k__BackingField: {fileID: 446629923419261929, guid: e32d2dbdff7503a4ab4f881b65c449e6, type: 3}
+    <CreateOnOpen>k__BackingField: 1
+    <DestroyOnClose>k__BackingField: 1
+  - <UIScreen>k__BackingField: {fileID: 7000813198410340685, guid: 8ca8666e82f8e7d4dad2389aacc5b81f, type: 3}
+    <CreateOnOpen>k__BackingField: 1
+    <DestroyOnClose>k__BackingField: 1
+  - <UIScreen>k__BackingField: {fileID: 2673113759865452680, guid: 0131e1c8771cd724687ac508ef5bdc40, type: 3}
+    <CreateOnOpen>k__BackingField: 1
+    <DestroyOnClose>k__BackingField: 1
+  - <UIScreen>k__BackingField: {fileID: 5938878503766186659, guid: b7ed92ca65d54e14aacd351a67c6d20e, type: 3}
+    <CreateOnOpen>k__BackingField: 1
+    <DestroyOnClose>k__BackingField: 1

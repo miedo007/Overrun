@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.Toolbox;
+using Mtl.UiFramework;
 using Project.Application;
 using Project.Extensions;
 using Project.Game.Items;
+using Project.Game.Tutorials;
 using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
@@ -25,6 +27,7 @@ namespace Project.Game.Shop
         [Inject("items")] private  TieredGroupDatabase _itemDatabase;
         [Inject] private  HeroRegistry _heroRegistry;
         [Inject] private  GameData _gameData;
+        [Inject] private  UIFrame _uiFrame;
         
         private int _waveIndex;
 
@@ -125,6 +128,10 @@ namespace Project.Game.Shop
             if (itemData != null)
             {
                 _heroRegistry.ActiveHero.AddItem(itemData);
+                if (!PrefKeys.HasCompletedItemsTutorial())
+                {
+                    _uiFrame.Open<ItemTutorialScreen>();
+                }
             }
             
             _heroRegistry.ActiveHero.ShopCurrency -= cost;

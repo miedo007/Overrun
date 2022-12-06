@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
-using Project.Application;
+﻿using Mtl.UiFramework;
+using Project.Game.Shop;
 using UnityEngine;
 
-namespace Project.Game.Shop
+namespace Project.Game.Tutorials
 {
-    public class ShopTutorial : MonoBehaviour
+    public class TutorialScreen : UIScreen
     {
         [SerializeField] private TutorialStage[] stages;
 
-        private int _currentStage = 0;
+        private int _currentStage;
+        
         private void Awake()
         {
             foreach (var tutorialStage in stages)
@@ -17,9 +17,10 @@ namespace Project.Game.Shop
                 tutorialStage.gameObject.SetActive(false);
             }
         }
-        
-        public void Initialize()
+
+        protected override void OnOpened()
         {
+            base.OnOpened();
             _currentStage = 0;
             OpenCurrentStage();
         }
@@ -36,14 +37,12 @@ namespace Project.Game.Shop
             _currentStage++;
             if (_currentStage >= stages.Length)
             {
-                PlayerPrefs.SetInt(PrefKeys.CraftingTutorialCompleted, 1);
-                gameObject.SetActive(false);
+                Close();
             }
             else
             {
-               OpenCurrentStage();
+                OpenCurrentStage();
             }
         }
-
     }
 }
