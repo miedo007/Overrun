@@ -107,9 +107,9 @@ namespace Project.Game.Enemies
 
         private float GetScaledValue(float baseValue, int level, int wave, float levelScaling, float waveScaling)
         {
-            var levelScaled = baseValue * ((level * levelScaling) + 1);
-            var waveScaled = baseValue * (wave * waveScaling);
-            return levelScaled + waveScaled;
+            var levelScaled = baseValue * ((level * levelScaling) + 1f);
+            var scaled = levelScaled * ((wave * waveScaling) + 1f);
+            return scaled;
         }
 
         public void Step(float dt, float time, PlayerController playerController)
