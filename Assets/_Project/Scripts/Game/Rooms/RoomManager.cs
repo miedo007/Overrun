@@ -1,11 +1,42 @@
-﻿using UnityEngine;
+﻿using Mtl.Injection;
+using Project.Game.Levels;
+using UnityEngine;
 
 namespace Project.Game.Rooms
 {
-    public class RoomManager : MonoBehaviour
+    public class RoomManager : MonoBehaviour, IInjectionReady
     {
+        [SerializeField] private RoomWall wallNorth;
+        [SerializeField] private RoomWall wallEast;
+        [SerializeField] private RoomWall wallSouth;
+        [SerializeField] private RoomWall wallWest;
+        [SerializeField] private Transform floor;
+        
         [field: SerializeField] public Rect Rect { get; private set; }
         
+        [field: SerializeField] public Transform CameraBounds { get; private set; }
+
+        [Inject] private readonly LevelController _levelController;
+        
+
+        public void OnReady()
+        {
+            _levelController.Initialized += OnLevelControllerInitialized;
+        }
+
+        private void OnLevelControllerInitialized()
+        {
+            var levelData = _levelController.CurrentLevel;
+            var rect = new Rect(-levelData.RoomSize * 0.5f, levelData.RoomSize);
+            Rect = rect;
+
+            floor.localScale = levelData.RoomSize + new Vector2(1,1);
+            wallNorth.Initialize(new Vector3(0, rect.yMax + 0.5f), rect.width);
+            wallSouth.Initialize(new Vector3(0, rect.yMin - 0.5f), rect.width);
+            wallEast.Initialize(new Vector3(rect.xMax + 0.5f, 0), rect.height);
+            wallWest.Initialize(new Vector3(rect.xMin - 0.5f, 0), rect.height);
+        }
+
         public Vector3 GetValidPositionInRadius(Vector3 referencePosition, float radius)
         {
             var randomPosition = referencePosition + ((Vector3)Random.insideUnitCircle * radius);

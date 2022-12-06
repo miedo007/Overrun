@@ -53,3 +53,4 @@ MonoBehaviour:
   <EnemyManager>k__BackingField: {fileID: 0}
   <CollectiblesManager>k__BackingField: {fileID: 0}
   <CameraManager>k__BackingField: {fileID: 0}
+  <ItemBehaviourManager>k__BackingField: {fileID: 0}

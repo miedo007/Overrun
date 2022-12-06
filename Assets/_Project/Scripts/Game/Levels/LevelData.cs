@@ -17,6 +17,7 @@ namespace Project.Game.Levels
         [field: SerializeField] public EnemyData[] Enemies { get; private set; }
         [field: SerializeField] public string[] Waves { get; private set; }
         [field: SerializeField] public RoomData RoomData { get; set; }
+        [field: SerializeField] public Vector2 RoomSize { get; set; } = new(14, 14);
 
         public float GetSpawnDelay(int waveIndex)
         {
