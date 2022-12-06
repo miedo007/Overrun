@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
   <Sprite>k__BackingField: {fileID: 1968297488, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
-  <DisplayName>k__BackingField: Cooldown Reduction
+  <DisplayName>k__BackingField: Cooldown
   <Description>k__BackingField: Decrease weapon cooldown by {0}
   <BasePrice>k__BackingField: 0
   <StatModifiers>k__BackingField:
