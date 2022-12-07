@@ -6,6 +6,6 @@ PhysicsMaterial2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: physics_enemy_default
+  m_Name: physics_launchable
   friction: 0
-  bounciness: 0.8
+  bounciness: 1

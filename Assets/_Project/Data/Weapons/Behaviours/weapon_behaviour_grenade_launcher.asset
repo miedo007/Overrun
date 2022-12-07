@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8776b4c197452a9a8cedb22241ccf2, type: 3}
-  m_Name: data_tier_0
+  m_Script: {fileID: 11500000, guid: dcd71f14b2594e2ab74a3aa5dc9cf39c, type: 3}
+  m_Name: weapon_behaviour_grenade_launcher
   m_EditorClassIdentifier: 
-  NamePostfix: I
-  Color: {r: 0.6981132, g: 0.6948202, b: 0.6948202, a: 1}
-  OutlineColor: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 0.6039216}
+  launchablePrefab: {fileID: -7237398558337110902, guid: eecce9cce346a7c41ab722fcc0e19a66, type: 3}
+  launchForce: 20
