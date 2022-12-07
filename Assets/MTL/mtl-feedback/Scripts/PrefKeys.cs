@@ -14,6 +14,7 @@ namespace Project.Application
         public const string WeaponMergeTutorialCompleted = "weapon_merge_tutorial_completed";
         public const string AutoMergeTutorialCompleted = "auto_merge_tutorial_completed";
         public const string ItemsTutorialCompleted = "items_tutorial_completed";
+        public const string ItemLockingTutorialCompleted = "item_locking_tutorial_completed";
 
         public static bool HasCompletedWeaponSlotTutorial()
         {
@@ -79,6 +80,16 @@ namespace Project.Application
         public static void SetCompletedWeaponSlotsFullTutorial(bool value)
         {
             SetCompletedTutorial(WeaponSlotsFullTutorialCompleted, value);
+        }
+        
+        public static bool HasCompletedItemLockingTutorial()
+        {
+            return PlayerPrefs.GetInt(ItemLockingTutorialCompleted, 0) > 0;
+        }
+
+        public static void SetsCompletedItemLockingTutorial(bool value)
+        {
+            SetCompletedTutorial(ItemLockingTutorialCompleted, value);
         }
     }
 }

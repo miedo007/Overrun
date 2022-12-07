@@ -28,7 +28,8 @@ namespace Project.Game.Shop
         [Inject] private  HeroRegistry _heroRegistry;
         [Inject] private  GameData _gameData;
         [Inject] private  UIFrame _uiFrame;
-        
+
+        private BaseData _lockedItem;
         private int _waveIndex;
 
         private List<ShopInventoryItemView> CurrentItems = new();
@@ -42,10 +43,24 @@ namespace Project.Game.Shop
         {
             ClearItems();
             
-            _waveIndex = waveIndex;
-            
             var weaponCount = 2;
+            var itemCount = 4;
+            
             var items = new List<BaseData>();
+            
+            if (_lockedItem != null)
+            {
+                if (_lockedItem as WeaponData != null)
+                {
+                    weaponCount--;
+                }
+                else
+                {
+                    itemCount--;
+                }
+            }
+            
+            _waveIndex = waveIndex;
             
             var tierRange = _gameData.GetItemTierRangeForWave(waveIndex);
             var chanceIncrease = _gameData.GetChanceIncreaseForWave(waveIndex);
@@ -54,7 +69,6 @@ namespace Project.Game.Shop
                 items.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
 
-            var itemCount = 4;
             for (var i = 0; i < itemCount; i++)
             {
                 items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
@@ -62,39 +76,71 @@ namespace Project.Game.Shop
 
             items.Shuffle();
 
-            foreach (var item in items)
+            if (_lockedItem != null)
             {
-                AddItem(item);
+                items.Insert(0, _lockedItem);
+            }
+
+            for (var index = 0; index < items.Count; index++)
+            {
+                var item = items[index];
+                AddItem(item, _lockedItem != null && index == 0);
             }
 
             Scroller.horizontalNormalizedPosition = 0;
         }
         
-        public void AddItem(BaseData data)
+        public void AddItem(BaseData data, bool lockedItem)
         {
             var itemView = Instantiate(ItemViewPrefab, Parent);
             var cost = _gameData.GetScaledCost(data, _waveIndex);
             itemView.Initialize(data, _heroRegistry.ActiveHero, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
+            itemView.EnableLockToggle(lockedItem);
+            itemView.LockedStateChanged += OnItemViewLockStateChanged;
+            
             CurrentItems.Add(itemView);
         }
-        
-        public void ClearItems()
+
+        private void OnItemViewLockStateChanged(ShopInventoryItemView updatedItem, bool state)
         {
-            foreach (var item in CurrentItems)
+            if (!PrefKeys.HasCompletedItemLockingTutorial())
             {
-                item.BuyButtonClicked -= OnBuyButtonClicked;
-                Destroy(item.gameObject);
+                _uiFrame.Open<ItemLockingTutorialScreen>();
             }
             
-            CurrentItems.Clear();
+            foreach (var item in CurrentItems)
+            {
+                if (item != updatedItem)
+                {
+                    item.LockToggle.SetState(false);
+                }
+            }
+        }
+
+        public void ClearItems()
+        {
+            _lockedItem = null;
+            
+            for (var index = CurrentItems.Count - 1; index >= 0; index--)
+            {
+                var itemView = CurrentItems[index];
+                if (itemView.LockToggle.IsOn)
+                {
+                    _lockedItem = itemView.Data;
+                }
+
+                CurrentItems.RemoveAt(index);
+                itemView.BuyButtonClicked -= OnBuyButtonClicked;
+                Destroy(itemView.gameObject);
+            }
         }
 
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
             var data = itemView.Data;
             
-            var cost = _gameData.GetScaledCost(data, _waveIndex);
+            var cost = itemView.Cost;
             if (_heroRegistry.ActiveHero.GetShopCurrencyIntValue() < cost)
             {
                 // can't afford

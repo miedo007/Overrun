@@ -16,6 +16,7 @@ namespace Project.Game.Shop
     public class ShopInventoryItemView : MonoBehaviour
     {
         public event Action<ShopInventoryItemView> BuyButtonClicked;
+        public event Action<ShopInventoryItemView, bool> LockedStateChanged;
         
         [field: SerializeField] public  CanvasGroup CanvasGroup { get; private set; }
         [field: SerializeField] public  Image Icon { get; private set; }
@@ -27,6 +28,7 @@ namespace Project.Game.Shop
         [field: SerializeField] public  TextMeshProUGUI CostText { get; private set; }
         [field: SerializeField] public  LayoutElement LayoutElement { get; private set; }
         [field: SerializeField] public  MergeableNotification MergeableNotification { get; private set; }
+        [field: SerializeField] public  LockToggle LockToggle { get; private set; }
 
         [Inject] private readonly TierDatabase _tierDatabase;
         [Inject] private readonly UIFrame _uiFrame;
@@ -36,6 +38,7 @@ namespace Project.Game.Shop
         private int _cost;
         
         public BaseData Data { get; private set; }
+        public int Cost => _cost;
 
         private HeroInfo _heroInfo;
 
@@ -98,7 +101,7 @@ namespace Project.Game.Shop
             RefreshMergeableNotification();
         }
         
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (_heroInfo != null)
             {
@@ -166,6 +169,7 @@ namespace Project.Game.Shop
         {
             if (_heroInfo.GetShopCurrencyIntValue() >= _cost)
             {
+                LockToggle.SetState(false);
                 BuyButtonClicked?.Invoke(this);
             }
         }
@@ -183,6 +187,18 @@ namespace Project.Game.Shop
         {
             LayoutElement.DOPreferredSize(Vector2.zero, 0.1f)
                 .OnComplete(() => gameObject.SetActive(false));
+        }
+
+        public void EnableLockToggle(bool state)
+        {
+            LockToggle.gameObject.SetActive(true);
+            LockToggle.SetState(state);
+            LockToggle.StateChanged += OnLockToggleStateChanged;
+        }
+
+        private void OnLockToggleStateChanged(bool isLocked)
+        {
+            LockedStateChanged?.Invoke(this, isLocked);
         }
     }
 }
