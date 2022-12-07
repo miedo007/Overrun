@@ -33,7 +33,7 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.buildtool": {
-      "version": "1.0.11",
+      "version": "1.0.10",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -49,7 +49,7 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.save": {
-      "version": "1.0.3",
+      "version": "1.0.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -58,8 +58,8 @@
       "url": "https://unity-packages.rovio.dev"
     },
     "com.rovio.mtl.toolbox": {
-      "version": "1.0.26",
-      "depth": 1,
+      "version": "1.0.27",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://unity-packages.rovio.dev"
