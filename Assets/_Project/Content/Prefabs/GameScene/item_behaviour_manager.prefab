@@ -48,6 +48,7 @@ MonoBehaviour:
   behaviourTriggers:
   - {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
   - {fileID: 11400000, guid: efc994bd928d78a46bfa6f13361623b0, type: 2}
+  - {fileID: 11400000, guid: 2465d11a63f4c16418e7a5dbe38fb5e5, type: 2}
 --- !u!114 &8958734336816345885
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,9 +12,12 @@ namespace Project.Game.Items
     {
         [SerializeField] private ProjectileData projectileData;
         [SerializeField] private StatData rangedStat;
+        [SerializeField] private StatData damageStat;
         [SerializeField] private int count;
+        [SerializeField] private float damageFactor;
 
         private StatInfo _rangedStatInfo;
+        private StatInfo _damageStatInfo;
         
         public StatInfo RangedStatInfo
         {
@@ -30,15 +33,38 @@ namespace Project.Game.Items
             }
         }
         
+        public StatInfo DamageStatInfo
+        {
+            get
+            {
+                if (_damageStatInfo == null)
+                {            
+                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
+                    _damageStatInfo = heroInfo.GetStat(damageStat);
+                }
+
+                return _damageStatInfo;
+            }
+        }
+
+        private float GetDamage()
+        {
+            return RangedStatInfo.GetFloatValue() * DamageStatInfo.GetFloatValue() * damageFactor;
+        }
+        
         public override bool OnPerform(Vector3 position)
         {
             var angleBetween = 360f / count;
+            var angleOffset = Random.Range(0, 360);
             for (var i = 0; i < count; i++)
             {
-                var projectile = LeanPool.Spawn(projectileData.ProjectilePrefab, position,Quaternion.Euler( Vector3.forward * angleBetween * i));
+                var projectile = LeanPool.Spawn(projectileData.ProjectilePrefab,
+                    position,
+                    Quaternion.Euler(Vector3.forward * (angleBetween * i + angleOffset)));
+                
                 projectile.Initialize(
                     projectileData,
-                    RangedStatInfo.GetFloatValue(), 
+                    GetDamage(), 
                     -1, 
                     -1,
                     0
@@ -50,7 +76,7 @@ namespace Project.Game.Items
 
         public override string GetDescription()
         {
-            return $"{GetChanceDisplay()} to firs {count} bullets in a ring";
+            return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring, dealing <b>{GetDamage()}</b> damage (x<sprite tint=1 name={RangedStatInfo.Data.Icon.name}>)";
         }
 
         public override void Cleanup()

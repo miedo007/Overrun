@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Mtl.Injection;
+using Project.Game.Items;
 using Project.Game.Levels;
 using Project.Heroes;
 using Project.PopupText;
@@ -18,6 +19,7 @@ namespace Project.Game.Player
 
         [field: SerializeField] public StatData HealthStat { get; private set; }
         [field: SerializeField] public StatData HealthRegenStat { get; private set; }
+        [field: SerializeField] public ItemBehaviourTrigger HealthLostTrigger { get; private set; }
 
         private StatInfo _healthStatInfo;
         private StatInfo _healthRegenStatInfo;
@@ -123,6 +125,11 @@ namespace Project.Game.Player
                 
                 if (!Mathf.Approximately(newHealth, CurrentHealth))
                 {
+                    if (delta < 0)
+                    {
+                        HealthLostTrigger.Trigger(transform.position);
+                    }
+                    
                     CurrentHealth = newHealth;
                     
                     _popupTextManager.DisplayTextAtPosition($"{Math.Round(delta, 1)}",
@@ -137,6 +144,7 @@ namespace Project.Game.Player
         public void ReduceHealth(float amount)
         {
             CurrentHealth -= amount;
+            HealthLostTrigger.Trigger(transform.position);
             DamageTaken?.Invoke();
         }
 

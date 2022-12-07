@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa57c7926b04d6c859ed4af11fe0ece, type: 3}
+  m_Name: data_projectile_thorns
+  m_EditorClassIdentifier: 
+  <ProjectilePrefab>k__BackingField: {fileID: 4387666197315951769, guid: 79c4eebfcc60055428d547b7495bf513, type: 3}
+  <RandomSpeed>k__BackingField: 0
+  <Speed>k__BackingField: 8
+  <SpeedRange>k__BackingField: {x: 10, y: 12}
+  <RandomLifespan>k__BackingField: 0
+  <Lifespan>k__BackingField: 2.5
+  <LifespanRange>k__BackingField: {x: 0.5, y: 1}
+  <BasePierceCount>k__BackingField: 100
+  <HitFeedback>k__BackingField: {fileID: 11400000, guid: f4fcb2fa4ca27f44180f00b1996b342e, type: 2}
+  <ScaleDownOverLife>k__BackingField: 0
+  <ScaleCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

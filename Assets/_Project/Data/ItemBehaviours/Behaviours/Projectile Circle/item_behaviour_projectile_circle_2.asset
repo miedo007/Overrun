@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7346ed5983484449b576a046a50274e4, type: 3}
-  m_Name: item_behaviour_projectile_circle_test
+  m_Name: item_behaviour_projectile_circle_2
   m_EditorClassIdentifier: 
   <HasRandomChance>k__BackingField: 1
-  <Chance>k__BackingField: 0.05
-  projectileData: {fileID: 11400000, guid: 60a6892f9fcbf0944868c08fd4056574, type: 2}
+  <Chance>k__BackingField: 0.5
+  <activationFeedback>k__BackingField: {fileID: 11400000, guid: d893deaddf621424896ac396897fd27b, type: 2}
+  projectileData: {fileID: 11400000, guid: 28205b5e18ba7d8478767153838d6f9d, type: 2}
   rangedStat: {fileID: 11400000, guid: 1e1f77924dde193439b8ccc374d3b6f3, type: 2}
-  count: 50
+  damageStat: {fileID: 11400000, guid: b907d206a016ce24a9e248583685c73d, type: 2}
+  count: 9
+  damageFactor: 3
