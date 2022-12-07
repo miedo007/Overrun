@@ -87,7 +87,7 @@ namespace Project.Game.Enemies
             while (enabled)
             {
                 var groupCenter = _playerController.Position;
-                var groupRadius = Random.Range(2f, 12f);
+                var groupRadius = Random.Range(_gameData.EnemySpawnRange.x, _gameData.EnemySpawnRange.y);
                 for (int i = 0; i < enemyCountPerGroup; i++)
                 {
                     var enemy = spawnSequence.GetNext();

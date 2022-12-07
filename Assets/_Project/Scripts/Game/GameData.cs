@@ -22,6 +22,7 @@ namespace Project.Game
         [field: SerializeField] public float HealthScalingPerWave { get; private set; } = 1.2f;
         [field: SerializeField] public float DamageScalingPerLevel { get; private set; } = 1.3f;
         [field: SerializeField] public float DamageScalingPerWave { get; private set; } = 1.3f;
+        [field: SerializeField] public Vector2 EnemySpawnRange { get; set; } = new(2, 12);
         
         [field: SerializeField, Header("Currency Reward")] public int RewardBaseValue { get; private set; } = 25;
         [field: SerializeField] public float RewardLevelScaling { get; private set; } = 1.25f;
