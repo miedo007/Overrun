@@ -16,8 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 3b2f8d346f1041d4e8680f3f784dd30f, type: 3}
   <Prefab>k__BackingField: {fileID: 8191813735188580489, guid: 51b0490bd69b79349bbb4b64368a8cd8, type: 3}
   <StatOverrides>k__BackingField: {fileID: 11400000, guid: 8974c4d6b65b40448b1c190153ec45f7, type: 2}
-  <StartingWeapons>k__BackingField:
-  - {fileID: 11400000, guid: 6cb9cf272a80bb642824d0275d631bdc, type: 2}
+  <StartingWeapons>k__BackingField: []
   <StartingWeaponDatabase>k__BackingField: {fileID: 0}
   <StartingItems>k__BackingField: []
   <StartingShopCurrency>k__BackingField: 0
