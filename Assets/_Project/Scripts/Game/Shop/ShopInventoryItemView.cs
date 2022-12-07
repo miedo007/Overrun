@@ -97,7 +97,8 @@ namespace Project.Game.Shop
             
             RefreshMergeableNotification();
         }
-        private void OnDestroy()
+        
+        private void OnDisable()
         {
             if (_heroInfo != null)
             {

@@ -26,7 +26,7 @@ namespace Project.Game.UI
             canvasGroup.DOFade(1,0.2f);
             
             canvasGroup.DOFade(0,0.2f)
-                .SetDelay(3)
+                .SetDelay(1.5f)
                 .OnComplete(()=>gameObject.SetActive(false));
         }
 

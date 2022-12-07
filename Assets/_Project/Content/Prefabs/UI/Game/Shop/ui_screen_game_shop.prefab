@@ -592,7 +592,6 @@ MonoBehaviour:
   <RerollButton>k__BackingField: {fileID: 7651213870755894037}
   <RerollButtonText>k__BackingField: {fileID: 8840254058335580302}
   <ShopInventory>k__BackingField: {fileID: 9039246796066101455}
-  <ShopTutorial>k__BackingField: {fileID: 0}
 --- !u!114 &3795720753482701690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,10 +1772,6 @@ PrefabInstance:
     - target: {fileID: 1569150035443290722, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_Name
       value: shop_inventory_view
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625361882554383792, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -16.104553
       objectReference: {fileID: 0}
     - target: {fileID: 5477116441959376875, guid: 4bedf374b9cedf748a65e53015003967, type: 3}
       propertyPath: m_SizeDelta.x

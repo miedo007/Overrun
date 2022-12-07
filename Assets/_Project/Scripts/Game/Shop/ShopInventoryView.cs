@@ -140,6 +140,10 @@ namespace Project.Game.Shop
                     return;
                 }
 
+                if (!PrefKeys.HasCompletedWeaponSlotsFullTutorial())
+                {
+                    _uiFrame.Open<WeaponSlotsFullTutorialScreen>();
+                }
                 weaponsFullNotification.Display();
                 return;
             }

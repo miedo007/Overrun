@@ -34,7 +34,7 @@ namespace Project.Game.Shop
             _rerollButtonLabel = RerollButtonText.text;
             NextWaveButton.onClick.AddListener(OnNextWaveButtonClicked);
             RerollButton.onClick.AddListener(OnRerollButtonClicked);
-        }
+        } 
 
         protected override void OnOpened()
         {

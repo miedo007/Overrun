@@ -10,6 +10,7 @@ namespace Project.Application
         public const string ScreenShakeEnabled = "pref_screen_shake";
         public const string CraftingTutorialCompleted = "crafting_tutorial_completed";
         public const string WeaponSlotTutorialCompleted = "weapon_slot_tutorial_completed";
+        public const string WeaponSlotsFullTutorialCompleted = "weapon_slots_full_tutorial_completed";
         public const string WeaponMergeTutorialCompleted = "weapon_merge_tutorial_completed";
         public const string AutoMergeTutorialCompleted = "auto_merge_tutorial_completed";
         public const string ItemsTutorialCompleted = "items_tutorial_completed";
@@ -68,6 +69,16 @@ namespace Project.Application
         public static void SetCompletedAutoMergeTutorial(bool value)
         {
             SetCompletedTutorial(AutoMergeTutorialCompleted, value);
+        }
+        
+        public static bool HasCompletedWeaponSlotsFullTutorial()
+        {
+            return PlayerPrefs.GetInt(WeaponSlotsFullTutorialCompleted, 0) > 0;
+        }
+
+        public static void SetCompletedWeaponSlotsFullTutorial(bool value)
+        {
+            SetCompletedTutorial(WeaponSlotsFullTutorialCompleted, value);
         }
     }
 }
