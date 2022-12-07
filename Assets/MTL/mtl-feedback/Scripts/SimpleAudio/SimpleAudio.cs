@@ -18,6 +18,7 @@ namespace MTLSimpleAudio
         private float _defaultSoundVolume;
         private AudioObject _currentMusicObject;
         private readonly List<AudioData> _registeredData = new();
+        private float _unduckMusicTime;
 
         private const string MusicVolume = "volume_music";
         private const string SoundVolume = "volume_fx";
@@ -81,6 +82,15 @@ namespace MTLSimpleAudio
 
         private void AudioDataOnPlayRequested(AudioInstance audioInstance)
         {
+            if (audioInstance.DuckMusic)
+            {
+                var unduckTime = Time.time + ((audioInstance.Clip.length * audioInstance.Pitch) * 0.5f);
+                if (unduckTime > _unduckMusicTime)
+                {
+                    musicGroup.audioMixer.SetFloat(MusicVolume, -35f);
+                    _unduckMusicTime = unduckTime;
+                }
+            }
             if (audioInstance.Source)
             {
                 audioInstance.Source.Play(audioInstance, false);
@@ -99,6 +109,17 @@ namespace MTLSimpleAudio
             yield return null;
             SetSoundEffectsActive(GetSoundEffectsActive());
             SetMusicActive(GetMusicActive());
+        }
+
+        private void Update()
+        {
+            if (GetMusicActive())
+            {
+                if (Time.time >= _unduckMusicTime)
+                {
+                    musicGroup.audioMixer.SetFloat(MusicVolume, _defaultMusicVolume);
+                }
+            }
         }
 
         private void MusicDataOnPlayRequested(MusicData musicData)

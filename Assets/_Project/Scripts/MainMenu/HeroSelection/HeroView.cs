@@ -2,6 +2,7 @@
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Application;
+using Project.Feedback;
 using Project.Game;
 using Project.Heroes;
 using TMPro;
@@ -19,6 +20,7 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private TextMeshProUGUI upgradeCostText;
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image heroImage;
+        [SerializeField] private FeedbackData heroLevelUpFeedback;
 
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly SaveManager _saveManager;
@@ -36,6 +38,7 @@ namespace Project.MainMenu.HeroSelection
         private void OnUpgradeButtonClicked()
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
+            heroLevelUpFeedback.Play(heroImage.transform.position, Quaternion.identity);
             _heroRegistry.UpgradeActiveHero();
             _playerInfo.ChangeCurrency(-nextUpgradeCost);
             _saveManager.Save();

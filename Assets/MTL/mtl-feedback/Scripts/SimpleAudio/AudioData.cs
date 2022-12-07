@@ -14,6 +14,8 @@ namespace MTLSimpleAudio
         [SerializeField] private Vector2 volumeRange = Vector2.one;
         [SerializeField] private Vector2 pitchRange = Vector2.one;
         [SerializeField] private Vector2 delayRange = Vector2.zero;
+        [SerializeField] private bool duckMusic;
+        
 
         public bool IsRegistered { get; set; }
         public int LastIndexPlayed { get; set; }
@@ -71,7 +73,8 @@ namespace MTLSimpleAudio
                 Volume = Random.Range(volumeRange.x, volumeRange.y),
                 Pitch = Random.Range(pitchRange.x, pitchRange.y),
                 UseSpecifiedSource = useSpecifiedSource,
-                Source = source
+                Source = source,
+                DuckMusic = duckMusic
             });
 
             NextPlayTime = Time.time + Random.Range(delayRange.x, delayRange.y);;
@@ -102,6 +105,7 @@ namespace MTLSimpleAudio
         public float Pitch;
         public bool UseSpecifiedSource;
         public AudioObject Source;
+        public bool DuckMusic;
     }
 }
 
