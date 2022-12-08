@@ -21,6 +21,7 @@ namespace Project.MainMenu
         [Inject] private readonly SessionInfo _sessionInfo;
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly InProgressSessionInfo _inProgressSessionInfo;
+        [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly SaveManager _saveManager;
         
         public void OnReady()
@@ -87,8 +88,7 @@ namespace Project.MainMenu
 
         private void OnPlayButtonClicked()
         {
-            var sagamap = _uiFrame.Get<SagaMapScreen>();
-            var levelIndex = sagamap.GetSelectedLevel();
+            var levelIndex = _playerInfo.PlayerSave.TopStageIndex;
             OnLevelSelected(levelIndex);
         }
 
