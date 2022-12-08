@@ -35,18 +35,20 @@ namespace Project.Game.Rooms
                 var roomDataIndex = _levelController.CurrentLevelIndex % roomDatas.Length;
                 roomData = roomDatas[roomDataIndex];
             }
-
+            
             using var renderers = ListPool.Get<Renderer>();
             GetComponentsInChildren(renderers);
 
             foreach (var r in renderers)
             {
-                if (r.material == levelMaterial)
+                if (r.sharedMaterial == levelMaterial)
                 {
                     r.sharedMaterial = _levelMaterialInstance;
                 }
             }
-
+            
+            Debug.Log($"ROOM DATA :: {roomData.name}");
+            
             _levelMaterialInstance.SetColor(GroundColor, roomData.GroundColor);
             _levelMaterialInstance.SetColor(WallColor, roomData.WallColor);
         }
