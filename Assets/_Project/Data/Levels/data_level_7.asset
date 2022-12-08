@@ -19,12 +19,12 @@ MonoBehaviour:
   <WaveDurationIncreaseRate>k__BackingField: 3
   <MaxWaveDuration>k__BackingField: 60
   <Enemies>k__BackingField:
-  - {fileID: 11400000, guid: 871a335623d465841be3731c458589b2, type: 2}
+  - {fileID: 11400000, guid: 1293445ae5a6fa24c8c911a441f22baf, type: 2}
   - {fileID: 11400000, guid: 3b7e0172ff1f5f54c88e2e7a17351c88, type: 2}
   - {fileID: 11400000, guid: b97e6aa047bfb64479bcf74ffeeccd9f, type: 2}
   - {fileID: 11400000, guid: 2e616ae9b25cd6d4685a0d6cff032e53, type: 2}
   - {fileID: 11400000, guid: bc4261d269439d448b287bc73b81303e, type: 2}
-  - {fileID: 11400000, guid: 3fd02965645133c4191dba283f49ca14, type: 2}
+  - {fileID: 11400000, guid: 78e530bc112cea643a5023968b243eae, type: 2}
   <Waves>k__BackingField:
   - 0112100043550001130205401
   - 0501113115000245113043000000

@@ -14923,7 +14923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2849654144810370189}
   explosionFeedback: {fileID: 11400000, guid: b2c5916d7ef3c6f4d95b79b1e6983139, type: 2}
-  radius: 2
+  radius: 2.75
   layerMask:
     serializedVersion: 2
     m_Bits: 64
