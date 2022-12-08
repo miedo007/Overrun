@@ -4746,7 +4746,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9498,7 +9498,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14250,7 +14250,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14294,7 +14294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1333480882267590529, guid: 244c55c6fed603b4c8adbbfc98b336af, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1333480882267590529, guid: 244c55c6fed603b4c8adbbfc98b336af, type: 3}
       propertyPath: m_SortingLayerID
@@ -14438,12 +14438,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028524499391457989, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8980740480662010180, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_BodyType
@@ -14502,6 +14518,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   injectedBehaviors:
   - {fileID: -7237398558337110902}
+--- !u!210 &757657712446640798
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226210715197719905}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &2226210716118128395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5028524499391457986, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
