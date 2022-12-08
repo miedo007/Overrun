@@ -39,6 +39,11 @@ namespace Project.Game.Enemies
             StartCoroutine(SpawnRoutine());
         }
 
+        public void EndWaveAfterDelay(float delay)
+        {
+            Invoke(nameof(EndWave), delay);
+        }
+
         public void EndWave()
         {
             StopAllCoroutines();

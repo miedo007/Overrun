@@ -268,6 +268,8 @@ namespace Project.Game
             _saveManager.Save();
             
             SendLevelSummaryEvent(false);
+
+            _enemyManager.EndWaveAfterDelay(0.5f);
             
             menuMusic.Play();
             
