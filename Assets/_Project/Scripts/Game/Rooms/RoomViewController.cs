@@ -1,4 +1,6 @@
-﻿using Mtl.Injection;
+﻿using System;
+using Mtl.Injection;
+using Mtl.Toolbox;
 using Project.Game.Levels;
 using UnityEngine;
 
@@ -13,11 +15,18 @@ namespace Project.Game.Rooms
         private static readonly int GroundColor = Shader.PropertyToID("_GroundColor");
         private static readonly int WallColor = Shader.PropertyToID("_WallColor");
 
+        private Material _levelMaterialInstance;
+
+        private void Awake()
+        {
+            _levelMaterialInstance = new Material(levelMaterial);
+        }
+
         public void OnReady()
         {
             _levelController.Initialized += OnLevelControllerInitialized;
         }
-        
+
         private void OnLevelControllerInitialized()
         {
             var roomData = _levelController.CurrentLevel.RoomData;
@@ -26,9 +35,20 @@ namespace Project.Game.Rooms
                 var roomDataIndex = _levelController.CurrentLevelIndex % roomDatas.Length;
                 roomData = roomDatas[roomDataIndex];
             }
-            
-            levelMaterial.SetColor(GroundColor, roomData.GroundColor);
-            levelMaterial.SetColor(WallColor, roomData.WallColor);
+
+            using var renderers = ListPool.Get<Renderer>();
+            GetComponentsInChildren(renderers);
+
+            foreach (var r in renderers)
+            {
+                if (r.material == levelMaterial)
+                {
+                    r.sharedMaterial = _levelMaterialInstance;
+                }
+            }
+
+            _levelMaterialInstance.SetColor(GroundColor, roomData.GroundColor);
+            _levelMaterialInstance.SetColor(WallColor, roomData.WallColor);
         }
 
         private void ColorSprites(SpriteRenderer[] spriteRenderers, Color color)
