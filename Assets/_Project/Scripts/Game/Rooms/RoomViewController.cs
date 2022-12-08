@@ -47,8 +47,6 @@ namespace Project.Game.Rooms
                 }
             }
             
-            Debug.Log($"ROOM DATA :: {roomData.name}");
-            
             _levelMaterialInstance.SetColor(GroundColor, roomData.GroundColor);
             _levelMaterialInstance.SetColor(WallColor, roomData.WallColor);
         }
