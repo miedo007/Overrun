@@ -10,6 +10,10 @@ namespace Project.Game.Enemies
     {
         [SerializeField] private float speed;
         [SerializeField] private GameObject chargeFx;
+        [SerializeField] private float maxChargeDistance = 16;
+
+        private Vector2 _startPosition;
+        private float _maxChargeDistanceSqr;
         
         protected override IEnumerator OnPerformActionRoutine(EnemyController enemy, PlayerController player,
             RoomManager roomManager, float time, Action onCompleteCallback)
@@ -25,14 +29,28 @@ namespace Project.Game.Enemies
             enemy.Rigidbody.mass = float.MaxValue;
             enemy.Rigidbody.velocity = vectorToTarget * speed;
             chargeFx.SetActive(true);
-            
-            yield return new WaitUntil(()=>enemy.Rigidbody.velocity.sqrMagnitude.Equals(0));
+            _startPosition = enemy.Rigidbody.position;
+            _maxChargeDistanceSqr = maxChargeDistance * maxChargeDistance;
+
+            yield return new WaitUntil(() =>
+                IsVelocityZero(enemy.Rigidbody) || 
+                HasReachedMaxChargeDistance(enemy.Rigidbody.position));
             
             chargeFx.SetActive(false);
             enemy.Rigidbody.mass = previousMass;
             enemy.Collider.isTrigger = false;
             
             onCompleteCallback?.Invoke();
+        }
+
+        private bool IsVelocityZero(Rigidbody2D rb)
+        {
+            return rb.velocity.sqrMagnitude.Equals(0);
+        }
+
+        private bool HasReachedMaxChargeDistance(Vector2 position)
+        {
+            return (position - _startPosition).sqrMagnitude >= _maxChargeDistanceSqr;
         }
 
         protected override void OnPerform(EnemyController enemy, PlayerController player, RoomManager roomManager, float time,
