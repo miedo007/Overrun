@@ -14386,6 +14386,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6200000, guid: 7cec9db3c7c1a3142878936cb9dfb2fd, type: 2}
     - target: {fileID: 3691358494671117113, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691358494671117113, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
@@ -14485,6 +14489,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5028524498433308840, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
   m_PrefabInstance: {fileID: 6570187506823740873}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &757657712446640798
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226210715197719905}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!114 &-7237398558337110902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14518,17 +14533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   injectedBehaviors:
   - {fileID: -7237398558337110902}
---- !u!210 &757657712446640798
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2226210715197719905}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &2226210716118128395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5028524499391457986, guid: 3baa6a777ea17bf40a75adb7e11b8ddc, type: 3}
