@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playHaptics: 0
   hapticPreset: -1
-  playFx: 1
-  fxPrefab: {fileID: 8029037132599511577, guid: cd1d38f47454d354fbbf553359712186, type: 3}
+  playFx: 0
+  fxPrefab: {fileID: 0}
   fxLifetime: 0.5
   playAudio: 1
   audioData: {fileID: 11400000, guid: d0c277ad83f5d3e498db38e84393fb2d, type: 2}

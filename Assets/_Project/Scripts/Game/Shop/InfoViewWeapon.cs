@@ -1,6 +1,7 @@
 ﻿using System;
 using Mtl.Injection;
 using Project.Application;
+using Project.Game.UI;
 using Project.Game.Weapons;
 using Project.Heroes;
 using Project.Stats;
@@ -16,6 +17,7 @@ namespace Project.Game.Shop
         [SerializeField] private TextMeshProUGUI criticalDamageText;
         [SerializeField] private TextMeshProUGUI cooldownText;
         [SerializeField] private TextMeshProUGUI knockbackText;
+        [SerializeField] private StatModifierView statModifierViewPrefab;
 
         private HeroInfo _heroInfo;
         private WeaponData _weaponData;
@@ -28,6 +30,12 @@ namespace Project.Game.Shop
 
         public override void Initialize(BaseData data)
         {
+            var statModifierViews = GetComponentsInChildren<StatModifierView>();
+            for (var i = statModifierViews.Length - 1; i >= 0; i--)
+            {
+                Destroy(statModifierViews[i].gameObject);
+            }
+            
             _heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
             
             foreach (var stat in _heroInfo.Stats)
@@ -37,6 +45,13 @@ namespace Project.Game.Shop
             
             gameObject.name = data.name;
             _weaponData = data as WeaponData;
+            
+            foreach (var statModifier in _weaponData.StatModifiers)
+            {
+                var statModView = Instantiate(statModifierViewPrefab, transform);
+                statModView.Initialize(statModifier);
+            }
+            
             Refresh();
         }
         

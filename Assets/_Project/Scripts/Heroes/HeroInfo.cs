@@ -91,22 +91,13 @@ namespace Project.Heroes
             
             WeaponsWillChange?.Invoke();
             CurrentWeapons.Add(weaponData);
-            WeaponsChanged?.Invoke();
-        }
-        
-        public void RemoveWeaponAtIndex(int weaponIndex)
-        {
-            if (weaponIndex >= CurrentWeapons.Count)
+            foreach (var statModifier in weaponData.StatModifiers)
             {
-                Debug.LogError($"No weapon at index {weaponIndex}");
-                return;
+                var statInfo = GetStat(statModifier.StatData);
+                statInfo.AddModifier(statModifier);
             }
-            
-            WeaponsWillChange?.Invoke();
-            CurrentWeapons.RemoveAt(weaponIndex);
             WeaponsChanged?.Invoke();
         }
-        
 
         public StatInfo GetStat(StatData statData)
         {
@@ -142,6 +133,11 @@ namespace Project.Heroes
         {
             WeaponsWillChange?.Invoke();
             CurrentWeapons.Remove(weaponData);
+            foreach (var statModifier in weaponData.StatModifiers)
+            {
+                var statInfo = GetStat(statModifier.StatData);
+                statInfo.RemoveModifier(statModifier);
+            }
             WeaponsChanged?.Invoke();
         }
 

@@ -7,7 +7,7 @@ namespace Project.Game.Player
     public class PlayerCharacter : MonoBehaviour
     {
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
-        [field: SerializeField] public float MaxSpeed { get; set; }
+        [field: SerializeField] public float MaxSpeed { get; set; } = 5;
         [field: SerializeField] public float Acceleration { get; private set; }
         [field: SerializeField] public float Drag { get; private set; }
 
@@ -16,6 +16,7 @@ namespace Project.Game.Player
         public Vector2 Velocity { get; private set; }
         public float MovementSpeed { get; private set; }
         public int HorizontalDirection { get; private set; } = 1;
+        public float SpeedPercentage { get; set; } = 1f;
 
         public void SetMovementDirection(Vector2 direction)
         {
@@ -34,7 +35,7 @@ namespace Project.Game.Player
                 }
                 else
                 {
-                    Velocity += direction * Acceleration * Time.deltaTime;
+                    Velocity += direction * (Acceleration * Time.deltaTime);
                 }
             }
 
@@ -44,7 +45,7 @@ namespace Project.Game.Player
                 HorizontalDirection = horizontalDirection;
             }
             
-            Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed * inputMagnitude);
+            Velocity = Vector2.ClampMagnitude(Velocity, MaxSpeed * SpeedPercentage * inputMagnitude);
             MovementSpeed = Velocity.magnitude;
 
             var newPosition = Rigidbody.position;
@@ -71,5 +72,6 @@ namespace Project.Game.Player
             Velocity = newVelocity;
             Rigidbody.position = newPosition;
         }
+
     }
 }

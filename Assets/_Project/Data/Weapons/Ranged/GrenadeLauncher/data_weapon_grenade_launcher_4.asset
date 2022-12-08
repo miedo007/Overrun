@@ -17,12 +17,17 @@ MonoBehaviour:
   <DisplayName>k__BackingField: Grenade Launcher
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 28
+  <StatModifiers>k__BackingField:
+  - <StatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
+    <Value>k__BackingField: -0.25
+    <ModifierType>k__BackingField: 0
+    <DisplayAsPercentage>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: 12d504032dd4edc47972751e53ba8a9c, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 66eaab8d5e4f75042a775339d8e78834, type: 2}
   <Cooldown>k__BackingField: 1.5
-  <DamageFactor>k__BackingField: 10
-  <Range>k__BackingField: 4
+  <DamageFactor>k__BackingField: 37
+  <Range>k__BackingField: 5
   <CriticalDamageMultiplier>k__BackingField: 2
   <KnockbackMultiplier>k__BackingField: 3
   <ActivationFeedback>k__BackingField: {fileID: 11400000, guid: 0f3c1b9eb6696354c9ed76fcf355ccf0, type: 2}

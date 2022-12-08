@@ -20,6 +20,6 @@ MonoBehaviour:
   playAudio: 1
   audioData: {fileID: 11400000, guid: 18692b28ef18fd249815304ddd9e977b, type: 2}
   playScreenShake: 1
-  amplitude: 2
-  playHitStop: 1
+  amplitude: 0.5
+  playHitStop: 0
   hitStopTime: 0.05

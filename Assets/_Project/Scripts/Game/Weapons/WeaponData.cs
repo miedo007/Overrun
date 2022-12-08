@@ -1,6 +1,8 @@
-﻿using Project.Application;
+﻿using System.Collections.Generic;
+using Project.Application;
 using Project.Heroes;
 using Project.Feedback;
+using Project.Stats;
 using UnityEngine;
 
 namespace Project.Game.Weapons
@@ -8,6 +10,7 @@ namespace Project.Game.Weapons
     [CreateAssetMenu(fileName = "data_weapon_", menuName = "Data/WeaponData", order = 0)]
     public class WeaponData : BaseData
     {
+        [field: SerializeField] public List<StatModifier> StatModifiers { get; private set; }
         [field: SerializeField] public WeaponController Prefab { get; private set; }
         [field: SerializeField] public WeaponTypeData Type { get; private set; }
         [field: SerializeField] public WeaponBehaviourBase BehaviourBase { get; set; }

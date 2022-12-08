@@ -94,7 +94,7 @@ namespace Project.Game.Player
         
         private void OnSpeedStatChanged(StatInfo stat)
         {
-            Character.MaxSpeed = _speedStat.GetFloatValue();
+            Character.SpeedPercentage = stat.GetFloatValue();
         }
     }
 }
