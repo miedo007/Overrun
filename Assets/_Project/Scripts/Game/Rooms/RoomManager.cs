@@ -10,7 +10,7 @@ namespace Project.Game.Rooms
         [SerializeField] private RoomWall wallEast;
         [SerializeField] private RoomWall wallSouth;
         [SerializeField] private RoomWall wallWest;
-        [SerializeField] private Transform floor;
+        [SerializeField] private SpriteRenderer floor;
         
         [field: SerializeField] public Rect Rect { get; private set; }
         
@@ -29,8 +29,8 @@ namespace Project.Game.Rooms
             var levelData = _levelController.CurrentLevel;
             var rect = new Rect(-levelData.RoomSize * 0.5f, levelData.RoomSize);
             Rect = rect;
-
-            floor.localScale = levelData.RoomSize + new Vector2(1,1);
+            
+            floor.size = levelData.RoomSize + new Vector2(1,1);
             wallNorth.Initialize(new Vector3(0, rect.yMax + 0.5f), rect.width);
             wallSouth.Initialize(new Vector3(0, rect.yMin - 0.5f), rect.width);
             wallEast.Initialize(new Vector3(rect.xMax + 0.5f, 0), rect.height);

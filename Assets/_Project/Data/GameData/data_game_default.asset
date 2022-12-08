@@ -47,8 +47,9 @@ MonoBehaviour:
   <MaxContainersPerWave>k__BackingField: 5
   <HealthScalingPerLevel>k__BackingField: 1.33
   <HealthScalingPerWave>k__BackingField: 1.1
-  <DamageScalingPerLevel>k__BackingField: 0.93
-  <DamageScalingPerWave>k__BackingField: 0.45
+  <DamageScalingPerLevel>k__BackingField: 0.89
+  <DamageScalingPerWave>k__BackingField: 0.42
+  <EnemySpawnRange>k__BackingField: {x: 2, y: 12}
   <RewardBaseValue>k__BackingField: 25
   <RewardLevelScaling>k__BackingField: 1
   <RewardWaveScaling>k__BackingField: 0.125
