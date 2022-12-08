@@ -28,7 +28,7 @@ namespace Project.Game.Items
                     var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
                     _rangedStatInfo = heroInfo.GetStat(rangedStat);
                 }
-
+                Debug.Log($"Ranged Stat Info :: {_rangedStatInfo}");
                 return _rangedStatInfo;
             }
         }
@@ -43,6 +43,7 @@ namespace Project.Game.Items
                     _damageStatInfo = heroInfo.GetStat(damageStat);
                 }
 
+                Debug.Log($"Damage Stat Info :: {_damageStatInfo}");
                 return _damageStatInfo;
             }
         }
@@ -82,6 +83,7 @@ namespace Project.Game.Items
         public override void Cleanup()
         {
             _rangedStatInfo = null;
+            _damageStatInfo = null;
         }
     }
 }

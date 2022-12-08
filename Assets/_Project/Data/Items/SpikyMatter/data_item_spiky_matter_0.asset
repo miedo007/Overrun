@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4164062b1e7a4032b98cfd39d7726636, type: 3}
-  m_Name: data_item_thorns_0
+  m_Name: data_item_spiky_matter_0
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: e2a9c091d1bb02a42b58ab640d381aed, type: 3}
-  <DisplayName>k__BackingField: Thorns
-  <Description>k__BackingField: 
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 1df3cbe8c0334d14593c65edbfef215f, type: 3}
+  <DisplayName>k__BackingField: Spiky Matter
+  <Description>k__BackingField: Chance to release projectile(s) when collecting tickets
   <BasePrice>k__BackingField: 10
   <StatModifiers>k__BackingField: []
   <Behaviours>k__BackingField:
-  - <Trigger>k__BackingField: {fileID: 11400000, guid: 2465d11a63f4c16418e7a5dbe38fb5e5, type: 2}
-    <Behaviour>k__BackingField: {fileID: 11400000, guid: 208a0374694869744b0c05fa3d710f13, type: 2}
+  - <Trigger>k__BackingField: {fileID: 11400000, guid: b2bb18fb94ecf9947a4a67a8f6884780, type: 2}
+    <Behaviour>k__BackingField: {fileID: 11400000, guid: 3edf2649f92cad7499e3ccbbc1191e12, type: 2}
   <ShowDescription>k__BackingField: 0
