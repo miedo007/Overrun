@@ -8,7 +8,7 @@ buildTarget = 'Android'
 properties([
 	parameters([
 		// Names prefixed with '-' and their values will be passed as arguments to Buildtool
-		choice(name: '-config', choices: ['general', 'darkmatter-distribution', 'alpha', 'beta', 'distribution'], description: 'Build configuration'),
+		choice(name: '-config', choices: ['appcenter-alpha', 'darkmatter-distribution'], description: 'Build configuration'),
 		string(name: '-unityVersion', defaultValue: '', description: 'Leave empty to use project defaults or specify a version such as "2021.3.5f1" or "2021.*"'),
 
 		// Options for execution
