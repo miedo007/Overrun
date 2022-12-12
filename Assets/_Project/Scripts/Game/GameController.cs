@@ -1,4 +1,5 @@
-﻿using Mtl.Bonfire;
+﻿using System.Collections;
+using Mtl.Bonfire;
 using Mtl.Injection;
 using Mtl.Save;
 using Mtl.UiFramework;
@@ -53,10 +54,10 @@ namespace Project.Game
 
         }
         
-        private void Start()
+        private IEnumerator Start()
         {
             _playerHealthController.Initialize();
-
+            
             var hasInProgressSession = _inProgressSession.InProgressSave.InProgress;
             
             var levelIndex = _sessionInfo.LevelIndex;
@@ -69,9 +70,12 @@ namespace Project.Game
             
             _levelController.Initialize(levelIndex, waveIndex);
             
-            _playerInput.Hide();
             _uiFrame.Open<HudScreen>();
             _uiFrame.Open<DamageOverlayScreen>();
+
+            yield return null;
+            
+            _playerInput.Hide(true);
             
             if (!hasInProgressSession)
             {
@@ -187,13 +191,13 @@ namespace Project.Game
             _playerController.transform.position = Vector3.zero;
             _playerController.enabled = true;
             
-            _playerInput.Show();
-
             BeginNextWave();
         }
 
         private void BeginNextWave()
         {
+            _playerInput.Show();
+
             waveMusic.Play();
             
             var waveIntroScreen = _uiFrame.Open<WaveIntroScreen>();
@@ -212,7 +216,6 @@ namespace Project.Game
         {
             waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
             
-            _playerInput.Show();
             _levelController.BeginNextWave(0.375f);
             _enemyManager.BeginWave(_levelController.CurrentLevel,
                 _levelController.CurrentLevelIndex,
