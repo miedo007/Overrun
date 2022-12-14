@@ -120,7 +120,7 @@ namespace Project.Game.Enemies
             enemy.Initialize(enemyData, _playerController.Position, _currentLevelIndex, _currentWaveIndex);
             enemy.Killed += OnEnemyKilled;
             
-            yield return enemy.transform.DOScale(1, 0.2f).WaitForCompletion();
+            yield return enemy.transform.DOScale(new Vector3(enemy.FacingDirection, 1, 1), 0.2f).WaitForCompletion();
             
             spawnWarning.Hide();
             
