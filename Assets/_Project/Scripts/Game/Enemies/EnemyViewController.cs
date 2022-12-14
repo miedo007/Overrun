@@ -10,6 +10,8 @@ namespace Project.Game.Enemies
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public Animation Animation { get; private set; }
 
+        [SerializeField] private bool _useRootScalingForDirection;
+
         private MaterialPropertyBlock _propertyBlock;
         private Tween _flashTween;
         private static readonly int FlashProperty = Shader.PropertyToID("_Flash");
@@ -49,7 +51,14 @@ namespace Project.Game.Enemies
 
         private void OnFacingDirectionChanged(int direction)
         {
-            SpriteRenderer.flipX = direction < 0;
+            if (_useRootScalingForDirection)
+            {
+                transform.localScale = new Vector3(direction, 1, 1);
+            }
+            else
+            {
+                SpriteRenderer.flipX = direction < 0;
+            }
         }
 
         private void ResetFlash()
@@ -58,7 +67,7 @@ namespace Project.Game.Enemies
             {
                 _flashTween.Kill();
             }
-            
+
             SpriteRenderer.GetPropertyBlock(_propertyBlock);
             _propertyBlock.SetFloat(FlashProperty, 0);
             SpriteRenderer.SetPropertyBlock(_propertyBlock);
@@ -70,13 +79,13 @@ namespace Project.Game.Enemies
             {
                 _flashTween.Kill();
             }
-            
+
             SpriteRenderer.GetPropertyBlock(_propertyBlock);
             // Assign our new value.
             _propertyBlock.SetFloat(FlashProperty, 1);
             // Apply the edited values to the renderer.
             SpriteRenderer.SetPropertyBlock(_propertyBlock);
-            
+
             _flashTween = DOVirtual.Float(1f, 0f, 0.2f, v =>
                 {
                     SpriteRenderer.GetPropertyBlock(_propertyBlock);
