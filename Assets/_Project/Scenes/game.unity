@@ -623,31 +623,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 864453683606732044, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1080
+      value: 501
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606732044, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 334
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606732044, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 540
+      value: 250.5
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606732044, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 540
+      value: 167
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606775598, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 378
+      value: 116.9
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606775598, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 378
+      value: 116.9
       objectReference: {fileID: 0}
     - target: {fileID: 864453683606775598, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -172.79999
+      value: -53.440002
       objectReference: {fileID: 0}
     - target: {fileID: 5677114095014020065, guid: 37527773550e2124da2e99c593863ec0, type: 3}
       propertyPath: m_Pivot.x
@@ -803,6 +803,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3440544190306221939, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790725651667831451, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237416203628274837, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6417058307201398818, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
       propertyPath: m_Name
       value: room_manager
@@ -850,6 +862,10 @@ PrefabInstance:
     - target: {fileID: 6417058307201398844, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070578761280577197, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dbe6c93d91dc96428e831228596077a, type: 3}

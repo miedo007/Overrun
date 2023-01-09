@@ -9,28 +9,49 @@ namespace Project.Game.Player
 {
     public class PlayerWeaponsController : MonoBehaviour, IInjectionReady
     {
-        [field: SerializeField, Tooltip("Weapon distance from player from 1-6 weapons")] 
+        [field: SerializeField, Tooltip("Weapon distance from player from 1-6 weapons")]
         public Vector2 RadiusRange { get; private set; } = new(0.375f, 0.75f);
 
         [field: SerializeField] public AnimationCurve RadiusCurve { get; private set; }
         [field: SerializeField] public Vector3 offset { get; private set; } = new(0, 0.2f);
-        
+
+        [SerializeField, Range(0f, 180f)] private float _maxAngle = 180f;
+        [SerializeField] private float _yScale = 1f;
+
+        [SerializeField] private int _weaponPreviewIndex = -1;
+
         [Inject] private readonly TargetManager _targetManager;
         [Inject] private readonly PlayerController _playerController;
         [Inject] private readonly HeroRegistry _heroRegistry;
 
         private HeroInfo _heroInfo;
         private readonly List<WeaponController> _weapons = new();
-        
+
         public void OnReady()
         {
-            _heroInfo = _heroRegistry.ActiveHero;
+            _heroRegistry.ActiveHeroChanged += RegisterHero;
+            RegisterHero(_heroRegistry.ActiveHero);
+        }
+
+        private void RegisterHero(HeroInfo info)
+        {
+            if (_heroInfo != null)
+            {
+                _heroInfo.WeaponsChanged -= OnWeaponsChanged;
+            }
+
+            _heroInfo = info;
             _heroInfo.WeaponsChanged += OnWeaponsChanged;
         }
 
         private void OnDestroy()
         {
-            _heroInfo.WeaponsChanged -= OnWeaponsChanged;
+            if (_heroInfo != null)
+            {
+                _heroInfo.WeaponsChanged -= OnWeaponsChanged;
+            }
+
+            _heroRegistry.ActiveHeroChanged -= RegisterHero;
         }
 
         private void OnWeaponsChanged()
@@ -43,9 +64,12 @@ namespace Project.Game.Player
         {
             foreach (var weapon in _weapons)
             {
-                Destroy(weapon.gameObject);
+                if (weapon != null)
+                {
+                    Destroy(weapon.gameObject);
+                }
             }
-            
+
             _weapons.Clear();
         }
 
@@ -55,7 +79,7 @@ namespace Project.Game.Player
             {
                 return;
             }
-            
+
             for (var i = 0; i < _heroInfo.CurrentWeapons.Count; i++)
             {
                 var data = _heroInfo.CurrentWeapons[i];
@@ -65,19 +89,36 @@ namespace Project.Game.Player
                 _weapons.Add(weapon);
             }
         }
-        
-        public Vector3 GetWeaponPosition(int slotIndex)
+
+        private Vector3 GetWeaponPosition(int slotIndex) => GetWeaponPosition(slotIndex, _heroInfo.CurrentWeapons.Count);
+
+        private Vector3 GetWeaponPosition(int slotIndex, int weaponCount)
         {
-            var weaponCount = _heroInfo.CurrentWeapons.Count;
-            var angleBetween = 360f / weaponCount;
-            
-            // don't offset if only one weapon
-            var angleOffset = weaponCount == 1 ? 0f : angleBetween * 0.5f;
-            var angle = -angleOffset - (angleBetween * slotIndex);
+            float angle;
+            if (weaponCount <= 1)
+            {
+                angle = 0f;
+            }
+            else
+            {
+                angle = (weaponCount / 2f - 0.5f) * (360f / weaponCount);
+                // Don't offset if only one weapon
+                if (angle > _maxAngle)
+                {
+                    angle = Mathf.Lerp(-_maxAngle, _maxAngle, slotIndex / (float)(weaponCount - 1));
+                }
+                else
+                {
+                    angle = Mathf.Lerp(-angle, angle, slotIndex / (float)(weaponCount - 1));
+                }
+            }
+
             var radiusFactor = RadiusCurve.Evaluate(weaponCount / 6f);
             var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, radiusFactor);
-            
-            var position = (Quaternion.Euler(0, 0, angle) * (Vector3.down * radius)) + offset;
+
+            var position = Quaternion.Euler(0, 0, angle) * (Vector3.down * radius);
+            position.y *= _yScale;
+            position += offset;
             return position;
         }
 
@@ -85,15 +126,59 @@ namespace Project.Game.Player
         {
             var dt = Time.deltaTime;
             var time = Time.time;
-            
+
             foreach (var weapon in _weapons)
             {
                 var target = _targetManager.GetClosestTarget(weapon.Barrel.position, weapon.Data.Range);
                 weapon.UpdateTarget(target, dt, _playerController.Character.HorizontalDirection);
-                
+
                 if (target != null && weapon.ShouldActivate(time))
                 {
                     weapon.Activate(weapon);
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            const int weaponCount = 8;
+
+            if (_weaponPreviewIndex is > 0 and <= weaponCount)
+            {
+                DrawIndex(_weaponPreviewIndex, Color.green);
+            }
+            else
+            {
+                for (var i = 1; i <= weaponCount; ++i)
+                {
+                    DrawIndex(i, Color.HSVToRGB(i / (float)(weaponCount + 1), 1f, 1f));
+                }
+            }
+
+            void DrawIndex(int index, Color color)
+            {
+                Gizmos.color = color;
+
+                const float granularity = 1f / 360f;
+                var radiusFactor = RadiusCurve.Evaluate(index / 6f);
+                for (var f = 0f; f < 1f; f += granularity)
+                {
+                    var radius = Mathf.Lerp(RadiusRange.x, RadiusRange.y, radiusFactor);
+                    var position = Quaternion.Euler(0, 0, Mathf.Lerp(-_maxAngle, _maxAngle, f)) * (Vector3.down * radius);
+                    position.y *= _yScale;
+                    position += offset;
+
+                    var nextPosition = Quaternion.Euler(0, 0, Mathf.Lerp(-_maxAngle, _maxAngle, f + granularity)) * (Vector3.down * radius);
+                    nextPosition.y *= _yScale;
+                    nextPosition += offset;
+
+                    Gizmos.DrawLine(position, nextPosition);
+                }
+
+                for (var j = 0; j < index; ++j)
+                {
+                    var pos = GetWeaponPosition(j, index);
+                    Gizmos.DrawIcon(pos, "", true, Gizmos.color);
                 }
             }
         }

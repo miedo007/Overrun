@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c9f803a48048d08a3e36d946cd2970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RadiusRange>k__BackingField: {x: 0.25, y: 0.75}
+  <RadiusRange>k__BackingField: {x: 0.25, y: 1.24}
   <RadiusCurve>k__BackingField:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <offset>k__BackingField: {x: 0, y: 0.125, z: 0}
+  <offset>k__BackingField: {x: 0, y: 0.36, z: 0}
+  _maxAngle: 135
+  _yScale: 0.44
+  _weaponPreviewIndex: -1
 --- !u!114 &425882226003985251
 MonoBehaviour:
   m_ObjectHideFlags: 0
