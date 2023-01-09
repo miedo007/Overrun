@@ -52,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <offset>k__BackingField: {x: 0, y: 0.36, z: 0}
+  <offset>k__BackingField: {x: 0, y: 0.18, z: 0}
   _maxAngle: 135
   _yScale: 0.44
   _weaponPreviewIndex: -1
