@@ -147,7 +147,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 0
+  m_Spacing: -3
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -310,6 +310,7 @@ MonoBehaviour:
   headerPrefab: {fileID: 6189593549253546046, guid: 5abbb420d5a4b9a4188122eb94f35bfb, type: 3}
   rowPrefab: {fileID: -4977811184333532691, guid: 07112f408b176fc439a6101c6595c496, type: 3}
   parent: {fileID: 2736893120032857141}
+  columns: 6
 --- !u!114 &2697175677329313869
 MonoBehaviour:
   m_ObjectHideFlags: 0
