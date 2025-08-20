@@ -24,11 +24,11 @@ namespace Project.Game.Items
             get
             {
                 if (_rangedStatInfo == null)
-                {            
-                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
-                    _rangedStatInfo = heroInfo.GetStat(rangedStat);
+                {
+                    var hero = InjectionContainer.Instance?.Injector?.Get<HeroRegistry>()?.ActiveHero;
+                    if (hero != null && rangedStat != null)
+                        _rangedStatInfo = hero.GetStat(rangedStat);
                 }
-                
                 return _rangedStatInfo;
             }
         }
@@ -38,18 +38,28 @@ namespace Project.Game.Items
             get
             {
                 if (_damageStatInfo == null)
-                {            
-                    var heroInfo = InjectionContainer.Instance.Injector.Get<HeroRegistry>().ActiveHero;
-                    _damageStatInfo = heroInfo.GetStat(damageStat);
+                {
+                    var hero = InjectionContainer.Instance?.Injector?.Get<HeroRegistry>()?.ActiveHero;
+                    if (hero != null && damageStat != null)
+                        _damageStatInfo = hero.GetStat(damageStat);
                 }
-
                 return _damageStatInfo;
             }
         }
 
+        private bool TryResolveStats(out StatInfo ranged, out StatInfo dmg)
+        {
+            ranged = RangedStatInfo;
+            dmg    = DamageStatInfo;
+            return ranged != null && dmg != null;
+        }
+
         private float GetDamage()
         {
-            return RangedStatInfo.GetFloatValue() * DamageStatInfo.GetFloatValue() * damageFactor;
+            // Only called at runtime during combat; stats should be resolved then.
+            return (RangedStatInfo?.GetFloatValue() ?? 1f) *
+                   (DamageStatInfo?.GetFloatValue() ?? 1f) *
+                   damageFactor;
         }
         
         public override bool OnPerform(Vector3 position)
@@ -58,25 +68,37 @@ namespace Project.Game.Items
             var angleOffset = Random.Range(0, 360);
             for (var i = 0; i < count; i++)
             {
-                var projectile = LeanPool.Spawn(projectileData.ProjectilePrefab,
+                if (projectileData?.ProjectilePrefab == null)
+                {
+                    Debug.LogError($"{name}: Missing projectileData/ProjectilePrefab");
+                    break;
+                }
+
+                var projectile = LeanPool.Spawn(
+                    projectileData.ProjectilePrefab,
                     position,
                     Quaternion.Euler(Vector3.forward * (angleBetween * i + angleOffset)));
-                
-                projectile.Initialize(
-                    projectileData,
-                    GetDamage(), 
-                    -1, 
-                    -1,
-                    0
-                );
-            }
 
+                projectile.Initialize(projectileData, GetDamage(), -1, -1, 0);
+            }
             return true;
         }
 
         public override string GetDescription()
         {
-            return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring, dealing <b>{GetDamage()}</b> damage (x<sprite tint=1 name={RangedStatInfo.Data.Icon.name}>)";
+            // Safe preview for shop/menus where hero/injector might not exist yet.
+            if (!TryResolveStats(out var r, out var d))
+            {
+                var rangedIcon = rangedStat != null ? rangedStat.name : "Ranged";
+                var damageIcon = damageStat != null ? damageStat.name : "Damage";
+                return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring. "
+                     + $"Damage scales with <b>{rangedIcon}</b> × <b>{damageIcon}</b> × <b>{damageFactor:0.##}</b>.";
+            }
+
+            var dmg = GetDamage();
+            var rangedIconName = r?.Data?.Icon ? r.Data.Icon.name : "stat";
+            return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring, "
+                 + $"dealing <b>{dmg:0.#}</b> damage (x<sprite tint=1 name={rangedIconName}>).";
         }
 
         public override void Cleanup()
