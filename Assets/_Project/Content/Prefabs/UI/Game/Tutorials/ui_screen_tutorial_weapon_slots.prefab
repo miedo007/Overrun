@@ -279,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 346
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -301,15 +301,51 @@ PrefabInstance:
       propertyPath: m_text
       value: WEAPON SLOTS
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 97.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: Your hero can equip as many <b>weapons</b> as there are weapon slots
         <sprite tint=1 name=sprite_sheet_stats_12> in your inventory.
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_margin.w
+      value: 265.65646
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_spriteAsset
       value: 
       objectReference: {fileID: 11400000, guid: b3784415544907f49b199f1a17ee8a9e, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!224 &3136342171591833564 stripped

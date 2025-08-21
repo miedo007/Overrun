@@ -1268,11 +1268,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2574488647812036138, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 55
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2574488647812036138, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 55
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574488647812036138, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -128
       objectReference: {fileID: 0}
     - target: {fileID: 4737758060804077231, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
       propertyPath: m_Pivot.x
@@ -1361,6 +1365,10 @@ PrefabInstance:
     - target: {fileID: 5763508489871785863, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
       propertyPath: m_fontSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763508489871785863, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
+      propertyPath: m_margin.w
+      value: 2.2672806
       objectReference: {fileID: 0}
     - target: {fileID: 5763508489871785863, guid: 2d75b82ce0fffd340a05e5fe7c2566f0, type: 3}
       propertyPath: m_fontAsset
@@ -2278,9 +2286,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214549039286367512, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214549039286367512, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214549039286367512, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214549039286367512, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 94.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_text
-      value: Reroll <sprite name=currency_ticket> {0}
+      value: Reroll <sprite name="currency_energy"> {0}
       objectReference: {fileID: 0}
     - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_fontSize
@@ -2296,11 +2320,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_fontSizeMax
-      value: 50
+      value: 59.2
       objectReference: {fileID: 0}
     - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_fontSizeMin
-      value: 12
+      value: 26.8
       objectReference: {fileID: 0}
     - target: {fileID: 3775429386687745261, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_sharedMaterial

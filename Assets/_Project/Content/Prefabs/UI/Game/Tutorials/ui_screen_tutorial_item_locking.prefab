@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22
+      value: -47
       objectReference: {fileID: 0}
     - target: {fileID: 5712159614227472227, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -337,6 +337,22 @@ PrefabInstance:
       propertyPath: m_text
       value: ITEM LOCKING
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 97.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: You've <b>locked</b> an item in the crafting list which <b>guarantees</b>
@@ -344,8 +360,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_margin.w
+      value: 73.5665
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 17.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!114 &1510077543269917872 stripped

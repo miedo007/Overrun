@@ -36,7 +36,7 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.88235295, g: 0.47843137, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
@@ -89,6 +89,30 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: currency_ticket
     m_HashCode: 1433249116
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 2
+    m_Scale: 1
+    m_Name: sprite_sheet_currency_0
+    m_HashCode: 1936886094
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 3
+    m_Scale: 1
+    m_Name: sprite_sheet_currency_1
+    m_HashCode: 1936886095
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 4
+    m_Scale: 1
+    m_Name: currency_energy
+    m_HashCode: 2026108538
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 5
+    m_Scale: 1
+    m_Name: currency_gold
+    m_HashCode: -2009356808
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -120,5 +144,65 @@ MonoBehaviour:
     m_Scale: 1.25
     m_AtlasIndex: 0
     sprite: {fileID: -649389838, guid: 27d176c16ecdbf24da4a4f9b4646ba4e, type: 3}
+  - m_Index: 2
+    m_Metrics:
+      m_Width: 60
+      m_Height: 59
+      m_HorizontalBearingX: -30
+      m_HorizontalBearingY: 29.5
+      m_HorizontalAdvance: 60
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 194
+      m_Width: 60
+      m_Height: 59
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 1907442049, guid: 27d176c16ecdbf24da4a4f9b4646ba4e, type: 3}
+  - m_Index: 3
+    m_Metrics:
+      m_Width: 67
+      m_Height: 61
+      m_HorizontalBearingX: -33.5
+      m_HorizontalBearingY: 30.5
+      m_HorizontalAdvance: 67
+    m_GlyphRect:
+      m_X: 64
+      m_Y: 195
+      m_Width: 67
+      m_Height: 61
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 1845991262, guid: 27d176c16ecdbf24da4a4f9b4646ba4e, type: 3}
+  - m_Index: 4
+    m_Metrics:
+      m_Width: 56
+      m_Height: 60
+      m_HorizontalBearingX: -28
+      m_HorizontalBearingY: 30
+      m_HorizontalAdvance: 56
+    m_GlyphRect:
+      m_X: 137
+      m_Y: 196
+      m_Width: 56
+      m_Height: 60
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -2089207076, guid: 27d176c16ecdbf24da4a4f9b4646ba4e, type: 3}
+  - m_Index: 5
+    m_Metrics:
+      m_Width: 51
+      m_Height: 60
+      m_HorizontalBearingX: -25.5
+      m_HorizontalBearingY: 30
+      m_HorizontalAdvance: 51
+    m_GlyphRect:
+      m_X: 197
+      m_Y: 195
+      m_Width: 51
+      m_Height: 60
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -1301861977, guid: 27d176c16ecdbf24da4a4f9b4646ba4e, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

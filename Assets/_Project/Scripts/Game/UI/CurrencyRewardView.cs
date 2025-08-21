@@ -25,7 +25,7 @@ namespace Project.Game.UI
 
         public void SetValue(int currencyReward)
         {
-            valueField.text = $"<sprite name=currency_coin> {currencyReward}";
+            valueField.text = $"<sprite name=currency_gold> {currencyReward}";
         }
     }
 }

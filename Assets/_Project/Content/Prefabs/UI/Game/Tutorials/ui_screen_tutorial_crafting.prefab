@@ -352,6 +352,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!224 &4196386605180171673 stripped
@@ -391,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968850979025615344, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize
-      value: 59.6
+      value: 52.55
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -399,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -115.21512
+      value: -148
       objectReference: {fileID: 0}
     - target: {fileID: 5590642635450907890, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_SizeDelta.x
@@ -495,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 333
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 8005550825368063020, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -517,11 +521,47 @@ PrefabInstance:
       propertyPath: m_text
       value: INVENTORY
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 97.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: <b>Weapons</b> and <b>Items</b> you craft will appear in your inventory.
         You can tap on these items to see more details.
       objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_margin.w
+      value: 253.39563
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!224 &4064285052616079718 stripped

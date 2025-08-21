@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name="currency_ticket">125
+  m_text: <sprite name="currency_energy">125
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
   m_sharedMaterial: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}

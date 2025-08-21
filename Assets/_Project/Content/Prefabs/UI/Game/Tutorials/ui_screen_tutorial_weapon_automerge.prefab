@@ -195,7 +195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -45
+      value: -74
       objectReference: {fileID: 0}
     - target: {fileID: 5712159614227472227, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -329,6 +329,22 @@ PrefabInstance:
       propertyPath: m_text
       value: AUTO-MERGE
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 97.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: If a <b>weapon</b> in the crafting list has the <b>merge</b> icon      
@@ -337,8 +353,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize
-      value: 72
+      value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_margin.w
+      value: 126.697784
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!114 &1510077543269917872 stripped
@@ -447,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3591701839804709481, guid: 799d07d19d591c54584aaa655b408de5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 137
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 3591701839804709481, guid: 799d07d19d591c54584aaa655b408de5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

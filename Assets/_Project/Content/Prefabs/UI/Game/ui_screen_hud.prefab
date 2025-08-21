@@ -1495,6 +1495,10 @@ PrefabInstance:
       value: -16.200256
       objectReference: {fileID: 0}
     - target: {fileID: 9052977415226745693, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
+      propertyPath: m_margin.y
+      value: 0.19903564
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052977415226745693, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}

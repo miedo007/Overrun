@@ -187,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968850979025615344, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize
-      value: 63.05
+      value: 52.55
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_SizeDelta.x
@@ -199,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074154566004643568, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -137.041
+      value: -153
       objectReference: {fileID: 0}
     - target: {fileID: 5712159614227472227, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -317,12 +317,48 @@ PrefabInstance:
       propertyPath: m_text
       value: ITEMS
       objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 97.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927983437969405189, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: Your hero can equip an unlimited number of <b>items</b>. These provide
         <b>passive</b> effects, like stat boosts and other bonuses, until the end
         of the level.
       objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_margin.w
+      value: 306.5269
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
 --- !u!114 &3799569270816610942 stripped
