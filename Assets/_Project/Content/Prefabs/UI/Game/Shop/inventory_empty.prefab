@@ -239,7 +239,7 @@ MonoBehaviour:
 
     SLOT'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
   m_sharedMaterial: {fileID: -8216763396484538535, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

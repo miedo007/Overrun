@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statModifierViewPrefab: {fileID: 6437613616444992422, guid: 9ddb714d13a79ab47937bfb9ed9f8c06, type: 3}
   itemBehaviourViewPrefab: {fileID: 4703737097533576508, guid: a82b0ee927d871143af5b775fa64744c, type: 3}
+  showDescription: 0
   descriptionPrefab: {fileID: 6245549578571649509, guid: a82b0ee927d871143af5b775fa64744c, type: 3}
   parent: {fileID: 3846844045263621181}
 --- !u!1001 &3549269303774270990
@@ -109,6 +110,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3846844045263621181}
     m_Modifications:
+    - target: {fileID: 211936238760299295, guid: 68e61277cb9d2ad4aa5105a65cf0feb2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
+    - target: {fileID: 211936238760299295, guid: 68e61277cb9d2ad4aa5105a65cf0feb2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 1452289467790428241, guid: 68e61277cb9d2ad4aa5105a65cf0feb2, type: 3}
       propertyPath: m_Name
       value: item_description
