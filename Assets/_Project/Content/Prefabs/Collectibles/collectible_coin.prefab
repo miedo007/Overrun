@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.529008
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.529008
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.529008
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63,10 +63,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304163, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c8d1f0fd106708a4d8c8250c32a57434, type: 3}
+      objectReference: {fileID: 21300000, guid: 221bc95783a533a4483c89ff03cf5240, type: 3}
+    - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.98039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2080715577355304188, guid: fdfcb4aa8d0be4548ab48c073816ce2d, type: 3}
       propertyPath: m_SortingLayer
       value: -1
