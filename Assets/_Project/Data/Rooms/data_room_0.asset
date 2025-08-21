@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f4e483063d4531aa4d89843fc82d98, type: 3}
   m_Name: data_room_0
   m_EditorClassIdentifier: 
-  <GroundColor>k__BackingField: {r: 0.36078432, g: 0.83921576, b: 0.7686275, a: 1}
-  <WallColor>k__BackingField: {r: 0, g: 0.5019608, b: 0.5294118, a: 1}
+  <GroundColor>k__BackingField: {r: 0.006229961, g: 0.014194259, b: 0.14150941, a: 1}
+  <WallColor>k__BackingField: {r: 0.0035303133, g: 0.015145594, b: 0.066037714, a: 1}
