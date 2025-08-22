@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68fec30fa60403e90a4773687b35038, type: 3}
   m_Name: music_shop
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 86a9c41f767ee3540ae182ca3b579794, type: 3}
+  clip: {fileID: 8300000, guid: 3351d94a93cdcc443adcc1d94ff15b83, type: 3}
   volume: 0.1
   pitch: 1

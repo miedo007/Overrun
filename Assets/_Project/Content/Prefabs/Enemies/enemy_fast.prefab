@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 2636251456522072233, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: <SpriteRenderer>k__BackingField
       value: 
-      objectReference: {fileID: 5890599533563213717}
+      objectReference: {fileID: 360270531438482283}
     - target: {fileID: 2978958270558183469, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -345,6 +345,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 4308a765a5ab3fc499df693e71a7e85d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+--- !u!212 &360270531438482283 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6461528716246511985, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+  m_PrefabInstance: {fileID: 6725006750383432218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1907262798758783369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5126208443004275603, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
