@@ -1253,6 +1253,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: button_settings
       objectReference: {fileID: 0}
+    - target: {fileID: 4877143803916525848, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877143803916525848, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e4f4c0390c77404fbc0e6716111c623, type: 3}
+    - target: {fileID: 4877143803916525848, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877143803916525848, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877143803916525848, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4056604
+      objectReference: {fileID: 0}
     - target: {fileID: 5797375564133486638, guid: 1ef7dae173c9dd94fa837ce73810a2e7, type: 3}
       propertyPath: m_SizeDelta.x
       value: -30
