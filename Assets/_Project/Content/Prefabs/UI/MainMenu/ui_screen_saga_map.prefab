@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.57254905, b: 0.8000001, a: 1}
+  m_Color: {r: 0.015686275, g: 0.023529412, b: 0.07450981, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.57254905, b: 0.8000001, a: 1}
+  m_Color: {r: 0.015686275, g: 0.023529412, b: 0.07450981, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -409,6 +409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: logo_menu
       objectReference: {fileID: 0}
+    - target: {fileID: 6630861479310151369, guid: ca87e41b46f191b40b7acc0a980ab84c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca87e41b46f191b40b7acc0a980ab84c, type: 3}
 --- !u!224 &372737995122921014 stripped
@@ -509,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 787205297649265864, guid: 278bcddfb66dcb04cb92aa14ae486bc9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1169.2798
+      value: 540.0001
       objectReference: {fileID: 0}
     - target: {fileID: 1702443236451705866, guid: 278bcddfb66dcb04cb92aa14ae486bc9, type: 3}
       propertyPath: m_Name
