@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy_toxic
       objectReference: {fileID: 0}
+    - target: {fileID: 2636251456522072233, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: <SpriteRenderer>k__BackingField
+      value: 
+      objectReference: {fileID: 5485499576892498527}
     - target: {fileID: 2978958270558183469, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: m_IsActive
       value: 0

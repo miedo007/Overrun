@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy_basic_heavy
       objectReference: {fileID: 0}
+    - target: {fileID: 2636251456522072233, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
+      propertyPath: <SpriteRenderer>k__BackingField
+      value: 
+      objectReference: {fileID: 7148620894736639368}
     - target: {fileID: 2967592958024202452, guid: 2feb0906df2c5d94f814c5003ac5cce8, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.313
