@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_thorns_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: e2a9c091d1bb02a42b58ab640d381aed, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 0e86fcc17e8526d4ab4357a349210525, type: 3}
   <DisplayName>k__BackingField: Thorns
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 17

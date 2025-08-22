@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_spiky_matter_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 1df3cbe8c0334d14593c65edbfef215f, type: 3}
-  <DisplayName>k__BackingField: Spiky Matter
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ed0eafb2bffae4e459d29378468971e1, type: 3}
+  <DisplayName>k__BackingField: Spiky energy
   <Description>k__BackingField: Chance to release projectile(s) when collecting energy
   <BasePrice>k__BackingField: 10
   <StatModifiers>k__BackingField: []

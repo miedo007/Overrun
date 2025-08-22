@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_holster_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: df84e5c77e338c742a2c17a65fe15258, type: 3}
-  <DisplayName>k__BackingField: Holster
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e2b2e4c8ec2efa4438f9040a2af6d2d3, type: 3}
+  <DisplayName>k__BackingField: Precise
   <Description>k__BackingField: ' Increases ranged weapon damage (<sprite tint=1
     name=sprite_sheet_stats_4>)'
   <BasePrice>k__BackingField: 16

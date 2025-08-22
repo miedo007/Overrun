@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_soda_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 98e9b4b4c324fd24eb561dcb5138ca60, type: 3}
-  <DisplayName>k__BackingField: Soda
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 050bc28f0fcbe9c41b54b13767d00b0f, type: 3}
+  <DisplayName>k__BackingField: Quickshot
   <Description>k__BackingField: Increases weapon cooldown reduction (<sprite tint=1
     name=sprite_sheet_stats_3>), but decreases maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)
   <BasePrice>k__BackingField: 20

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: data_weapon_shockwave_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 236da507bf336724a8dba46c6cd90f4d, type: 3}
-  <DisplayName>k__BackingField: Shockwave
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 927b72698f2fa424b849c6ae3d768c94, type: 3}
+  <DisplayName>k__BackingField: Wave
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 23
+  <StatModifiers>k__BackingField: []
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: a38ad7361262cd146bed66d78a963d0d, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}
   <BehaviourBase>k__BackingField: {fileID: 11400000, guid: 3c272127e2da95640ba87058d4836cfe, type: 2}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_toxic_sludge_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: b917660b8679c644f80e16881a5644e1, type: 3}
-  <DisplayName>k__BackingField: Toxic Sludge
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 6f5d318c0b9d8df439248da4f6ccd941, type: 3}
+  <DisplayName>k__BackingField: Toxic
   <Description>k__BackingField: ' Increases all damage (<sprite tint=1 name=sprite_sheet_stats_6>),
     but reduces health regeneration (<sprite tint=1 name=sprite_sheet_stats_1>)'
   <BasePrice>k__BackingField: 25

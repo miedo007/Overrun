@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_energy_drink_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: a713de4cadf4bf24ca0d2cd84a909acc, type: 3}
-  <DisplayName>k__BackingField: Energy Drink
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 0426ebe7694fa90499ac75c332157980, type: 3}
+  <DisplayName>k__BackingField: Excited
   <Description>k__BackingField: Increases movement speed (<sprite tint=1 name=sprite_sheet_stats_8>)
     and cooldown reduction (<sprite tint=1 name=sprite_sheet_stats_3>), but decreases
     maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)

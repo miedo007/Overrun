@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: data_tier_3
   m_EditorClassIdentifier: 
   NamePostfix: IV
-  Color: {r: 0.579193, g: 0.20803669, b: 0.8018868, a: 1}
+  Color: {r: 0.49029914, g: 0.15376166, b: 0.6886792, a: 1}
   OutlineColor: {r: 0.7994706, g: 0.3915094, b: 1, a: 1}

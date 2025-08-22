@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: data_item_glasses_0
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6acc905a762dbec4dbd3e90b8a897952, type: 3}
-  <DisplayName>k__BackingField: Glasses
+  <Sprite>k__BackingField: {fileID: 21300000, guid: dcb0ad2585452964180394b236674c7f, type: 3}
+  <DisplayName>k__BackingField: Lucky
   <Description>k__BackingField: Increase critical chance (<sprite tint=1 name=sprite_sheet_stats_7>)
   <BasePrice>k__BackingField: 12
   <StatModifiers>k__BackingField:

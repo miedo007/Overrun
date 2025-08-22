@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
   <Sprite>k__BackingField: {fileID: -164736604, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
   <DisplayName>k__BackingField: Gathering
-  <Description>k__BackingField: Increase amount of <sprite name=currency_ticket>
+  <Description>k__BackingField: Increase amount of <sprite name=currency_energy>
     gathered by {0}
   <BasePrice>k__BackingField: 0
   <StatModifiers>k__BackingField:
