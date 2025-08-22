@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 1df3cbe8c0334d14593c65edbfef215f, type: 3}
   <DisplayName>k__BackingField: Spiky Matter
-  <Description>k__BackingField: Chance to release projectile(s) when collecting tickets
+  <Description>k__BackingField: Chance to release projectile(s) when collecting energy
   <BasePrice>k__BackingField: 10
   <StatModifiers>k__BackingField: []
   <Behaviours>k__BackingField:

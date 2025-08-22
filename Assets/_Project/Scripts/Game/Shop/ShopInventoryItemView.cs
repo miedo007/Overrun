@@ -90,7 +90,7 @@ namespace Project.Game.Shop
                 }
                 else if (string.IsNullOrEmpty(buyButtonString))
                 {
-                    CostText.text = $"<sprite name=currency_ticket> {cost}";
+                    CostText.text = $"<sprite name=currency_energy> {cost}";
                 }
                 else
                 {

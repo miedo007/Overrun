@@ -764,6 +764,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5515006681368755617, guid: e8c6f975ba5cedb40a8abf81598a38f4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6789605681968825968, guid: e8c6f975ba5cedb40a8abf81598a38f4, type: 3}
       propertyPath: m_fontSize
       value: 59.35
@@ -791,6 +795,10 @@ PrefabInstance:
     - target: {fileID: 7403362834812453684, guid: e8c6f975ba5cedb40a8abf81598a38f4, type: 3}
       propertyPath: m_SizeDelta.y
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403362834812453684, guid: e8c6f975ba5cedb40a8abf81598a38f4, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c6f975ba5cedb40a8abf81598a38f4, type: 3}

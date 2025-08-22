@@ -395,7 +395,7 @@ MonoBehaviour:
   m_text: <b>Sell</b> or <b>Merge</b> weapons in your weapon inventory to free up
     space
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 88520f15aa804b044b363ba471c8f6ad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
   m_sharedMaterial: {fileID: -6365003228971735182, guid: 88520f15aa804b044b363ba471c8f6ad, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8083065449024444958
