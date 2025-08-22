@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
-      value: <b>Weapons</b> and <b>Items</b> you craft will appear in your inventory.
+      value: <b>Weapons</b> and <b>Items</b> you buy will appear in your inventory.
         You can tap on these items to see more details.
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}

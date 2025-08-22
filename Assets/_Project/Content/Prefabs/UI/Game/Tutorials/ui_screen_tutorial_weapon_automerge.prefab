@@ -348,8 +348,8 @@ PrefabInstance:
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
       value: If a <b>weapon</b> in the crafting list has the <b>merge</b> icon      
-        , crafting it will automatically merge it with a matching weapon in your
-        inventory, creating a <b>higher level</b> weapon.
+        , buying it will automatically merge it with a matching weapon in your inventory,
+        creating a <b>higher level</b> weapon.
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize

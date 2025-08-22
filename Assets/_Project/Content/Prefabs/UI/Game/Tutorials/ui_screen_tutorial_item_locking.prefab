@@ -355,8 +355,8 @@ PrefabInstance:
       objectReference: {fileID: -5457076052982106898, guid: 836a3a392dc3c4c578bfba339a999616, type: 2}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
-      value: You've <b>locked</b> an item in the crafting list which <b>guarantees</b>
-        it will show up in the list until either <b>crafted</b> or <b>unlocked</b>.
+      value: You've <b>locked</b> an item in the shop <b>guarantees</b> it will show
+        up in the list until either <b>bought</b> or <b>unlocked</b>.
       objectReference: {fileID: 0}
     - target: {fileID: 9197028410162186960, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize
