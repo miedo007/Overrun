@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
-
-// ReSharper disable UnusedAutoPropertyAccessor.Local
 
 namespace Mtl.SagaMap
 {
-    public enum NodeState
-    {
-        Completed,
-        Current,
-        Locked
-    }
+    public enum NodeState { Completed, Current, Locked }
 
     public struct NodeInfo
     {
@@ -22,7 +15,6 @@ namespace Mtl.SagaMap
         public NodeState NodeState;
     }
 
-    [PublicAPI]
     public class SagaMapNodeController : MonoBehaviour
     {
         public event Action<SagaMapNodeController> OnClick;
@@ -39,41 +31,53 @@ namespace Mtl.SagaMap
 
         public bool IsSelected
         {
-            set
-            {
-                foreach (var selectionObject in selectionObjects)
-                {
-                    selectionObject.SetActive(value);
-                }
-            }
+            set { foreach (var o in selectionObjects) o.SetActive(value); }
         }
 
         private void Awake()
         {
-            button.onClick.AddListener(OnButtonClicked);
+            if (button) button.onClick.AddListener(OnButtonClicked);
         }
 
-        private void OnButtonClicked()
-        {
-            OnClick?.Invoke(this);
-        }
+        private void OnButtonClicked() => OnClick?.Invoke(this);
 
         public void Init(NodeInfo nodeInfo)
         {
             NodeInfo = nodeInfo;
             gameObject.name = $"Stage {NodeInfo.Index}";
-            foreach (var nodeNumberLabel in nodeNumberLabels)
-            {
-                nodeNumberLabel.text = $"{NodeInfo.Index + 1:##0}";
-            }
 
-            //states
+            foreach (var lbl in nodeNumberLabels)
+                lbl.text = $"{NodeInfo.Index + 1:##0}";
+
             activeRoot.SetActive(nodeInfo.NodeState == NodeState.Current);
             lockedRoot.SetActive(nodeInfo.NodeState == NodeState.Locked);
-            if (nodeInfo.Index != 0) return;
 
-            pathUp.anchorMin = new Vector2(0, 0.5f);
-            pathUp.anchorMax = new Vector2(1, 1);
+            if (nodeInfo.Index == 0 && pathUp)
+            {
+                pathUp.anchorMin = new Vector2(0f, 0.5f);
+                pathUp.anchorMax = new Vector2(1f, 1f);
+            }
+        }
+
+        /// <summary>
+        /// Move the path segment to a background container while preserving world position.
+        /// Also disables raycasts and ignores layout so it won’t be moved.
+        /// </summary>
+        public RectTransform DetachPathTo(RectTransform newParent)
+        {
+            if (!pathUp || !newParent) return null;
+
+            // Don’t block clicks
+            var g = pathUp.GetComponent<Graphic>();
+            if (g) g.raycastTarget = false;
+
+            // Make sure no layout group will try to position this
+            var le = pathUp.GetComponent<LayoutElement>();
+            if (!le) le = pathUp.gameObject.AddComponent<LayoutElement>();
+            le.ignoreLayout = true;
+
+            pathUp.SetParent(newParent, true); // keep world position
+            return pathUp;
         }
     }
 }

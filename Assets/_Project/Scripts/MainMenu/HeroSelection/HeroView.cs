@@ -63,7 +63,7 @@ namespace Project.MainMenu.HeroSelection
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
             upgradeButton.interactable = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
-            upgradeCostText.text = $"<sprite name=currency_coin> {nextUpgradeCost}";
+            upgradeCostText.text = $"{nextUpgradeCost}";
         }
 
         private void OnSelectButtonClicked()
