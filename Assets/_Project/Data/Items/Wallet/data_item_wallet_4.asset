@@ -16,7 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 08c2ff9b77f8ac44c91021809e2cbe04, type: 3}
   <DisplayName>k__BackingField: Collector
   <Description>k__BackingField: Increases the amount of matter (<sprite name=currency_energy>)
-    collected (<sprite tint=1 name=sprite_sheet_stats_10>)
+    collected
   <BasePrice>k__BackingField: 15
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 076b9e9900afd104f9858a3c7b58ded5, type: 2}

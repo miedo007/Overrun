@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 09dfda7477414e048b911f08a08f426f, type: 3}
   <DisplayName>k__BackingField: Strong
-  <Description>k__BackingField: Increases melee weapon damage (<sprite tint=1 name=sprite_sheet_stats_5>)
+  <Description>k__BackingField: Increases melee weapon damage
   <BasePrice>k__BackingField: 12
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: ed7949804d86ddc4ea26bfb9579b6564, type: 2}

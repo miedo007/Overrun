@@ -15,9 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 0426ebe7694fa90499ac75c332157980, type: 3}
   <DisplayName>k__BackingField: Excited
-  <Description>k__BackingField: Increases movement speed (<sprite tint=1 name=sprite_sheet_stats_8>)
-    and cooldown reduction (<sprite tint=1 name=sprite_sheet_stats_3>), but decreases
-    maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)
+  <Description>k__BackingField: Improved speed & cooldown, but lower max health
   <BasePrice>k__BackingField: 26
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 3fd7ded7ea17ae246b8187e2af37900d, type: 2}
@@ -33,4 +31,4 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 1
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []
-  <ShowDescription>k__BackingField: 1
+  <ShowDescription>k__BackingField: 0

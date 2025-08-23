@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: music_wave
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 53c3f111736906240a159c499d9cdc36, type: 3}
-  volume: 0.1
+  volume: 0.08
   pitch: 1

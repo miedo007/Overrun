@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 29c47e7914a00ca4f9e9c34b574bdd8b, type: 3}
   <DisplayName>k__BackingField: Healthy
-  <Description>k__BackingField: Increases maximum health (<sprite tint=1 name=sprite_sheet_stats_0>)
+  <Description>k__BackingField: Maximum health
   <BasePrice>k__BackingField: 13
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 9fef2e734f200264ea5ca54bf59c1d79, type: 2}

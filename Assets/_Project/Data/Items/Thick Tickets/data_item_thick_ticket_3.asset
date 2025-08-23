@@ -15,8 +15,8 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: cad054348862a00469dc0bbf77c1bb13, type: 3}
   <DisplayName>k__BackingField: Pusher
-  <Description>k__BackingField: Chance to apply force to surrounding enemies when
-    collecting energy (<sprite name=sprite_sheet_stats_0>)
+  <Description>k__BackingField: Chance to damage surrounding enemies when collecting
+    energy
   <BasePrice>k__BackingField: 16
   <StatModifiers>k__BackingField: []
   <Behaviours>k__BackingField:

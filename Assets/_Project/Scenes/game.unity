@@ -994,6 +994,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5278812402053378852, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
+      propertyPath: <MaxSpeed>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8265728662808973049, guid: 2d30d923cf0f2b74da7561feaecdb0b0, type: 3}
       propertyPath: m_Name
       value: player_controller

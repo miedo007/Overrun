@@ -91,14 +91,14 @@ namespace Project.Game.Items
             {
                 var rangedIcon = rangedStat != null ? rangedStat.name : "Ranged";
                 var damageIcon = damageStat != null ? damageStat.name : "Damage";
-                return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring. "
+                return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets. "
                      + $"Damage scales with <b>{rangedIcon}</b> × <b>{damageIcon}</b> × <b>{damageFactor:0.##}</b>.";
             }
 
             var dmg = GetDamage();
             var rangedIconName = r?.Data?.Icon ? r.Data.Icon.name : "stat";
-            return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets in a ring, "
-                 + $"dealing <b>{dmg:0.#}</b> damage (x<sprite tint=1 name={rangedIconName}>).";
+            return $"<b>{GetChanceDisplay()}</b> to fire <b>{count}</b> bullets, "
+                 + $"dealing <b>{dmg:0.#}</b> damage.";
         }
 
         public override void Cleanup()

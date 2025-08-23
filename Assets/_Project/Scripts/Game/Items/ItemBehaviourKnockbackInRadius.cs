@@ -78,7 +78,7 @@ namespace Project.Game.Items
 
         public override string GetDescription()
         {
-            return $"{Chance * 100:0.0}% chance to knock back enemies within {Radius:0.0}m";
+            return $"{Chance * 100:0.0}% chance to knock back enemies {Radius:0.0}m";
         }
 
         public override void Cleanup()

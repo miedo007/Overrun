@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_upgrade_ranged_damage_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: 1986707897, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e2b2e4c8ec2efa4438f9040a2af6d2d3, type: 3}
   <DisplayName>k__BackingField: Ranged Dmg
   <Description>k__BackingField: Increase ranged weapon damage by {0}
   <BasePrice>k__BackingField: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
     <ModifierType>k__BackingField: 1
     <DisplayAsPercentage>k__BackingField: 1
   <Behaviours>k__BackingField: []
+  <ShowDescription>k__BackingField: 1

@@ -42,4 +42,4 @@ MonoBehaviour:
   - 003011420332501450531100125353334410001100111500010
   - 55004335030011401004520050114003004500333001104400500
   <RoomData>k__BackingField: {fileID: 11400000, guid: 25cf18712e175514fb307302ccfb834b, type: 2}
-  <RoomSize>k__BackingField: {x: 50, y: 50}
+  <RoomSize>k__BackingField: {x: 35, y: 35}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_upgrade_gathering_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: -164736604, guid: 088602d8a283a54479f8cdccba5ccdb8, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: df3b97ba7c6893e4eb829256b6db1d3b, type: 3}
   <DisplayName>k__BackingField: Gathering
   <Description>k__BackingField: Increase amount of <sprite name=currency_energy>
     gathered by {0}

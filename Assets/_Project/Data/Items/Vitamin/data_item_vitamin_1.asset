@@ -15,7 +15,7 @@ MonoBehaviour:
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
   <Sprite>k__BackingField: {fileID: 21300000, guid: 270e8eb4f47f8f840bac893f1a975c88, type: 3}
   <DisplayName>k__BackingField: Recharger
-  <Description>k__BackingField: Increases health regeneration (<sprite tint=1 name=sprite_sheet_stats_1>)
+  <Description>k__BackingField: Increases health regeneration
   <BasePrice>k__BackingField: 15
   <StatModifiers>k__BackingField:
   - <StatData>k__BackingField: {fileID: 11400000, guid: 6cd1a29b64296e940b24d3738257a6c4, type: 2}
