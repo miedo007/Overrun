@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968850979025615344, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_text
-      value: I'm ready to craft!
+      value: I'm ready to buy!
       objectReference: {fileID: 0}
     - target: {fileID: 4968850979025615344, guid: 96af2d61b1fe68d429f405b8f05bcd9d, type: 3}
       propertyPath: m_fontSize

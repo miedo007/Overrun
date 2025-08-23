@@ -66,9 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to the <b>Crafting</b> menu! From here, you can prepare for the
-    next wave by crafting <b>items</b> and <b>weapons</b> using the <sprite name=currency_ticket>
-    <b>matter</b> you've collected from enemies!
+  m_text: Welcome to the <b>Shop</b> menu! From here, you can prepare for the next
+    wave by buying <b>items</b> and <b>weapons</b> using the <sprite name=currency_energy>
+    <b>energy</b> you've collected from enemies!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88520f15aa804b044b363ba471c8f6ad, type: 2}
   m_sharedMaterial: {fileID: -6365003228971735182, guid: 88520f15aa804b044b363ba471c8f6ad, type: 2}
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CRAFTING
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
   m_sharedMaterial: {fileID: -8216763396484538535, guid: 33447d5efb1b24a4fb16a126824d3578, type: 2}
