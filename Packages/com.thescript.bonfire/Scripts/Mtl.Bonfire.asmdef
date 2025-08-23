@@ -1,0 +1,18 @@
+{
+    "name": "Mtl.Bonfire",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7881506498bb244d1986559fdbff1b9c",
+        "GUID:d40531970a067425d8e6efa4469dffe9",
+        "GUID:f8c64bb88d959406689053ae3f31183d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

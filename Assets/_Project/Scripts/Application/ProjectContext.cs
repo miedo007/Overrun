@@ -1,4 +1,3 @@
-using Mtl.Bonfire;
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Game;
@@ -22,19 +21,12 @@ namespace Project.Application
         [SerializeField] private GameData gameData;
         [SerializeField] private SaveManager saveManager;
         [SerializeField] private FeedbackController feedbackController;
-        
+
         protected override void OnInjectStart()
         {
             UnityEngine.Application.targetFrameRate = 60;
-            
-            var beaconWrapper = GetComponentInChildren<BeaconWrapper>();
-            Bind(beaconWrapper);
 
-            var analyticsManager = new AnalyticsManager();
-            Bind<IAnalyticsManager>(analyticsManager);
-            analyticsManager.Register(beaconWrapper);
-            analyticsManager.Register(new GameAnalyticsWrapper());
-            
+            // Bind core services and databases
             Bind(levelDatabase);
             Bind(sceneLoader);
             Bind(tierDatabase);
@@ -42,46 +34,43 @@ namespace Project.Application
             Bind(itemDatabase, "items");
             Bind(statUpgradeDatabase, "stat_upgrades");
             Bind(heroDatabase);
-            Bind(gameData);         
+            Bind(gameData);
             Bind(saveManager);
             Bind(feedbackController);
 
+            // In-progress session
             var inProgressSession = new InProgressSessionInfo();
             var inProgressReadWriter = new FileReadWriter("in-progress");
-            saveManager.TryLoad(inProgressSession, (success) =>
+            saveManager.TryLoad(inProgressSession, success =>
             {
-                if (!success)
-                {
-                    inProgressSession.Create();
-                }
+                if (!success) inProgressSession.Create();
             }, inProgressReadWriter);
             Bind(inProgressSession);
-            
+
+            // Player info
             var playerInfo = new PlayerInfo();
             var playerReadWriter = new FileReadWriter("player");
-            saveManager.TryLoad(playerInfo, (success) =>
+            saveManager.TryLoad(playerInfo, success =>
             {
-                if (!success)
-                {
-                    playerInfo.Create();
-                }
+                if (!success) playerInfo.Create();
             }, playerReadWriter);
-            
+
             Bind(new SessionInfo
             {
                 LevelIndex = playerInfo.PlayerSave.TopStageIndex
             });
 
+            // Heroes registry
             var heroesInfo = new HeroRegistry();
             var heroesReadWriter = new FileReadWriter("heroes");
-            saveManager.TryLoad(heroesInfo, success =>
+            saveManager.TryLoad(heroesInfo, _ =>
             {
                 heroesInfo.Initialize(heroDatabase);
-            }, heroesReadWriter);     
+            }, heroesReadWriter);
             Bind(heroesInfo);
-            
+
+            // Finally inject the player info (and bind it)
             InjectAndBind(playerInfo);
         }
-
     }
 }

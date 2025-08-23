@@ -1,0 +1,17 @@
+{
+  "name": "com.thescript.bonfire",
+  "displayName": "THESCRIPT - Bonfire",
+  "version": "1.0.10",
+  "unity": "2019.4",
+  "description": "Gameplay/tools package",
+  "dependencies": {
+    "com.thescript.ui": "1.1.14",
+    "com.thescript.uiframework": "1.0.2",
+    "com.thescript.toolbox": "1.0.27",
+    "com.thescript.injection": "1.0.9",
+    "com.thescript.save": "1.0.2"
+  },
+  "author": { "name": "THESCRIPT" },
+  "type": "library",
+  "hideInEditor": false
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Mtl.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7881506498bb244d1986559fdbff1b9c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.textmeshpro",
+            "expression": "0.0.0",
+            "define": "TMP_AVAILABLE"
+        }
+    ],
+    "noEngineReferences": false
+}

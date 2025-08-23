@@ -1,0 +1,11 @@
+{
+  "name": "com.thescript.injection",
+  "displayName": "THESCRIPT - Injection",
+  "version": "1.0.9",
+  "unity": "2019.4",
+  "description": "Lightweight DI helpers",
+  "dependencies": {},
+  "author": { "name": "THESCRIPT" },
+  "type": "library",
+  "hideInEditor": false
+}

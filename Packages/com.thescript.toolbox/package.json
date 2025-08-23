@@ -1,0 +1,13 @@
+{
+  "name": "com.thescript.toolbox",
+  "displayName": "THESCRIPT - Toolbox",
+  "version": "1.0.27",
+  "unity": "2019.4",
+  "description": "Common helpers and utilities",
+  "dependencies": {
+    "com.thescript.injection": "1.0.9"
+  },
+  "author": { "name": "THESCRIPT" },
+  "type": "library",
+  "hideInEditor": false
+}

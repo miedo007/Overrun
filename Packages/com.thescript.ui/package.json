@@ -1,0 +1,22 @@
+{
+  "name": "com.thescript.ui",
+  "displayName": "THESCRIPT - UI",
+  "version": "1.1.14",
+  "unity": "2019.4",
+  "description": "UI components and Shaders",
+  "dependencies": {},
+  "author": {
+    "name": "THESCRIPT",
+    "url": "https://github.com/thescript"
+  },
+  "type": "library",
+  "hideInEditor": false,
+  "samples": [
+    {
+      "displayName": "Base UI Assets",
+      "description": "The base UI assets to be customized later",
+      "path": "Assets~/BaseUIAssets/",
+      "interactiveImport": true
+    }
+  ]
+}

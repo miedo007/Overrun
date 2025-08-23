@@ -1,82 +1,54 @@
 {
   "dependencies": {
-    "com.google.external-dependency-manager": {
-      "version": "1.2.168",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
-    },
-    "com.rovio.beacon.unitysdk": {
-      "version": "6.16.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
-    },
-    "com.rovio.buildtool": {
-      "version": "1.0.10",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
-    },
-    "com.rovio.mtl.bonfire": {
-      "version": "1.0.10",
+    "com.thescript.bonfire": {
+      "version": "file:com.thescript.bonfire",
       "depth": 0,
-      "source": "registry",
+      "source": "embedded",
       "dependencies": {
-        "com.google.external-dependency-manager": "1.2.168",
-        "com.rovio.beacon.unitysdk": "6.16.0",
-        "com.rovio.mtl.toolbox": "1.0.26"
-      },
-      "url": "https://unity-packages.rovio.dev"
+        "com.thescript.ui": "1.1.14",
+        "com.thescript.uiframework": "1.0.2",
+        "com.thescript.toolbox": "1.0.27",
+        "com.thescript.injection": "1.0.9",
+        "com.thescript.save": "1.0.2"
+      }
     },
-    "com.rovio.mtl.buildtool": {
-      "version": "1.0.13",
+    "com.thescript.injection": {
+      "version": "file:com.thescript.injection",
       "depth": 0,
-      "source": "registry",
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.thescript.save": {
+      "version": "file:com.thescript.save",
+      "depth": 0,
+      "source": "embedded",
       "dependencies": {
-        "com.rovio.buildtool": "1.0.10"
-      },
-      "url": "https://unity-packages.rovio.dev"
+        "com.thescript.toolbox": "1.0.27",
+        "com.thescript.injection": "1.0.9"
+      }
     },
-    "com.rovio.mtl.injection": {
-      "version": "1.0.9",
+    "com.thescript.toolbox": {
+      "version": "file:com.thescript.toolbox",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
-    },
-    "com.rovio.mtl.save": {
-      "version": "1.0.2",
-      "depth": 0,
-      "source": "registry",
+      "source": "embedded",
       "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.0.2"
-      },
-      "url": "https://unity-packages.rovio.dev"
+        "com.thescript.injection": "1.0.9"
+      }
     },
-    "com.rovio.mtl.toolbox": {
-      "version": "1.0.27",
+    "com.thescript.ui": {
+      "version": "file:com.thescript.ui",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
+      "source": "embedded",
+      "dependencies": {}
     },
-    "com.rovio.mtl.ui": {
-      "version": "1.1.14",
+    "com.thescript.uiframework": {
+      "version": "file:com.thescript.uiframework",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
-    },
-    "com.rovio.mtl.uiframework": {
-      "version": "1.0.2",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://unity-packages.rovio.dev"
+      "source": "embedded",
+      "dependencies": {
+        "com.thescript.injection": "1.0.9",
+        "com.thescript.toolbox": "1.0.27"
+      }
     },
     "com.unity.2d.animation": {
       "version": "7.0.7",
@@ -95,10 +67,10 @@
       "depth": 2,
       "source": "registry",
       "dependencies": {
+        "com.unity.burst": "1.5.1",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.1.0",
-        "com.unity.modules.uielements": "1.0.0",
-        "com.unity.burst": "1.5.1"
+        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -121,9 +93,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.animation": "7.0.7",
         "com.unity.2d.common": "6.0.4",
-        "com.unity.2d.sprite": "1.0.0"
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.2d.animation": "7.0.7"
       },
       "url": "https://packages.unity.com"
     },
@@ -138,9 +110,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.mathematics": "1.1.0",
-        "com.unity.2d.common": "6.0.4",
         "com.unity.2d.path": "5.0.2",
+        "com.unity.2d.common": "6.0.4",
+        "com.unity.mathematics": "1.1.0",
         "com.unity.modules.physics2d": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -156,9 +128,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.tilemap": "1.0.0",
-        "com.unity.2d.tilemap": "1.0.0",
         "com.unity.ugui": "1.0.0",
+        "com.unity.2d.tilemap": "1.0.0",
+        "com.unity.modules.tilemap": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
@@ -254,7 +226,7 @@
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.0.2",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -264,9 +236,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.androidjni": "1.0.0",
         "com.unity.nuget.newtonsoft-json": "3.0.2",
-        "com.unity.modules.androidjni": "1.0.0"
+        "com.unity.modules.unitywebrequest": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -295,9 +267,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"

@@ -1,5 +1,4 @@
 ﻿using JetBrains.Annotations;
-using Mtl.Bonfire;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Feedback;
@@ -20,38 +19,45 @@ namespace Project.Settings
         [SerializeField] private Button emailSupportButton;
 
         [Inject] private FeedbackController _feedbackController;
-        [Inject] private BeaconWrapper _beaconWrapper;
         [Inject] private UIFrame _uiFrame;
-        
+
         private void Awake()
         {
-            closeButton.onClick.AddListener(OnResumeButtonClicked);
-            emailSupportButton.onClick.AddListener(SendEmailToSupport);
+            if (closeButton != null) closeButton.onClick.AddListener(OnResumeButtonClicked);
+            if (emailSupportButton != null) emailSupportButton.onClick.AddListener(SendEmailToSupport);
         }
-        
+
         public void OnReady()
         {
-            playerIdText.text = $"Player ID: {_beaconWrapper.CustomerId}";
+            if (playerIdText != null) playerIdText.text = "Player ID: —";
         }
-        
+
         private void OnResumeButtonClicked()
         {
             _uiFrame.Close(GetType());
         }
 
         [UsedImplicitly]
-        public void SendEmailToSupport()
-        {
-            UnityEngine.Application.OpenURL("mailto:privacy@darkmatterplay.com");
-        }
+public void SendEmailToSupport()
+{
+    UnityEngine.Application.OpenURL("mailto:mehdi.elmoussali@gmail.com");
+}
 
         protected override void OnOpened()
         {
-            playerIdText.text = $"Player ID: {_beaconWrapper.CustomerId}";
-            hapticsToggle.Init(FeedbackController.GetHapticsEnabled(), OnHapticsToggled);
-            soundToggle.Init(_feedbackController.Audio.GetSoundEffectsActive(), OnSoundToggled);
-            musicToggle.Init(_feedbackController.Audio.GetMusicActive(), OnMusicToggled);
-            screenshakeToggle.Init(FeedbackController.GetScreenShakeActive(), OnScreenShakeToggled);
+            if (playerIdText != null) playerIdText.text = "Player ID: —";
+
+            if (hapticsToggle != null)
+                hapticsToggle.Init(FeedbackController.GetHapticsEnabled(), OnHapticsToggled);
+
+            if (soundToggle != null)
+                soundToggle.Init(_feedbackController.Audio.GetSoundEffectsActive(), OnSoundToggled);
+
+            if (musicToggle != null)
+                musicToggle.Init(_feedbackController.Audio.GetMusicActive(), OnMusicToggled);
+
+            if (screenshakeToggle != null)
+                screenshakeToggle.Init(FeedbackController.GetScreenShakeActive(), OnScreenShakeToggled);
         }
 
         private void OnSoundToggled()
