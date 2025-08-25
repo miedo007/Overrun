@@ -25,15 +25,7 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
-  - m_Id: scoped:Rovio
-    m_Name: Rovio
-    m_Url: https://unity-packages.rovio.dev
-    m_Scopes:
-    - com.rovio
-    - com.google
-    m_IsDefault: 0
-    m_Capabilities: 0
-  m_UserSelectedRegistryName: Rovio
+  m_UserSelectedRegistryName: 
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
