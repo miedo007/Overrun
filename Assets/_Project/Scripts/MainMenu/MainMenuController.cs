@@ -15,7 +15,7 @@ namespace Project.MainMenu
     public class MainMenuController : MonoBehaviour, IInjectionReady
     {
         [SerializeField] private MusicData musicData;
-        
+
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly SceneLoader _sceneLoader;
         [Inject] private readonly SessionInfo _sessionInfo;
@@ -23,7 +23,9 @@ namespace Project.MainMenu
         [Inject] private readonly InProgressSessionInfo _inProgressSessionInfo;
         [Inject] private readonly PlayerInfo _playerInfo;
         [Inject] private readonly SaveManager _saveManager;
-        
+
+        private NavBarScreen _navBar;
+
         public void OnReady()
         {
             _heroRegistry.LoadSelectedHero();
@@ -32,19 +34,27 @@ namespace Project.MainMenu
         private void Start()
         {
             musicData.Play();
-            
+
             // Set target framerate
             UnityEngine.Application.targetFrameRate = 60;
-            
+
             _uiFrame.Open<MainMenuHudScreen>();
             _uiFrame.Open<SagaMapScreen>();
-            
-            var navBar = _uiFrame.Open<NavBarScreen>();
-            navBar.PlayButtonClicked += OnPlayButtonClicked;    
-            navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
-            navBar.SettingsButtonClicked += OnSettingsButtonCLicked;
 
-            if (_inProgressSessionInfo.InProgressSave.InProgress)
+            _navBar = _uiFrame.Open<NavBarScreen>();
+            _navBar.PlayButtonClicked += OnPlayButtonClicked;
+            _navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
+            _navBar.SettingsButtonClicked += OnSettingsButtonCLicked;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Menu is not active gameplay
+            PokiSignals.GameplayStop();
+#endif
+
+            // Correct in-progress check
+            if (_inProgressSessionInfo != null &&
+                _inProgressSessionInfo.InProgressSave != null &&
+                _inProgressSessionInfo.InProgressSave.InProgress)
             {
                 if (_inProgressSessionInfo.IsValid())
                 {
@@ -53,27 +63,40 @@ namespace Project.MainMenu
                 }
                 else
                 {
-                    #if UNITY_EDITOR
+#if UNITY_EDITOR
                     Debug.LogError("Invalid in progress save. Clear it and ignore it");
-                    #endif
-                    
+#endif
                     _inProgressSessionInfo.ClearProgress();
                     _saveManager.Save();
                 }
             }
         }
 
+        private void OnDestroy()
+        {
+            if (_navBar != null)
+            {
+                _navBar.PlayButtonClicked -= OnPlayButtonClicked;
+                _navBar.UpgradeButtonClicked -= OnUpgradeButtonClicked;
+                _navBar.SettingsButtonClicked -= OnSettingsButtonCLicked;
+            }
+        }
+
         private void OnSettingsButtonCLicked()
         {
             _uiFrame.Open<SettingsScreen>();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Still non-play
+            PokiSignals.GameplayStop();
+#endif
         }
 
         private void InProgressScreenOnConfirmed(bool didConfirm)
         {
             var screen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
             screen.Confirmed -= InProgressScreenOnConfirmed;
-            
-            if (didConfirm)
+
+            if (didConfirm && _inProgressSessionInfo.InProgressSave != null)
             {
                 _heroRegistry.SetSelectedHero(_inProgressSessionInfo.InProgressSave.HeroId);
                 LoadLevel(_inProgressSessionInfo.InProgressSave.LevelIndex);
@@ -88,6 +111,10 @@ namespace Project.MainMenu
 
         private void OnPlayButtonClicked()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Start of the run: fire gameplayStart as soon as the player hits PLAY
+            PokiSignals.GameplayStart();
+#endif
             var levelIndex = _playerInfo.PlayerSave.TopStageIndex;
             OnLevelSelected(levelIndex);
         }
@@ -95,11 +122,17 @@ namespace Project.MainMenu
         private void OnUpgradeButtonClicked()
         {
             _uiFrame.Open<HeroSelectionScreen>();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            PokiSignals.GameplayStop();
+#endif
         }
 
         private void OpenHeroSelection()
         {
             _uiFrame.Open<HeroSelectionScreen>();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            PokiSignals.GameplayStop();
+#endif
         }
 
         private void OnLevelSelected(int levelIndex)
@@ -111,6 +144,9 @@ namespace Project.MainMenu
         {
             _heroRegistry.SetActiveHero(_heroRegistry.GetSelectedHero());
             _sessionInfo.LevelIndex = levelIndex;
+
+            // Do NOT start gameplay here; GameController handles it,
+            // and we already fired start on PLAY.
             _sceneLoader.LoadScene("game", 0.2f, 0.5f);
         }
     }

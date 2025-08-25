@@ -28,7 +28,6 @@ namespace Project.Game
         [Inject] private readonly UIFrame _uiFrame;
         [Inject] private readonly InProgressSessionInfo _inProgressSession;
         [Inject] private readonly SaveManager _saveManager;
-        // Removed: IAnalyticsManager
         [Inject] private readonly LevelController _levelController;
         [Inject] private readonly EnemyManager _enemyManager;
         [Inject] private readonly CameraManager _cameraManager;
@@ -78,6 +77,8 @@ namespace Project.Game
 
             _playerInput.Hide(true);
 
+            // No Poki signal here. Start is fired on PLAY (MainMenu).
+
             if (!hasInProgressSession)
             {
                 OpenWeaponSelector();
@@ -95,6 +96,7 @@ namespace Project.Game
                 ? _weaponDatabase
                 : _heroInfo.Data.StartingWeaponDatabase);
             weaponSelector.OnCloseEvent += OnWeaponSelectorClosed;
+            // Do NOT stop here — you want the run to remain "playing" after PLAY.
         }
 
         private void OnWeaponSelectorClosed(UIScreen weaponSelector)
@@ -120,6 +122,8 @@ namespace Project.Game
 
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
+
+            // No stop between waves.
 
             var currencyReward = ApplySoftCurrencyReward();
 
@@ -165,6 +169,7 @@ namespace Project.Game
             var shopScreen = _uiFrame.Open<ShopScreen>();
             shopScreen.Initialize();
             shopScreen.OnCloseEvent += OnShopClosed;
+            // No stop here.
         }
 
         private void OnWaveRewardsClosed(UIScreen screen)
@@ -174,6 +179,7 @@ namespace Project.Game
             var upgradeSelector = _uiFrame.Open<StatUpgradeSelectorScreen>();
             upgradeSelector.Initialize();
             upgradeSelector.OnCloseEvent += OnUpgradeSelectorClosed;
+            // No stop here.
         }
 
         private void OnShopClosed(UIScreen screen)
@@ -215,6 +221,7 @@ namespace Project.Game
             }
 
             _cameraManager.ZoomOut();
+            // No stop during intros.
         }
 
         private void OnWaveIntroCompleted(UIScreen waveIntroScreen)
@@ -226,10 +233,16 @@ namespace Project.Game
                 _levelController.CurrentLevel,
                 _levelController.CurrentLevelIndex,
                 _levelController.WaveIndex);
+
+            // Optional: duplicate-safe start (guard will skip if PLAY already started it)
+            PokiSignals.GameplayStart();
         }
 
         private void OnLevelCompleted()
         {
+            // Stop only when the level/run actually ends (win)
+            PokiSignals.GameplayStop();
+
             if (_inProgressSession != null)
             {
                 _inProgressSession.ClearProgress();
@@ -269,6 +282,9 @@ namespace Project.Game
 
         private void OnPlayerHealthDepleted()
         {
+            // Stop only when the level/run actually ends (fail)
+            PokiSignals.GameplayStop();
+
             if (_inProgressSession != null)
             {
                 _inProgressSession.ClearProgress();
@@ -300,6 +316,8 @@ namespace Project.Game
 
         private void LoadMainMenu()
         {
+            // Safety net before leaving the scene
+            PokiSignals.GameplayStop();
             _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }
 
@@ -368,5 +386,15 @@ namespace Project.Game
             }
         }
 #endif
+
+        // Pause/focus hygiene for WebGL
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus) PokiSignals.GameplayStop();
+        }
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) PokiSignals.GameplayStop();
+        }
     }
 }

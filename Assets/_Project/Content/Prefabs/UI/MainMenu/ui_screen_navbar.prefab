@@ -561,6 +561,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.14711823
       objectReference: {fileID: 0}
+    - target: {fileID: 1556745210055798580, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3167326857836907291, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -677,6 +681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: button_play
       objectReference: {fileID: 0}
+    - target: {fileID: 8690713543724383719, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e4f4c0390c77404fbc0e6716111c623, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
 --- !u!224 &145878120546156889 stripped
