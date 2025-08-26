@@ -235,21 +235,61 @@ namespace Project.Game
         }
 
         private void OnWaveIntroCompleted(UIScreen waveIntroScreen)
-        {
-            waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
+{
+    waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
 
-            // ★ Show movement hint immediately at actual wave start
-            if (_idleHint != null) _idleHint.Begin();
+    // Show movement hint immediately when wave intro closes
+    _idleHint?.Begin();
 
-            _levelController.BeginNextWave(0.375f);
-            _enemyManager.BeginWave(
-                _levelController.CurrentLevel,
-                _levelController.CurrentLevelIndex,
-                _levelController.WaveIndex);
+    // Instead of starting the wave right away, wait until the player moves
+    StartCoroutine(WaitForMoveThenStartWave());
+}
 
-            // Optional: duplicate-safe start (guard will skip if PLAY already started it)
-            PokiSignals.GameplayStart();
-        }
+private void StartWaveGameplay()
+{
+    _levelController.BeginNextWave(0.375f);
+    _enemyManager.BeginWave(
+        _levelController.CurrentLevel,
+        _levelController.CurrentLevelIndex,
+        _levelController.WaveIndex);
+
+    PokiSignals.GameplayStart();
+}
+
+private System.Collections.IEnumerator WaitForMoveThenStartWave()
+{
+    Vector3 lastPos = _playerController.transform.position;
+
+    while (true)
+    {
+        yield return null;
+
+        if (HasMovementInput() || HasMovedSince(ref lastPos))
+            break;
+    }
+
+    StartWaveGameplay();
+}
+
+private bool HasMovedSince(ref Vector3 lastPos)
+{
+    Vector3 pos = _playerController.transform.position;
+    float distSqr = (pos - lastPos).sqrMagnitude;
+    lastPos = pos;
+    return distSqr > 0.0004f; // tweak threshold to match your scale
+}
+
+private bool HasMovementInput()
+{
+    if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.01f) return true;
+    if (Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.01f) return true;
+
+    if (Input.anyKeyDown) return true;
+    if (Input.GetMouseButton(0)) return true;
+    if (Input.touchCount > 0) return true;
+
+    return false;
+}
 
         private void OnLevelCompleted()
         {
