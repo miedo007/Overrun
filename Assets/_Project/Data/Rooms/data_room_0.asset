@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: data_room_0
   m_EditorClassIdentifier: 
   <GroundColor>k__BackingField: {r: 0.006229961, g: 0.014194259, b: 0.14150941, a: 1}
-  <WallColor>k__BackingField: {r: 0.0035303133, g: 0.015145594, b: 0.066037714, a: 1}
+  <WallColor>k__BackingField: {r: 0.04743678, g: 0.10752823, b: 0.3679245, a: 1}

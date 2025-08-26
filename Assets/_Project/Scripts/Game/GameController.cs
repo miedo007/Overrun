@@ -12,6 +12,7 @@ using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Game.Weapons;
+using Project.Game.Tutorials;   // ★ for IdleHint
 using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
@@ -45,10 +46,16 @@ namespace Project.Game
 
         private HeroInfo _heroInfo;
 
+        // ★ cache the hint once (even if inactive)
+        private IdleHint _idleHint;
+
         public void OnReady()
         {
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
             _heroInfo = _heroRegistry.ActiveHero;
+
+            // ★ find the IdleHint in scene (true = include inactive)
+            _idleHint = FindObjectOfType<IdleHint>(true);
         }
 
         private IEnumerator Start()
@@ -115,6 +122,9 @@ namespace Project.Game
 
         private void OnWaveCompleted()
         {
+            // ★ Hide/stop the hint while out of combat (optional but recommended)
+            if (_idleHint != null) _idleHint.End();
+
             menuMusic.Play();
 
             _cameraManager.ZoomIn();
@@ -228,6 +238,9 @@ namespace Project.Game
         {
             waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
 
+            // ★ Show movement hint immediately at actual wave start
+            if (_idleHint != null) _idleHint.Begin();
+
             _levelController.BeginNextWave(0.375f);
             _enemyManager.BeginWave(
                 _levelController.CurrentLevel,
@@ -264,6 +277,9 @@ namespace Project.Game
             _playerController.enabled = false;
             _playerController.HandleWaveComplete();
             _playerInput.Hide();
+
+            // ★ ensure hint is off on win screen
+            if (_idleHint != null) _idleHint.End();
 
             var currencyReward = ApplySoftCurrencyReward();
 
@@ -304,6 +320,9 @@ namespace Project.Game
             _playerController.enabled = false;
             _playerController.gameObject.SetActive(false);
             _playerInput.Hide();
+
+            // ★ ensure hint is off on fail screen
+            if (_idleHint != null) _idleHint.End();
 
             var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
             levelFailedScreen.ConfirmButtonClicked += OnLevelFailConfirmed;
