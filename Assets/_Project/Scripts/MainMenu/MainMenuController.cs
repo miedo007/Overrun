@@ -48,7 +48,7 @@ namespace Project.MainMenu
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             // Menu is not active gameplay
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 #endif
 
             // Correct in-progress check
@@ -87,7 +87,7 @@ namespace Project.MainMenu
             _uiFrame.Open<SettingsScreen>();
 #if UNITY_WEBGL && !UNITY_EDITOR
             // Still non-play
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 #endif
         }
 
@@ -113,7 +113,7 @@ namespace Project.MainMenu
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             // Start of the run: fire gameplayStart as soon as the player hits PLAY
-            PokiSignals.GameplayStart();
+            CrazySdkManager.GameplayStop();
 #endif
             var levelIndex = _playerInfo.PlayerSave.TopStageIndex;
             OnLevelSelected(levelIndex);
@@ -123,7 +123,7 @@ namespace Project.MainMenu
         {
             _uiFrame.Open<HeroSelectionScreen>();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 #endif
         }
 
@@ -131,7 +131,7 @@ namespace Project.MainMenu
         {
             _uiFrame.Open<HeroSelectionScreen>();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 #endif
         }
 

@@ -18,6 +18,7 @@ using Project.Tiers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+
 namespace Project.Game
 {
     public class GameController : MonoBehaviour, IInjectionReady
@@ -253,7 +254,7 @@ private void StartWaveGameplay()
         _levelController.CurrentLevelIndex,
         _levelController.WaveIndex);
 
-    PokiSignals.GameplayStart();
+            CrazySdkManager.GameplayStart();
 }
 
 private System.Collections.IEnumerator WaitForMoveThenStartWave()
@@ -294,7 +295,7 @@ private bool HasMovementInput()
         private void OnLevelCompleted()
         {
             // Stop only when the level/run actually ends (win)
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 
             if (_inProgressSession != null)
             {
@@ -339,7 +340,7 @@ private bool HasMovementInput()
         private void OnPlayerHealthDepleted()
         {
             // Stop only when the level/run actually ends (fail)
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
 
             if (_inProgressSession != null)
             {
@@ -376,7 +377,7 @@ private bool HasMovementInput()
         private void LoadMainMenu()
         {
             // Safety net before leaving the scene
-            PokiSignals.GameplayStop();
+            CrazySdkManager.GameplayStop();
             _sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
         }
 
@@ -449,11 +450,11 @@ private bool HasMovementInput()
         // Pause/focus hygiene for WebGL
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (!hasFocus) PokiSignals.GameplayStop();
+            if (!hasFocus) CrazySdkManager.GameplayStop();
         }
         private void OnApplicationPause(bool paused)
         {
-            if (paused) PokiSignals.GameplayStop();
+            if (paused) CrazySdkManager.GameplayStop();
         }
     }
 }
