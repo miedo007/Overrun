@@ -393,6 +393,9 @@ private bool HasMovementInput()
             _playerController.gameObject.SetActive(true);
             _playerController.enabled = true;
             
+            // Fix weapon animation states after GameObject reactivation
+            ResetWeaponAnimationStates();
+            
             // Restore player health to full
             _playerHealthController.CurrentHealth = _playerHealthController.MaxHealth;
             Debug.Log($"[GameController] Player health restored to {_playerHealthController.CurrentHealth}/{_playerHealthController.MaxHealth}");
@@ -417,7 +420,23 @@ private bool HasMovementInput()
             // Re-enable player input
             _playerInput.Show();
             
-            Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned!");
+            Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned, weapons reset!");
+        }
+
+        private void ResetWeaponAnimationStates()
+        {
+            // Find all weapon animation components and reset their states
+            var weaponAnimations = _playerController.GetComponentsInChildren<Animation>();
+            foreach (var animation in weaponAnimations)
+            {
+                if (animation != null)
+                {
+                    // Stop any ongoing animations and reset to default state
+                    animation.Stop();
+                    animation.Rewind();
+                    Debug.Log($"[GameController] Reset animation state for weapon: {animation.gameObject.name}");
+                }
+            }
         }
 
         private void LoadMainMenu()
