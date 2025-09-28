@@ -9,8 +9,8 @@ namespace Project.Game.Levels
     public static class MidgameAds
     {
         // Tweakable settings
-        public static int WaveFrequency = 1; // Show ad every X waves (CHANGED TO 1 FOR TESTING)
-        public static float CooldownMinutes = 0.1f; // Minimum time between ads in minutes (CHANGED TO 6 SECONDS FOR TESTING)
+        public static int WaveFrequency = 3; // Show ad every X waves  
+        public static float CooldownMinutes = 2f; // Minimum time between ads in minutes
         
         // Private tracking
         private static int _adsShown = 0;

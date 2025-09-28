@@ -374,11 +374,50 @@ private bool HasMovementInput()
 
             var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
             levelFailedScreen.ConfirmButtonClicked += OnLevelFailConfirmed;
+            levelFailedScreen.ReviveButtonClicked += OnReviveButtonClicked;
         }
 
         private void OnLevelFailConfirmed()
         {
             LoadMainMenu();
+        }
+
+        private void OnReviveButtonClicked()
+        {
+            Debug.Log("[GameController] Player used revive - continuing current wave");
+            
+            // Close the failed screen
+            _uiFrame.Close<LevelFailedScreen>();
+            
+            // Reactivate and re-enable the player controller
+            _playerController.gameObject.SetActive(true);
+            _playerController.enabled = true;
+            
+            // Restore player health to full
+            _playerHealthController.CurrentHealth = _playerHealthController.MaxHealth;
+            Debug.Log($"[GameController] Player health restored to {_playerHealthController.CurrentHealth}/{_playerHealthController.MaxHealth}");
+            
+            // Re-subscribe to health events for the new attempt
+            _playerHealthController.Depleted += OnPlayerHealthDepleted;
+            _levelController.WaveCompleted += OnWaveCompleted;
+            _levelController.LevelCompleted += OnLevelCompleted;
+            
+            // Clean up any remaining enemies from the failed attempt
+            _enemyManager.EndWave();
+            
+            // Continue the current wave (timer keeps running)
+            _levelController.ContinueCurrentWave();
+            
+            // Restart enemy spawning for the current wave
+            _enemyManager.BeginWave(
+                _levelController.CurrentLevel,
+                _levelController.CurrentLevelIndex,
+                _levelController.WaveIndex);
+            
+            // Re-enable player input
+            _playerInput.Show();
+            
+            Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned!");
         }
 
         private void LoadMainMenu()

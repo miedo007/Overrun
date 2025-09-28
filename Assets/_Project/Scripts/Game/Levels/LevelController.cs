@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using Mtl.Injection;
 using Mtl.UiFramework;
@@ -63,6 +63,27 @@ namespace Project.Game.Levels
                 WaveCompleted?.Invoke();
                 WaveIndex++;
             }
+        }
+
+        public void RestartCurrentWave()
+        {
+            Debug.Log($"[LevelController] Restarting current wave {WaveIndex + 1}");
+            
+            // Stop any existing timer
+            var timer = _uiFrame.Get<HudScreen>().Timer;
+            timer.TimerCompleted -= OnTimerCompleted;
+            timer.Stop();
+            
+            // Restart the current wave immediately
+            BeginNextWave(0f);
+        }
+
+        public void ContinueCurrentWave()
+        {
+            Debug.Log($"[LevelController] Continuing current wave {WaveIndex + 1} (timer keeps running)");
+            
+            // Timer continues running - we don't stop or restart it
+            // This method is used for revives where we want to continue from where we left off
         }
 
         #if UNITY_EDITOR
