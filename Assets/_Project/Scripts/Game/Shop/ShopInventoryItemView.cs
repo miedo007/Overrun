@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using DG.Tweening;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
+using Project.Game.Levels;
 using Project.Game.Tutorials;
 using Project.Game.Weapons;
 using Project.Heroes;
@@ -16,6 +17,7 @@ namespace Project.Game.Shop
     public class ShopInventoryItemView : MonoBehaviour
     {
         public event Action<ShopInventoryItemView> BuyButtonClicked;
+        public event Action<ShopInventoryItemView> RewardedAdBuyClicked;
         public event Action<ShopInventoryItemView, bool> LockedStateChanged;
         
         [field: SerializeField] public  CanvasGroup CanvasGroup { get; private set; }
@@ -30,12 +32,18 @@ namespace Project.Game.Shop
         [field: SerializeField] public  MergeableNotification MergeableNotification { get; private set; }
         [field: SerializeField] public  LockToggle LockToggle { get; private set; }
 
+        [Header("Currency/Ad UI Elements")]
+        [SerializeField] private GameObject coinImageObject;  // GameObject containing coin icon
+        [SerializeField] private GameObject adIconObject;     // GameObject containing ad icon
+
         [Inject] private readonly TierDatabase _tierDatabase;
         [Inject] private readonly UIFrame _uiFrame;
 
         private bool _affordable;
         private bool _purchased;
         private int _cost;
+        private bool _isShowingRewardedAdOption = false;
+        private bool _canUseRewardedAd = true; // Will be set by ShopScreen
         
         public BaseData Data { get; private set; }
         public int Cost => _cost;
@@ -90,7 +98,7 @@ namespace Project.Game.Shop
                 }
                 else if (string.IsNullOrEmpty(buyButtonString))
                 {
-                    CostText.text = $"<sprite name=currency_energy> {cost}";
+                    // Will be updated in UpdateBuyButtonDisplay()
                 }
                 else
                 {
@@ -99,6 +107,12 @@ namespace Project.Game.Shop
             }
             
             RefreshMergeableNotification();
+        }
+
+        public void SetRewardedAdAvailability(bool canUseRewardedAd)
+        {
+            _canUseRewardedAd = canUseRewardedAd;
+            OnShopCurrencyChanged(); // Refresh button state
         }
         
         private void OnDestroy()
@@ -113,13 +127,73 @@ namespace Project.Game.Shop
         private void OnShopCurrencyChanged()
         {
             _affordable = _cost <= _heroInfo.GetShopCurrencyIntValue();
-            BuyButton.interactable = _affordable;
+            UpdateBuyButtonDisplay();
             RefreshMergeableNotification();
+        }
+
+        private void UpdateBuyButtonDisplay()
+        {
+            if (_purchased) return;
+
+            var hasEnoughCurrency = _affordable;
+            var canPurchaseWithAd = !hasEnoughCurrency && _canUseRewardedAd && CanBePurchasedWithAd();
+
+            if (hasEnoughCurrency)
+            {
+                // Show normal purchase with currency
+                _isShowingRewardedAdOption = false;
+                BuyButton.interactable = true;
+                
+                // Show coin icon and cost text, hide ad icon
+                if (coinImageObject != null) coinImageObject.SetActive(true);
+                if (adIconObject != null) adIconObject.SetActive(false);
+                CostText.text = $"<sprite name=currency_energy> {_cost}";
+                CostText.gameObject.SetActive(true);
+            }
+            else if (canPurchaseWithAd)
+            {
+                // Show rewarded ad purchase option
+                _isShowingRewardedAdOption = true;
+                BuyButton.interactable = true;
+                
+                // Show ad icon, hide coin icon and cost text
+                if (coinImageObject != null) coinImageObject.SetActive(false);
+                if (adIconObject != null) adIconObject.SetActive(true);
+                CostText.gameObject.SetActive(false); // Hide text when showing ad icon
+            }
+            else
+            {
+                // Can't afford and no ad option available
+                _isShowingRewardedAdOption = false;
+                BuyButton.interactable = false;
+                
+                // Show grayed out currency display
+                if (coinImageObject != null) coinImageObject.SetActive(true);
+                if (adIconObject != null) adIconObject.SetActive(false);
+                CostText.text = $"<sprite name=currency_energy> {_cost}";
+                CostText.gameObject.SetActive(true);
+            }
+        }
+
+        private bool CanBePurchasedWithAd()
+        {
+            var weaponData = Data as WeaponData;
+            if (weaponData != null)
+            {
+                // Can buy weapon with ad if: has free slot OR can merge
+                return _heroInfo.HasFreeWeaponSlot() || _heroInfo.CanMergeWeapon(weaponData, 1);
+            }
+            else
+            {
+                // Items can always be purchased (they don't have inventory limits)
+                return true;
+            }
         }
 
         private void OnWeaponsChanged()
         {
             RefreshMergeableNotification();
+            OnShopCurrencyChanged(); // Refresh ad availability based on weapon slots
         }
 
         private void RefreshMergeableNotification()
@@ -135,7 +209,7 @@ namespace Project.Game.Shop
                 return;
             }
 
-            if (!_affordable)
+            if (!_affordable && !_isShowingRewardedAdOption)
             {
                 MergeableNotification.Deactivate();
                 return;
@@ -167,11 +241,44 @@ namespace Project.Game.Shop
 
         private void OnBuyButtonClicked()
         {
-            if (_heroInfo.GetShopCurrencyIntValue() >= _cost)
+            if (_isShowingRewardedAdOption)
             {
+                // Handle rewarded ad purchase
+                PerformRewardedAdPurchase();
+            }
+            else if (_heroInfo.GetShopCurrencyIntValue() >= _cost)
+            {
+                // Handle normal currency purchase
                 LockToggle.SetState(false);
                 BuyButtonClicked?.Invoke(this);
             }
+        }
+
+        private void PerformRewardedAdPurchase()
+        {
+            Debug.Log($"[ShopInventoryItemView] Attempting rewarded ad purchase for {Data.DisplayName}");
+            
+            // Disable button during ad
+            BuyButton.interactable = false;
+            
+            // Show loading state - hide both icons, show loading text
+            if (coinImageObject != null) coinImageObject.SetActive(false);
+            if (adIconObject != null) adIconObject.SetActive(false);
+            CostText.text = "LOADING...";
+            CostText.gameObject.SetActive(true);
+            
+            RewardedAds.ShowRewardedAd(
+                onAdFinished: () => {
+                    Debug.Log($"[ShopInventoryItemView] Rewarded ad completed - purchasing {Data.DisplayName} for free!");
+                    LockToggle.SetState(false);
+                    RewardedAdBuyClicked?.Invoke(this);
+                },
+                onAdFailed: () => {
+                    Debug.Log("[ShopInventoryItemView] Rewarded ad failed - restoring button state");
+                    // Restore button state
+                    UpdateBuyButtonDisplay();
+                }
+            );
         }
 
         public void Purchase()

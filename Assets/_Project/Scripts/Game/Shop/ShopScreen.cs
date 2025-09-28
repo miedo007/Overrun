@@ -1,4 +1,4 @@
-﻿using Mtl.Injection;
+using Mtl.Injection;
 using Mtl.UiFramework;
 using MTLSimpleAudio;
 using Project.Application;
@@ -68,6 +68,9 @@ namespace Project.Game.Shop
 
             _rerollCount = 0;
             UpdateRerollCost();
+            
+            // Reset rewarded ad usage for new shop session
+            ShopInventory.ResetRewardedAdUsage();
             
             ShopInventory.Populate(waveIndex: _waveIndex);
         }

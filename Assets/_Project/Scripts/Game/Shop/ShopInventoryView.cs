@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.Toolbox;
 using Mtl.UiFramework;
@@ -31,6 +31,7 @@ namespace Project.Game.Shop
 
         private BaseData _lockedItem;
         private int _waveIndex;
+        private bool _hasUsedRewardedAdThisShop = false; // Track once-per-shop limitation
 
         private List<ShopInventoryItemView> CurrentItems = new();
 
@@ -89,6 +90,15 @@ namespace Project.Game.Shop
 
             Scroller.horizontalNormalizedPosition = 0;
         }
+
+        public void ResetRewardedAdUsage()
+        {
+            _hasUsedRewardedAdThisShop = false;
+            Debug.Log("[ShopInventoryView] Rewarded ad usage reset for new shop session");
+            
+            // Update all items to show ad availability
+            UpdateAllItemsAdAvailability();
+        }
         
         public void AddItem(BaseData data, bool lockedItem)
         {
@@ -96,10 +106,22 @@ namespace Project.Game.Shop
             var cost = _gameData.GetScaledCost(data, _waveIndex);
             itemView.Initialize(data, _heroRegistry.ActiveHero, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
+            itemView.RewardedAdBuyClicked += OnRewardedAdBuyClicked;
             itemView.EnableLockToggle(lockedItem);
             itemView.LockedStateChanged += OnItemViewLockStateChanged;
             
+            // Set initial rewarded ad availability
+            itemView.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+            
             CurrentItems.Add(itemView);
+        }
+
+        private void UpdateAllItemsAdAvailability()
+        {
+            foreach (var item in CurrentItems)
+            {
+                item.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+            }
         }
 
         private void OnItemViewLockStateChanged(ShopInventoryItemView updatedItem, bool state)
@@ -132,6 +154,7 @@ namespace Project.Game.Shop
 
                 CurrentItems.RemoveAt(index);
                 itemView.BuyButtonClicked -= OnBuyButtonClicked;
+                itemView.RewardedAdBuyClicked -= OnRewardedAdBuyClicked;
                 Destroy(itemView.gameObject);
             }
         }
@@ -162,10 +185,46 @@ namespace Project.Game.Shop
             }
         }
 
+        private void OnRewardedAdBuyClicked(ShopInventoryItemView itemView)
+        {
+            Debug.Log($"[ShopInventoryView] Processing rewarded ad purchase for {itemView.Data.DisplayName}");
+            
+            // Mark rewarded ad as used for this shop session
+            _hasUsedRewardedAdThisShop = true;
+            UpdateAllItemsAdAvailability();
+            
+            var data = itemView.Data;
+            var weaponData = data as WeaponData;
+            if (weaponData != null)
+            {
+                PurchaseWeaponWithAd(itemView, weaponData);
+            }
+            else
+            {
+                var itemData = data as ItemData;
+                if (itemData != null)
+                {
+                    PurchaseItemWithAd(itemView, itemData);
+                }
+            }
+        }
+
         private void PurchaseItem(ShopInventoryItemView itemView, ItemData itemData, int cost)
         {
             itemView.Purchase();
             _heroRegistry.ActiveHero.ShopCurrency -= cost;
+            _heroRegistry.ActiveHero.AddItem(itemData);
+            if (!PrefKeys.HasCompletedItemsTutorial())
+            {
+                _uiFrame.Open<ItemTutorialScreen>();
+            }
+        }
+
+        private void PurchaseItemWithAd(ShopInventoryItemView itemView, ItemData itemData)
+        {
+            Debug.Log($"[ShopInventoryView] Purchased {itemData.DisplayName} with rewarded ad (FREE!)");
+            itemView.Purchase();
+            // No currency cost for rewarded ad purchases
             _heroRegistry.ActiveHero.AddItem(itemData);
             if (!PrefKeys.HasCompletedItemsTutorial())
             {
@@ -196,6 +255,34 @@ namespace Project.Game.Shop
 
             itemView.Purchase();
             _heroRegistry.ActiveHero.ShopCurrency -= cost;
+            _heroRegistry.ActiveHero.AddWeapon(weaponData);
+        }
+
+        private void PurchaseWeaponWithAd(ShopInventoryItemView itemView, WeaponData weaponData)
+        {
+            Debug.Log($"[ShopInventoryView] Purchased {weaponData.DisplayName} with rewarded ad (FREE!)");
+            
+            if (!_heroRegistry.ActiveHero.HasFreeWeaponSlot())
+            {
+                // can this weapon be merged with an item in the players inventory?
+                if (_heroRegistry.ActiveHero.CanMergeWeapon(weaponData, 1))
+                {
+                    itemView.Purchase();
+                    // No currency cost for rewarded ad purchases
+                    _heroRegistry.ActiveHero.MergeWeapon(weaponData, 1);
+                    return;
+                }
+
+                if (!PrefKeys.HasCompletedWeaponSlotsFullTutorial())
+                {
+                    _uiFrame.Open<WeaponSlotsFullTutorialScreen>();
+                }
+                weaponsFullNotification.Display();
+                return;
+            }
+
+            itemView.Purchase();
+            // No currency cost for rewarded ad purchases
             _heroRegistry.ActiveHero.AddWeapon(weaponData);
         }
     }
