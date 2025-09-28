@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Project.Boot;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Bootstrap : MonoBehaviour
 
     void Awake()
     {
+        // Ensure proper EventSystem management
+        gameObject.AddComponent<EventSystemManager>();
+        
         var flagPath = Path.Combine(Application.persistentDataPath, "first_launch.flag");
         bool firstLaunch = !File.Exists(flagPath);
 

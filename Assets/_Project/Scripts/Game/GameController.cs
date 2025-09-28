@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Mtl.Injection;
 using Mtl.Save;
 using Mtl.UiFramework;
@@ -57,6 +57,13 @@ namespace Project.Game
 
             // ★ find the IdleHint in scene (true = include inactive)
             _idleHint = FindObjectOfType<IdleHint>(true);
+            
+#if UNITY_EDITOR
+            // Add midgame ads debugger for easy testing
+            var debuggerGO = new GameObject("MidgameAdsDebugger");
+            debuggerGO.AddComponent<Project.Game.Levels.MidgameAdsDebugger>();
+            Debug.Log("[GameController] MidgameAdsDebugger added to scene. Press F2 to force ads!");
+#endif
         }
 
         private IEnumerator Start()
@@ -139,7 +146,7 @@ namespace Project.Game
             var currencyReward = ApplySoftCurrencyReward();
 
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
-            waveCompleteScreen.Initialize(currencyReward);
+            waveCompleteScreen.Initialize(currencyReward, false, _levelController.WaveIndex);
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
 
