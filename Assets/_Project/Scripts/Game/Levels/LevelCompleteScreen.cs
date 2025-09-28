@@ -15,7 +15,6 @@ namespace Project.Game.Levels
 
         [Header("Double Reward Feature")]
         [SerializeField] private GameObject doubleRewardPanel;
-        [SerializeField] private Button continueButton;
         [SerializeField] private Button doubleRewardButton;
         [SerializeField] private TextMeshProUGUI rewardAmountText; // Display total reward amount
 
@@ -47,23 +46,19 @@ namespace Project.Game.Levels
         
         private void Awake()
         {
-            // Original confirm button (fallback if no double reward panel)
+            // Original confirm button - handles "continue with normal reward"
             if (ConfirmButton != null)
             {
-                ConfirmButton.onClick.AddListener(OnConfirmButtonClicked);
+                ConfirmButton.onClick.AddListener(OnContinueButtonClicked);
                 _buttonScale = ConfirmButton.transform.localScale;
                 ConfirmButton.transform.localScale = Vector3.zero;
             }
             
-            // Double reward buttons
-            if (continueButton != null)
-            {
-                continueButton.onClick.AddListener(OnContinueButtonClicked);
-            }
-            
+            // Double reward button - handles "watch ad for double reward"
             if (doubleRewardButton != null)
             {
                 doubleRewardButton.onClick.AddListener(OnDoubleRewardButtonClicked);
+                doubleRewardButton.transform.localScale = Vector3.zero; // Start hidden like confirm button
             }
         }
         
@@ -82,38 +77,33 @@ namespace Project.Game.Levels
                 yield return null;
             }
 
-            // Show double reward buttons if available, otherwise show original confirm button
-            if (continueButton != null && doubleRewardButton != null)
+            // Check if we have double reward system available
+            if (doubleRewardButton != null)
             {
-                // We have the double reward system - show both buttons
-                continueButton.gameObject.SetActive(true);
-                continueButton.interactable = true;
-                Debug.Log("[LevelCompleteScreen] Continue button activated");
+                // Show both buttons with animations (like original confirm button)
+                if (ConfirmButton != null)
+                {
+                    ConfirmButton.transform.DOScale(_buttonScale, 0.125f);
+                    Debug.Log("[LevelCompleteScreen] Confirm button (Continue) animated in");
+                }
                 
-                doubleRewardButton.gameObject.SetActive(true);
-                doubleRewardButton.interactable = true;
-                Debug.Log("[LevelCompleteScreen] Double reward button activated");
+                if (doubleRewardButton != null)
+                {
+                    doubleRewardButton.transform.DOScale(_buttonScale, 0.125f);
+                    Debug.Log("[LevelCompleteScreen] Double reward button animated in");
+                }
                 
                 // Wait for user choice
                 yield return new WaitUntil(() => _shouldClose);
             }
             else
             {
-                // Fallback to original behavior
-                Debug.Log("[LevelCompleteScreen] Using original confirm button");
+                // Fallback to original single-button behavior
+                Debug.Log("[LevelCompleteScreen] Using original single confirm button");
                 if (ConfirmButton != null)
                 {
                     ConfirmButton.transform.DOScale(_buttonScale, 0.125f);
                 }
-            }
-        }
-
-        private void OnConfirmButtonClicked()
-        {
-            Debug.Log("[LevelCompleteScreen] Original confirm button clicked");
-            if (IsOpened)
-            {
-                Close();
             }
         }
 
@@ -130,7 +120,7 @@ namespace Project.Game.Levels
             Debug.Log("[LevelCompleteScreen] Double reward button clicked - showing rewarded ad");
             
             // Disable buttons during ad
-            if (continueButton != null) continueButton.interactable = false;
+            if (ConfirmButton != null) ConfirmButton.interactable = false;
             if (doubleRewardButton != null) doubleRewardButton.interactable = false;
             
             RewardedAds.ShowRewardedAd(
@@ -150,7 +140,7 @@ namespace Project.Game.Levels
                 onAdFailed: () => {
                     Debug.Log("[LevelCompleteScreen] ❌ Rewarded ad failed - restoring button state");
                     // Restore button state
-                    if (continueButton != null) continueButton.interactable = true;
+                    if (ConfirmButton != null) ConfirmButton.interactable = true;
                     if (doubleRewardButton != null) doubleRewardButton.interactable = true;
                 }
             );
