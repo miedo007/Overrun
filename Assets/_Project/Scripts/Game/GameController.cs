@@ -50,6 +50,9 @@ namespace Project.Game
         // ★ cache the hint once (even if inactive)
         private IdleHint _idleHint;
 
+        // Track accumulated rewards for entire level (reset on level start)
+        private int _totalLevelReward = 0;
+
         public void OnReady()
         {
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
@@ -122,6 +125,10 @@ namespace Project.Game
 
         private void StartLevel()
         {
+            // Reset reward tracking when starting a new level
+            _totalLevelReward = 0;
+            Debug.Log($"[GameController] Starting new level - Reset total reward tracker");
+            
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
 
@@ -142,22 +149,20 @@ namespace Project.Game
             _playerInput.Hide();
 
             // No stop between waves.
+            
+            // Calculate wave reward and give it immediately (restores top bar functionality)
+            var waveReward = _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.WaveIndex);
+            _totalLevelReward += waveReward;
+            
+            // Give currency immediately so top bar updates correctly
+            _playerInfo.ChangeCurrency(waveReward);
+            
+            Debug.Log($"[GameController] Wave {_levelController.WaveIndex + 1} reward: {waveReward} (given), Total level reward: {_totalLevelReward}");
 
-            var currencyReward = ApplySoftCurrencyReward();
-
+            // Show the wave complete screen with THIS WAVE's reward amount
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
-            waveCompleteScreen.Initialize(currencyReward, false, _levelController.WaveIndex);
+            waveCompleteScreen.Initialize(waveReward, false, _levelController.WaveIndex);
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
-        }
-
-        private int ApplySoftCurrencyReward()
-        {
-            var currencyReward =
-                _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.WaveIndex);
-
-            _playerInfo.ChangeCurrency(currencyReward);
-
-            return currencyReward;
         }
 
         private void OnWaveCompleteScreenClosed(UIScreen screen)
@@ -329,11 +334,36 @@ private bool HasMovementInput()
             // ★ ensure hint is off on win screen
             if (_idleHint != null) _idleHint.End();
 
-            var currencyReward = ApplySoftCurrencyReward();
+            // Add final wave reward to total and give it immediately
+            var finalWaveReward = _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.WaveIndex);
+            _totalLevelReward += finalWaveReward;
+            _playerInfo.ChangeCurrency(finalWaveReward);
+            
+            Debug.Log($"[GameController] Level completed! Final wave reward: {finalWaveReward} (given), Total level reward: {_totalLevelReward}");
 
-            var levelCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
-            levelCompleteScreen.Initialize(currencyReward, true);
+            // Use the proper LevelCompleteScreen for level completion
+            var levelCompleteScreen = _uiFrame.Open<LevelCompleteScreen>();
+            levelCompleteScreen.Initialize(_totalLevelReward); // Pass total rewards for display
+            levelCompleteScreen.DoubleRewardClicked += OnDoubleRewardClicked;
             levelCompleteScreen.OnCloseEvent += OnLevelCompleteClosed;
+        }
+
+        private void OnDoubleRewardClicked(bool wasDoubled)
+        {
+            if (wasDoubled)
+            {
+                // Currency was already given during waves, so just add the additional bonus amount
+                var bonusAmount = _totalLevelReward; // Give another full amount as bonus
+                _playerInfo.ChangeCurrency(bonusAmount);
+                Debug.Log($"[GameController] Double reward - Added bonus: {bonusAmount}, Total given this level: {_totalLevelReward * 2}");
+            }
+            else
+            {
+                Debug.Log($"[GameController] Continue - No bonus, Total given this level: {_totalLevelReward}");
+            }
+            
+            // Reset total reward for next level
+            _totalLevelReward = 0;
         }
 
         // No-op now that analytics are removed
@@ -341,6 +371,14 @@ private bool HasMovementInput()
 
         private void OnLevelCompleteClosed(UIScreen screen)
         {
+            screen.OnCloseEvent -= OnLevelCompleteClosed;
+            
+            var levelCompleteScreen = screen as LevelCompleteScreen;
+            if (levelCompleteScreen != null)
+            {
+                levelCompleteScreen.DoubleRewardClicked -= OnDoubleRewardClicked;
+            }
+            
             LoadMainMenu();
         }
 
