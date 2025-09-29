@@ -42,6 +42,7 @@ namespace Project.Game.Shop
         private bool _affordable;
         private bool _purchased;
         private int _cost;
+        private string _customButtonText; // Store custom button text like "CHOOSE"
         private bool _isShowingRewardedAdOption = false;
         private bool _canUseRewardedAd = true; // Will be set by ShopScreen
         
@@ -67,6 +68,7 @@ namespace Project.Game.Shop
             
             _cost = cost;
             _heroInfo = hero;
+            _customButtonText = buyButtonString; // Store the custom button text
             Data = data;
             Icon.sprite = data.Sprite;
             IconBacker.color = data.Tier.Color;
@@ -96,13 +98,14 @@ namespace Project.Game.Shop
                 {
                     BuyButton.gameObject.SetActive(false);
                 }
-                else if (string.IsNullOrEmpty(buyButtonString))
+                else if (!string.IsNullOrEmpty(buyButtonString))
                 {
-                    // Will be updated in UpdateBuyButtonDisplay()
+                    // Custom button text provided - will be handled in UpdateBuyButtonDisplay
+                    Debug.Log($"[ShopInventoryItemView] Custom button text set: '{buyButtonString}' for {data.DisplayName}");
                 }
                 else
                 {
-                    CostText.text = buyButtonString;
+                    // Will be updated in UpdateBuyButtonDisplay()
                 }
             }
             
@@ -134,6 +137,22 @@ namespace Project.Game.Shop
         private void UpdateBuyButtonDisplay()
         {
             if (_purchased) return;
+
+            // If custom button text is provided (like "CHOOSE"), always use it
+            if (!string.IsNullOrEmpty(_customButtonText))
+            {
+                _isShowingRewardedAdOption = false;
+                BuyButton.interactable = true;
+                
+                // Hide both currency and ad icons for custom text
+                if (coinImageObject != null) coinImageObject.SetActive(false);
+                if (adIconObject != null) adIconObject.SetActive(false);
+                CostText.text = _customButtonText;
+                CostText.gameObject.SetActive(true);
+                
+                Debug.Log($"[ShopInventoryItemView] Using custom button text: '{_customButtonText}'");
+                return;
+            }
 
             var hasEnoughCurrency = _affordable;
             var canPurchaseWithAd = !hasEnoughCurrency && _canUseRewardedAd && CanBePurchasedWithAd();

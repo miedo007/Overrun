@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Application;
@@ -23,11 +23,28 @@ namespace Project.Game.UI
             foreach (var itemView in itemViews)
             {
                 itemView.BuyButtonClicked += OnBuyButtonClicked;
+                itemView.RewardedAdBuyClicked += OnPremiumBuyButtonClicked; // Handle premium ad purchases
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var itemView in itemViews)
+            {
+                itemView.BuyButtonClicked -= OnBuyButtonClicked;
+                itemView.RewardedAdBuyClicked -= OnPremiumBuyButtonClicked;
             }
         }
 
         private void OnBuyButtonClicked(ShopInventoryItemView itemView)
         {
+            _heroRegistry.ActiveHero.AddToInventoryFromBaseData(itemView.Data);
+            Close();
+        }
+
+        private void OnPremiumBuyButtonClicked(ShopInventoryItemView itemView)
+        {
+            // Same result as regular purchase - just obtained through ad
             _heroRegistry.ActiveHero.AddToInventoryFromBaseData(itemView.Data);
             Close();
         }
@@ -46,6 +63,10 @@ namespace Project.Game.UI
                 itemSelection.Add(randomStatUpgradeGroup);
             }
 
+            // Randomly select one weapon to be premium (tier 1, requires ad)
+            var premiumWeaponIndex = Random.Range(0, itemSelection.Count);
+            Debug.Log($"[RandomItemSelectorScreen] Premium weapon will be at index: {premiumWeaponIndex}");
+
             var waveIndex = _levelController.WaveIndex;
             var tierRange = _gameData.GetItemTierRangeForWave(waveIndex);
             var chanceIncrease = _gameData.GetChanceIncreaseForWave(waveIndex);
@@ -53,10 +74,48 @@ namespace Project.Game.UI
             for (var i = 0; i < itemSelection.Count; i++)
             {
                 var tieredDataGroup = itemSelection[i];
-                var upgradeTierInfo = tieredDataGroup.GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease);
+                bool isPremium = (i == premiumWeaponIndex);
+                
+                var upgradeTierInfo = isPremium 
+                    ? GetPremiumWeapon(tieredDataGroup)
+                    : tieredDataGroup.GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease);
+                
                 var upgrade = upgradeTierInfo.Data as BaseData;
-                itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 0, "CHOOSE");
+                
+                if (isPremium)
+                {
+                    // Premium weapon: Set up for ad purchase (cost = high value, no custom text so ad icon shows)
+                    itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 9999); // No custom text
+                    itemViews[i].SetRewardedAdAvailability(true);
+                    Debug.Log($"[RandomItemSelectorScreen] ⭐ Premium weapon configured: {upgrade.DisplayName} - Tier 1, Shows ad icon only");
+                }
+                else
+                {
+                    // Regular weapon: Free selection with custom "CHOOSE" text
+                    itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 0, "CHOOSE");
+                    itemViews[i].SetRewardedAdAvailability(false);
+                    Debug.Log($"[RandomItemSelectorScreen] 🔫 Regular weapon configured: {upgrade.DisplayName} - Tier 0, Shows 'CHOOSE' text");
+                }
             }
+        }
+
+        private TierInfo GetPremiumWeapon(TieredDataGroup tieredDataGroup)
+        {
+            // Premium weapons are always tier 1 (guaranteed better than normal tier 0)
+            var premiumTierRange = new Vector2Int(1, 1);
+            
+            // Clamp tier range to available tiers in the group to prevent errors
+            var maxTierIndex = tieredDataGroup.Tiers.Count - 1;
+            premiumTierRange.x = Mathf.Clamp(premiumTierRange.x, 0, maxTierIndex);
+            premiumTierRange.y = Mathf.Clamp(premiumTierRange.y, 0, maxTierIndex);
+            
+            // High chance increase to ensure tier 1 selection
+            var premiumChanceIncrease = 0.9f; // 90% chance bias toward higher tier
+            
+            var weaponTierInfo = tieredDataGroup.GetRandomTier(_gameData.RarityCurve, premiumTierRange, premiumChanceIncrease);
+            Debug.Log($"[RandomItemSelectorScreen] ⭐ Premium weapon selected: {weaponTierInfo.Data.name} (Tier range: {premiumTierRange.x}-{premiumTierRange.y}, Max available: {maxTierIndex})");
+            
+            return weaponTierInfo;
         }
     }
 }
