@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_smg_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 8b26178ad05d5754a85d139a5937480a, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 557f801aff3f7124db32d087d1d2cde4, type: 3}
   <DisplayName>k__BackingField: Assault Rifle
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 26

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_boomerang_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 9506a713ab7dc0b4eb940f5e647c5c0a, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 379d2f75859ee0d4f83ba61fee86c40c, type: 3}
   <DisplayName>k__BackingField: Moonrang
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 30

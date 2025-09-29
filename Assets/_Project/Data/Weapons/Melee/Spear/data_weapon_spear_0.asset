@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_spear_0
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: c8f9c34049fdaf344bf36c72b7605e54, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 3474010b094c3cb41a5de1abf3b11e7e, type: 3}
   <DisplayName>k__BackingField: Rapier
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 15

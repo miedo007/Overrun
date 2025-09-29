@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_grenade_launcher_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: a9321d33e2f944345b8712aafe3f45b2, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: d9834281db3dcb648be6ef821333e36c, type: 3}
   <DisplayName>k__BackingField: Grenade Launcher
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 22

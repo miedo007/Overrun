@@ -684,6 +684,8 @@ MonoBehaviour:
   <LayoutElement>k__BackingField: {fileID: 5665203157097246610}
   <MergeableNotification>k__BackingField: {fileID: 0}
   <LockToggle>k__BackingField: {fileID: 0}
+  coinImageObject: {fileID: 0}
+  adIconObject: {fileID: 0}
 --- !u!225 &5618185551734170797
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2081,6 +2083,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 391b2d636fe83344e8c4d177f528eb40, type: 3}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.b
+      value: 0.10588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.g
+      value: 0.15774468
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.r
+      value: 0.83137256
+      objectReference: {fileID: 0}
     - target: {fileID: 3167326857836907291, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2587,6 +2601,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5978760492894947749}
     m_Modifications:
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4509804
+      objectReference: {fileID: 0}
     - target: {fileID: 2658657899947388790, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Interactable
       value: 0
@@ -2919,7 +2945,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3724893892860894481, guid: 9e06b9867b4113a42824b2b34e935e6b, type: 3}
       propertyPath: m_fontSize
-      value: 48
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3724893892860894481, guid: 9e06b9867b4113a42824b2b34e935e6b, type: 3}
       propertyPath: m_fontAsset

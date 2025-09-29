@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_shotgun_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 7f311410a24aec246bf8da2368f36dc1, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ef20e1302215f6c4ab79ea8a7eadad05, type: 3}
   <DisplayName>k__BackingField: Shotgun
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 22

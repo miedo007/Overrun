@@ -420,7 +420,6 @@ MonoBehaviour:
   <ConfirmButton>k__BackingField: {fileID: 5683794253825149477}
   <Animation>k__BackingField: {fileID: 5465910196304694184}
   doubleRewardPanel: {fileID: 2398142701510999895}
-  continueButton: {fileID: 0}
   doubleRewardButton: {fileID: 5210365522800106742}
   rewardAmountText: {fileID: 7484352707650696511}
 --- !u!114 &1980467981702874810
@@ -959,6 +958,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6720131145784293143}
     m_Modifications:
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 227376775170834375, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4509804
+      objectReference: {fileID: 0}
     - target: {fileID: 3167326857836907291, guid: c1c6d0d19c9b1684b8a299630847ad14, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

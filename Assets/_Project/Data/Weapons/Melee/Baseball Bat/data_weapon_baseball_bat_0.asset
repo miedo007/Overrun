@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_baseball_bat_0
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 97816c761134e9d469453dcc10d866ea, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 2c20547200bce264088ad6ab879e5ed6, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 10fe54d0dadfaf0459f1180cd642605e, type: 3}
   <DisplayName>k__BackingField: Hammer
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 12

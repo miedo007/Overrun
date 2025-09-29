@@ -154,6 +154,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: currency_bar
       objectReference: {fileID: 0}
+    - target: {fileID: 6370700509135943787, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
+      propertyPath: m_Color.a
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370700509135943787, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
+      propertyPath: m_Color.b
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370700509135943787, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
+      propertyPath: m_Color.g
+      value: 0.12156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370700509135943787, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
+      propertyPath: m_Color.r
+      value: 0.050980393
+      objectReference: {fileID: 0}
     - target: {fileID: 7727735162579656547, guid: 478f76648cb233a46a6f3aa7d3a3e635, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

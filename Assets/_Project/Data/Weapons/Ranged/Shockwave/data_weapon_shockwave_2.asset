@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_shockwave_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 927b72698f2fa424b849c6ae3d768c94, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 4618a05a84a713040823e93f472a04a9, type: 3}
   <DisplayName>k__BackingField: Wave
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 19

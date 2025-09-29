@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 816.799}
+  m_AnchoredPosition: {x: 0, y: 711.77704}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &4804594705884175184
@@ -155,10 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 8546857672628367967, guid: 4d6ce00f03e1a4895bcb338746cf6004, type: 3}
-  previousStageCount: 20
-  nextStageCount: 20
   content: {fileID: 787205297649265864}
   scrollRect: {fileID: 4331265039576309983}
+  previousStageCount: 20
+  nextStageCount: 20
+  pathThickness: 18
+  pathColor: {r: 0.1, g: 0.45, b: 0.7, a: 1}
+  pathSprite: {fileID: 0}
+  pathInsetFromNode: 26
 --- !u!1 &4554087482462540105
 GameObject:
   m_ObjectHideFlags: 0

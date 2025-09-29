@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_weapon_boxing_glove_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6692ffc7364505e479c50932e20331f9, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 115ab236853a8dc4dabfb801787566a3, type: 3}
   <DisplayName>k__BackingField: Light Glove
   <Description>k__BackingField: 
   <BasePrice>k__BackingField: 18
