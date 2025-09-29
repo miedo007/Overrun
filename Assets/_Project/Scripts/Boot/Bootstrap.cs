@@ -11,9 +11,6 @@ public class Bootstrap : MonoBehaviour
 
     void Awake()
     {
-        // Ensure proper EventSystem management
-        gameObject.AddComponent<EventSystemManager>();
-        
         var flagPath = Path.Combine(Application.persistentDataPath, "first_launch.flag");
         bool firstLaunch = !File.Exists(flagPath);
 
