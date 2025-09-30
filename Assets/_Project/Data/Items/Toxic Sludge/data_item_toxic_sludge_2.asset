@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_toxic_sludge_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 6f5d318c0b9d8df439248da4f6ccd941, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 05cf4a01485e4df4294ed88404d7c629, type: 3}
   <DisplayName>k__BackingField: Toxic
   <Description>k__BackingField: ' Increases all damage, but reduces health regeneration '
   <BasePrice>k__BackingField: 18

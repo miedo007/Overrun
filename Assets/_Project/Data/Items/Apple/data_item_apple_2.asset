@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_apple_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 29c47e7914a00ca4f9e9c34b574bdd8b, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 4795b8379d12493419f0d32a49bc0688, type: 3}
   <DisplayName>k__BackingField: Healthy
   <Description>k__BackingField: Maximum health
   <BasePrice>k__BackingField: 16

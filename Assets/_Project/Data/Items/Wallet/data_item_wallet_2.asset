@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_wallet_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 08c2ff9b77f8ac44c91021809e2cbe04, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: a95b50dad74fb1b49b750404bd9da7ed, type: 3}
   <DisplayName>k__BackingField: Collector
   <Description>k__BackingField: Increases the amount of matter (<sprite name=currency_energy>)
     collected

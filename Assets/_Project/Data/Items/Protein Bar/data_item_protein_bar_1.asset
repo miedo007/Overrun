@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_protein_bar_1
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 413a668ae9e309642a164940d76165e9, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 09dfda7477414e048b911f08a08f426f, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 3bb178ba639e32943bbce21eb8001e65, type: 3}
   <DisplayName>k__BackingField: Strong
   <Description>k__BackingField: Increases melee weapon damage
   <BasePrice>k__BackingField: 15

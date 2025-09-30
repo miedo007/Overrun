@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce1ff3076c64bbc8aa3c4464562866e, type: 3}
   m_Name: data_game_default
   m_EditorClassIdentifier: 
-  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.265
-  <ShopBasePriceMultiplier>k__BackingField: 0.8
+  <ShopPriceIncreaseCoeffecient>k__BackingField: 1.5
+  <ShopBasePriceMultiplier>k__BackingField: 1
   <ResellValue>k__BackingField: 0.375
   <BaseRerollCost>k__BackingField: 1
   <RerollIncreasePerWave>k__BackingField: 1
@@ -50,9 +50,9 @@ MonoBehaviour:
   <DamageScalingPerLevel>k__BackingField: 0.89
   <DamageScalingPerWave>k__BackingField: 0.42
   <EnemySpawnRange>k__BackingField: {x: 2, y: 12}
-  <RewardBaseValue>k__BackingField: 25
+  <RewardBaseValue>k__BackingField: 10
   <RewardLevelScaling>k__BackingField: 1
-  <RewardWaveScaling>k__BackingField: 0.125
+  <RewardWaveScaling>k__BackingField: 0.1
   <UpgradeBaseCost>k__BackingField: 150
   <UpgradeCostScaling>k__BackingField: 0.75
   <InitialSpawnDelay>k__BackingField: 1.5

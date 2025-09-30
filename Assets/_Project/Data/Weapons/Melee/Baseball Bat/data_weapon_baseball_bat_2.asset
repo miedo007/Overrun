@@ -16,7 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 10fe54d0dadfaf0459f1180cd642605e, type: 3}
   <DisplayName>k__BackingField: Hammer
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 20
+  <BasePrice>k__BackingField: 25
   <StatModifiers>k__BackingField: []
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: 485dd8514864a5d4780b30b357d14f7e, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: e8ee95598017a1f4197c2d9aee00b170, type: 2}

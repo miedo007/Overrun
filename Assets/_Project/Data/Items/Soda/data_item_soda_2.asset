@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_soda_2
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 140d7ffc86bedcc48a45794c330bc30b, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 050bc28f0fcbe9c41b54b13767d00b0f, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: cac9b436bdffa7148a45ce9c55dc4884, type: 3}
   <DisplayName>k__BackingField: Quickshot
   <Description>k__BackingField: Imprpoved cooldown, but lower max health
   <BasePrice>k__BackingField: 17

@@ -62,10 +62,10 @@ namespace Project.Game
             _idleHint = FindObjectOfType<IdleHint>(true);
             
 #if UNITY_EDITOR
-            // Add midgame ads debugger for easy testing
+            // Add midgame ads debugger for easy testing (can be disabled in component)
             var debuggerGO = new GameObject("MidgameAdsDebugger");
             debuggerGO.AddComponent<Project.Game.Levels.MidgameAdsDebugger>();
-            Debug.Log("[GameController] MidgameAdsDebugger added to scene. Press F2 to force ads!");
+            Debug.Log("[GameController] MidgameAdsDebugger added to scene. Toggle 'Enable Debug UI' to show/hide.");
 #endif
         }
 
@@ -449,6 +449,9 @@ private bool HasMovementInput()
             // Continue the current wave (timer keeps running)
             _levelController.ContinueCurrentWave();
             
+            // Ensure wave timer is visible and running after revive
+            RestoreWaveTimerAfterRevive();
+            
             // Restart enemy spawning for the current wave
             _enemyManager.BeginWave(
                 _levelController.CurrentLevel,
@@ -461,9 +464,41 @@ private bool HasMovementInput()
             Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned, weapons reset!");
         }
 
+        private void RestoreWaveTimerAfterRevive()
+        {
+            var hudScreen = _uiFrame.Get<HudScreen>();
+            if (hudScreen != null && hudScreen.Timer != null)
+            {
+                var timer = hudScreen.Timer;
+                
+                // Ensure timer is active and visible
+                if (!timer.Root.gameObject.activeSelf)
+                {
+                    timer.Root.gameObject.SetActive(true);
+                    Debug.Log("[GameController] Wave timer was hidden - reactivated after revive");
+                }
+                
+                // Ensure wave text is visible
+                if (hudScreen.WaveIndexText != null && !hudScreen.WaveIndexText.enabled)
+                {
+                    hudScreen.WaveIndexText.enabled = true;
+                    hudScreen.WaveIndexText.text = $"WAVE {_levelController.WaveIndex + 1}<alpha=#BB>/{_levelController.WaveCount}";
+                    Debug.Log($"[GameController] Wave text restored: {hudScreen.WaveIndexText.text}");
+                }
+                
+                Debug.Log("[GameController] Wave timer state restored after revive");
+            }
+            else
+            {
+                Debug.LogWarning("[GameController] Could not find HudScreen or Timer for restoration after revive!");
+            }
+        }
+
         private void ResetWeaponAnimationStates()
         {
-            // Find all weapon animation components and reset their states
+            Debug.Log("[GameController] Resetting weapon animation states after revive...");
+            
+            // Find all Legacy Animation components and reset their states
             var weaponAnimations = _playerController.GetComponentsInChildren<Animation>();
             foreach (var animation in weaponAnimations)
             {
@@ -472,9 +507,24 @@ private bool HasMovementInput()
                     // Stop any ongoing animations and reset to default state
                     animation.Stop();
                     animation.Rewind();
-                    Debug.Log($"[GameController] Reset animation state for weapon: {animation.gameObject.name}");
+                    Debug.Log($"[GameController] Reset Legacy Animation state for weapon: {animation.gameObject.name}");
                 }
             }
+            
+            // Also handle Animator components (for weapons like boomerang that might use Animator instead)
+            var weaponAnimators = _playerController.GetComponentsInChildren<Animator>();
+            foreach (var animator in weaponAnimators)
+            {
+                if (animator != null)
+                {
+                    // Reset animator to default state
+                    animator.Rebind();
+                    animator.Update(0f);
+                    Debug.Log($"[GameController] Reset Animator state for weapon: {animator.gameObject.name}");
+                }
+            }
+            
+            Debug.Log($"[GameController] Weapon animation reset complete: {weaponAnimations.Length} Animation + {weaponAnimators.Length} Animator components reset");
         }
 
         private void LoadMainMenu()

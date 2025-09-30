@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_vitamin_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 270e8eb4f47f8f840bac893f1a975c88, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: b70e28f1eb32fd44c99981e670f1b3b7, type: 3}
   <DisplayName>k__BackingField: Recharger
   <Description>k__BackingField: Increases health regeneration
   <BasePrice>k__BackingField: 26

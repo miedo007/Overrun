@@ -16,7 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 0379cb6d53258234284024ced106b99c, type: 3}
   <DisplayName>k__BackingField: Gun
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 17
+  <BasePrice>k__BackingField: 22
   <StatModifiers>k__BackingField: []
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: d1644ba18563e4a4ca6bfad30914bb5e, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: da5242d8e4260524cabd91c8e284ed00, type: 2}

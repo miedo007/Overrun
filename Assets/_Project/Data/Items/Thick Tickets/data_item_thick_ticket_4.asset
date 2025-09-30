@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_thick_ticket_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: cad054348862a00469dc0bbf77c1bb13, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 3f519b7112cc4334cb6567b6644c42c0, type: 3}
   <DisplayName>k__BackingField: Pusher
   <Description>k__BackingField: Chance to damage surrounding enemies when collecting
     energy

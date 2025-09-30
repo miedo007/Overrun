@@ -16,7 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 115ab236853a8dc4dabfb801787566a3, type: 3}
   <DisplayName>k__BackingField: Light Glove
   <Description>k__BackingField: 
-  <BasePrice>k__BackingField: 14
+  <BasePrice>k__BackingField: 18
   <StatModifiers>k__BackingField: []
   <Prefab>k__BackingField: {fileID: 2111562008881299045, guid: 80737654d8f53d344826c0833fcf9016, type: 3}
   <Type>k__BackingField: {fileID: 11400000, guid: e8ee95598017a1f4197c2d9aee00b170, type: 2}

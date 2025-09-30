@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_magnet_4
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: ca7c43e867696c9479862deac3e70e87, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: bbc5e1f8eeda849419f5bed06e3e5fce, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: f0280e0f03133764d909f54b143b7252, type: 3}
   <DisplayName>k__BackingField: Magnet
   <Description>k__BackingField: Increases pickup range
   <BasePrice>k__BackingField: 12

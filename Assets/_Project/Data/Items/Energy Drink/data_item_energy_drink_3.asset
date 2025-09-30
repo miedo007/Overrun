@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: data_item_energy_drink_3
   m_EditorClassIdentifier: 
   <Tier>k__BackingField: {fileID: 11400000, guid: 5da12ba678b5cd74c99add6bef9578e0, type: 2}
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 0426ebe7694fa90499ac75c332157980, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: c5f68d9116b69c14b8d1ca01ac0b5a07, type: 3}
   <DisplayName>k__BackingField: Excited
   <Description>k__BackingField: Improved speed & cooldown, but lower max health
   <BasePrice>k__BackingField: 23

@@ -9,8 +9,13 @@ namespace Project.Game.Levels
     public class MidgameAdsDebugger : MonoBehaviour
     {
 #if UNITY_EDITOR
+        [Header("Debug Controls")]
+        [SerializeField] private bool enableDebugUI = false; // Set to false to hide debug UI
+        
         private void Start()
         {
+            if (!enableDebugUI) return;
+            
             Debug.Log("=== MIDGAME ADS DEBUGGER ACTIVE ===");
             Debug.Log("[MidgameAdsDebugger] Press F2 to force show midgame ad");
             Debug.Log("[MidgameAdsDebugger] Press F3 to reset ad tracking");
@@ -20,6 +25,8 @@ namespace Project.Game.Levels
         
         private void Update()
         {
+            if (!enableDebugUI) return;
+            
             // F2 to force show a midgame ad
             if (Input.GetKeyDown(KeyCode.F2))
             {
@@ -57,6 +64,8 @@ namespace Project.Game.Levels
         
         private void OnGUI()
         {
+            if (!enableDebugUI) return; // Hide GUI when disabled
+            
             // Show debug info on screen
             GUI.color = Color.white;
             GUI.backgroundColor = Color.black;
