@@ -28,13 +28,11 @@ namespace Mtl.Save
         protected override bool OnTryLoad(out string rawSave)
         {
             ValidateFileDestination();
-            
             if (!File.Exists(_fileDestination))
             {
                 rawSave = string.Empty;
                 return false;
             }
-
             rawSave = File.ReadAllText(_fileDestination);
             return true;
         }
@@ -42,7 +40,6 @@ namespace Mtl.Save
         protected override void OnClear()
         {
             ValidateFileDestination();
-            
             if (File.Exists(_fileDestination))
             {
                 File.Delete(_fileDestination);
@@ -58,4 +55,3 @@ namespace Mtl.Save
         }
     }
 }
-
