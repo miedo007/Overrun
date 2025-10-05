@@ -86,7 +86,7 @@ namespace Project.Game.Levels
             // Check if we should show a midgame ad (but not on level complete)
             bool shouldShowAd = MidgameAds.ShouldShowAd(_currentWave, _isLevelComplete);
             
-            Debug.Log($"[WaveCompleteScreen] Wave {_currentWave}, isLevelComplete: {_isLevelComplete}, shouldShowAd: {shouldShowAd}");
+            Debug.Log($"[WaveCompleteScreen] Just completed wave {_currentWave}, isLevelComplete: {_isLevelComplete}, shouldShowAd: {shouldShowAd}");
             Debug.Log($"[WaveCompleteScreen] Ad debug info: {MidgameAds.GetDebugInfo()}");
             
             if (shouldShowAd)

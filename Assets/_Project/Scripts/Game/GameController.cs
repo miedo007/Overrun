@@ -160,8 +160,9 @@ namespace Project.Game
             Debug.Log($"[GameController] Wave {_levelController.WaveIndex + 1} reward: {waveReward} (given), Total level reward: {_totalLevelReward}");
 
             // Show the wave complete screen with THIS WAVE's reward amount
+            // Use WaveIndex + 1 because ads should check the wave that just completed (1-based counting)
             var waveCompleteScreen = _uiFrame.Open<WaveCompleteScreen>();
-            waveCompleteScreen.Initialize(waveReward, false, _levelController.WaveIndex);
+            waveCompleteScreen.Initialize(waveReward, false, _levelController.WaveIndex + 1);
             waveCompleteScreen.OnCloseEvent += OnWaveCompleteScreenClosed;
         }
 

@@ -49,7 +49,8 @@ namespace Project.Game.Levels
             {
                 // Show every WaveFrequency waves
                 shouldShow = currentWave > 0 && (currentWave % WaveFrequency == 0);
-                Debug.Log($"[MidgameAds] Wave check: {currentWave} % {WaveFrequency} = {currentWave % WaveFrequency} -> {shouldShow}");
+                Debug.Log($"[MidgameAds] Wave check: Wave {currentWave} % {WaveFrequency} = {currentWave % WaveFrequency} -> {shouldShow}");
+                Debug.Log($"[MidgameAds] Expected trigger waves: {WaveFrequency}, {WaveFrequency * 2}, {WaveFrequency * 3}, etc.");
             }
             
             return shouldShow;
