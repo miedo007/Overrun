@@ -1,10 +1,11 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using Mtl.Injection;
 using Mtl.UiFramework;
 using Project.Feedback;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using CrazyGames;
 
 namespace Project.Settings
 {
@@ -45,6 +46,9 @@ public void SendEmailToSupport()
 
         protected override void OnOpened()
         {
+            // Stop gameplay when settings screen opens
+            CrazySDK.Game.GameplayStop();
+            
             if (playerIdText != null) playerIdText.text = "Player ID: —";
 
             if (hapticsToggle != null)
@@ -82,6 +86,8 @@ public void SendEmailToSupport()
 
         protected override void OnClosed()
         {
+            // Resume gameplay when settings screen closes
+            CrazySDK.Game.GameplayStart();
         }
     }
 }

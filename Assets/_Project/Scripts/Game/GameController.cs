@@ -137,6 +137,9 @@ namespace Project.Game
 
         private void OnWaveCompleted()
         {
+            // Stop gameplay when wave ends
+            CrazySdkManager.GameplayStop();
+            
             // ★ Hide/stop the hint while out of combat (optional but recommended)
             if (_idleHint != null) _idleHint.End();
 

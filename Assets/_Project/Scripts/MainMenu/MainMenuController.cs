@@ -52,9 +52,7 @@ namespace Project.MainMenu
         {
             Debug.Log("Starting reload coroutine...");
             
-            // Wait a short moment for any migration to complete
-            yield return new WaitForSeconds(1f);
-            
+            // Remove artificial delay - load immediately when login detected
             Debug.Log("Attempting to reload in-progress session data from cloud storage");
             
             // Force reload the in-progress session from cloud storage directly into the existing instance
@@ -74,6 +72,8 @@ namespace Project.MainMenu
                     CheckForInProgressSession(); // Still check in case there's local data
                 }
             }, inProgressReadWriter);
+            
+            yield break; // Exit immediately, callback handles the rest
         }
 
         private void Start()
@@ -96,8 +96,37 @@ namespace Project.MainMenu
             CrazySdkManager.GameplayStop();
 #endif
 
-            // Check for in-progress session initially
-            CheckForInProgressSession();
+            // Check for in-progress session initially - with smart cloud detection
+            if (SaveSystemIntegration.IsUserLoggedIn && SaveSystemIntegration.IsCrazySDKReady())
+            {
+                Debug.Log("User is already logged in, checking cloud data immediately");
+                StartCoroutine(LoadCloudDataAndCheck());
+            }
+            else
+            {
+                Debug.Log("User not logged in yet, checking local data only");
+                CheckForInProgressSession();
+            }
+        }
+
+        private System.Collections.IEnumerator LoadCloudDataAndCheck()
+        {
+            Debug.Log("Loading cloud data immediately for logged-in user");
+            
+            // No artificial delay - load cloud data right away
+            var inProgressReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("in-progress");
+            
+            _saveManager.TryLoad(_inProgressSessionInfo, success =>
+            {
+                Debug.Log($"Loaded in-progress session from cloud: success={success}");
+                if (success)
+                {
+                    Debug.Log($"Cloud data - InProgress: {_inProgressSessionInfo.InProgressSave?.InProgress}, Level: {_inProgressSessionInfo.InProgressSave?.LevelIndex}, Wave: {_inProgressSessionInfo.InProgressSave?.WaveIndex}");
+                }
+                CheckForInProgressSession();
+            }, inProgressReadWriter);
+            
+            yield break; // Exit immediately, callback handles the rest
         }
 
         private void CheckForInProgressSession()
