@@ -42,7 +42,7 @@ namespace Project.Game.Shop
 
         private IEnumerator EnableButtonRoutine()
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(0.0f);
             button.interactable = true;
         }
 
