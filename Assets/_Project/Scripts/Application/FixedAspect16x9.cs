@@ -16,8 +16,14 @@ public class FixedAspect16x9 : MonoBehaviour
     bool IsMobile() =>
         Application.isMobilePlatform || SystemInfo.deviceType == DeviceType.Handheld;
 
+    bool IsWebGL() =>
+        Application.platform == RuntimePlatform.WebGLPlayer;
+
     void Apply()
     {
+        // Skip aspect ratio enforcement for WebGL builds to prevent white bars
+        if (IsWebGL()) { cam.rect = new Rect(0,0,1,1); return; }
+        
         if (onlyOnMobile && !IsMobile()) { cam.rect = new Rect(0,0,1,1); return; }
 
         float windowAspect = (float)Screen.width / Screen.height;

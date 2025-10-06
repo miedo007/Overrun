@@ -67,6 +67,7 @@ namespace Project.Heroes
         public HeroInfo GetHeroInfo(HeroData heroData, int level = -1)
         {
             var heroLevel = level < 0 ? _save.GetHeroLevel(heroData.Id) : level;
+            Debug.Log($"[HeroRegistry] GetHeroInfo - Hero: {heroData.Id}, Requested Level: {level}, Save Level: {_save.GetHeroLevel(heroData.Id)}, Final Level: {heroLevel}");
             return new HeroInfo(heroData, Database.DefaultStats, heroLevel);
         }
 
@@ -79,7 +80,15 @@ namespace Project.Heroes
 
         public void LoadSelectedHero()
         {
+            var selectedHeroData = GetSelectedHero();
+            var heroId = selectedHeroData.Id;
+            var savedLevel = _save.GetHeroLevel(heroId);
+            
+            Debug.Log($"[HeroRegistry] LoadSelectedHero - Hero ID: {heroId}, Saved Level: {savedLevel}");
+            
             ActiveHero = GetSelectedHeroInfo();
+            
+            Debug.Log($"[HeroRegistry] LoadSelectedHero - Active Hero Level after load: {ActiveHero.Level}");
         }
 
         public void SetActiveHero(HeroData heroData)
@@ -90,10 +99,27 @@ namespace Project.Heroes
         public void UpgradeActiveHero()
         {
             var heroId = ActiveHero.Data.Id;
+            Debug.Log($"[HeroRegistry] Upgrading hero {heroId} from level {_save.GetHeroLevel(heroId)}");
+            
             _save.IncrementHeroLevel(heroId);
+            
+            var newLevel = _save.GetHeroLevel(heroId);
+            Debug.Log($"[HeroRegistry] Hero {heroId} upgraded to level {newLevel}");
+            
             SetActiveHero(ActiveHero.Data);
             OnChanged?.Invoke();
+            Debug.Log("[HeroRegistry] OnChanged event triggered for save");
+            
             ActiveHeroChanged?.Invoke(ActiveHero);
+        }
+
+        /// <summary>
+        /// Force the save system to mark this registry as dirty for saving
+        /// </summary>
+        public void ForceSaveUpdate()
+        {
+            Debug.Log("[HeroRegistry] Forcing save update - triggering OnChanged event");
+            OnChanged?.Invoke();
         }
 
         public HeroData GetHeroData(string heroId)

@@ -52,7 +52,7 @@ namespace Project.MainMenu
         {
             Debug.Log("Starting reload coroutine...");
             
-            // Remove artificial delay - load immediately when login detected
+            // Reload both in-progress session data AND hero data from cloud storage
             Debug.Log("Attempting to reload in-progress session data from cloud storage");
             
             // Force reload the in-progress session from cloud storage directly into the existing instance
@@ -73,7 +73,58 @@ namespace Project.MainMenu
                 }
             }, inProgressReadWriter);
             
-            yield break; // Exit immediately, callback handles the rest
+            // CRITICAL FIX: Also reload hero data from cloud storage
+            Debug.Log("Attempting to reload hero data from cloud storage");
+            var heroReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("heroes");
+            
+            // First, try to load the raw JSON data directly
+            if (heroReadWriter.TryLoad(out var rawHeroData))
+            {
+                Debug.Log($"Raw hero data from cloud: {rawHeroData}");
+                
+                // Parse the JSON to verify what we're getting
+                try 
+                {
+                    var heroSaveData = Newtonsoft.Json.JsonConvert.DeserializeObject<Project.Heroes.HeroSave>(rawHeroData);
+                    if (heroSaveData != null)
+                    {
+                        var heroId = "data_hero_0"; // The hero we're tracking
+                        var cloudLevel = heroSaveData.GetHeroLevel(heroId);
+                        Debug.Log($"Parsed cloud data - Hero: {heroId}, Level: {cloudLevel}");
+                        
+                        // Force update the HeroRegistry's save data directly
+                        Debug.Log("Force updating HeroRegistry save data");
+                        var registrySave = (Project.Heroes.HeroSave)_heroRegistry.Save;
+                        registrySave.SelectedHero = heroSaveData.SelectedHero;
+                        registrySave.HeroLevels = heroSaveData.HeroLevels;
+                        
+                        // Verify the update worked
+                        var updatedLevel = registrySave.GetHeroLevel(heroId);
+                        Debug.Log($"After force update - Save Level: {updatedLevel}");
+                        
+                        // Refresh the active hero
+                        var selectedHeroData = _heroRegistry.GetSelectedHero();
+                        _heroRegistry.SetActiveHero(selectedHeroData);
+                        
+                        var activeHero = _heroRegistry.ActiveHero;
+                        Debug.Log($"Hero reloaded - ID: {heroId}, Level: {activeHero.Level}");
+                    }
+                    else 
+                    {
+                        Debug.LogError("Failed to parse hero save data from cloud");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"Exception parsing hero data: {ex.Message}");
+                }
+            }
+            else 
+            {
+                Debug.Log("Failed to load raw hero data from cloud");
+            }
+            
+            yield break; // Exit immediately, callbacks handle the rest
         }
 
         private void Start()

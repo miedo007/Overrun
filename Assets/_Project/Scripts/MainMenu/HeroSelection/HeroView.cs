@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Mtl.Injection;
 using Mtl.Save;
 using Project.Application;
@@ -89,23 +90,78 @@ namespace Project.MainMenu.HeroSelection
             
             RewardedAds.ShowRewardedAd(
                 onAdFinished: () => {
+                    Debug.Log("=== [HeroView] AD CALLBACK TRIGGERED - Starting hero upgrade process ===");
                     Debug.Log("[HeroView] Rewarded ad completed - upgrading hero for free!");
-                    heroLevelUpFeedback.Play(heroImage.transform.position, Quaternion.identity);
-                    _heroRegistry.UpgradeActiveHero();
+                    
+                    try 
+                    {
+                        var oldLevel = _heroRegistry.ActiveHero.Level;
+                        Debug.Log($"[HeroView] Hero level before upgrade: {oldLevel}");
+                        Debug.Log($"[HeroView] Active hero: {_heroRegistry.ActiveHero.Data.Id}");
+                        Debug.Log($"[HeroView] Hero registry state before upgrade: {_heroRegistry.ActiveHero.Data.name}");
+                        
+                        heroLevelUpFeedback.Play(heroImage.transform.position, Quaternion.identity);
+                        
+                        Debug.Log("[HeroView] About to call _heroRegistry.UpgradeActiveHero()");
+                        _heroRegistry.UpgradeActiveHero();
+                        Debug.Log("[HeroView] _heroRegistry.UpgradeActiveHero() completed");
+                    
+                    var newLevel = _heroRegistry.ActiveHero.Level;
+                    Debug.Log($"[HeroView] Hero level after upgrade: {newLevel}");
+                    
+                    // Check what's actually in the save data
+                    var heroId = _heroRegistry.ActiveHero.Data.Id;
+                    var savedLevel = ((HeroSave)_heroRegistry.Save).GetHeroLevel(heroId);
+                    Debug.Log($"[HeroView] Hero level in save data: {savedLevel} for hero ID: {heroId}");
+                    
+                    Debug.Log($"[HeroView] Save system login status: {SaveSystemIntegration.IsUserLoggedIn}, SDK ready: {SaveSystemIntegration.IsCrazySDKReady()}");
+                    
+                    // Force the OnChanged event to ensure HeroRegistry is marked as dirty
+                    Debug.Log("[HeroView] Forcing HeroRegistry to trigger OnChanged event");
+                    _heroRegistry.ForceSaveUpdate();
+                    
+                    // Save immediately and also after a short delay to ensure persistence
                     _saveManager.Save();
+                    Debug.Log("[HeroView] Immediate hero upgrade save completed!");
+                    
+                    // Also save after a short delay to ensure cloud sync
+                    StartCoroutine(DelayedSave());
                     
                     // Mark ad upgrade as used for this session
                     HeroUpgradeAdsTracker.MarkAdUpgradeUsed();
                     
                     // Update UI after upgrade
                     UpdateUpgradeButton();
-                },
+                    
+                    Debug.Log("=== [HeroView] AD UPGRADE PROCESS COMPLETED SUCCESSFULLY ===");
+                }
+                catch (System.Exception ex) 
+                {
+                    Debug.LogError($"[HeroView] Exception during hero upgrade: {ex.Message}");
+                    Debug.LogError($"[HeroView] Stack trace: {ex.StackTrace}");
+                    // Restore button state on error
+                    UpdateUpgradeButton();
+                }
+            },
                 onAdFailed: () => {
                     Debug.Log("[HeroView] Rewarded ad failed - restoring button state");
                     // Restore button state
                     UpdateUpgradeButton();
                 }
             );
+        }
+
+        private System.Collections.IEnumerator DelayedSave()
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("[HeroView] Performing delayed save to ensure cloud persistence");
+            
+            // Force the OnChanged event to ensure HeroRegistry is marked as dirty  
+            Debug.Log("[HeroView] Forcing HeroRegistry to trigger OnChanged event (delayed)");
+            _heroRegistry.ForceSaveUpdate();
+            
+            _saveManager.Save();
+            Debug.Log("[HeroView] Delayed hero upgrade save completed!");
         }
 
         public void OnReady()
@@ -181,6 +237,31 @@ namespace Project.MainMenu.HeroSelection
         {
             _heroRegistry.SetSelectedHero(_heroInfo.Data.name);
             Selected?.Invoke(_heroInfo.Data);
+        }
+
+        /// <summary>
+        /// Test method to verify hero upgrade logic works (temporary debugging)
+        /// </summary>
+        [UnityEngine.ContextMenu("Test Hero Upgrade")]
+        public void TestHeroUpgrade()
+        {
+            Debug.Log("=== [HeroView] TESTING HERO UPGRADE (NON-AD) ===");
+            
+            var oldLevel = _heroRegistry.ActiveHero.Level;
+            var heroId = _heroRegistry.ActiveHero.Data.Id;
+            var oldSaveLevel = ((HeroSave)_heroRegistry.Save).GetHeroLevel(heroId);
+            
+            Debug.Log($"[HeroView] Before upgrade - UI Level: {oldLevel}, Save Level: {oldSaveLevel}, Hero ID: {heroId}");
+            
+            _heroRegistry.UpgradeActiveHero();
+            
+            var newLevel = _heroRegistry.ActiveHero.Level;
+            var newSaveLevel = ((HeroSave)_heroRegistry.Save).GetHeroLevel(heroId);
+            
+            Debug.Log($"[HeroView] After upgrade - UI Level: {newLevel}, Save Level: {newSaveLevel}");
+            
+            _saveManager.Save();
+            Debug.Log("[HeroView] Test upgrade saved!");
         }
 
         private void OnDestroy()
