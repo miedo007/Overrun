@@ -71,6 +71,13 @@ namespace Project.MainMenu.HeroSelection
         {
             Debug.Log("[HeroView] Attempting rewarded ad upgrade");
             
+            // Check if player can use ad upgrade
+            if (!HeroUpgradeAdsTracker.CanUseAdUpgrade)
+            {
+                Debug.Log("[HeroView] Cannot use ad upgrade - already used this session");
+                return;
+            }
+            
             // Disable button during ad
             upgradeButton.interactable = false;
             
@@ -87,6 +94,9 @@ namespace Project.MainMenu.HeroSelection
                     _heroRegistry.UpgradeActiveHero();
                     _saveManager.Save();
                     
+                    // Mark ad upgrade as used for this session
+                    HeroUpgradeAdsTracker.MarkAdUpgradeUsed();
+                    
                     // Update UI after upgrade
                     UpdateUpgradeButton();
                 },
@@ -100,10 +110,14 @@ namespace Project.MainMenu.HeroSelection
 
         public void OnReady()
         {
+            // Initialize the ads tracker with required dependencies
+            HeroUpgradeAdsTracker.Initialize(_playerInfo, _saveManager);
+            
             _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
             OnActiveHeroChanged(_heroRegistry.ActiveHero);
             
             _playerInfo.OnCurrencyChanged += OnCurrencyChanged;
+            _playerInfo.OnHeroAdUpgradeStateChanged += OnHeroAdUpgradeStateChanged;
             OnCurrencyChanged();
         }
         
@@ -112,11 +126,17 @@ namespace Project.MainMenu.HeroSelection
         {
             UpdateUpgradeButton();
         }
+        
+        private void OnHeroAdUpgradeStateChanged()
+        {
+            UpdateUpgradeButton();
+        }
 
         private void UpdateUpgradeButton()
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
             var hasEnoughCurrency = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
+            var canUseAdUpgrade = HeroUpgradeAdsTracker.CanUseAdUpgrade;
 
             if (hasEnoughCurrency)
             {
@@ -131,7 +151,7 @@ namespace Project.MainMenu.HeroSelection
                 upgradeCostText.color = Color.white;
                 upgradeCostText.gameObject.SetActive(true);
             }
-            else
+            else if (canUseAdUpgrade)
             {
                 // Show rewarded ad upgrade option
                 _isShowingRewardedAdOption = true;
@@ -141,6 +161,19 @@ namespace Project.MainMenu.HeroSelection
                 if (coinImageObject != null) coinImageObject.SetActive(false);
                 if (adIconObject != null) adIconObject.SetActive(true);
                 upgradeCostText.gameObject.SetActive(false); // Hide text when showing ad icon
+            }
+            else
+            {
+                // Player has already used ad upgrade this session and doesn't have currency
+                _isShowingRewardedAdOption = false;
+                upgradeButton.interactable = false;
+                
+                // Show coin icon and cost in red to indicate insufficient funds
+                if (coinImageObject != null) coinImageObject.SetActive(true);
+                if (adIconObject != null) adIconObject.SetActive(false);
+                upgradeCostText.text = $"{nextUpgradeCost}";
+                upgradeCostText.color = Color.red;
+                upgradeCostText.gameObject.SetActive(true);
             }
         }
 
@@ -154,6 +187,7 @@ namespace Project.MainMenu.HeroSelection
         {
             _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
             _playerInfo.OnCurrencyChanged -= OnCurrencyChanged;
+            _playerInfo.OnHeroAdUpgradeStateChanged -= OnHeroAdUpgradeStateChanged;
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)

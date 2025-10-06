@@ -15,6 +15,7 @@ using Project.Game.Weapons;
 using Project.Game.Tutorials;   // ★ for IdleHint
 using Project.Heroes;
 using Project.Tiers;
+using Project.MainMenu.HeroSelection;   // ★ for HeroUpgradeAdsTracker
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -55,6 +56,9 @@ namespace Project.Game
 
         public void OnReady()
         {
+            // Initialize the hero upgrade ads tracker with dependencies
+            HeroUpgradeAdsTracker.Initialize(_playerInfo, _saveManager);
+            
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
             _heroInfo = _heroRegistry.ActiveHero;
 
@@ -128,6 +132,9 @@ namespace Project.Game
             // Reset reward tracking when starting a new level
             _totalLevelReward = 0;
             Debug.Log($"[GameController] Starting new level - Reset total reward tracker");
+            
+            // Reset hero upgrade ads availability for new game session
+            HeroUpgradeAdsTracker.ResetForNewSession();
             
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
@@ -325,6 +332,9 @@ private bool HasMovementInput()
             _saveManager.Save();
 
             SendLevelSummaryEvent(true);
+            
+            // Reset hero upgrade ads availability after completing level
+            HeroUpgradeAdsTracker.ResetForNewSession();
 
             menuMusic.Play();
 
@@ -398,6 +408,9 @@ private bool HasMovementInput()
             _saveManager.Save();
 
             SendLevelSummaryEvent(false);
+            
+            // Reset hero upgrade ads availability after dying (going back to menu)
+            HeroUpgradeAdsTracker.ResetForNewSession();
 
             _enemyManager.EndWaveAfterDelay(0.5f);
 
