@@ -475,6 +475,9 @@ private bool HasMovementInput()
                 _levelController.CurrentLevelIndex,
                 _levelController.WaveIndex);
             
+            // Resume gameplay tracking for CrazyGames
+            CrazySdkManager.GameplayStart();
+            
             // Re-enable player input
             _playerInput.Show();
             
@@ -618,13 +621,18 @@ private bool HasMovementInput()
 #endif
 
         // Pause/focus hygiene for WebGL
+        // Note: Disabled for web builds to prevent gameplayStop when clicking outside game frame
         private void OnApplicationFocus(bool hasFocus)
         {
+#if !UNITY_WEBGL || UNITY_EDITOR
             if (!hasFocus) CrazySdkManager.GameplayStop();
+#endif
         }
         private void OnApplicationPause(bool paused)
         {
+#if !UNITY_WEBGL || UNITY_EDITOR
             if (paused) CrazySdkManager.GameplayStop();
+#endif
         }
     }
 }

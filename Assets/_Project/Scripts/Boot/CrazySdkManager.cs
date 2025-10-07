@@ -58,16 +58,21 @@ public class CrazySdkManager : MonoBehaviour
     }
 
     // Stop on blur/pause; resume to desired state on refocus/unpause
+    // Note: Disabled for web builds to prevent gameplayStop when clicking outside game frame
     void OnApplicationFocus(bool hasFocus)
     {
+#if !UNITY_WEBGL || UNITY_EDITOR
         if (!hasFocus) DoStop();
         else if (_wantStarted) DoStart();
+#endif
     }
 
     void OnApplicationPause(bool paused)
     {
+#if !UNITY_WEBGL || UNITY_EDITOR
         if (paused) DoStop();
         else if (_wantStarted) DoStart();
+#endif
     }
 
     // ---- Internals (send once; only flip _startedSent when SDK call is made) ----
