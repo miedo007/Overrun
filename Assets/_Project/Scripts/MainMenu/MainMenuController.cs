@@ -217,9 +217,11 @@ namespace Project.MainMenu
         {
             Debug.Log($"CheckForInProgressSession called - hasChecked: {_hasCheckedInProgressSession}");
             
-            if (_hasCheckedInProgressSession) 
+            // Check if we've already handled this session OR if the screen is already open
+            var existingScreen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
+            if (_hasCheckedInProgressSession || (existingScreen != null && existingScreen.IsOpened))
             {
-                Debug.Log("Already checked in-progress session, skipping");
+                Debug.Log($"Skipping in-progress check - hasChecked: {_hasCheckedInProgressSession}, screenAlreadyOpen: {existingScreen != null && existingScreen.IsOpened}");
                 return;
             }
             
@@ -234,7 +236,7 @@ namespace Project.MainMenu
                 }
             }
             
-            // Correct in-progress check
+            // Check for valid in-progress session
             if (_inProgressSessionInfo != null &&
                 _inProgressSessionInfo.InProgressSave != null &&
                 _inProgressSessionInfo.InProgressSave.InProgress)
@@ -243,10 +245,22 @@ namespace Project.MainMenu
                 
                 if (_inProgressSessionInfo.IsValid())
                 {
-                    Debug.Log("In-progress session is valid, opening confirmation screen");
-                    var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
-                    inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
-                    _hasCheckedInProgressSession = true;
+                    Debug.Log("In-progress session is valid, checking if screen already exists");
+                    
+                    // Double-check to prevent opening duplicate screens
+                    existingScreen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
+                    if (existingScreen == null || !existingScreen.IsOpened)
+                    {
+                        Debug.Log("Opening confirmation screen");
+                        var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
+                        inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
+                        _hasCheckedInProgressSession = true;
+                    }
+                    else
+                    {
+                        Debug.Log("In-progress confirmation screen already opened, skipping");
+                        _hasCheckedInProgressSession = true;
+                    }
                 }
                 else
                 {
