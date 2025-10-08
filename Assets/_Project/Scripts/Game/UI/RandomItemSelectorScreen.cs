@@ -84,16 +84,18 @@ namespace Project.Game.UI
                 
                 if (isPremium)
                 {
-                    // Premium weapon: Set up for ad purchase (cost = high value, no custom text so ad icon shows)
-                    itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 9999); // No custom text
+                    // Premium weapon: Set up for ad purchase (cost = 0, mark as ad-exclusive)
+                    itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 0); // No custom text, cost = 0
                     itemViews[i].SetRewardedAdAvailability(true);
-                    Debug.Log($"[RandomItemSelectorScreen] ⭐ Premium weapon configured: {upgrade.DisplayName} - Tier 1, Shows ad icon only");
+                    itemViews[i].SetAdExclusive(true); // Mark as ad-exclusive for new system
+                    Debug.Log($"[RandomItemSelectorScreen] ⭐ Premium weapon configured: {upgrade.DisplayName} - Tier 1, Ad-exclusive");
                 }
                 else
                 {
                     // Regular weapon: Free selection with custom "CHOOSE" text
                     itemViews[i].Initialize(upgrade, _heroRegistry.ActiveHero, 0, "CHOOSE");
                     itemViews[i].SetRewardedAdAvailability(false);
+                    itemViews[i].SetAdExclusive(false); // Regular weapon, not ad-exclusive
                     Debug.Log($"[RandomItemSelectorScreen] 🔫 Regular weapon configured: {upgrade.DisplayName} - Tier 0, Shows 'CHOOSE' text");
                 }
             }

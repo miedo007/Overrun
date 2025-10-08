@@ -32,6 +32,8 @@ namespace Project.Game.Shop
         private BaseData _lockedItem;
         private int _waveIndex;
         private bool _hasUsedRewardedAdThisShop = false; // Track once-per-shop limitation
+        private BaseData _adExclusiveWeapon; // Track which weapon is ad-exclusive this session
+        private BaseData _adExclusiveItem; // Track which item is ad-exclusive this session
 
         private List<ShopInventoryItemView> CurrentItems = new();
 
@@ -65,16 +67,42 @@ namespace Project.Game.Shop
             
             var tierRange = _gameData.GetItemTierRangeForWave(waveIndex);
             var chanceIncrease = _gameData.GetChanceIncreaseForWave(waveIndex);
+            
+            // Generate weapons
+            var weapons = new List<BaseData>();
             for (var i = 0; i < weaponCount; i++)
             {
-                items.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
+                weapons.Add(_weaponDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
-
+            
+            // Generate items  
+            var regularItems = new List<BaseData>();
             for (var i = 0; i < itemCount; i++)
             {
-                items.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
+                regularItems.Add(_itemDatabase.GetRandom().GetRandomTier(_gameData.RarityCurve, tierRange, chanceIncrease).Data);
             }
-
+            
+            // Reset ad-exclusive tracking
+            _adExclusiveWeapon = null;
+            _adExclusiveItem = null;
+            
+            // Mark one weapon and one item as ad-exclusive
+            if (weapons.Count > 0)
+            {
+                var randomWeaponIndex = Random.Range(0, weapons.Count);
+                _adExclusiveWeapon = weapons[randomWeaponIndex];
+                Debug.Log($"[ShopInventoryView] Selected ad-exclusive weapon: {_adExclusiveWeapon.DisplayName}");
+            }
+            
+            if (regularItems.Count > 0)
+            {
+                var randomItemIndex = Random.Range(0, regularItems.Count);
+                _adExclusiveItem = regularItems[randomItemIndex];
+                Debug.Log($"[ShopInventoryView] Selected ad-exclusive item: {_adExclusiveItem.DisplayName}");
+            }
+            
+            items.AddRange(weapons);
+            items.AddRange(regularItems);
             items.Shuffle();
 
             if (_lockedItem != null)
@@ -85,7 +113,8 @@ namespace Project.Game.Shop
             for (var index = 0; index < items.Count; index++)
             {
                 var item = items[index];
-                AddItem(item, _lockedItem != null && index == 0);
+                var isAdExclusive = (item == _adExclusiveWeapon || item == _adExclusiveItem);
+                AddItem(item, _lockedItem != null && index == 0, isAdExclusive);
             }
 
             Scroller.horizontalNormalizedPosition = 0;
@@ -96,22 +125,32 @@ namespace Project.Game.Shop
             _hasUsedRewardedAdThisShop = false;
             Debug.Log("[ShopInventoryView] Rewarded ad usage reset for new shop session");
             
-            // Update all items to show ad availability
+            // Update all ad-exclusive items to show ad availability
             UpdateAllItemsAdAvailability();
         }
         
-        public void AddItem(BaseData data, bool lockedItem)
+        public void AddItem(BaseData data, bool lockedItem, bool isAdExclusive = false)
         {
             var itemView = Instantiate(ItemViewPrefab, Parent);
-            var cost = _gameData.GetScaledCost(data, _waveIndex);
+            var cost = isAdExclusive ? 0 : _gameData.GetScaledCost(data, _waveIndex); // Ad-exclusive items have no currency cost
             itemView.Initialize(data, _heroRegistry.ActiveHero, cost);
             itemView.BuyButtonClicked += OnBuyButtonClicked;
             itemView.RewardedAdBuyClicked += OnRewardedAdBuyClicked;
             itemView.EnableLockToggle(lockedItem);
             itemView.LockedStateChanged += OnItemViewLockStateChanged;
             
-            // Set initial rewarded ad availability
-            itemView.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+            // Set ad availability and exclusivity based on item type
+            if (isAdExclusive)
+            {
+                itemView.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+                itemView.SetAdExclusive(true);
+                Debug.Log($"[ShopInventoryView] Added ad-exclusive item: {data.DisplayName}");
+            }
+            else
+            {
+                itemView.SetRewardedAdAvailability(false); // Regular items can't use ads
+                itemView.SetAdExclusive(false);
+            }
             
             CurrentItems.Add(itemView);
         }
@@ -120,7 +159,11 @@ namespace Project.Game.Shop
         {
             foreach (var item in CurrentItems)
             {
-                item.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+                // Only update ad availability for ad-exclusive items
+                if (item.Data == _adExclusiveWeapon || item.Data == _adExclusiveItem)
+                {
+                    item.SetRewardedAdAvailability(!_hasUsedRewardedAdThisShop);
+                }
             }
         }
 
@@ -163,6 +206,14 @@ namespace Project.Game.Shop
         {
             var data = itemView.Data;
             
+            // Check if this is an ad-exclusive item trying to be purchased with currency
+            var isAdExclusive = (data == _adExclusiveWeapon || data == _adExclusiveItem);
+            if (isAdExclusive)
+            {
+                Debug.LogWarning($"[ShopInventoryView] Attempted to buy ad-exclusive item {data.DisplayName} with currency - this should not happen!");
+                return;
+            }
+            
             var cost = itemView.Cost;
             if (_heroRegistry.ActiveHero.GetShopCurrencyIntValue() < cost)
             {
@@ -189,11 +240,19 @@ namespace Project.Game.Shop
         {
             Debug.Log($"[ShopInventoryView] Processing rewarded ad purchase for {itemView.Data.DisplayName}");
             
+            // Verify this is an ad-exclusive item
+            var data = itemView.Data;
+            var isAdExclusive = (data == _adExclusiveWeapon || data == _adExclusiveItem);
+            if (!isAdExclusive)
+            {
+                Debug.LogWarning($"[ShopInventoryView] Attempted to buy non-ad-exclusive item {data.DisplayName} with ad - this should not happen!");
+                return;
+            }
+            
             // Mark rewarded ad as used for this shop session
             _hasUsedRewardedAdThisShop = true;
             UpdateAllItemsAdAvailability();
             
-            var data = itemView.Data;
             var weaponData = data as WeaponData;
             if (weaponData != null)
             {

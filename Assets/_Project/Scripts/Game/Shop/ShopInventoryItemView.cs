@@ -45,6 +45,7 @@ namespace Project.Game.Shop
         private string _customButtonText; // Store custom button text like "CHOOSE"
         private bool _isShowingRewardedAdOption = false;
         private bool _canUseRewardedAd = true; // Will be set by ShopScreen
+        private bool _isAdExclusive = false; // Track if this item is ad-exclusive
         
         public BaseData Data { get; private set; }
         public int Cost => _cost;
@@ -117,6 +118,12 @@ namespace Project.Game.Shop
             _canUseRewardedAd = canUseRewardedAd;
             OnShopCurrencyChanged(); // Refresh button state
         }
+
+        public void SetAdExclusive(bool isAdExclusive)
+        {
+            _isAdExclusive = isAdExclusive;
+            OnShopCurrencyChanged(); // Refresh button state
+        }
         
         private void OnDestroy()
         {
@@ -154,9 +161,37 @@ namespace Project.Game.Shop
                 return;
             }
 
-            var hasEnoughCurrency = _affordable;
-            var canPurchaseWithAd = !hasEnoughCurrency && _canUseRewardedAd && CanBePurchasedWithAd();
+            // Check if this item is ad-exclusive
+            if (_isAdExclusive)
+            {
+                // Ad-exclusive items can only be bought with ads
+                if (_canUseRewardedAd)
+                {
+                    _isShowingRewardedAdOption = true;
+                    BuyButton.interactable = true;
+                    
+                    // Show ad icon, hide coin icon and cost text
+                    if (coinImageObject != null) coinImageObject.SetActive(false);
+                    if (adIconObject != null) adIconObject.SetActive(true);
+                    CostText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    // Ad not available, disable button
+                    _isShowingRewardedAdOption = false;
+                    BuyButton.interactable = false;
+                    
+                    // Show ad icon grayed out
+                    if (coinImageObject != null) coinImageObject.SetActive(false);
+                    if (adIconObject != null) adIconObject.SetActive(true);
+                    CostText.gameObject.SetActive(false);
+                }
+                return;
+            }
 
+            // Regular items - currency only (no ad option)
+            var hasEnoughCurrency = _affordable;
+            
             if (hasEnoughCurrency)
             {
                 // Show normal purchase with currency
@@ -169,20 +204,9 @@ namespace Project.Game.Shop
                 CostText.text = $"<sprite name=currency_energy> {_cost}";
                 CostText.gameObject.SetActive(true);
             }
-            else if (canPurchaseWithAd)
-            {
-                // Show rewarded ad purchase option
-                _isShowingRewardedAdOption = true;
-                BuyButton.interactable = true;
-                
-                // Show ad icon, hide coin icon and cost text
-                if (coinImageObject != null) coinImageObject.SetActive(false);
-                if (adIconObject != null) adIconObject.SetActive(true);
-                CostText.gameObject.SetActive(false); // Hide text when showing ad icon
-            }
             else
             {
-                // Can't afford and no ad option available
+                // Can't afford and no ad option available for regular items
                 _isShowingRewardedAdOption = false;
                 BuyButton.interactable = false;
                 
@@ -196,6 +220,9 @@ namespace Project.Game.Shop
 
         private bool CanBePurchasedWithAd()
         {
+            // Only ad-exclusive items can be purchased with ads
+            if (!_isAdExclusive) return false;
+            
             var weaponData = Data as WeaponData;
             if (weaponData != null)
             {

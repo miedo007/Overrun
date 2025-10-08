@@ -1,4 +1,4 @@
-﻿using Project.Heroes;
+using Project.Heroes;
 using Project.Tiers;
 using UnityEngine;
 
@@ -11,6 +11,7 @@ namespace Project.Application
         [field: SerializeField] public string DisplayName { get; protected set; }
         [field: SerializeField, TextArea] public string Description { get; protected set; }
         [field: SerializeField] public int BasePrice { get; set; } = 5;
+        [field: SerializeField] public bool IsAdExclusive { get; protected set; } = false;
 
         public string Id => name;
         
