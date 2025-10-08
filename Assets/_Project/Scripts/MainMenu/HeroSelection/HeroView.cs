@@ -18,15 +18,13 @@ namespace Project.MainMenu.HeroSelection
         public event Action<HeroData> Selected;
         
         [SerializeField] private Button selectButton;
-        [SerializeField] private Button upgradeButton;
-        [SerializeField] private TextMeshProUGUI upgradeCostText;
+        [SerializeField] private Button currencyUpgradeButton;
+        [SerializeField] private Button adUpgradeButton;
+        [SerializeField] private TextMeshProUGUI currencyUpgradeCostText;
+        [SerializeField] private TextMeshProUGUI adUpgradeText;
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image heroImage;
         [SerializeField] private FeedbackData heroLevelUpFeedback;
-
-        [Header("Currency/Ad UI Elements")]
-        [SerializeField] private GameObject coinImageObject;  // GameObject containing coin icon
-        [SerializeField] private GameObject adIconObject;     // GameObject containing ad icon
 
         [Inject] private readonly HeroRegistry _heroRegistry;
         [Inject] private readonly SaveManager _saveManager;
@@ -34,28 +32,38 @@ namespace Project.MainMenu.HeroSelection
         [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
-        private bool _isShowingRewardedAdOption = false;
 
         private void Awake()
         {
             selectButton.onClick.AddListener(OnSelectButtonClicked);
-            upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+            currencyUpgradeButton.onClick.AddListener(OnCurrencyUpgradeButtonClicked);
+            adUpgradeButton.onClick.AddListener(OnAdUpgradeButtonClicked);
         }
 
-        private void OnUpgradeButtonClicked()
+        private void OnCurrencyUpgradeButtonClicked()
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
             var hasEnoughCurrency = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
 
             if (hasEnoughCurrency)
             {
-                // Normal currency upgrade
                 PerformCurrencyUpgrade(nextUpgradeCost);
             }
-            else if (_isShowingRewardedAdOption)
+            else
             {
-                // Rewarded ad upgrade
+                Debug.Log("[HeroView] Not enough currency for upgrade");
+            }
+        }
+
+        private void OnAdUpgradeButtonClicked()
+        {
+            if (HeroUpgradeAdsTracker.CanUseAdUpgrade)
+            {
                 PerformRewardedAdUpgrade();
+            }
+            else
+            {
+                Debug.Log("[HeroView] Cannot use ad upgrade - already used this session");
             }
         }
 
@@ -80,13 +88,13 @@ namespace Project.MainMenu.HeroSelection
             }
             
             // Disable button during ad
-            upgradeButton.interactable = false;
+            adUpgradeButton.interactable = false;
             
-            // Show loading state - hide both icons, show loading text
-            if (coinImageObject != null) coinImageObject.SetActive(false);
-            if (adIconObject != null) adIconObject.SetActive(false);
-            upgradeCostText.text = "LOADING...";
-            upgradeCostText.gameObject.SetActive(true);
+            // Show loading state on ad button
+            if (adUpgradeText != null)
+            {
+                adUpgradeText.text = "LOADING...";
+            }
             
             RewardedAds.ShowRewardedAd(
                 onAdFinished: () => {
@@ -131,7 +139,7 @@ namespace Project.MainMenu.HeroSelection
                     HeroUpgradeAdsTracker.MarkAdUpgradeUsed();
                     
                     // Update UI after upgrade
-                    UpdateUpgradeButton();
+                    UpdateUpgradeButtons();
                     
                     Debug.Log("=== [HeroView] AD UPGRADE PROCESS COMPLETED SUCCESSFULLY ===");
                 }
@@ -140,13 +148,13 @@ namespace Project.MainMenu.HeroSelection
                     Debug.LogError($"[HeroView] Exception during hero upgrade: {ex.Message}");
                     Debug.LogError($"[HeroView] Stack trace: {ex.StackTrace}");
                     // Restore button state on error
-                    UpdateUpgradeButton();
+                    UpdateUpgradeButtons();
                 }
             },
                 onAdFailed: () => {
                     Debug.Log("[HeroView] Rewarded ad failed - restoring button state");
                     // Restore button state
-                    UpdateUpgradeButton();
+                    UpdateUpgradeButtons();
                 }
             );
         }
@@ -180,56 +188,33 @@ namespace Project.MainMenu.HeroSelection
 
         private void OnCurrencyChanged()
         {
-            UpdateUpgradeButton();
+            UpdateUpgradeButtons();
         }
         
         private void OnHeroAdUpgradeStateChanged()
         {
-            UpdateUpgradeButton();
+            UpdateUpgradeButtons();
         }
 
-        private void UpdateUpgradeButton()
+        private void UpdateUpgradeButtons()
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
             var hasEnoughCurrency = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
             var canUseAdUpgrade = HeroUpgradeAdsTracker.CanUseAdUpgrade;
 
-            if (hasEnoughCurrency)
+            // Update currency upgrade button
+            currencyUpgradeButton.interactable = hasEnoughCurrency;
+            currencyUpgradeCostText.text = $"{nextUpgradeCost}";
+            currencyUpgradeCostText.color = hasEnoughCurrency ? Color.white : Color.red;
+
+            // Update ad upgrade button
+            adUpgradeButton.interactable = canUseAdUpgrade;
+            
+            // Update ad button text based on availability
+            if (adUpgradeText != null)
             {
-                // Show normal upgrade with currency cost
-                _isShowingRewardedAdOption = false;
-                upgradeButton.interactable = true;
-                
-                // Show coin icon and cost text, hide ad icon
-                if (coinImageObject != null) coinImageObject.SetActive(true);
-                if (adIconObject != null) adIconObject.SetActive(false);
-                upgradeCostText.text = $"{nextUpgradeCost}";
-                upgradeCostText.color = Color.white;
-                upgradeCostText.gameObject.SetActive(true);
-            }
-            else if (canUseAdUpgrade)
-            {
-                // Show rewarded ad upgrade option
-                _isShowingRewardedAdOption = true;
-                upgradeButton.interactable = true;
-                
-                // Show ad icon, hide coin icon and cost text
-                if (coinImageObject != null) coinImageObject.SetActive(false);
-                if (adIconObject != null) adIconObject.SetActive(true);
-                upgradeCostText.gameObject.SetActive(false); // Hide text when showing ad icon
-            }
-            else
-            {
-                // Player has already used ad upgrade this session and doesn't have currency
-                _isShowingRewardedAdOption = false;
-                upgradeButton.interactable = false;
-                
-                // Show coin icon and cost in red to indicate insufficient funds
-                if (coinImageObject != null) coinImageObject.SetActive(true);
-                if (adIconObject != null) adIconObject.SetActive(false);
-                upgradeCostText.text = $"{nextUpgradeCost}";
-                upgradeCostText.color = Color.red;
-                upgradeCostText.gameObject.SetActive(true);
+                adUpgradeText.text = canUseAdUpgrade ? "UPGRADE WITH AD" : "AD USED";
+                adUpgradeText.color = canUseAdUpgrade ? Color.white : Color.gray;
             }
         }
 
@@ -276,7 +261,7 @@ namespace Project.MainMenu.HeroSelection
             _heroInfo = heroInfo;
             levelText.text = $"LEVEL {heroInfo.Level + 1}"; 
             heroImage.sprite = _heroInfo.Data.Sprite;
-            UpdateUpgradeButton();
+            UpdateUpgradeButtons();
         }
     }
 }
