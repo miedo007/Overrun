@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mtl.Injection;
 using Mtl.Save;
 using Mtl.UiFramework;
@@ -12,7 +13,7 @@ using Project.Game.Player;
 using Project.Game.Shop;
 using Project.Game.UI;
 using Project.Game.Weapons;
-using Project.Game.Tutorials;   // ★ for IdleHint
+using Project.Game.Tutorials;
 using Project.Heroes;
 using Project.Tiers;
 using Project.MainMenu.HeroSelection;   // ★ for HeroUpgradeAdsTracker
@@ -448,9 +449,6 @@ private bool HasMovementInput()
             _playerController.gameObject.SetActive(true);
             _playerController.enabled = true;
             
-            // Fix weapon animation states after GameObject reactivation
-            ResetWeaponAnimationStates();
-            
             // Restore player health to full
             _playerHealthController.CurrentHealth = _playerHealthController.MaxHealth;
             Debug.Log($"[GameController] Player health restored to {_playerHealthController.CurrentHealth}/{_playerHealthController.MaxHealth}");
@@ -469,6 +467,9 @@ private bool HasMovementInput()
             // Ensure wave timer is visible and running after revive
             RestoreWaveTimerAfterRevive();
             
+            // Force weapons to refresh and reset their states - this will recreate weapons properly
+            StartCoroutine(ResetWeaponsAfterRevive());
+            
             // Restart enemy spawning for the current wave
             _enemyManager.BeginWave(
                 _levelController.CurrentLevel,
@@ -481,7 +482,7 @@ private bool HasMovementInput()
             // Re-enable player input
             _playerInput.Show();
             
-            Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned, weapons reset!");
+            Debug.Log("[GameController] Player revived successfully! Timer continues, enemies respawned, weapons will reset!");
         }
 
         private void RestoreWaveTimerAfterRevive()
@@ -514,37 +515,82 @@ private bool HasMovementInput()
             }
         }
 
-        private void ResetWeaponAnimationStates()
+        private System.Collections.IEnumerator ResetWeaponsAfterRevive()
         {
-            Debug.Log("[GameController] Resetting weapon animation states after revive...");
+            Debug.Log("[GameController] Starting weapon reset coroutine after revive...");
             
-            // Find all Legacy Animation components and reset their states
+            // Wait a frame to ensure PlayerController is fully active
+            yield return null;
+            
+            // Force weapons to refresh - this triggers OnWeaponsChanged which recreates all weapons
+            var weaponsController = _playerController.WeaponsController;
+            if (weaponsController != null)
+            {
+                Debug.Log("[GameController] Forcing weapon refresh to recreate weapons with proper states");
+                
+                // Trigger weapons refresh by temporarily clearing and re-adding weapons
+                var heroInfo = _heroRegistry.ActiveHero;
+                var currentWeapons = new List<WeaponData>(heroInfo.CurrentWeapons);
+                
+                // Clear weapons (this destroys old weapon instances)
+                heroInfo.ClearWeapons();
+                
+                // Wait a frame to ensure cleanup is complete
+                yield return null;
+                
+                // Re-add weapons (this creates new weapon instances with fresh states)
+                foreach (var weapon in currentWeapons)
+                {
+                    heroInfo.AddWeapon(weapon);
+                }
+                
+                Debug.Log($"[GameController] Weapon recreation complete: {currentWeapons.Count} weapons recreated");
+                
+                // Wait another frame to ensure all weapons are fully initialized
+                yield return null;
+                
+                // Verify weapon animation states are working
+                VerifyWeaponAnimationStates();
+            }
+            else
+            {
+                Debug.LogWarning("[GameController] WeaponsController not found - cannot reset weapons!");
+            }
+        }
+        
+        private void VerifyWeaponAnimationStates()
+        {
+            Debug.Log("[GameController] Verifying weapon animation states after revive...");
+            
+            // Find all Animation components in weapons and verify they're working
             var weaponAnimations = _playerController.GetComponentsInChildren<Animation>();
+            var weaponAnimators = _playerController.GetComponentsInChildren<Animator>();
+            
+            Debug.Log($"[GameController] Found {weaponAnimations.Length} Animation + {weaponAnimators.Length} Animator components after recreation");
+            
             foreach (var animation in weaponAnimations)
             {
-                if (animation != null)
+                if (animation != null && animation.gameObject.activeInHierarchy)
                 {
-                    // Stop any ongoing animations and reset to default state
+                    // Ensure animation is in a clean state
                     animation.Stop();
                     animation.Rewind();
-                    Debug.Log($"[GameController] Reset Legacy Animation state for weapon: {animation.gameObject.name}");
+                    Debug.Log($"[GameController] ✅ Animation component ready: {animation.gameObject.name}");
                 }
             }
             
-            // Also handle Animator components (for weapons like boomerang that might use Animator instead)
-            var weaponAnimators = _playerController.GetComponentsInChildren<Animator>();
             foreach (var animator in weaponAnimators)
             {
-                if (animator != null)
+                if (animator != null && animator.gameObject.activeInHierarchy)
                 {
-                    // Reset animator to default state
+                    // Ensure animator is in a clean state
                     animator.Rebind();
                     animator.Update(0f);
-                    Debug.Log($"[GameController] Reset Animator state for weapon: {animator.gameObject.name}");
+                    Debug.Log($"[GameController] ✅ Animator component ready: {animator.gameObject.name}");
                 }
             }
             
-            Debug.Log($"[GameController] Weapon animation reset complete: {weaponAnimations.Length} Animation + {weaponAnimators.Length} Animator components reset");
+            Debug.Log("[GameController] ✅ Weapon animation verification complete - all weapons should work now!");
         }
 
         private void LoadMainMenu()

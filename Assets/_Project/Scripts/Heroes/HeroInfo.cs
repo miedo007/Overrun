@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Project.Stats;
 using System.Linq;
@@ -96,6 +96,30 @@ namespace Project.Heroes
                 var statInfo = GetStat(statModifier.StatData);
                 statInfo.AddModifier(statModifier);
             }
+            WeaponsChanged?.Invoke();
+        }
+
+        public void ClearWeapons()
+        {
+            if (CurrentWeapons.Count == 0)
+            {
+                return;
+            }
+            
+            WeaponsWillChange?.Invoke();
+            
+            // Remove all stat modifiers from current weapons
+            foreach (var weaponData in CurrentWeapons.ToList())
+            {
+                foreach (var statModifier in weaponData.StatModifiers)
+                {
+                    var statInfo = GetStat(statModifier.StatData);
+                    statInfo.RemoveModifier(statModifier);
+                }
+            }
+            
+            // Clear the weapons list
+            CurrentWeapons.Clear();
             WeaponsChanged?.Invoke();
         }
 
