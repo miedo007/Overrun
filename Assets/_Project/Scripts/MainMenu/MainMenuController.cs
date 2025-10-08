@@ -155,8 +155,8 @@ namespace Project.MainMenu
             }
             else
             {
-                Debug.Log("User not logged in yet, checking local data only");
-                CheckForInProgressSession();
+                Debug.Log("CrazySDK not ready yet or user not logged in - waiting for SDK initialization");
+                StartCoroutine(WaitForSDKAndCheckInProgress());
             }
         }
 
@@ -178,6 +178,39 @@ namespace Project.MainMenu
             }, inProgressReadWriter);
             
             yield break; // Exit immediately, callback handles the rest
+        }
+
+        private System.Collections.IEnumerator WaitForSDKAndCheckInProgress()
+        {
+            Debug.Log("Waiting for CrazySDK to be ready before checking in-progress session...");
+            
+#if UNITY_EDITOR
+            // In Editor, CrazySDK will never be ready, so check immediately with local storage
+            Debug.Log("Running in Unity Editor - checking in-progress session immediately with local storage");
+            CheckForInProgressSession();
+            yield break;
+#endif
+            
+            // Wait for CrazySDK to be ready (important for guest users who use localStorage)
+            while (!SaveSystemIntegration.IsCrazySDKReady())
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            
+            Debug.Log("CrazySDK is now ready - checking for in-progress session");
+            
+            // Now that SDK is ready, reload data using the proper storage backend
+            var inProgressReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("in-progress");
+            
+            _saveManager.TryLoad(_inProgressSessionInfo, success =>
+            {
+                Debug.Log($"Loaded in-progress session after SDK ready: success={success}");
+                if (success)
+                {
+                    Debug.Log($"SDK-ready data - InProgress: {_inProgressSessionInfo.InProgressSave?.InProgress}, Level: {_inProgressSessionInfo.InProgressSave?.LevelIndex}, Wave: {_inProgressSessionInfo.InProgressSave?.WaveIndex}");
+                }
+                CheckForInProgressSession();
+            }, inProgressReadWriter);
         }
 
         private void CheckForInProgressSession()

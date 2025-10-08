@@ -23,11 +23,17 @@ namespace Project.Application
 
         private ReadWriter GetCurrentReadWriter()
         {
-            if (SaveSystemIntegration.IsUserLoggedIn && SaveSystemIntegration.IsCrazySDKReady())
+            // Use CrazyGames Data for BOTH logged-in users AND guest users when SDK is ready
+            // Per CrazyGames docs: "If the user is not logged in, the data module will store the game data in LocalStorage"
+            if (SaveSystemIntegration.IsCrazySDKReady())
             {
-                return _crazyGamesReadWriter;
+                bool isLoggedIn = SaveSystemIntegration.IsUserLoggedIn;
+                Debug.Log($"[DynamicReadWriter] CrazySDK ready - User logged in: {isLoggedIn} - Using CrazyGames Data");
+                return _crazyGamesReadWriter;  // Uses localStorage for guests, cloud for logged-in
             }
-            return _fileReadWriter;
+            
+            Debug.Log($"[DynamicReadWriter] CrazySDK not ready, using local file storage");
+            return _fileReadWriter;  // Only fallback when SDK unavailable (like in editor)
         }
 
         protected override void OnSave(string rawSave)
