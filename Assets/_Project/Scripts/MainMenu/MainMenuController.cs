@@ -231,6 +231,26 @@ namespace Project.MainMenu
                 }
                 CheckForInProgressSession();
             }, inProgressReadWriter);
+            
+            // CRITICAL FIX: Also reload player data (currency) from cloud storage for guest users
+            Debug.Log("Attempting to reload player data from cloud storage");
+            var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
+
+            _saveManager.TryLoad(_playerInfo, success =>
+            {
+                Debug.Log($"Reloaded player data: success={success}");
+                if (success)
+                {
+                    Debug.Log($"Player data reloaded - Currency: {_playerInfo.PlayerSave.Currency}, TopStage: {_playerInfo.PlayerSave.TopStageIndex}");
+                    
+                    // Trigger UI refresh events so the currency display updates
+                    _playerInfo.NotifyDataReloaded();
+                }
+                else
+                {
+                    Debug.Log("Failed to reload player data from cloud storage");
+                }
+            }, playerReadWriter);
         }
 
         private void CheckForInProgressSession()
