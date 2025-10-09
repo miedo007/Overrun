@@ -114,7 +114,7 @@ public void SendEmailToSupport()
             // In editor, CrazySDK is never actually initialized
             return false;
 #else
-            return CrazySDK.Instance != null;
+            return CrazySDK.IsInitialized;
 #endif
         }
     }
