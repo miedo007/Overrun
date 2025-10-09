@@ -198,6 +198,17 @@ namespace Project.MainMenu.HeroSelection
             // Initialize the ads tracker with required dependencies
             HeroUpgradeAdsTracker.Initialize(_playerInfo, _saveManager);
             
+            // Check if there's an active cooldown and start timer updates if needed
+            if (!HeroUpgradeAdsTracker.CanUseAdUpgrade)
+            {
+                var remainingTime = HeroUpgradeAdsTracker.GetRemainingCooldownTime();
+                if (remainingTime > 0)
+                {
+                    _isTimerActive = true;
+                    Debug.Log($"[HeroView] Detected active cooldown on scene load - starting timer updates. Remaining time: {remainingTime:F0} seconds");
+                }
+            }
+            
             _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
             OnActiveHeroChanged(_heroRegistry.ActiveHero);
             
