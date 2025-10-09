@@ -11,6 +11,7 @@ namespace Project.Heroes
         public event Action<HeroInfo> ActiveHeroChanged;
 
         private HeroInfo _activeHeroInfo;
+        private SaveManager _saveManager;
 
         private readonly HeroSave _save = new HeroSave();
 
@@ -28,8 +29,9 @@ namespace Project.Heroes
             }
         }
         
-        public void Initialize(HeroDatabase database)
+        public void Initialize(SaveManager saveManager, HeroDatabase database)
         {
+            _saveManager = saveManager;
             Database = database;
             ActiveHero = GetSelectedHeroInfo();
         }
@@ -111,6 +113,10 @@ namespace Project.Heroes
             Debug.Log("[HeroRegistry] OnChanged event triggered for save");
             
             ActiveHeroChanged?.Invoke(ActiveHero);
+            
+            // Force immediate save when hero upgrades
+            _saveManager?.Save();
+            Debug.Log("[HeroRegistry] Immediate hero upgrade save completed!");
         }
 
         /// <summary>

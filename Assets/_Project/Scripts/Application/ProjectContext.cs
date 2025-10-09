@@ -80,7 +80,7 @@ namespace Project.Application
             var heroesReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("heroes");
             saveManager.TryLoad(_heroesInfo, _ =>
             {
-                _heroesInfo.Initialize(heroDatabase);
+                _heroesInfo.Initialize(saveManager, heroDatabase);
             }, heroesReadWriter);
             Bind(_heroesInfo);
 
