@@ -12,6 +12,12 @@ namespace Project.Application
 
         public IPlayerSave PlayerSave => _save;
         private readonly PlayerSave _save = new PlayerSave();
+        private SaveManager _saveManager;
+
+        public void Initialize(SaveManager saveManager)
+        {
+            _saveManager = saveManager;
+        }
 
         public void IncrementTopStage()
         {
@@ -34,6 +40,9 @@ namespace Project.Application
             _save.Currency += delta;
             OnCurrencyChanged?.Invoke();
             OnChanged?.Invoke();
+            
+            // Force immediate save when currency changes
+            _saveManager?.Save();
         }
         
         public void ChangeHeroAdUpgradeState(bool hasUsed)
@@ -41,6 +50,12 @@ namespace Project.Application
             _save.HasUsedHeroAdUpgradeThisSession = hasUsed;
             OnHeroAdUpgradeStateChanged?.Invoke();
             OnChanged?.Invoke();
+        }
+        
+        public void NotifyDataReloaded()
+        {
+            OnChanged?.Invoke();
+            OnCurrencyChanged?.Invoke();
         }
     }
 }

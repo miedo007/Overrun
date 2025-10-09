@@ -63,6 +63,7 @@ namespace Project.Application
 
             // Player info
             _playerInfo = new PlayerInfo();
+            _playerInfo.Initialize(saveManager);
             var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
             saveManager.TryLoad(_playerInfo, success =>
             {
