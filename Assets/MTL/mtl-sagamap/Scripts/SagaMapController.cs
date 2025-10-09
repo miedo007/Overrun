@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mtl.Toolbox;
@@ -26,6 +26,9 @@ namespace Mtl.SagaMap
         [SerializeField] private Color pathColor = new Color(0.10f, 0.45f, 0.70f, 1f);
         [SerializeField] private Sprite pathSprite; // optional; leave null for a solid bar
         [SerializeField] private float pathInsetFromNode = 26f; // trims under the circle
+
+        [Header("Scroll Settings")]
+        [SerializeField] private float scrollSensitivity = 3.0f; // Increase for faster scrolling
 
         private readonly List<SagaMapNodeController> _stages = new();
         private readonly List<RectTransform> _pathPool = new();
@@ -136,6 +139,9 @@ namespace Mtl.SagaMap
         {
             scrollRect.horizontal = true;
             scrollRect.vertical   = false;
+            
+            // Apply custom scroll sensitivity for faster mouse wheel scrolling
+            scrollRect.scrollSensitivity = scrollSensitivity;
 
             content.anchorMin = new Vector2(0f, 0.5f);
             content.anchorMax = new Vector2(0f, 0.5f);

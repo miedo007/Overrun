@@ -52,8 +52,8 @@ public void SendEmailToSupport()
             // Determine if we're in gameplay or main menu based on current scene
             _isOpenedFromGameplay = IsCurrentSceneGameplay();
             
-            // Only stop gameplay when settings screen opens if we're actually in gameplay
-            if (_isOpenedFromGameplay)
+            // Only stop gameplay when settings screen opens if we're actually in gameplay AND CrazySDK is ready
+            if (_isOpenedFromGameplay && IsCrazySDKReady())
             {
                 CrazySDK.Game.GameplayStop();
             }
@@ -95,8 +95,8 @@ public void SendEmailToSupport()
 
         protected override void OnClosed()
         {
-            // Only resume gameplay when settings screen closes if we were in gameplay
-            if (_isOpenedFromGameplay)
+            // Only resume gameplay when settings screen closes if we were in gameplay AND CrazySDK is ready
+            if (_isOpenedFromGameplay && IsCrazySDKReady())
             {
                 CrazySDK.Game.GameplayStart();
             }
@@ -106,6 +106,16 @@ public void SendEmailToSupport()
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
             return currentSceneName == "game" || currentSceneName.ToLower().Contains("game");
+        }
+        
+        private bool IsCrazySDKReady()
+        {
+#if UNITY_EDITOR
+            // In editor, CrazySDK is never actually initialized
+            return false;
+#else
+            return CrazySDK.Instance != null;
+#endif
         }
     }
 }

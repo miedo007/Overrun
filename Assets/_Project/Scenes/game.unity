@@ -2372,8 +2372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1440190959}
   moveThreshold: 0.02
-  idleDelay: 2.5
+  idleDelay: 30
   fadeDuration: 0.15
+  cooldownAfterFirstWave: 10
 --- !u!4 &2041068256
 Transform:
   m_ObjectHideFlags: 0
