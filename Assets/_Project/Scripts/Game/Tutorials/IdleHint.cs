@@ -4,7 +4,8 @@ namespace Project.Game.Tutorials
 {
     /// <summary>
     /// Shows a movement hint when the player is idle.
-    /// - Visible immediately when Begin() is called (e.g., at wave start).
+    /// - Always visible on the first wave (wave 0).
+    /// - On subsequent waves, only appears after a cooldown period.
     /// - Hides as soon as the player moves.
     /// - Reappears after the player goes idle again for 'idleDelay' seconds.
     /// Attach to the hint UI object (must have a CanvasGroup).
@@ -19,19 +20,41 @@ namespace Project.Game.Tutorials
         [SerializeField] private float idleDelay = 2f;             // seconds idle before showing again
         [SerializeField] private float fadeDuration = 0.15f;       // 0 = instant
 
+        [Header("Wave-based Display")]
+        [SerializeField] private float cooldownAfterFirstWave = 10f; // cooldown time for waves after the first
+
         private CanvasGroup cg;
         private Vector3 lastPos;
         private float idleTimer;
+        private float cooldownTimer;
         private bool isVisible;
         private bool tracking;
+        private int currentWaveIndex;
+        private bool cooldownActive;
 
         /// <summary>Called by GameController at wave start.</summary>
-        public void Begin()
+        public void Begin(int waveIndex = 0)
         {
             if (tracking) return;
+            
+            currentWaveIndex = waveIndex;
             tracking = true;
             idleTimer = 0f;
-            ShowImmediate();
+            
+            // First wave: show immediately
+            if (currentWaveIndex == 0)
+            {
+                cooldownActive = false;
+                ShowImmediate();
+            }
+            // Subsequent waves: start cooldown
+            else
+            {
+                cooldownActive = true;
+                cooldownTimer = cooldownAfterFirstWave;
+                HideImmediate();
+            }
+            
             if (target) lastPos = target.position;
         }
 
@@ -39,6 +62,8 @@ namespace Project.Game.Tutorials
         public void End()
         {
             tracking = false;
+            cooldownActive = false;
+            cooldownTimer = 0f;
             HideImmediate();
         }
 
@@ -52,6 +77,18 @@ namespace Project.Game.Tutorials
         private void Update()
         {
             if (!tracking || !target) return;
+
+            // Handle cooldown for non-first waves
+            if (cooldownActive)
+            {
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer <= 0f)
+                {
+                    cooldownActive = false;
+                }
+                // Don't process movement during cooldown
+                return;
+            }
 
             Vector3 pos = target.position;
             float speed = (pos - lastPos).magnitude / Mathf.Max(Time.deltaTime, 0.0001f);

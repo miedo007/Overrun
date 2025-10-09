@@ -22,6 +22,7 @@ namespace Project.MainMenu.HeroSelection
         [SerializeField] private Button adUpgradeButton;
         [SerializeField] private TextMeshProUGUI currencyUpgradeCostText;
         [SerializeField] private TextMeshProUGUI adUpgradeText;
+        [SerializeField] private Image adUpgradeIcon;
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private Image heroImage;
         [SerializeField] private FeedbackData heroLevelUpFeedback;
@@ -32,12 +33,28 @@ namespace Project.MainMenu.HeroSelection
         [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
+        private bool _isTimerActive = false;
 
         private void Awake()
         {
             selectButton.onClick.AddListener(OnSelectButtonClicked);
             currencyUpgradeButton.onClick.AddListener(OnCurrencyUpgradeButtonClicked);
             adUpgradeButton.onClick.AddListener(OnAdUpgradeButtonClicked);
+        }
+
+        private void Update()
+        {
+            // Update timer display if countdown is active
+            if (_isTimerActive)
+            {
+                UpdateUpgradeButtons();
+                
+                // Stop updating when cooldown is finished
+                if (HeroUpgradeAdsTracker.CanUseAdUpgrade)
+                {
+                    _isTimerActive = false;
+                }
+            }
         }
 
         private void OnCurrencyUpgradeButtonClicked()
@@ -63,7 +80,8 @@ namespace Project.MainMenu.HeroSelection
             }
             else
             {
-                Debug.Log("[HeroView] Cannot use ad upgrade - already used this session");
+                var remainingTime = HeroUpgradeAdsTracker.GetRemainingCooldownTime();
+                Debug.Log($"[HeroView] Cannot use ad upgrade - cooldown active for {remainingTime:F0} more seconds");
             }
         }
 
@@ -135,8 +153,11 @@ namespace Project.MainMenu.HeroSelection
                     // Also save after a short delay to ensure cloud sync
                     StartCoroutine(DelayedSave());
                     
-                    // Mark ad upgrade as used for this session
+                    // Mark ad upgrade as used and start cooldown timer
                     HeroUpgradeAdsTracker.MarkAdUpgradeUsed();
+                    
+                    // Start timer updates in UI
+                    _isTimerActive = true;
                     
                     // Update UI after upgrade
                     UpdateUpgradeButtons();
@@ -210,11 +231,18 @@ namespace Project.MainMenu.HeroSelection
             // Update ad upgrade button
             adUpgradeButton.interactable = canUseAdUpgrade;
             
-            // Update ad button text based on availability
+            // Update ad button text based on timer state
             if (adUpgradeText != null)
             {
-                adUpgradeText.text = canUseAdUpgrade ? "UPGRADE WITH AD" : "AD USED";
-                adUpgradeText.color = canUseAdUpgrade ? Color.white : Color.gray;
+                adUpgradeText.text = HeroUpgradeAdsTracker.GetCooldownDisplayText();
+                adUpgradeText.color = canUseAdUpgrade ? Color.white : Color.yellow;
+            }
+            
+            // Update ad icon based on timer state
+            if (adUpgradeIcon != null)
+            {
+                adUpgradeIcon.color = canUseAdUpgrade ? Color.white : Color.gray;
+                adUpgradeIcon.enabled = canUseAdUpgrade;
             }
         }
 

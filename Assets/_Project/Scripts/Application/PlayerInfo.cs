@@ -52,6 +52,13 @@ namespace Project.Application
             OnChanged?.Invoke();
         }
         
+        public void ChangeHeroAdUpgradeTime(double timestamp)
+        {
+            _save.LastHeroAdUpgradeTime = timestamp;
+            OnHeroAdUpgradeStateChanged?.Invoke();
+            OnChanged?.Invoke();
+        }
+        
         public void NotifyDataReloaded()
         {
             OnChanged?.Invoke();

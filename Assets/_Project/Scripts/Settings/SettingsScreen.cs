@@ -5,6 +5,7 @@ using Project.Feedback;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using CrazyGames;
 
 namespace Project.Settings
@@ -21,6 +22,8 @@ namespace Project.Settings
 
         [Inject] private FeedbackController _feedbackController;
         [Inject] private UIFrame _uiFrame;
+        
+        private bool _isOpenedFromGameplay = false;
 
         private void Awake()
         {
@@ -46,8 +49,14 @@ public void SendEmailToSupport()
 
         protected override void OnOpened()
         {
-            // Stop gameplay when settings screen opens
-            CrazySDK.Game.GameplayStop();
+            // Determine if we're in gameplay or main menu based on current scene
+            _isOpenedFromGameplay = IsCurrentSceneGameplay();
+            
+            // Only stop gameplay when settings screen opens if we're actually in gameplay
+            if (_isOpenedFromGameplay)
+            {
+                CrazySDK.Game.GameplayStop();
+            }
             
             if (playerIdText != null) playerIdText.text = "Player ID: —";
 
@@ -86,8 +95,17 @@ public void SendEmailToSupport()
 
         protected override void OnClosed()
         {
-            // Resume gameplay when settings screen closes
-            CrazySDK.Game.GameplayStart();
+            // Only resume gameplay when settings screen closes if we were in gameplay
+            if (_isOpenedFromGameplay)
+            {
+                CrazySDK.Game.GameplayStart();
+            }
+        }
+        
+        private bool IsCurrentSceneGameplay()
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            return currentSceneName == "game" || currentSceneName.ToLower().Contains("game");
         }
     }
 }

@@ -50,11 +50,11 @@ namespace Project.MainMenu.HeroSelection
             Debug.Log("[HeroUpgradeAdsValidator] Manually marked ad as used");
         }
         
-        [ContextMenu("Test: Reset For New Session")]
-        private void TestResetForNewSession()
+        [ContextMenu("Test: Reset Cooldown")]
+        private void TestResetCooldown()
         {
-            HeroUpgradeAdsTracker.ResetForNewSession();
-            Debug.Log("[HeroUpgradeAdsValidator] Manually reset for new session");
+            HeroUpgradeAdsTracker.ResetCooldown();
+            Debug.Log("[HeroUpgradeAdsValidator] Manually reset cooldown timer");
         }
         
         [ContextMenu("Test: Show Current Status")]

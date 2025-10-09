@@ -134,9 +134,6 @@ namespace Project.Game
             _totalLevelReward = 0;
             Debug.Log($"[GameController] Starting new level - Reset total reward tracker");
             
-            // Reset hero upgrade ads availability for new game session
-            HeroUpgradeAdsTracker.ResetForNewSession();
-            
             _levelController.WaveCompleted += OnWaveCompleted;
             _levelController.LevelCompleted += OnLevelCompleted;
 
@@ -263,8 +260,8 @@ namespace Project.Game
 {
     waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
 
-    // Show movement hint immediately when wave intro closes
-    _idleHint?.Begin();
+    // Show movement hint with current wave index
+    _idleHint?.Begin(_levelController.WaveIndex);
 
     // Instead of starting the wave right away, wait until the player moves
     StartCoroutine(WaitForMoveThenStartWave());
@@ -333,9 +330,6 @@ private bool HasMovementInput()
             _saveManager.Save();
 
             SendLevelSummaryEvent(true);
-            
-            // Reset hero upgrade ads availability after completing level
-            HeroUpgradeAdsTracker.ResetForNewSession();
 
             menuMusic.Play();
 
@@ -409,9 +403,6 @@ private bool HasMovementInput()
             _saveManager.Save();
 
             SendLevelSummaryEvent(false);
-            
-            // Reset hero upgrade ads availability after dying (going back to menu)
-            HeroUpgradeAdsTracker.ResetForNewSession();
 
             _enemyManager.EndWaveAfterDelay(0.5f);
 
