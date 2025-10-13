@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace Project.Game.Tutorials
 {
@@ -13,15 +15,64 @@ namespace Project.Game.Tutorials
 
         private IdleHintBase activeHint;
         private bool isMobile;
+        private bool detectionComplete = false;
+
+        // Import the JavaScript function
+        [DllImport("__Internal")]
+        private static extern void DetectMobile();
 
         private void Awake()
         {
-            // Detect platform
-            isMobile = IsMobilePlatform();
+            // Start mobile detection
+            StartMobileDetection();
+        }
+
+        private void StartMobileDetection()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Only detect mobile on WebGL builds, not in Editor
+            string url = UnityEngine.Application.absoluteURL.ToLower();
+            if (url.Contains("crazygames.com"))
+            {
+                if (debugMode)
+                {
+                    Debug.Log("[PlatformHintManager] Starting mobile detection via JavaScript...");
+                }
+                
+                // Call JavaScript function - result will come back via OnMobileDetected
+                DetectMobile();
+                return;
+            }
+#endif
+            // Fallback: Editor or non-CrazyGames = Desktop
+            if (debugMode)
+            {
+                Debug.Log("[PlatformHintManager] Using fallback detection (Editor/Non-CrazyGames): Desktop");
+            }
+            SetPlatform(false); // false = desktop
+        }
+
+        // This method is called by JavaScript via SendMessage
+        public void OnMobileDetected(string result)
+        {
+            bool isMobileDevice = result == "true";
+            
+            if (debugMode)
+            {
+                Debug.Log($"[PlatformHintManager] JavaScript detection result: {(isMobileDevice ? "Mobile" : "Desktop")}");
+            }
+            
+            SetPlatform(isMobileDevice);
+        }
+
+        private void SetPlatform(bool mobile)
+        {
+            isMobile = mobile;
+            detectionComplete = true;
 
             if (debugMode)
             {
-                Debug.Log($"[PlatformHintManager] Platform detected: {(isMobile ? "Mobile" : "Desktop")}");
+                Debug.Log($"[PlatformHintManager] Platform set to: {(isMobile ? "Mobile" : "Desktop")}");
                 Debug.Log($"[PlatformHintManager] Screen: {Screen.width}x{Screen.height}");
                 Debug.Log($"[PlatformHintManager] URL: {UnityEngine.Application.absoluteURL}");
             }
@@ -44,9 +95,40 @@ namespace Project.Game.Tutorials
 
         public void Begin(int waveIndex = 0)
         {
+            // Wait for detection to complete before starting hints
+            if (!detectionComplete)
+            {
+                StartCoroutine(WaitForDetectionAndBegin(waveIndex));
+                return;
+            }
+
             if (debugMode)
             {
                 Debug.Log($"[PlatformHintManager] Begin wave {waveIndex} on {(isMobile ? "Mobile" : "Desktop")}");
+            }
+
+            activeHint?.Begin(waveIndex);
+        }
+
+        private IEnumerator WaitForDetectionAndBegin(int waveIndex)
+        {
+            // Wait up to 1 second for detection to complete
+            float timeout = 1f;
+            float elapsed = 0f;
+            
+            while (!detectionComplete && elapsed < timeout)
+            {
+                yield return new WaitForSeconds(0.1f);
+                elapsed += 0.1f;
+            }
+
+            if (!detectionComplete)
+            {
+                if (debugMode)
+                {
+                    Debug.LogWarning("[PlatformHintManager] Detection timeout - defaulting to Desktop");
+                }
+                SetPlatform(false); // Default to desktop if detection fails
             }
 
             activeHint?.Begin(waveIndex);
@@ -56,28 +138,10 @@ namespace Project.Game.Tutorials
         {
             if (debugMode)
             {
-                Debug.Log($"[PlatformHintManager] End hints");
+                Debug.Log("[PlatformHintManager] End hints");
             }
 
             activeHint?.End();
-        }
-
-        private bool IsMobilePlatform()
-        {
-            // Only apply mobile detection on WebGL builds
-            if (UnityEngine.Application.platform != RuntimePlatform.WebGLPlayer)
-                return false;
-
-            // Only apply to CrazyGames domain
-            string url = UnityEngine.Application.absoluteURL.ToLower();
-            if (!url.Contains("crazygames.com"))
-                return false;
-
-            // Much more restrictive mobile detection - only very small screens
-            bool isVerySmallScreen = Screen.width <= 480 || Screen.height <= 480;
-            bool isSmallLandscape = Screen.width <= 854 && Screen.height <= 480;
-            
-            return isVerySmallScreen || isSmallLandscape;
         }
     }
 }

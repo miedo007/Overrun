@@ -5,7 +5,7 @@ namespace Project.Game.Tutorials
     public class MobileIdleHint : IdleHintBase
     {
         [Header("Mobile-Specific Settings")]
-        [SerializeField] private bool disableHintsOnMobile = true;
+        [SerializeField] private bool disableHintsOnMobile = false;
 
         public override void Begin(int waveIndex = 0)
         {
