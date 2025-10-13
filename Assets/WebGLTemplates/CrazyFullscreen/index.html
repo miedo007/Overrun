@@ -47,7 +47,7 @@
             productName: "{{{ PRODUCT_NAME }}}",
             productVersion: "{{{ PRODUCT_VERSION }}}",
             matchWebGLToCanvasSize: true,
-            devicePixelRatio: 1
+            devicePixelRatio: Math.min(window.devicePixelRatio || 1, 3)
         }).then(() => {
             console.log("Unity loaded successfully");
         }).catch((message) => {
