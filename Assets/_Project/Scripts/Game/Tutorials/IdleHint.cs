@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 namespace Project.Game.Tutorials
 {
     /// <summary>
+    /// LEGACY - Use PlatformHintManager instead
     /// Shows a movement hint when the player is idle.
     /// - Always visible on the first wave (wave 0).
     /// - On subsequent waves, only appears after a cooldown period.
@@ -10,6 +12,7 @@ namespace Project.Game.Tutorials
     /// - Reappears after the player goes idle again for 'idleDelay' seconds.
     /// Attach to the hint UI object (must have a CanvasGroup).
     /// </summary>
+    [System.Obsolete("Use PlatformHintManager with DesktopIdleHint/MobileIdleHint instead")]
     public class IdleHint : MonoBehaviour
     {
         [Header("Who to watch (movement)")]
@@ -69,9 +72,36 @@ namespace Project.Game.Tutorials
 
         private void Awake()
         {
+            // Hide on CrazyGames mobile web
+            if (IsCrazyGamesMobile())
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+            
             cg = GetComponent<CanvasGroup>();
             if (!cg) cg = gameObject.AddComponent<CanvasGroup>();
             HideImmediate(); // we only show when Begin() is called
+        }
+
+        private bool IsCrazyGamesMobile()
+        {
+            // Check if running on WebGL platform
+            if (UnityEngine.Application.platform != RuntimePlatform.WebGLPlayer)
+                return false;
+            
+            // Check if the URL contains crazygames domain
+            string currentUrl = UnityEngine.Application.absoluteURL.ToLower();
+            if (!currentUrl.Contains("crazygames.com"))
+                return false;
+            
+            // Multiple detection methods
+            bool isMobileResolution = Screen.width <= 768 || Screen.height <= 768;
+            bool isLandscapeMobile = (Screen.width <= 1024 && Screen.height <= 768) || (Screen.width <= 768 && Screen.height <= 1024);
+            bool hasTouch = Input.touchSupported;
+            
+            // Return true if any mobile indicator is detected
+            return isMobileResolution || isLandscapeMobile || hasTouch;
         }
 
         private void Update()

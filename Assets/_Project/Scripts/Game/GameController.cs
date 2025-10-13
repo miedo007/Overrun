@@ -50,7 +50,7 @@ namespace Project.Game
         private HeroInfo _heroInfo;
 
         // ★ cache the hint once (even if inactive)
-        private IdleHint _idleHint;
+        private PlatformHintManager _hintManager;
 
         // Track accumulated rewards for entire level (reset on level start)
         private int _totalLevelReward = 0;
@@ -63,8 +63,8 @@ namespace Project.Game
             _playerHealthController.Depleted += OnPlayerHealthDepleted;
             _heroInfo = _heroRegistry.ActiveHero;
 
-            // ★ find the IdleHint in scene (true = include inactive)
-            _idleHint = FindObjectOfType<IdleHint>(true);
+            // ★ find the PlatformHintManager in scene (true = include inactive)
+            _hintManager = FindObjectOfType<PlatformHintManager>(true);
             
 #if UNITY_EDITOR
             // Add midgame ads debugger for easy testing (can be disabled in component)
@@ -146,7 +146,7 @@ namespace Project.Game
             CrazySdkManager.GameplayStop();
             
             // ★ Hide/stop the hint while out of combat (optional but recommended)
-            if (_idleHint != null) _idleHint.End();
+            if (_hintManager != null) _hintManager.End();
 
             menuMusic.Play();
 
@@ -261,7 +261,7 @@ namespace Project.Game
     waveIntroScreen.OnCloseEvent -= OnWaveIntroCompleted;
 
     // Show movement hint with current wave index
-    _idleHint?.Begin(_levelController.WaveIndex);
+    _hintManager?.Begin(_levelController.WaveIndex);
 
     // Instead of starting the wave right away, wait until the player moves
     StartCoroutine(WaitForMoveThenStartWave());
@@ -341,7 +341,7 @@ private bool HasMovementInput()
             _playerInput.Hide();
 
             // ★ ensure hint is off on win screen
-            if (_idleHint != null) _idleHint.End();
+            if (_hintManager != null) _hintManager.End();
 
             // Add final wave reward to total and give it immediately
             var finalWaveReward = _gameData.GetCurrencyReward(_levelController.CurrentLevelIndex, _levelController.WaveIndex);
@@ -417,7 +417,7 @@ private bool HasMovementInput()
             _playerInput.Hide();
 
             // ★ ensure hint is off on fail screen
-            if (_idleHint != null) _idleHint.End();
+            if (_hintManager != null) _hintManager.End();
 
             var levelFailedScreen = _uiFrame.Open<LevelFailedScreen>();
             levelFailedScreen.ConfirmButtonClicked += OnLevelFailConfirmed;

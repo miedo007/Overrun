@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 629348314359534192}
   - component: {fileID: 5505761042405284583}
   - component: {fileID: 499078623440424391}
-  - component: {fileID: 4866519108578717501}
+  - component: {fileID: 1228424522099434496}
   m_Layer: 5
   m_Name: view_hero
   m_TagString: Untagged
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   injectedBehaviors:
   - {fileID: 5505761042405284583}
---- !u!114 &4866519108578717501
+--- !u!114 &1228424522099434496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,11 +466,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1415866398961565580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90ac877b76cfa74383bc0d297fdf366, type: 3}
+  m_Script: {fileID: 11500000, guid: b0081cefc19bd224b94d52e47b4bf56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownDuration: 120
-  enableDebugLogs: 0
+  usePreset: 0
+  preset: 30
+  enableDebugLogs: 1
 --- !u!1 &2568687425396004339
 GameObject:
   m_ObjectHideFlags: 0

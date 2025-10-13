@@ -33,17 +33,13 @@ namespace Project.MainMenu.HeroSelection
         [Inject] private readonly PlayerInfo _playerInfo;
 
         private HeroInfo _heroInfo;
+        private Coroutine _cooldownCheckCoroutine;
 
         private void Awake()
         {
             selectButton.onClick.AddListener(OnSelectButtonClicked);
             currencyUpgradeButton.onClick.AddListener(OnCurrencyUpgradeButtonClicked);
             adUpgradeButton.onClick.AddListener(OnAdUpgradeButtonClicked);
-        }
-
-        private void Update()
-        {
-            // No timer updates needed - ad upgrades are always available
         }
 
         private void OnCurrencyUpgradeButtonClicked()
@@ -63,8 +59,15 @@ namespace Project.MainMenu.HeroSelection
 
         private void OnAdUpgradeButtonClicked()
         {
-            // Always allow ad upgrade - no cooldown check needed
-            PerformRewardedAdUpgrade();
+            if (HeroAdUpgradeTimer.CanUseAdUpgrade)
+            {
+                PerformRewardedAdUpgrade();
+            }
+            else
+            {
+                var remainingTime = HeroAdUpgradeTimer.GetRemainingCooldownTime();
+                Debug.Log($"[HeroView] Cannot use ad upgrade - cooldown active for {remainingTime:F0} more seconds");
+            }
         }
 
         private void PerformCurrencyUpgrade(int upgradeCost)
@@ -80,7 +83,6 @@ namespace Project.MainMenu.HeroSelection
         {
             Debug.Log("[HeroView] Attempting rewarded ad upgrade");
             
-            // Disable button during ad
             adUpgradeButton.interactable = false;
             
             RewardedAds.ShowRewardedAd(
@@ -93,7 +95,8 @@ namespace Project.MainMenu.HeroSelection
                         _heroRegistry.UpgradeActiveHero();
                         _saveManager.Save();
                         
-                        // Update UI after upgrade
+                        HeroAdUpgradeTimer.StartCooldown();
+                        StartCooldownCheckIfNeeded();
                         UpdateUpgradeButtons();
                         
                         Debug.Log("[HeroView] Ad upgrade completed successfully");
@@ -113,13 +116,29 @@ namespace Project.MainMenu.HeroSelection
 
         public void OnReady()
         {
+            HeroAdUpgradeTimer.Initialize(_playerInfo, _saveManager);
+            HeroAdUpgradeTimer.OnDurationChanged += OnTimerDurationChanged;
+            
+            var currentDuration = HeroAdUpgradeTimer.CooldownDuration;
+            Debug.Log($"[HeroView] Timer initialized with duration: {currentDuration} seconds ({currentDuration/60f:F1} minutes)");
+            
             _heroRegistry.ActiveHeroChanged += OnActiveHeroChanged;
             OnActiveHeroChanged(_heroRegistry.ActiveHero);
             
             _playerInfo.OnCurrencyChanged += OnCurrencyChanged;
             OnCurrencyChanged();
+            
+            // Start checking for cooldown expiry if needed
+            StartCooldownCheckIfNeeded();
         }
         
+
+        private void OnTimerDurationChanged()
+        {
+            Debug.Log($"[HeroView] Timer duration changed to {HeroAdUpgradeTimer.CooldownDuration}s - refreshing UI");
+            StartCooldownCheckIfNeeded();
+            UpdateUpgradeButtons();
+        }
 
         private void OnCurrencyChanged()
         {
@@ -130,27 +149,83 @@ namespace Project.MainMenu.HeroSelection
         {
             var nextUpgradeCost = _gameData.GetUpgradeCost(_heroRegistry.ActiveHero.Level);
             var hasEnoughCurrency = _playerInfo.PlayerSave.Currency >= nextUpgradeCost;
+            var canUseAdUpgrade = HeroAdUpgradeTimer.CanUseAdUpgrade;
 
             // Update currency upgrade button
             currencyUpgradeButton.interactable = hasEnoughCurrency;
             currencyUpgradeCostText.text = $"{nextUpgradeCost}";
             currencyUpgradeCostText.color = hasEnoughCurrency ? Color.white : Color.red;
 
-            // Ad upgrade button is always available
-            adUpgradeButton.interactable = true;
+            // Hide entire ad button during cooldown, show when available
+            adUpgradeButton.gameObject.SetActive(canUseAdUpgrade);
             
-            // Hide ad button text - icon only
-            if (adUpgradeText != null)
+            if (canUseAdUpgrade)
             {
-                adUpgradeText.text = "";
-                adUpgradeText.enabled = false;
+                adUpgradeButton.interactable = true;
+                
+                // Ensure icon and text are visible when button is available
+                if (adUpgradeIcon != null)
+                {
+                    adUpgradeIcon.enabled = true;
+                    adUpgradeIcon.color = Color.white;
+                }
+                
+                if (adUpgradeText != null)
+                {
+                    adUpgradeText.enabled = true;
+                    adUpgradeText.color = Color.white;
+                }
             }
             
-            // Ad icon is always enabled
-            if (adUpgradeIcon != null)
+            Debug.Log($"[HeroView] Ad button visibility: {canUseAdUpgrade}");
+        }
+
+        private void StartCooldownCheckIfNeeded()
+        {
+            // Stop any existing coroutine
+            if (_cooldownCheckCoroutine != null)
             {
-                adUpgradeIcon.color = Color.white;
-                adUpgradeIcon.enabled = true;
+                StopCoroutine(_cooldownCheckCoroutine);
+                _cooldownCheckCoroutine = null;
+            }
+            
+            // Only start checking if there's an active cooldown
+            var canUseAdUpgrade = HeroAdUpgradeTimer.CanUseAdUpgrade;
+            var remainingTime = HeroAdUpgradeTimer.GetRemainingCooldownTime();
+            
+            Debug.Log($"[HeroView] Cooldown check - CanUse: {canUseAdUpgrade}, Remaining: {remainingTime:F1}s");
+            
+            if (!canUseAdUpgrade && remainingTime > 0)
+            {
+                Debug.Log($"[HeroView] Starting cooldown check - {remainingTime:F0} seconds remaining");
+                _cooldownCheckCoroutine = StartCoroutine(CooldownCheckCoroutine());
+            }
+            else
+            {
+                Debug.Log("[HeroView] No cooldown check needed - button should be available");
+            }
+        }
+        
+        private IEnumerator CooldownCheckCoroutine()
+        {
+            Debug.Log("[HeroView] Cooldown check coroutine started");
+            
+            while (true)
+            {
+                var canUseAdUpgrade = HeroAdUpgradeTimer.CanUseAdUpgrade;
+                var remainingTime = HeroAdUpgradeTimer.GetRemainingCooldownTime();
+                
+                Debug.Log($"[HeroView] Cooldown check tick - CanUse: {canUseAdUpgrade}, Remaining: {remainingTime:F1}s");
+                
+                if (canUseAdUpgrade)
+                {
+                    Debug.Log("[HeroView] Cooldown expired - showing ad button and stopping coroutine");
+                    UpdateUpgradeButtons();
+                    _cooldownCheckCoroutine = null;
+                    yield break;
+                }
+                
+                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -160,9 +235,6 @@ namespace Project.MainMenu.HeroSelection
             Selected?.Invoke(_heroInfo.Data);
         }
 
-        /// <summary>
-        /// Test method to verify hero upgrade logic works (temporary debugging)
-        /// </summary>
         [UnityEngine.ContextMenu("Test Hero Upgrade")]
         public void TestHeroUpgrade()
         {
@@ -185,10 +257,69 @@ namespace Project.MainMenu.HeroSelection
             Debug.Log("[HeroView] Test upgrade saved!");
         }
 
+        [UnityEngine.ContextMenu("Test Ad Cooldown")]
+        public void TestAdCooldown()
+        {
+            Debug.Log("[HeroView] Starting test ad cooldown");
+            HeroAdUpgradeTimer.StartCooldown();
+            StartCooldownCheckIfNeeded();
+            UpdateUpgradeButtons();
+        }
+
+        [UnityEngine.ContextMenu("Reset Ad Cooldown")]
+        public void ResetAdCooldown()
+        {
+            Debug.Log("[HeroView] Resetting ad cooldown");
+            _playerInfo.ChangeHeroAdUpgradeTime(0);
+            _saveManager.Save();
+            
+            // Stop cooldown checking since cooldown is reset
+            if (_cooldownCheckCoroutine != null)
+            {
+                StopCoroutine(_cooldownCheckCoroutine);
+                _cooldownCheckCoroutine = null;
+            }
+            
+            UpdateUpgradeButtons();
+        }
+
+        [UnityEngine.ContextMenu("Check Timer Status")]
+        public void CheckTimerStatus()
+        {
+            var canUse = HeroAdUpgradeTimer.CanUseAdUpgrade;
+            var remaining = HeroAdUpgradeTimer.GetRemainingCooldownTime();
+            var lastAdTime = _playerInfo.PlayerSave.LastHeroAdUpgradeTime;
+            var duration = HeroAdUpgradeTimer.CooldownDuration;
+            
+            Debug.Log($"[HeroView] === TIMER STATUS ===");
+            Debug.Log($"[HeroView] Can Use Ad: {canUse}");
+            Debug.Log($"[HeroView] Remaining Time: {remaining:F1}s");
+            Debug.Log($"[HeroView] Last Ad Time: {lastAdTime}");
+            Debug.Log($"[HeroView] Duration: {duration}s");
+            Debug.Log($"[HeroView] Button Active: {adUpgradeButton.gameObject.activeSelf}");
+            Debug.Log($"[HeroView] Coroutine Running: {_cooldownCheckCoroutine != null}");
+        }
+
+        [UnityEngine.ContextMenu("Force Refresh UI")]
+        public void ForceRefreshUI()
+        {
+            Debug.Log("[HeroView] Force refreshing UI");
+            StartCooldownCheckIfNeeded();
+            UpdateUpgradeButtons();
+        }
+
         private void OnDestroy()
         {
             _heroRegistry.ActiveHeroChanged -= OnActiveHeroChanged;
             _playerInfo.OnCurrencyChanged -= OnCurrencyChanged;
+            HeroAdUpgradeTimer.OnDurationChanged -= OnTimerDurationChanged;
+            
+            // Clean up cooldown check coroutine
+            if (_cooldownCheckCoroutine != null)
+            {
+                StopCoroutine(_cooldownCheckCoroutine);
+                _cooldownCheckCoroutine = null;
+            }
         }
 
         private void OnActiveHeroChanged(HeroInfo heroInfo)
