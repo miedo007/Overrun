@@ -23,32 +23,36 @@ namespace Project.Application
 
         private ReadWriter GetCurrentReadWriter()
         {
-            // Use CrazyGames Data for BOTH logged-in users AND guest users when SDK is ready
-            // Per CrazyGames docs: "If the user is not logged in, the data module will store the game data in LocalStorage"
+            // Use CrazyGames storage (cloud OR localStorage) when SDK is ready
+            // This works for both logged-in users (cloud) and guest users (localStorage)
             if (SaveSystemIntegration.IsCrazySDKReady())
             {
-                bool isLoggedIn = SaveSystemIntegration.IsUserLoggedIn;
-                Debug.Log($"[DynamicReadWriter] CrazySDK ready - User logged in: {isLoggedIn} - Using CrazyGames Data");
-                return _crazyGamesReadWriter;  // Uses localStorage for guests, cloud for logged-in
+                return _crazyGamesReadWriter;
             }
-            
-            Debug.Log($"[DynamicReadWriter] CrazySDK not ready, using local file storage");
-            return _fileReadWriter;  // Only fallback when SDK unavailable (like in editor)
+            // Fallback to local file storage only when SDK is not ready (e.g., in Editor)
+            return _fileReadWriter;
         }
 
         protected override void OnSave(string rawSave)
         {
             var currentWriter = GetCurrentReadWriter();
-            var writerType = currentWriter is CrazyGamesDataReadWriter ? "Crazy Games Data" : "local file";
-            Debug.Log($"Saving {_saveKey} using {writerType}");
+            var writerType = currentWriter is CrazyGamesDataReadWriter 
+                ? (SaveSystemIntegration.IsUserLoggedIn ? "Crazy Games Cloud" : "Crazy Games localStorage") 
+                : "local file";
+            Debug.Log($"[DynamicReadWriter] ★ Saving {_saveKey} using {writerType}");
+            Debug.Log($"[DynamicReadWriter] Data to save: {rawSave}");
             
             currentWriter.Save(rawSave);
+            
+            Debug.Log($"[DynamicReadWriter] ★ Save completed for {_saveKey}");
         }
 
         protected override bool OnTryLoad(out string rawSave)
         {
             var currentWriter = GetCurrentReadWriter();
-            var writerType = currentWriter is CrazyGamesDataReadWriter ? "Crazy Games Data" : "local file";
+            var writerType = currentWriter is CrazyGamesDataReadWriter 
+                ? (SaveSystemIntegration.IsUserLoggedIn ? "Crazy Games Cloud" : "Crazy Games localStorage") 
+                : "local file";
             Debug.Log($"Loading {_saveKey} using {writerType}");
             
             // If we're using cloud storage, try to load from there

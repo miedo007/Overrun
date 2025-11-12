@@ -124,26 +124,6 @@ namespace Project.MainMenu
                 Debug.Log("Failed to load raw hero data from cloud");
             }
             
-            // CRITICAL FIX: Also reload player data (currency) from cloud storage
-            Debug.Log("Attempting to reload player data from cloud storage");
-            var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
-
-            _saveManager.TryLoad(_playerInfo, success =>
-            {
-                Debug.Log($"Reloaded player data: success={success}");
-                if (success)
-                {
-                    Debug.Log($"Player data reloaded - Currency: {_playerInfo.PlayerSave.Currency}, TopStage: {_playerInfo.PlayerSave.TopStageIndex}");
-                    
-                    // Trigger UI refresh events so the currency display updates
-                    _playerInfo.NotifyDataReloaded();
-                }
-                else
-                {
-                    Debug.Log("Failed to reload player data from cloud storage");
-                }
-            }, playerReadWriter);
-            
             yield break; // Exit immediately, callbacks handle the rest
         }
 
@@ -175,8 +155,8 @@ namespace Project.MainMenu
             }
             else
             {
-                Debug.Log("CrazySDK not ready yet or user not logged in - waiting for SDK initialization");
-                StartCoroutine(WaitForSDKAndCheckInProgress());
+                Debug.Log("User not logged in yet, checking local data only");
+                CheckForInProgressSession();
             }
         }
 
@@ -200,118 +180,13 @@ namespace Project.MainMenu
             yield break; // Exit immediately, callback handles the rest
         }
 
-        private System.Collections.IEnumerator WaitForSDKAndCheckInProgress()
-        {
-            Debug.Log("Waiting for CrazySDK to be ready before checking in-progress session...");
-            
-#if UNITY_EDITOR
-            // In Editor, CrazySDK will never be ready, so check immediately with local storage
-            Debug.Log("Running in Unity Editor - checking in-progress session immediately with local storage");
-            CheckForInProgressSession();
-            yield break;
-#endif
-            
-            // Wait for CrazySDK to be ready (important for guest users who use localStorage)
-            while (!SaveSystemIntegration.IsCrazySDKReady())
-            {
-                yield return new WaitForSeconds(0.1f);
-            }
-            
-            Debug.Log("CrazySDK is now ready - checking for in-progress session");
-            
-            // Now that SDK is ready, reload data using the proper storage backend
-            var inProgressReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("in-progress");
-            
-            _saveManager.TryLoad(_inProgressSessionInfo, success =>
-            {
-                Debug.Log($"Loaded in-progress session after SDK ready: success={success}");
-                if (success)
-                {
-                    Debug.Log($"SDK-ready data - InProgress: {_inProgressSessionInfo.InProgressSave?.InProgress}, Level: {_inProgressSessionInfo.InProgressSave?.LevelIndex}, Wave: {_inProgressSessionInfo.InProgressSave?.WaveIndex}");
-                }
-                CheckForInProgressSession();
-            }, inProgressReadWriter);
-            
-            // CRITICAL FIX: Also reload player data (currency) from cloud storage for guest users
-            Debug.Log("Attempting to reload player data from cloud storage");
-            var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
-
-            _saveManager.TryLoad(_playerInfo, success =>
-            {
-                Debug.Log($"Reloaded player data: success={success}");
-                if (success)
-                {
-                    Debug.Log($"Player data reloaded - Currency: {_playerInfo.PlayerSave.Currency}, TopStage: {_playerInfo.PlayerSave.TopStageIndex}");
-                    
-                    // Trigger UI refresh events so the currency display updates
-                    _playerInfo.NotifyDataReloaded();
-                }
-                else
-                {
-                    Debug.Log("Failed to reload player data from cloud storage");
-                }
-            }, playerReadWriter);
-            
-            // CRITICAL FIX: Also reload hero data from cloud storage for guest users
-            Debug.Log("Attempting to reload hero data from cloud storage");
-            var heroReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("heroes");
-
-            // Use the same manual parsing approach that works for logged-in users
-            if (heroReadWriter.TryLoad(out var rawHeroData))
-            {
-                Debug.Log($"Raw hero data from cloud: {rawHeroData}");
-                
-                try 
-                {
-                    var heroSaveData = Newtonsoft.Json.JsonConvert.DeserializeObject<Project.Heroes.HeroSave>(rawHeroData);
-                    if (heroSaveData != null)
-                    {
-                        var heroId = "data_hero_0";
-                        var cloudLevel = heroSaveData.GetHeroLevel(heroId);
-                        Debug.Log($"Parsed cloud data - Hero: {heroId}, Level: {cloudLevel}");
-                        
-                        // Force update the HeroRegistry's save data directly
-                        Debug.Log("Force updating HeroRegistry save data");
-                        var registrySave = (Project.Heroes.HeroSave)_heroRegistry.Save;
-                        registrySave.SelectedHero = heroSaveData.SelectedHero;
-                        registrySave.HeroLevels = heroSaveData.HeroLevels;
-                        
-                        // Verify the update worked
-                        var updatedLevel = registrySave.GetHeroLevel(heroId);
-                        Debug.Log($"After force update - Save Level: {updatedLevel}");
-                        
-                        // Refresh the active hero
-                        var selectedHeroData = _heroRegistry.GetSelectedHero();
-                        _heroRegistry.SetActiveHero(selectedHeroData);
-                        
-                        var activeHero = _heroRegistry.ActiveHero;
-                        Debug.Log($"Hero reloaded - ID: {heroId}, Level: {activeHero.Level}");
-                    }
-                    else 
-                    {
-                        Debug.LogError("Failed to parse hero save data from cloud");
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError($"Exception parsing hero data: {ex.Message}");
-                }
-            }
-            else 
-            {
-                Debug.Log("Failed to load raw hero data from cloud");
-            }
-        }
-
         private void CheckForInProgressSession()
         {
             Debug.Log($"CheckForInProgressSession called - hasChecked: {_hasCheckedInProgressSession}");
             
-            // Check if we've already handled this session OR if the screen is already open
-            var existingScreen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
-            if (_hasCheckedInProgressSession || (existingScreen != null && existingScreen.IsOpened))
+            if (_hasCheckedInProgressSession) 
             {
-                Debug.Log($"Skipping in-progress check - hasChecked: {_hasCheckedInProgressSession}, screenAlreadyOpen: {existingScreen != null && existingScreen.IsOpened}");
+                Debug.Log("Already checked in-progress session, skipping");
                 return;
             }
             
@@ -326,7 +201,7 @@ namespace Project.MainMenu
                 }
             }
             
-            // Check for valid in-progress session
+            // Correct in-progress check
             if (_inProgressSessionInfo != null &&
                 _inProgressSessionInfo.InProgressSave != null &&
                 _inProgressSessionInfo.InProgressSave.InProgress)
@@ -335,22 +210,10 @@ namespace Project.MainMenu
                 
                 if (_inProgressSessionInfo.IsValid())
                 {
-                    Debug.Log("In-progress session is valid, checking if screen already exists");
-                    
-                    // Double-check to prevent opening duplicate screens
-                    existingScreen = _uiFrame.Get<InProgressSessionConfirmationScreen>();
-                    if (existingScreen == null || !existingScreen.IsOpened)
-                    {
-                        Debug.Log("Opening confirmation screen");
-                        var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
-                        inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
-                        _hasCheckedInProgressSession = true;
-                    }
-                    else
-                    {
-                        Debug.Log("In-progress confirmation screen already opened, skipping");
-                        _hasCheckedInProgressSession = true;
-                    }
+                    Debug.Log("In-progress session is valid, opening confirmation screen");
+                    var inProgressScreen = _uiFrame.Open<InProgressSessionConfirmationScreen>();
+                    inProgressScreen.Confirmed += InProgressScreenOnConfirmed;
+                    _hasCheckedInProgressSession = true;
                 }
                 else
                 {

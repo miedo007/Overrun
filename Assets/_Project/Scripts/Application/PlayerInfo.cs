@@ -1,5 +1,6 @@
 using System;
 using Mtl.Save;
+using UnityEngine;
 
 namespace Project.Application
 {
@@ -21,8 +22,15 @@ namespace Project.Application
 
         public void IncrementTopStage()
         {
+            var oldStage = _save.TopStageIndex;
             _save.TopStageIndex++;
+            Debug.Log($"[PlayerInfo] ★★★ Level progression incremented: {oldStage} -> {_save.TopStageIndex} ★★★");
             OnChanged?.Invoke();
+            
+            // Force immediate save for level progression (similar to currency)
+            Debug.Log($"[PlayerInfo] Calling SaveManager.Save() for TopStageIndex={_save.TopStageIndex}");
+            _saveManager?.Save();
+            Debug.Log($"[PlayerInfo] SaveManager.Save() completed");
         }
 
         public void Create()

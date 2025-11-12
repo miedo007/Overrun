@@ -6,6 +6,7 @@ using Project.Tiers;
 using Project.Feedback;
 using Project.Game.Levels;
 using UnityEngine;
+using System.Collections;
 
 namespace Project.Application
 {
@@ -48,6 +49,9 @@ namespace Project.Application
 
             // Initialize save objects immediately (dependency injection requires this)
             InitializeSaveObjects();
+            
+            // Wait for SDK to become ready and reload data from correct storage
+            StartCoroutine(WaitForSDKAndReloadData());
         }
 
         private void InitializeSaveObjects()
@@ -126,6 +130,99 @@ namespace Project.Application
         private void OnDestroy()
         {
             SaveSystemIntegration.OnLoginStatusChanged -= OnUserLoginStatusChanged;
+        }
+        
+        private System.Collections.IEnumerator WaitForSDKAndReloadData()
+        {
+            Debug.Log("[ProjectContext] Waiting for CrazySDK to be ready...");
+            
+            // Wait for CrazySDK to be ready
+            float waitTime = 0f;
+            while (!SaveSystemIntegration.IsCrazySDKReady())
+            {
+                yield return new WaitForSeconds(0.5f);
+                waitTime += 0.5f;
+                if (waitTime >= 10f)
+                {
+                    Debug.LogWarning("[ProjectContext] CrazySDK not ready after 10 seconds, proceeding anyway");
+                    yield break;
+                }
+            }
+            
+            Debug.Log($"[ProjectContext] CrazySDK is ready after {waitTime}s! Reloading save data from CrazyGames storage...");
+            
+            // Now that SDK is ready, reload all save data from the correct storage
+            // The DynamicReadWriter will now use CrazyGames storage instead of local files
+            ReloadAllSaveData();
+        }
+        
+        private void ReloadAllSaveData()
+        {
+            Debug.Log("[ProjectContext] ReloadAllSaveData started");
+            
+            // Reload in-progress session
+            var inProgressReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("in-progress");
+            Debug.Log($"[ProjectContext] Attempting to reload in-progress data...");
+            if (inProgressReadWriter.TryLoad(out var rawInProgressData))
+            {
+                Debug.Log($"[ProjectContext] Raw in-progress data loaded: {rawInProgressData}");
+                var inProgressData = Newtonsoft.Json.JsonConvert.DeserializeObject<InProgressSessionSave>(rawInProgressData);
+                var inProgressSave = (InProgressSessionSave)_inProgressSession.Save;
+                inProgressSave.InProgress = inProgressData.InProgress;
+                inProgressSave.LevelIndex = inProgressData.LevelIndex;
+                inProgressSave.WaveIndex = inProgressData.WaveIndex;
+                Debug.Log($"[ProjectContext] In-progress data reloaded - InProgress: {inProgressSave.InProgress}, Level: {inProgressSave.LevelIndex}, Wave: {inProgressSave.WaveIndex}");
+            }
+            else
+            {
+                Debug.Log("[ProjectContext] No in-progress data found in CrazyGames storage");
+            }
+            
+            // Reload player data
+            var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
+            Debug.Log($"[ProjectContext] Attempting to reload player data...");
+            if (playerReadWriter.TryLoad(out var rawPlayerData))
+            {
+                Debug.Log($"[ProjectContext] Raw player data loaded: {rawPlayerData}");
+                var playerData = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerSave>(rawPlayerData);
+                var playerSave = (PlayerSave)_playerInfo.Save;
+                
+                Debug.Log($"[ProjectContext] BEFORE reload - TopStageIndex: {playerSave.TopStageIndex}, Currency: {playerSave.Currency}");
+                
+                playerSave.Currency = playerData.Currency;
+                playerSave.TopStageIndex = playerData.TopStageIndex;
+                playerSave.HasUsedHeroAdUpgradeThisSession = playerData.HasUsedHeroAdUpgradeThisSession;
+                playerSave.LastHeroAdUpgradeTime = playerData.LastHeroAdUpgradeTime;
+                
+                Debug.Log($"[ProjectContext] AFTER reload - TopStageIndex: {playerSave.TopStageIndex}, Currency: {playerSave.Currency}");
+                
+                _playerInfo.NotifyDataReloaded();
+                Debug.Log($"[ProjectContext] Player data reloaded successfully!");
+            }
+            else
+            {
+                Debug.Log("[ProjectContext] No player data found in CrazyGames storage");
+            }
+            
+            // Reload hero data
+            var heroReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("heroes");
+            Debug.Log($"[ProjectContext] Attempting to reload hero data...");
+            if (heroReadWriter.TryLoad(out var rawHeroData))
+            {
+                Debug.Log($"[ProjectContext] Raw hero data loaded: {rawHeroData}");
+                var heroSaveData = Newtonsoft.Json.JsonConvert.DeserializeObject<Project.Heroes.HeroSave>(rawHeroData);
+                var registrySave = (Project.Heroes.HeroSave)_heroesInfo.Save;
+                registrySave.SelectedHero = heroSaveData.SelectedHero;
+                registrySave.HeroLevels = heroSaveData.HeroLevels;
+                _heroesInfo.SetActiveHero(_heroesInfo.GetSelectedHero());
+                Debug.Log($"[ProjectContext] Hero data reloaded - Selected: {registrySave.SelectedHero}");
+            }
+            else
+            {
+                Debug.Log("[ProjectContext] No hero data found in CrazyGames storage");
+            }
+            
+            Debug.Log("[ProjectContext] ReloadAllSaveData completed");
         }
     }
 }
