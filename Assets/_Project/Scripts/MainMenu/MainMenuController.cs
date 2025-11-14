@@ -134,6 +134,44 @@ namespace Project.MainMenu
             // Set target framerate
             UnityEngine.Application.targetFrameRate = 60;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // Menu is not active gameplay
+            CrazySdkManager.GameplayStop();
+#endif
+
+            // Wait for SDK and cloud data to be ready before opening screens
+            StartCoroutine(WaitForDataAndOpenScreens());
+        }
+        
+        private IEnumerator WaitForDataAndOpenScreens()
+        {
+            // If user is logged in, wait for SDK to be ready and cloud data to load
+            if (SaveSystemIntegration.IsUserLoggedIn)
+            {
+                Debug.Log("[MainMenuController] User logged in on first load, waiting for SDK and cloud data...");
+                
+                float waitTime = 0f;
+                while (!SaveSystemIntegration.IsCrazySDKReady())
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    waitTime += 0.1f;
+                    if (waitTime >= 5f)
+                    {
+                        Debug.LogWarning("[MainMenuController] SDK not ready after 5 seconds, opening screens anyway");
+                        break;
+                    }
+                }
+                
+                if (SaveSystemIntegration.IsCrazySDKReady())
+                {
+                    Debug.Log("[MainMenuController] SDK ready, waiting for cloud data reload...");
+                    // Give ProjectContext time to reload cloud data
+                    yield return new WaitForSeconds(0.5f);
+                }
+            }
+            
+            // Now open screens
+            Debug.Log("[MainMenuController] Opening screens with loaded data");
             _uiFrame.Open<MainMenuHudScreen>();
             _uiFrame.Open<SagaMapScreen>();
 
@@ -142,20 +180,15 @@ namespace Project.MainMenu
             _navBar.UpgradeButtonClicked += OnUpgradeButtonClicked;
             _navBar.SettingsButtonClicked += OnSettingsButtonCLicked;
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-            // Menu is not active gameplay
-            CrazySdkManager.GameplayStop();
-#endif
-
-            // Check for in-progress session initially - with smart cloud detection
+            // Check for in-progress session
             if (SaveSystemIntegration.IsUserLoggedIn && SaveSystemIntegration.IsCrazySDKReady())
             {
-                Debug.Log("User is already logged in, checking cloud data immediately");
+                Debug.Log("User is logged in, checking cloud data for in-progress session");
                 StartCoroutine(LoadCloudDataAndCheck());
             }
             else
             {
-                Debug.Log("User not logged in yet, checking local data only");
+                Debug.Log("User not logged in, checking local data only");
                 CheckForInProgressSession();
             }
         }

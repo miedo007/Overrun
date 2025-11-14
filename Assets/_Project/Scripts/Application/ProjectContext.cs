@@ -160,6 +160,15 @@ namespace Project.Application
         {
             Debug.Log("[ProjectContext] ReloadAllSaveData started");
             
+            bool hadInitialProgress = false;
+            int initialTopStage = 0;
+            int initialCurrency = 0;
+            
+            // Capture initial state before reload
+            var playerSave = (PlayerSave)_playerInfo.Save;
+            initialTopStage = playerSave.TopStageIndex;
+            initialCurrency = playerSave.Currency;
+            
             // Reload in-progress session
             var inProgressReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("in-progress");
             Debug.Log($"[ProjectContext] Attempting to reload in-progress data...");
@@ -181,11 +190,11 @@ namespace Project.Application
             // Reload player data
             var playerReadWriter = SaveSystemIntegration.CreateOptimalReadWriter("player");
             Debug.Log($"[ProjectContext] Attempting to reload player data...");
+            bool playerDataChanged = false;
             if (playerReadWriter.TryLoad(out var rawPlayerData))
             {
                 Debug.Log($"[ProjectContext] Raw player data loaded: {rawPlayerData}");
                 var playerData = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerSave>(rawPlayerData);
-                var playerSave = (PlayerSave)_playerInfo.Save;
                 
                 Debug.Log($"[ProjectContext] BEFORE reload - TopStageIndex: {playerSave.TopStageIndex}, Currency: {playerSave.Currency}");
                 
@@ -195,6 +204,14 @@ namespace Project.Application
                 playerSave.LastHeroAdUpgradeTime = playerData.LastHeroAdUpgradeTime;
                 
                 Debug.Log($"[ProjectContext] AFTER reload - TopStageIndex: {playerSave.TopStageIndex}, Currency: {playerSave.Currency}");
+                
+                // Check if cloud data is different from initial state
+                if (playerData.TopStageIndex != initialTopStage || playerData.Currency != initialCurrency)
+                {
+                    playerDataChanged = true;
+                    hadInitialProgress = playerData.TopStageIndex > 0 || playerData.Currency > 0;
+                    Debug.Log($"[ProjectContext] Player data changed! Initial: TopStage={initialTopStage}, Currency={initialCurrency} | Cloud: TopStage={playerData.TopStageIndex}, Currency={playerData.Currency}");
+                }
                 
                 _playerInfo.NotifyDataReloaded();
                 Debug.Log($"[ProjectContext] Player data reloaded successfully!");
@@ -223,6 +240,19 @@ namespace Project.Application
             }
             
             Debug.Log("[ProjectContext] ReloadAllSaveData completed");
+            
+            // If we detected cloud save data with progress and we're in the game scene, redirect to main menu
+            if (playerDataChanged && hadInitialProgress)
+            {
+                var currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                Debug.Log($"[ProjectContext] Current scene: {currentScene}");
+                
+                if (currentScene.ToLower() == "game")
+                {
+                    Debug.Log("[ProjectContext] Cloud save detected with progress while in game scene - redirecting to main menu!");
+                    sceneLoader.LoadScene("main_menu", 0.2f, 0.5f);
+                }
+            }
         }
     }
 }
