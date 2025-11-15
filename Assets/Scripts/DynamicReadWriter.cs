@@ -23,36 +23,26 @@ namespace Project.Application
 
         private ReadWriter GetCurrentReadWriter()
         {
-            // Use CrazyGames storage (cloud OR localStorage) when SDK is ready
-            // This works for both logged-in users (cloud) and guest users (localStorage)
-            if (SaveSystemIntegration.IsCrazySDKReady())
+            if (SaveSystemIntegration.IsUserLoggedIn && SaveSystemIntegration.IsCrazySDKReady())
             {
                 return _crazyGamesReadWriter;
             }
-            // Fallback to local file storage only when SDK is not ready (e.g., in Editor)
             return _fileReadWriter;
         }
 
         protected override void OnSave(string rawSave)
         {
             var currentWriter = GetCurrentReadWriter();
-            var writerType = currentWriter is CrazyGamesDataReadWriter 
-                ? (SaveSystemIntegration.IsUserLoggedIn ? "Crazy Games Cloud" : "Crazy Games localStorage") 
-                : "local file";
-            Debug.Log($"[DynamicReadWriter] ★ Saving {_saveKey} using {writerType}");
-            Debug.Log($"[DynamicReadWriter] Data to save: {rawSave}");
+            var writerType = currentWriter is CrazyGamesDataReadWriter ? "Crazy Games Data" : "local file";
+            Debug.Log($"Saving {_saveKey} using {writerType}");
             
             currentWriter.Save(rawSave);
-            
-            Debug.Log($"[DynamicReadWriter] ★ Save completed for {_saveKey}");
         }
 
         protected override bool OnTryLoad(out string rawSave)
         {
             var currentWriter = GetCurrentReadWriter();
-            var writerType = currentWriter is CrazyGamesDataReadWriter 
-                ? (SaveSystemIntegration.IsUserLoggedIn ? "Crazy Games Cloud" : "Crazy Games localStorage") 
-                : "local file";
+            var writerType = currentWriter is CrazyGamesDataReadWriter ? "Crazy Games Data" : "local file";
             Debug.Log($"Loading {_saveKey} using {writerType}");
             
             // If we're using cloud storage, try to load from there
